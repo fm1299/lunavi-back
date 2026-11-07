@@ -1,0 +1,49 @@
+{
+  "properties": {
+    "id": {
+      "title": "Id",
+      "type": "string"
+    },
+    "name": {
+      "title": "Name",
+      "type": "string"
+    },
+    "lat": {
+      "title": "Lat",
+      "type": "number"
+    },
+    "lon": {
+      "title": "Lon",
+      "type": "number"
+    },
+    "source_ref": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Source Ref"
+    },
+    "citation_status": {
+      "enum": [
+        "verified",
+        "to_verify"
+      ],
+      "title": "Citation Status",
+      "type": "string"
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "lat",
+    "lon",
+    "source_ref",
+    "citation_status"
+  ],
+  "title": "CaveSite",
+  "type": "object"
+}

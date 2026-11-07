@@ -1,0 +1,24 @@
+{
+  "dummy": true,
+  "generated_at": "2026-11-07T17:31:24+00:00",
+  "grid_resolution_deg": 0.25,
+  "region": {
+    "id": "andes_south",
+    "name": "Southern Peru, northern Chile, Bolivian Altiplano and the Peruvian Amazon",
+    "lat_min": -30.0,
+    "lat_max": -10.0,
+    "lon_min": -78.0,
+    "lon_max": -62.0
+  },
+  "cells_with_data": {
+    "slope": 50,
+    "roughness": 50,
+    "temp_annual_range": 50,
+    "temp_diurnal_range": 50,
+    "mean_temperature": 50,
+    "aridity": 50,
+    "vegetation": 50,
+    "composition": 50,
+    "elevation": 50
+  }
+}

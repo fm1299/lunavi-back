@@ -1,0 +1,25 @@
+{
+  "grid_resolution_deg": 0.25,
+  "region": {
+    "id": "andes_south",
+    "name": "Southern Peru, northern Chile, Bolivian Altiplano and the Peruvian Amazon",
+    "lat_min": -30.0,
+    "lat_max": -10.0,
+    "lon_min": -78.0,
+    "lon_max": -62.0
+  },
+  "region_presets": [
+    { "id": "all", "name": "Whole region", "bbox": [-78.0, -30.0, -62.0, -10.0] },
+    { "id": "atacama", "name": "Atacama", "bbox": [-72.0, -28.0, -67.0, -20.0] },
+    { "id": "altiplano", "name": "Altiplano", "bbox": [-70.5, -23.0, -65.0, -15.0] },
+    { "id": "southern_peru", "name": "Southern Peru", "bbox": [-76.5, -18.5, -69.5, -13.0] }
+  ],
+  "novelty_km": { "known": 150.0, "near_known": 500.0 },
+  "target_quality": { "measured": 1.0, "physical": 1.0, "literature": 0.7 },
+  "confidence_bands": { "high": 0.75, "medium": 0.5 },
+  "min_catalog_size": 30,
+  "control_search_km": 50.0,
+  "candidate_top_percent": 5.0,
+  "geometric_floor": 0.01,
+  "reference_year": 2023
+}

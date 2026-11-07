@@ -1,0 +1,126 @@
+{
+  "$defs": {
+    "Candidate": {
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Name"
+        },
+        "cell_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Cell Ids",
+          "type": "array"
+        },
+        "lat": {
+          "title": "Lat",
+          "type": "number"
+        },
+        "lon": {
+          "title": "Lon",
+          "type": "number"
+        },
+        "score": {
+          "title": "Score",
+          "type": "number"
+        },
+        "confidence": {
+          "title": "Confidence",
+          "type": "number"
+        },
+        "closest_matches": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Closest Matches",
+          "type": "array"
+        },
+        "weakest_matches": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Weakest Matches",
+          "type": "array"
+        },
+        "test_first": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Test First",
+          "type": "array"
+        },
+        "sources": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Sources",
+          "type": "array"
+        },
+        "literature_check": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Literature Check"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "cell_ids",
+        "lat",
+        "lon",
+        "score",
+        "confidence",
+        "closest_matches",
+        "weakest_matches",
+        "test_first",
+        "sources",
+        "literature_check"
+      ],
+      "title": "Candidate",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "target_id": {
+      "title": "Target Id",
+      "type": "string"
+    },
+    "profile": {
+      "title": "Profile",
+      "type": "string"
+    },
+    "candidates": {
+      "items": {
+        "$ref": "#/$defs/Candidate"
+      },
+      "title": "Candidates",
+      "type": "array"
+    }
+  },
+  "required": [
+    "target_id",
+    "profile",
+    "candidates"
+  ],
+  "title": "TargetFindings",
+  "type": "object"
+}

@@ -1,0 +1,94 @@
+{
+  "$defs": {
+    "MaskException": {
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "bbox": {
+          "maxItems": 4,
+          "minItems": 4,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Bbox",
+          "type": "array"
+        },
+        "reason": {
+          "title": "Reason",
+          "type": "string"
+        },
+        "source_ref": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Source Ref"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "bbox",
+        "reason",
+        "source_ref"
+      ],
+      "title": "MaskException",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "min_land_fraction": {
+      "title": "Min Land Fraction",
+      "type": "number"
+    },
+    "arid_precip_mm": {
+      "title": "Arid Precip Mm",
+      "type": "number"
+    },
+    "polar_lat_deg": {
+      "title": "Polar Lat Deg",
+      "type": "number"
+    },
+    "volcano_distance_km": {
+      "title": "Volcano Distance Km",
+      "type": "number"
+    },
+    "mask_exceptions": {
+      "items": {
+        "$ref": "#/$defs/MaskException"
+      },
+      "title": "Mask Exceptions",
+      "type": "array"
+    }
+  },
+  "required": [
+    "min_land_fraction",
+    "arid_precip_mm",
+    "polar_lat_deg",
+    "volcano_distance_km",
+    "mask_exceptions"
+  ],
+  "title": "Masks",
+  "type": "object"
+}

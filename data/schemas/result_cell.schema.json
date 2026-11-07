@@ -1,0 +1,130 @@
+{
+  "description": "One cell as the API returns it with detail=full. Parquet flattens s, q and raw.",
+  "properties": {
+    "cell_id": {
+      "title": "Cell Id",
+      "type": "string"
+    },
+    "lat": {
+      "title": "Lat",
+      "type": "number"
+    },
+    "lon": {
+      "title": "Lon",
+      "type": "number"
+    },
+    "terrain": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Terrain",
+      "type": "array"
+    },
+    "s": {
+      "additionalProperties": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "title": "S",
+      "type": "object"
+    },
+    "q": {
+      "additionalProperties": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "title": "Q",
+      "type": "object"
+    },
+    "raw": {
+      "additionalProperties": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "title": "Raw",
+      "type": "object"
+    },
+    "novelty": {
+      "enum": [
+        "known",
+        "near_known",
+        "new"
+      ],
+      "title": "Novelty",
+      "type": "string"
+    },
+    "nearest_known": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Nearest Known"
+    },
+    "tags": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Tags",
+      "type": "array"
+    },
+    "score": {
+      "title": "Score",
+      "type": "number"
+    },
+    "confidence": {
+      "title": "Confidence",
+      "type": "number"
+    },
+    "band": {
+      "enum": [
+        "high",
+        "medium",
+        "low"
+      ],
+      "title": "Band",
+      "type": "string"
+    }
+  },
+  "required": [
+    "cell_id",
+    "lat",
+    "lon",
+    "terrain",
+    "s",
+    "q",
+    "raw",
+    "novelty",
+    "nearest_known",
+    "tags",
+    "score",
+    "confidence",
+    "band"
+  ],
+  "title": "ResultCell",
+  "type": "object"
+}

@@ -1,0 +1,79 @@
+{
+  "properties": {
+    "id": {
+      "title": "Id",
+      "type": "string"
+    },
+    "name": {
+      "title": "Name",
+      "type": "string"
+    },
+    "lat": {
+      "title": "Lat",
+      "type": "number"
+    },
+    "lon": {
+      "title": "Lon",
+      "type": "number"
+    },
+    "type": {
+      "enum": [
+        "desert",
+        "polar",
+        "volcanic",
+        "cave",
+        "other"
+      ],
+      "title": "Type",
+      "type": "string"
+    },
+    "role": {
+      "enum": [
+        "positive_control",
+        "negative_control",
+        "catalog_only"
+      ],
+      "title": "Role",
+      "type": "string"
+    },
+    "control_for": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Control For",
+      "type": "array"
+    },
+    "source_ref": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Source Ref"
+    },
+    "citation_status": {
+      "enum": [
+        "verified",
+        "to_verify"
+      ],
+      "title": "Citation Status",
+      "type": "string"
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "lat",
+    "lon",
+    "type",
+    "role",
+    "control_for",
+    "source_ref",
+    "citation_status"
+  ],
+  "title": "KnownAnalog",
+  "type": "object"
+}

@@ -1,0 +1,42 @@
+{
+  "properties": {
+    "id": {
+      "title": "Id",
+      "type": "string"
+    },
+    "label": {
+      "title": "Label",
+      "type": "string"
+    },
+    "weights": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "title": "Weights",
+      "type": "object"
+    },
+    "gates": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "title": "Gates",
+      "type": "object"
+    },
+    "test_tags": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Test Tags",
+      "type": "array"
+    }
+  },
+  "required": [
+    "id",
+    "label",
+    "weights",
+    "gates",
+    "test_tags"
+  ],
+  "title": "Profile",
+  "type": "object"
+}

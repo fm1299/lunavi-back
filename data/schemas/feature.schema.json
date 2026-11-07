@@ -1,0 +1,136 @@
+{
+  "properties": {
+    "key": {
+      "title": "Key",
+      "type": "string"
+    },
+    "label": {
+      "title": "Label",
+      "type": "string"
+    },
+    "unit": {
+      "title": "Unit",
+      "type": "string"
+    },
+    "type": {
+      "enum": [
+        "numeric",
+        "categorical"
+      ],
+      "title": "Type",
+      "type": "string"
+    },
+    "direction": {
+      "title": "Direction",
+      "type": "string"
+    },
+    "lo": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Lo"
+    },
+    "hi": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Hi"
+    },
+    "classes": {
+      "anyOf": [
+        {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Classes"
+    },
+    "similarity_matrix": {
+      "anyOf": [
+        {
+          "additionalProperties": {
+            "additionalProperties": {
+              "type": "number"
+            },
+            "type": "object"
+          },
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Similarity Matrix"
+    },
+    "source_quality": {
+      "title": "Source Quality",
+      "type": "number"
+    },
+    "resolution_factor": {
+      "title": "Resolution Factor",
+      "type": "number"
+    },
+    "adapter": {
+      "title": "Adapter",
+      "type": "string"
+    },
+    "source_name": {
+      "title": "Source Name",
+      "type": "string"
+    },
+    "source_url": {
+      "title": "Source Url",
+      "type": "string"
+    },
+    "license": {
+      "title": "License",
+      "type": "string"
+    },
+    "note": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Note"
+    }
+  },
+  "required": [
+    "key",
+    "label",
+    "unit",
+    "type",
+    "direction",
+    "source_quality",
+    "resolution_factor",
+    "adapter",
+    "source_name",
+    "source_url",
+    "license"
+  ],
+  "title": "Feature",
+  "type": "object"
+}

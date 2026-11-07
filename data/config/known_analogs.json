@@ -1,0 +1,31 @@
+{
+  "_note": "Coordinates are approximate. citation_status to_verify means the entry came from the spec's starter list and still needs a citation. Only verified entries count toward min_catalog_size. control_for is proposed; the industrial engineer owns it.",
+  "sites": [
+    { "id": "atacama", "name": "Atacama Desert (Yungay)", "lat": -24.1, "lon": -70.0, "type": "desert", "role": "positive_control", "control_for": ["jezero"], "source_ref": "Named in the official challenge text", "citation_status": "verified" },
+    { "id": "haughton", "name": "Haughton crater, Devon Island", "lat": 75.38, "lon": -89.68, "type": "polar", "role": "positive_control", "control_for": ["arcadia_planitia"], "source_ref": "Named in the official challenge text", "citation_status": "verified" },
+    { "id": "death_valley", "name": "Death Valley", "lat": 36.25, "lon": -116.85, "type": "desert", "role": "positive_control", "control_for": ["jezero"], "source_ref": "Named in the official challenge text", "citation_status": "verified" },
+    { "id": "pampas_la_joya", "name": "Pampas de La Joya", "lat": -16.7, "lon": -72.0, "type": "desert", "role": "positive_control", "control_for": ["jezero"], "source_ref": "Multidisciplinary approach of the hyperarid desert of Pampas de La Joya in southern Peru as a new Mars-like soil analog, Geochimica et Cosmochimica Acta, 2011", "citation_status": "verified" },
+    { "id": "mauna_kea", "name": "Mauna Kea", "lat": 19.82, "lon": -155.47, "type": "volcanic", "role": "positive_control", "control_for": ["shackleton_ridge"], "source_ref": null, "citation_status": "to_verify" },
+    { "id": "askja", "name": "Askja, Iceland", "lat": 65.05, "lon": -16.75, "type": "volcanic", "role": "positive_control", "control_for": ["shackleton_ridge"], "source_ref": null, "citation_status": "to_verify" },
+    { "id": "dry_valleys", "name": "Antarctic Dry Valleys", "lat": -77.5, "lon": 162.0, "type": "polar", "role": "positive_control", "control_for": ["arcadia_planitia"], "source_ref": null, "citation_status": "to_verify" },
+    { "id": "rio_tinto", "name": "Rio Tinto", "lat": 37.72, "lon": -6.56, "type": "other", "role": "positive_control", "control_for": ["jezero"], "source_ref": null, "citation_status": "to_verify" },
+    { "id": "salar_uyuni", "name": "Salar de Uyuni", "lat": -20.2, "lon": -67.6, "type": "desert", "role": "positive_control", "control_for": ["jezero"], "source_ref": null, "citation_status": "to_verify" },
+
+    { "id": "amazon_madre_de_dios", "name": "Amazon, Madre de Dios (Peru)", "lat": -12.6, "lon": -69.5, "type": "other", "role": "negative_control", "control_for": ["shackleton_ridge", "arcadia_planitia", "jezero"], "source_ref": "Negative control chosen in the spec", "citation_status": "verified" },
+    { "id": "amazon_central", "name": "Central Amazon (Brazil)", "lat": -3.1, "lon": -60.0, "type": "other", "role": "negative_control", "control_for": ["shackleton_ridge", "arcadia_planitia", "jezero"], "source_ref": "Negative control chosen in the spec", "citation_status": "verified" },
+    { "id": "congo_basin", "name": "Congo basin", "lat": -0.5, "lon": 20.0, "type": "other", "role": "negative_control", "control_for": ["shackleton_ridge", "arcadia_planitia", "jezero"], "source_ref": "Negative control chosen in the spec", "citation_status": "verified" },
+    { "id": "farmland_iowa", "name": "Intensive farmland (Iowa)", "lat": 42.0, "lon": -93.5, "type": "other", "role": "negative_control", "control_for": ["shackleton_ridge", "arcadia_planitia", "jezero"], "source_ref": "Negative control chosen in the spec", "citation_status": "verified" },
+
+    { "id": "mdrs", "name": "Mars Desert Research Station", "lat": 38.41, "lon": -110.79, "type": "desert", "role": "catalog_only", "control_for": [], "source_ref": null, "citation_status": "to_verify" },
+    { "id": "mojave", "name": "Mojave Desert", "lat": 35.0, "lon": -116.0, "type": "desert", "role": "catalog_only", "control_for": [], "source_ref": null, "citation_status": "to_verify" },
+    { "id": "svalbard", "name": "Svalbard", "lat": 79.4, "lon": 13.3, "type": "polar", "role": "catalog_only", "control_for": [], "source_ref": null, "citation_status": "to_verify" },
+    { "id": "dhofar", "name": "Dhofar, Oman", "lat": 18.8, "lon": 55.9, "type": "desert", "role": "catalog_only", "control_for": [], "source_ref": null, "citation_status": "to_verify" },
+    { "id": "negev", "name": "Negev Desert", "lat": 30.6, "lon": 34.8, "type": "desert", "role": "catalog_only", "control_for": [], "source_ref": null, "citation_status": "to_verify" },
+    { "id": "qaidam", "name": "Qaidam Basin", "lat": 37.0, "lon": 94.0, "type": "desert", "role": "catalog_only", "control_for": [], "source_ref": null, "citation_status": "to_verify" },
+    { "id": "ladakh", "name": "Ladakh", "lat": 33.3, "lon": 78.0, "type": "desert", "role": "catalog_only", "control_for": [], "source_ref": null, "citation_status": "to_verify" },
+    { "id": "pilbara", "name": "Pilbara", "lat": -21.2, "lon": 119.4, "type": "desert", "role": "catalog_only", "control_for": [], "source_ref": null, "citation_status": "to_verify" },
+    { "id": "lanzarote", "name": "Lanzarote", "lat": 29.0, "lon": -13.6, "type": "volcanic", "role": "catalog_only", "control_for": [], "source_ref": null, "citation_status": "to_verify" },
+    { "id": "meteor_crater", "name": "Meteor Crater", "lat": 35.03, "lon": -111.02, "type": "other", "role": "catalog_only", "control_for": [], "source_ref": null, "citation_status": "to_verify" },
+    { "id": "mistastin", "name": "Mistastin crater", "lat": 55.88, "lon": -63.31, "type": "other", "role": "catalog_only", "control_for": [], "source_ref": null, "citation_status": "to_verify" }
+  ]
+}

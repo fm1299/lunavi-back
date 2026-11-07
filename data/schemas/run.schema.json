@@ -1,0 +1,172 @@
+{
+  "$defs": {
+    "Region": {
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "lat_min": {
+          "title": "Lat Min",
+          "type": "number"
+        },
+        "lat_max": {
+          "title": "Lat Max",
+          "type": "number"
+        },
+        "lon_min": {
+          "title": "Lon Min",
+          "type": "number"
+        },
+        "lon_max": {
+          "title": "Lon Max",
+          "type": "number"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "lat_min",
+        "lat_max",
+        "lon_min",
+        "lon_max"
+      ],
+      "title": "Region",
+      "type": "object"
+    },
+    "RegionPreset": {
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "bbox": {
+          "maxItems": 4,
+          "minItems": 4,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Bbox",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "bbox"
+      ],
+      "title": "RegionPreset",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "grid_resolution_deg": {
+      "title": "Grid Resolution Deg",
+      "type": "number"
+    },
+    "region": {
+      "$ref": "#/$defs/Region"
+    },
+    "region_presets": {
+      "items": {
+        "$ref": "#/$defs/RegionPreset"
+      },
+      "title": "Region Presets",
+      "type": "array"
+    },
+    "novelty_km": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "propertyNames": {
+        "enum": [
+          "known",
+          "near_known"
+        ]
+      },
+      "title": "Novelty Km",
+      "type": "object"
+    },
+    "target_quality": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "propertyNames": {
+        "enum": [
+          "measured",
+          "literature",
+          "physical"
+        ]
+      },
+      "title": "Target Quality",
+      "type": "object"
+    },
+    "confidence_bands": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "propertyNames": {
+        "enum": [
+          "high",
+          "medium"
+        ]
+      },
+      "title": "Confidence Bands",
+      "type": "object"
+    },
+    "min_catalog_size": {
+      "title": "Min Catalog Size",
+      "type": "integer"
+    },
+    "control_search_km": {
+      "title": "Control Search Km",
+      "type": "number"
+    },
+    "candidate_top_percent": {
+      "title": "Candidate Top Percent",
+      "type": "number"
+    },
+    "geometric_floor": {
+      "title": "Geometric Floor",
+      "type": "number"
+    },
+    "reference_year": {
+      "title": "Reference Year",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "grid_resolution_deg",
+    "region",
+    "region_presets",
+    "novelty_km",
+    "target_quality",
+    "confidence_bands",
+    "min_catalog_size",
+    "control_search_km",
+    "candidate_top_percent",
+    "geometric_floor",
+    "reference_year"
+  ],
+  "title": "RunConfig",
+  "type": "object"
+}

@@ -1,0 +1,15 @@
+{
+  "min_land_fraction": 0.25,
+  "arid_precip_mm": 250,
+  "polar_lat_deg": 60,
+  "volcano_distance_km": 50,
+  "mask_exceptions": [
+    {
+      "id": "rio_tinto",
+      "name": "Rio Tinto",
+      "bbox": [-6.8, 37.5, -6.3, 37.9],
+      "reason": "Acidic, iron-rich river system documented as a Mars analog, outside the arid, polar and volcanic classes.",
+      "source_ref": null
+    }
+  ]
+}

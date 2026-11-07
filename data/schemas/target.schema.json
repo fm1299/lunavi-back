@@ -1,0 +1,145 @@
+{
+  "$defs": {
+    "TargetFeature": {
+      "properties": {
+        "value": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Value"
+        },
+        "uncertainty": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Uncertainty"
+        },
+        "basis": {
+          "anyOf": [
+            {
+              "enum": [
+                "measured",
+                "literature",
+                "physical"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Basis"
+        },
+        "source_url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Source Url"
+        },
+        "note": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Note"
+        }
+      },
+      "required": [
+        "value",
+        "basis",
+        "source_url"
+      ],
+      "title": "TargetFeature",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "id": {
+      "title": "Id",
+      "type": "string"
+    },
+    "name": {
+      "title": "Name",
+      "type": "string"
+    },
+    "body": {
+      "enum": [
+        "moon",
+        "mars"
+      ],
+      "title": "Body",
+      "type": "string"
+    },
+    "lat": {
+      "title": "Lat",
+      "type": "number"
+    },
+    "lon": {
+      "title": "Lon",
+      "type": "number"
+    },
+    "description": {
+      "title": "Description",
+      "type": "string"
+    },
+    "coordinate_note": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Coordinate Note"
+    },
+    "default_profile": {
+      "title": "Default Profile",
+      "type": "string"
+    },
+    "features": {
+      "additionalProperties": {
+        "$ref": "#/$defs/TargetFeature"
+      },
+      "title": "Features",
+      "type": "object"
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "body",
+    "lat",
+    "lon",
+    "description",
+    "default_profile",
+    "features"
+  ],
+  "title": "Target",
+  "type": "object"
+}

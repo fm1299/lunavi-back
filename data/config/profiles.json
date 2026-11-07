@@ -1,0 +1,71 @@
+{
+  "profiles": [
+    {
+      "id": "rover_mobility",
+      "label": "Rover mobility",
+      "weights": {
+        "slope": 3,
+        "roughness": 3,
+        "aridity": 1,
+        "temp_annual_range": 1,
+        "temp_diurnal_range": 1,
+        "composition": 1
+      },
+      "gates": { "vegetation": 0.5 },
+      "test_tags": ["Traction and wheel wear", "Autonomous navigation", "Sampling operations"]
+    },
+    {
+      "id": "habitat_thermal",
+      "label": "Habitat and thermal stress",
+      "weights": {
+        "temp_diurnal_range": 3,
+        "temp_annual_range": 2,
+        "aridity": 2,
+        "slope": 1,
+        "roughness": 1
+      },
+      "gates": { "vegetation": 0.5 },
+      "test_tags": ["Thermal control", "Power and insulation cycling", "Long-duration exposure"]
+    },
+    {
+      "id": "ice_water",
+      "label": "Ice and water",
+      "weights": {
+        "mean_temperature": 3,
+        "temp_annual_range": 2,
+        "composition": 2,
+        "aridity": 1
+      },
+      "gates": { "vegetation": 0.5 },
+      "test_tags": ["Ground-ice radar", "Drilling and coring", "Volatile handling"]
+    },
+    {
+      "id": "dust_regolith",
+      "label": "Dust and regolith",
+      "weights": {
+        "aridity": 3,
+        "composition": 3,
+        "roughness": 2,
+        "slope": 1
+      },
+      "gates": { "vegetation": 0.5 },
+      "test_tags": ["Dust mitigation", "Abrasion on seals", "Regolith handling"]
+    },
+    {
+      "id": "landing_site",
+      "label": "Landing site",
+      "weights": {
+        "slope": 3,
+        "roughness": 3,
+        "composition": 1,
+        "aridity": 1
+      },
+      "gates": { "vegetation": 0.5 },
+      "test_tags": [
+        "Landing hazard detection",
+        "Terrain-relative navigation",
+        "Plume and surface interaction"
+      ]
+    }
+  ]
+}
