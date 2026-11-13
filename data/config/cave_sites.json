@@ -1,8 +1,0 @@
-{
-  "_note": "Starter list from memory with approximate coordinates, none inside the first region. Each entry needs a citation from a published cave catalog.",
-  "sites": [
-    { "id": "cueva_de_los_verdes", "name": "Cueva de los Verdes, Lanzarote", "lat": 29.16, "lon": -13.44, "source_ref": null, "citation_status": "to_verify" },
-    { "id": "lava_beds", "name": "Lava Beds National Monument", "lat": 41.71, "lon": -121.51, "source_ref": null, "citation_status": "to_verify" },
-    { "id": "kazumura", "name": "Kazumura Cave, Hawaii", "lat": 19.5, "lon": -155.1, "source_ref": null, "citation_status": "to_verify" }
-  ]
-}

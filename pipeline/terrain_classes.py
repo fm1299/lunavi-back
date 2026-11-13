@@ -3,12 +3,12 @@
 import json
 from pathlib import Path
 
-import httpx
 import numpy as np
 
-from pipeline.contract import CaveSite, Masks
+from pipeline.contract import Masks
 from pipeline.geo import haversine_km
 from pipeline.grid import Grid
+from pipeline.net import fetch
 
 GVP_URL = (
     "https://webservices.volcano.si.edu/geoserver/GVP-VOTW/ows?service=WFS&version=2.0.0"
@@ -21,9 +21,8 @@ def load_volcanoes(raw_dir: Path) -> tuple[np.ndarray, np.ndarray]:
     """Smithsonian Holocene volcano list as (lats, lons)."""
     path = raw_dir / "gvp" / "holocene_volcanoes.geojson"
     if not path.exists():
+        response = fetch(GVP_URL, timeout=180)
         path.parent.mkdir(parents=True, exist_ok=True)
-        response = httpx.get(GVP_URL, timeout=180)
-        response.raise_for_status()
         path.write_text(response.text, encoding="utf-8")
     features = json.loads(path.read_text(encoding="utf-8"))["features"]
     points = [f["geometry"]["coordinates"] for f in features if f.get("geometry")]
@@ -45,24 +44,22 @@ def classify_terrain(
     aridity_mm: np.ndarray,
     composition: np.ndarray,
     near_volcano: np.ndarray,
-    caves: list[CaveSite],
+    glaciated: np.ndarray,
     masks: Masks,
 ) -> np.ndarray:
-    """Return a grid-shaped object array holding each cell's list of classes."""
+    """Return a grid-shaped object array holding each cell's list of classes.
+
+    Ice sheets get no class: they are not rock or regolith, and the terrain tiles record the
+    bedrock under them, so their slope and roughness mean nothing. A documented ice-free site
+    inside a coarse glacier polygon, such as the Dry Valleys, stays through a mask exception.
+    """
     lat2d, lon2d = grid.mesh()
     half = grid.res / 2
+    ice_free = glaciated <= masks.max_glaciated_fraction
     with np.errstate(invalid="ignore"):
-        arid = aridity_mm < masks.arid_precip_mm
-    polar = np.abs(lat2d) >= masks.polar_lat_deg
-    basaltic = composition == "basaltic"
-    volcanic = basaltic | near_volcano
-
-    cave_cells = np.zeros(grid.shape, dtype=bool)
-    for cave in caves:
-        if grid.contains(cave.lat, cave.lon):
-            row = int(np.round((cave.lat - grid.lats[0]) / grid.res))
-            col = int(np.round((cave.lon - grid.lons[0]) / grid.res))
-            cave_cells[row, col] = True
+        arid = (aridity_mm < masks.arid_precip_mm) & ice_free
+    polar = (np.abs(lat2d) >= masks.polar_lat_deg) & ice_free
+    volcanic = ((composition == "basaltic") | near_volcano) & ice_free
 
     other = np.zeros(grid.shape, dtype=bool)
     for exception in masks.mask_exceptions:
@@ -83,22 +80,7 @@ def classify_terrain(
             cell.append("polar")
         if volcanic[index]:
             cell.append("volcanic")
-        if cave_cells[index]:
-            cell.append("caves")
         if other[index]:
             cell.append("other")
         classes[index] = cell
     return classes
-
-
-def cave_tags(grid: Grid, caves: list[CaveSite]) -> np.ndarray:
-    """Grid-shaped array of tag lists. The cave tag never changes a score."""
-    tags = np.empty(grid.shape, dtype=object)
-    for index in np.ndindex(grid.shape):
-        tags[index] = []
-    for cave in caves:
-        if grid.contains(cave.lat, cave.lon):
-            row = int(np.round((cave.lat - grid.lats[0]) / grid.res))
-            col = int(np.round((cave.lon - grid.lons[0]) / grid.res))
-            tags[row, col] = [*tags[row, col], "cave"]
-    return tags

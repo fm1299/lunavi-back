@@ -46,7 +46,7 @@
       "source_name": "NASA POWER climatology (TS)",
       "source_url": "https://power.larc.nasa.gov/",
       "license": "NASA open data",
-      "note": "Source grid is 0.5 x 0.625 degrees, so sharp Andean relief is smoothed."
+      "note": "Source grid is 0.5 x 0.625 degrees, so sharp mountain relief is smoothed."
     },
     {
       "key": "temp_diurnal_range",
@@ -78,7 +78,7 @@
       "source_name": "NASA POWER climatology (TS)",
       "source_url": "https://power.larc.nasa.gov/",
       "license": "NASA open data",
-      "note": "Source grid is 0.5 x 0.625 degrees, so sharp Andean relief is smoothed."
+      "note": "Source grid is 0.5 x 0.625 degrees, so sharp mountain relief is smoothed."
     },
     {
       "key": "aridity",
@@ -127,11 +127,11 @@
       },
       "source_quality": 0.5,
       "resolution_factor": 0.8,
-      "adapter": "pipeline.adapters.lithology:composition",
-      "source_name": "Macrostrat geologic map API (small scale)",
-      "source_url": "https://macrostrat.org/",
-      "license": "CC-BY 4.0",
-      "note": "One point sampled at the cell centre and mapped by keyword to a coarse class, so low quality by design."
+      "adapter": null,
+      "source_name": "No source yet",
+      "source_url": null,
+      "license": null,
+      "note": "Left blank for now and expected from the event data. pipeline/adapters/lithology.py is a ready option: set this adapter to pipeline.adapters.lithology:composition to use the Macrostrat API."
     },
     {
       "key": "elevation",
@@ -147,7 +147,8 @@
       "source_name": "AWS Terrain Tiles (Terrarium, zoom 8)",
       "source_url": "https://registry.opendata.aws/terrain-tiles/",
       "license": "Open data, attribution required",
-      "note": "Moon and Mars heights are relative to their own datums, so this is context only."
+      "note": "Moon and Mars heights are relative to their own datums, so this is context only.",
+      "comparable_across_bodies": false
     }
   ]
 }

@@ -1,5 +1,5 @@
 {
-  "description": "One cell as the API returns it with detail=full. Parquet flattens s, q and raw.",
+  "description": "One Earth cell as the API returns it with detail=full. Parquet flattens raw and gap.",
   "properties": {
     "cell_id": {
       "title": "Cell Id",
@@ -12,6 +12,17 @@
     "lon": {
       "title": "Lon",
       "type": "number"
+    },
+    "country": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Country"
     },
     "terrain": {
       "items": {
@@ -65,33 +76,6 @@
       "title": "Raw",
       "type": "object"
     },
-    "novelty": {
-      "enum": [
-        "known",
-        "near_known",
-        "new"
-      ],
-      "title": "Novelty",
-      "type": "string"
-    },
-    "nearest_known": {
-      "anyOf": [
-        {
-          "type": "string"
-        },
-        {
-          "type": "null"
-        }
-      ],
-      "title": "Nearest Known"
-    },
-    "tags": {
-      "items": {
-        "type": "string"
-      },
-      "title": "Tags",
-      "type": "array"
-    },
     "score": {
       "title": "Score",
       "type": "number"
@@ -114,13 +98,11 @@
     "cell_id",
     "lat",
     "lon",
+    "country",
     "terrain",
     "s",
     "q",
     "raw",
-    "novelty",
-    "nearest_known",
-    "tags",
     "score",
     "confidence",
     "band"

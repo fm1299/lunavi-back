@@ -7,5 +7,4 @@ __pycache__/
 # Large or rebuildable data. Config and dummy files stay in git.
 data/raw/
 data/derived/
-data/results/*
-!data/results/findings.json
+data/results/

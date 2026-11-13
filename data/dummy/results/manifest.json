@@ -1,15 +1,16 @@
 {
   "dummy": true,
-  "generated_at": "2026-11-07T17:31:24+00:00",
-  "grid_resolution_deg": 0.25,
+  "generated_at": "2026-11-07T19:50:53+00:00",
+  "grid_resolution_deg": 0.5,
   "region": {
-    "id": "andes_south",
-    "name": "Southern Peru, northern Chile, Bolivian Altiplano and the Peruvian Amazon",
-    "lat_min": -30.0,
-    "lat_max": -10.0,
-    "lon_min": -78.0,
-    "lon_max": -62.0
+    "id": "global",
+    "name": "Whole Earth",
+    "lat_min": -89.5,
+    "lat_max": 89.5,
+    "lon_min": -180.0,
+    "lon_max": 179.5
   },
+  "land_cells": 50,
   "cells_with_data": {
     "slope": 50,
     "roughness": 50,

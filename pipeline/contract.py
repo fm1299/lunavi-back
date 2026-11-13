@@ -16,10 +16,11 @@ SCHEMA_DIR = Path("data/schemas")
 
 Basis = Literal["measured", "literature", "physical"]
 CitationStatus = Literal["verified", "to_verify"]
-Novelty = Literal["known", "near_known", "new"]
 
 
 class TargetFeature(BaseModel):
+    """One value for a Moon or Mars site. A null value means no data yet."""
+
     value: float | str | None
     uncertainty: float | None = None
     basis: Basis | None
@@ -34,6 +35,8 @@ class TargetFeature(BaseModel):
 
 
 class Target(BaseModel):
+    """A Moon or Mars site: a preset from targets.json, or a location chosen on the map."""
+
     id: str
     name: str
     body: Literal["moon", "mars"]
@@ -43,6 +46,7 @@ class Target(BaseModel):
     coordinate_note: str | None = None
     default_profile: str
     features: dict[str, TargetFeature]
+    climate_status: Literal["ready", "pending", "unavailable"] = "ready"
 
 
 class Feature(BaseModel):
@@ -57,11 +61,12 @@ class Feature(BaseModel):
     similarity_matrix: dict[str, dict[str, float]] | None = None
     source_quality: float
     resolution_factor: float
-    adapter: str
+    adapter: str | None  # null means no Earth data source yet, so the feature stays blank
     source_name: str
-    source_url: str
-    license: str
+    source_url: str | None
+    license: str | None
     note: str | None = None
+    comparable_across_bodies: bool = True  # false when each body measures it from its own zero
 
     @model_validator(mode="after")
     def check_type_fields(self):
@@ -81,6 +86,8 @@ class Profile(BaseModel):
 
 
 class KnownAnalog(BaseModel):
+    """A documented Earth analog, shown as a pin on the map."""
+
     id: str
     name: str
     lat: float
@@ -88,15 +95,6 @@ class KnownAnalog(BaseModel):
     type: Literal["desert", "polar", "volcanic", "cave", "other"]
     role: Literal["positive_control", "negative_control", "catalog_only"]
     control_for: list[str]
-    source_ref: str | None
-    citation_status: CitationStatus
-
-
-class CaveSite(BaseModel):
-    id: str
-    name: str
-    lat: float
-    lon: float
     source_ref: str | None
     citation_status: CitationStatus
 
@@ -114,6 +112,7 @@ class Masks(BaseModel):
     arid_precip_mm: float
     polar_lat_deg: float
     volcano_distance_km: float
+    max_glaciated_fraction: float
     mask_exceptions: list[MaskException]
 
 
@@ -136,53 +135,26 @@ class RunConfig(BaseModel):
     grid_resolution_deg: float
     region: Region
     region_presets: list[RegionPreset]
-    novelty_km: dict[Literal["known", "near_known"], float]
+    site_window_km: float
     target_quality: dict[Basis, float]
     confidence_bands: dict[Literal["high", "medium"], float]
-    min_catalog_size: int
-    control_search_km: float
-    candidate_top_percent: float
-    geometric_floor: float
     reference_year: int
 
 
 class ResultCell(BaseModel):
-    """One cell as the API returns it with detail=full. Parquet flattens s, q and raw."""
+    """One Earth cell as the API returns it with detail=full. Parquet flattens raw and gap."""
 
     cell_id: str
     lat: float
     lon: float
+    country: str | None
     terrain: list[str]
     s: dict[str, float | None]
     q: dict[str, float | None]
     raw: dict[str, float | str | None]
-    novelty: Novelty
-    nearest_known: str | None
-    tags: list[str]
     score: float
     confidence: float
     band: Literal["high", "medium", "low"]
-
-
-class Candidate(BaseModel):
-    id: str
-    name: str | None
-    cell_ids: list[str]
-    lat: float
-    lon: float
-    score: float
-    confidence: float
-    closest_matches: list[str]
-    weakest_matches: list[str]
-    test_first: list[str]
-    sources: list[str]
-    literature_check: dict | None
-
-
-class TargetFindings(BaseModel):
-    target_id: str
-    profile: str
-    candidates: list[Candidate]
 
 
 @dataclass(frozen=True)
@@ -192,13 +164,7 @@ class Config:
     features: dict[str, Feature]
     profiles: dict[str, Profile]
     analogs: list[KnownAnalog]
-    caves: list[CaveSite]
     masks: Masks
-
-    @property
-    def catalog(self) -> list[KnownAnalog]:
-        """Documented analog sites. Negative controls are not part of the catalog."""
-        return [a for a in self.analogs if a.role != "negative_control"]
 
 
 def _read(path: Path) -> dict:
@@ -212,7 +178,6 @@ def load_config(config_dir: Path = CONFIG_DIR) -> Config:
         features={f["key"]: Feature(**f) for f in _read(config_dir / "features.json")["features"]},
         profiles={p["id"]: Profile(**p) for p in _read(config_dir / "profiles.json")["profiles"]},
         analogs=[KnownAnalog(**s) for s in _read(config_dir / "known_analogs.json")["sites"]],
-        caves=[CaveSite(**s) for s in _read(config_dir / "cave_sites.json")["sites"]],
         masks=Masks(**_read(config_dir / "masks.json")),
     )
     _cross_check(config)
@@ -230,10 +195,6 @@ def _cross_check(config: Config) -> None:
         for key in [*profile.weights, *profile.gates]:
             if key not in config.features:
                 raise ValueError(f"{profile.id}: unknown feature {key}")
-    for site in config.analogs:
-        for target_id in site.control_for:
-            if target_id not in config.targets:
-                raise ValueError(f"{site.id}: unknown target {target_id}")
 
 
 def export_schemas(out_dir: Path = SCHEMA_DIR) -> None:
@@ -243,11 +204,9 @@ def export_schemas(out_dir: Path = SCHEMA_DIR) -> None:
         "feature": Feature,
         "profile": Profile,
         "known_analog": KnownAnalog,
-        "cave_site": CaveSite,
         "masks": Masks,
         "run": RunConfig,
         "result_cell": ResultCell,
-        "findings": TargetFindings,
     }
     for name, model in models.items():
         text = json.dumps(model.model_json_schema(), indent=2) + "\n"

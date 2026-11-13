@@ -1,6 +1,7 @@
 {
   "$defs": {
     "TargetFeature": {
+      "description": "One value for a Moon or Mars site. A null value means no data yet.",
       "properties": {
         "value": {
           "anyOf": [
@@ -77,6 +78,7 @@
       "type": "object"
     }
   },
+  "description": "A Moon or Mars site: a preset from targets.json, or a location chosen on the map.",
   "properties": {
     "id": {
       "title": "Id",
@@ -128,6 +130,16 @@
       },
       "title": "Features",
       "type": "object"
+    },
+    "climate_status": {
+      "default": "ready",
+      "enum": [
+        "ready",
+        "pending",
+        "unavailable"
+      ],
+      "title": "Climate Status",
+      "type": "string"
     }
   },
   "required": [

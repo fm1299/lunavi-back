@@ -74,6 +74,10 @@
       "title": "Volcano Distance Km",
       "type": "number"
     },
+    "max_glaciated_fraction": {
+      "title": "Max Glaciated Fraction",
+      "type": "number"
+    },
     "mask_exceptions": {
       "items": {
         "$ref": "#/$defs/MaskException"
@@ -87,6 +91,7 @@
     "arid_precip_mm",
     "polar_lat_deg",
     "volcano_distance_km",
+    "max_glaciated_fraction",
     "mask_exceptions"
   ],
   "title": "Masks",

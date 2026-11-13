@@ -1,4 +1,4 @@
-"""Results held in memory, and the cheap per-request scoring (spec 3.1). Nothing heavy runs here."""
+"""The Earth table held in memory, and the cheap per-request comparison (spec 3.1)."""
 
 import json
 import os
@@ -6,12 +6,12 @@ from dataclasses import dataclass
 from pathlib import Path
 
 import numpy as np
-import pandas as pd
 
 from pipeline import scoring
 from pipeline.contract import Config, Profile, Target, load_config
-from pipeline.findings import beyond_earth_keys
-from pipeline.results import Matrices, read_results, to_matrices
+from pipeline.earth import Comparison, beyond_earth_keys, compare, load_earth
+from pipeline.geo import haversine_km
+from pipeline.sites import SiteBook
 
 REAL_RESULTS = Path("data/results")
 DUMMY_RESULTS = Path("data/dummy/results")
@@ -37,78 +37,79 @@ def _clean(value):
 
 
 @dataclass(frozen=True)
-class TargetData:
-    table: pd.DataFrame
-    matrices: Matrices
-    eligible: np.ndarray
-    terrain: list[list[str]]
-    index_by_cell: dict[str, int]
-
-
-@dataclass(frozen=True)
 class Scored:
+    comparison: Comparison
     score: np.ndarray
     confidence: np.ndarray
 
 
 class Store:
-    def __init__(self, directory: Path | None = None, config: Config | None = None):
+    def __init__(
+        self,
+        directory: Path | None = None,
+        config: Config | None = None,
+        sites: SiteBook | None = None,
+    ):
         self.config = config or load_config()
         self.directory = directory or results_dir()
         self.manifest = json.loads((self.directory / "manifest.json").read_text(encoding="utf-8"))
-        self.validation = json.loads(
-            (self.directory / "validation.json").read_text(encoding="utf-8")
-        )
-        self.findings = json.loads((self.directory / "findings.json").read_text(encoding="utf-8"))
-        self.candidates = json.loads(
-            (self.directory / "candidates.json").read_text(encoding="utf-8")
-        )
-        self.targets: dict[str, TargetData] = {}
-        for target_id in self.config.targets:
-            table = read_results(self.directory / f"{target_id}.parquet")
-            terrain = [list(t) for t in table["terrain"]]
-            table["tags"] = [list(t) for t in table["tags"]]
-            self.targets[target_id] = TargetData(
-                table=table,
-                matrices=to_matrices(table, self.config.features),
-                eligible=np.array([len(t) > 0 for t in terrain]),
-                terrain=terrain,
-                index_by_cell={c: i for i, c in enumerate(table["cell_id"])},
-            )
+        self.earth = load_earth(self.directory / "earth.parquet")
+        self.sites = sites or SiteBook(window_km=self.config.run.site_window_km)
 
-    def compute(self, data: TargetData, weights: dict[str, float], profile: Profile) -> Scored:
-        matrices = data.matrices
-        weight_vector = matrices.weights(weights)
-        gate_s, thresholds = matrices.gates(profile.gates)
-        vetoed = scoring.gate_vetoes(gate_s, thresholds)
+    def find_target(self, identifier: str) -> Target | None:
+        """A preset from targets.json, or a location chosen on the map."""
+        return self.config.targets.get(identifier) or self.sites.get(identifier)
+
+    def describe_target(self, target: Target) -> dict:
+        beyond = sorted(beyond_earth_keys(self.config.features, target))
+        return {**target.model_dump(), "beyond_earth": beyond}
+
+    def compute(self, target: Target, weights: dict[str, float], profile: Profile) -> Scored:
+        comparison = compare(
+            self.earth, self.config.features, target, self.config.run.target_quality
+        )
+        weight_vector = comparison.weights(weights)
         return Scored(
-            score=scoring.combined_score(matrices.s, weight_vector, vetoed),
-            confidence=scoring.confidence(matrices.q, matrices.s, weight_vector),
+            comparison=comparison,
+            score=scoring.combined_score(
+                comparison.s, weight_vector, comparison.vetoes(profile.gates)
+            ),
+            confidence=scoring.confidence(comparison.q, comparison.s, weight_vector),
         )
 
     def band(self, value: float) -> str:
         bands = self.config.run.confidence_bands
         return scoring.confidence_band(value, bands["high"], bands["medium"])
 
-    def beyond_earth(self, target: Target) -> list[str]:
-        return sorted(beyond_earth_keys(self.config, target))
+    def spaced_top(self, ordered: np.ndarray, count: int, min_km: float) -> np.ndarray:
+        """Take the best cells that are at least min_km apart, so the list shows distinct places."""
+        earth = self.earth
+        picks: list[int] = []
+        for index in ordered:
+            if picks:
+                distances = haversine_km(
+                    earth.lat[index], earth.lon[index], earth.lat[picks], earth.lon[picks]
+                )
+                if distances.min() < min_km:
+                    continue
+            picks.append(int(index))
+            if len(picks) == count:
+                break
+        return np.array(picks, dtype=int)
 
-    def full_cell(self, data: TargetData, index: int, scored: Scored) -> dict:
-        """One cell in the shape from spec 6.4, plus score, confidence and band."""
-        row = data.table.iloc[index]
-        keys = data.matrices.keys
+    def full_cell(self, index: int, scored: Scored) -> dict:
+        """One cell with its per-feature values, plus score, confidence and band."""
+        row = self.earth.table.iloc[index]
+        keys = scored.comparison.keys
         return {
             "cell_id": row["cell_id"],
             "lat": float(row["lat"]),
             "lon": float(row["lon"]),
-            "terrain": data.terrain[index],
-            "s": {k: _clean(row[f"s_{k}"]) for k in keys},
-            "q": {k: _clean(row[f"q_{k}"]) for k in keys},
+            "country": row["country"],
+            "terrain": self.earth.terrain[index],
+            "s": {k: _clean(scored.comparison.s[index, i]) for i, k in enumerate(keys)},
+            "q": {k: _clean(scored.comparison.q[index, i]) for i, k in enumerate(keys)},
             "raw": {k: _clean(row[f"raw_{k}"]) for k in keys},
-            "novelty": row["novelty"],
-            "nearest_known": row["nearest_known"],
-            "nearest_known_km": _clean(row["nearest_known_km"]),
-            "tags": row["tags"],
             "score": round(float(scored.score[index]), 1),
             "confidence": round(float(scored.confidence[index]), 3),
             "band": self.band(float(scored.confidence[index])),
@@ -117,15 +118,14 @@ class Store:
     def cell_sheet(
         self,
         target: Target,
-        data: TargetData,
         index: int,
         scored: Scored,
         weights: dict[str, float],
         profile: Profile,
     ) -> dict:
-        """Everything the site sheet shows for one cell (spec FR-W5)."""
-        cell = self.full_cell(data, index, scored)
-        flagged = beyond_earth_keys(self.config, target)
+        """Everything the site sheet shows for one Earth cell (spec FR-W5)."""
+        cell = self.full_cell(index, scored)
+        flagged = beyond_earth_keys(self.config.features, target)
         breakdown = []
         for key, feature in self.config.features.items():
             entry = target.features.get(key)
@@ -175,5 +175,5 @@ class Store:
             "beyond_earth_weight_share": round(scoring.weight_share(weights, flagged), 3),
             "missing_features": [r["key"] for r in breakdown if r["weight"] > 0 and r["s"] is None],
             "test_tags": profile.test_tags,
-            "eligible": bool(data.eligible[index]),
+            "eligible": bool(self.earth.eligible[index]),
         }

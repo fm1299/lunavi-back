@@ -90,20 +90,41 @@
       "type": "number"
     },
     "adapter": {
-      "title": "Adapter",
-      "type": "string"
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Adapter"
     },
     "source_name": {
       "title": "Source Name",
       "type": "string"
     },
     "source_url": {
-      "title": "Source Url",
-      "type": "string"
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Source Url"
     },
     "license": {
-      "title": "License",
-      "type": "string"
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "License"
     },
     "note": {
       "anyOf": [
@@ -116,6 +137,11 @@
       ],
       "default": null,
       "title": "Note"
+    },
+    "comparable_across_bodies": {
+      "default": true,
+      "title": "Comparable Across Bodies",
+      "type": "boolean"
     }
   },
   "required": [

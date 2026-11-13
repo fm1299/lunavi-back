@@ -32,11 +32,11 @@
           "note": "Lower bound: Diviner annual maximum minus annual mean, within 3 km. The true range is larger, and the Earth scale clamps it either way."
         },
         "temp_diurnal_range": {
-          "value": null,
+          "value": 137.5,
           "uncertainty": null,
-          "basis": null,
-          "source_url": null,
-          "note": "Not measured yet. Needs the Diviner seasonal polar tables (PCP, over 200 MB per file) or organizer data. Missing on purpose: it lowers confidence and is left out of the score."
+          "basis": "measured",
+          "source_url": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp",
+          "note": "Diviner global table: 13:30 minus 01:30 local time, mirroring the MODIS overpass on Earth. A 0.5 degree bin, so coarser than this ridge. The pole's local time is a weak idea of day and night, so treat this as approximate."
         },
         "mean_temperature": {
           "value": -138.2,

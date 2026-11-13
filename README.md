@@ -1,8 +1,11 @@
 # LUNAVI back end
 
-Pipeline and read-only API for LUNAVI, which finds and ranks Earth analogs of Moon and Mars sites. The web app is in [lunavi-front](https://github.com/fm1299/lunavi-front).
+Pipeline and read-only API for LUNAVI. Choose any location on the Moon or Mars, and LUNAVI ranks every land cell on Earth by how closely it matches. The web app is in [lunavi-front](https://github.com/fm1299/lunavi-front).
 
-The pipeline computes similarities offline and writes files. The API loads those files and only does cheap weighted sums per request.
+- **Offline:** the pipeline stores one table of Earth values.
+- **On request:** the API reads the chosen Moon or Mars location from open data, then compares it with the Earth table.
+
+This branch is the base. Validation, findings, novelty labels and cave tags are on the `full-prototype` branch, ready to bring back.
 
 ## Run it
 
@@ -13,69 +16,78 @@ uv sync
 uv run uvicorn api.main:app --reload    # API on http://localhost:8000, docs at /docs
 ```
 
-Without real results, the API serves the dummy files in `data/dummy/results` and says so in `/health`.
+Without real results, the API serves the dummy table in `data/dummy/results` and says so in `/health`.
 
-## Rebuild the results
+## Build the Earth table
 
 ```powershell
-uv run python -m pipeline.run                     # one command, all results, about 5 minutes the first time
-uv run python -m pipeline.run --skip composition  # leave a feature out as missing data
+uv run python -m pipeline.run                                 # the whole Earth at 0.5 degrees
+uv run python -m pipeline.run --bbox -30 -15 -75 -65          # a small area, for a quick check (about a minute)
 ```
 
-Downloads are cached in `data/raw` and `data/derived`, so reruns take seconds. No account or API key is needed. Delete `data/derived` to recompute from the raw files. To choose the region or grid, edit `data/config/run.json`.
+No account or API key is needed. Downloads are cached in `data/raw` and `data/derived`, so a stopped run resumes where it left off. A first full run downloads about 3 GB. To change the grid, edit `data/config/run.json`.
 
 Other commands:
 
 ```powershell
-uv run python -m pipeline.make_dummy       # regenerate the dummy files (about 50 cells)
-uv run python -m pipeline.contract         # validate config and export JSON Schemas to data/schemas
-uv run python -m pipeline.measure_targets  # re-measure the Moon and Mars values in targets.json
-uv run pytest                              # tests, no network needed
-uv run ruff check .                        # linter
+uv run python -m pipeline.make_dummy    # regenerate the dummy table (about 50 cells)
+uv run python -m pipeline.contract      # validate config and export JSON Schemas to data/schemas
+uv run pytest                           # tests, no network needed
+uv run ruff check .                     # linter
 ```
 
-## Swap in the event data
+## Add a data source
 
-Every feature has exactly one adapter: a function that takes a `Context` and returns a `Layer` (value grid and gap grid). To use the NASA or other agency data provided at the event:
+Missing values are normal here. A value with no source stays blank, is left out of the score, and lowers confidence, so the app works before every source exists.
+
+**Earth.** Every feature has one adapter: a function that takes a `Context` and returns a `Layer` (value grid and gap grid). To use data from the event:
 
 1. Add a function in `pipeline/adapters/`, such as `pipeline/adapters/event.py:slope`.
-2. Point that feature's `adapter` in `data/config/features.json` at it, and update its source, license and quality values.
-3. Run `uv run python -m pipeline.run`.
+2. Point that feature's `adapter` in `data/config/features.json` at it, and update its source, license and quality values. `"adapter": null` means no source yet.
+3. Run `uv run python -m pipeline.run`. Delete that feature's file in `data/derived` first if it already exists.
 
-Scoring, validation, the API and the web app stay as they are.
+Composition has no source yet. `pipeline/adapters/lithology.py` is a ready option using Macrostrat, but it needs about 88,000 requests for the whole Earth.
+
+**Moon and Mars.** Add a reader in `pipeline/sites.py` and call it from `SiteBook.resolve`. Delete `data/derived/sites` afterward so that locations are read again.
+
+## API
+
+| Endpoint | What it does |
+|---|---|
+| `GET /targets` | Preset sites |
+| `GET /sites/resolve?body=mars&lat=18.44&lon=77.45` | Read any location. The first read takes seconds, then it is cached |
+| `GET /sites/{id}/climate` | Finish a location's slow temperature query (Mars) |
+| `GET /results?target={id}&profile=&weights=&bbox=&terrain=&top_n=&min_confidence=&min_separation_km=&detail=` | Rank Earth cells against a site |
+| `GET /cells/{cell_id}?target={id}` | Explain one Earth cell |
+| `GET /profiles`, `/features`, `/analogs`, `/meta`, `/health` | Config and status |
 
 ## Layout
 
 | Path | What it holds |
 |---|---|
 | `pipeline/scoring.py` | The formulas from spec section 5, as pure functions |
-| `pipeline/adapters/` | One adapter per feature |
+| `pipeline/adapters/` | One adapter per Earth feature |
+| `pipeline/sites.py` | Reads any Moon or Mars location |
+| `pipeline/earth.py` | Loads the Earth table and compares a site with it |
 | `pipeline/contract.py` | The data contract as Pydantic models |
-| `pipeline/run.py` | The one command that rebuilds everything |
-| `pipeline/validate.py` | The validation report (spec section 8) |
-| `pipeline/findings.py` | Candidates for the literature check (spec 5.10) |
+| `pipeline/run.py` | The one command that builds the Earth table |
 | `api/` | FastAPI app |
-| `data/config/` | Targets, features, profiles, catalog, caves, masks and run settings |
-| `data/dummy/results/` | Dummy results in the real format |
-| `data/results/` | Real results (git-ignored, except the team's reviewed `findings.json`) |
+| `data/config/` | Preset sites, features, profiles, documented analogs, masks and run settings |
+| `data/dummy/results/` | A dummy Earth table in the real format |
+| `data/results/` | The real Earth table (git-ignored) |
 
 The spec describes one repository with `pipeline/`, `api/`, `web/` and `data/`. The team uses two, so `web/` lives in lunavi-front.
-
-## Findings are a people step
-
-The pipeline writes candidates to `data/results/candidates.json`. The team runs the literature check, names the survivors and adds them to `data/results/findings.json`, which reruns never overwrite. Findings stay blocked in the app until the catalog has `min_catalog_size` cited sites.
 
 ## Data sources
 
 | Data | Source | License |
 |---|---|---|
-| Slope, roughness, elevation | [AWS Terrain Tiles](https://registry.opendata.aws/terrain-tiles/) | Open data, attribution required |
-| Surface temperature, precipitation | [NASA POWER](https://power.larc.nasa.gov/) | NASA open data |
-| NDVI, day-night temperature | MODIS MOD13A1 and MYD11A2 through [Planetary Computer](https://planetarycomputer.microsoft.com/) | NASA open data |
-| Lithology | [Macrostrat](https://macrostrat.org/) | CC-BY 4.0 |
-| Land mask | [Natural Earth](https://www.naturalearthdata.com/) | Public domain |
+| Earth slope, roughness, elevation | [AWS Terrain Tiles](https://registry.opendata.aws/terrain-tiles/) | Open data, attribution required |
+| Earth surface temperature, precipitation | [NASA POWER](https://power.larc.nasa.gov/) | NASA open data |
+| Earth NDVI, day-night temperature | MODIS MOD13A1 and MYD11A2 through [Planetary Computer](https://planetarycomputer.microsoft.com/) | NASA open data |
+| Land mask, countries | [Natural Earth](https://www.naturalearthdata.com/) | Public domain |
 | Holocene volcanoes | [Smithsonian GVP](https://volcano.si.edu/) | Cite the GVP |
-| Mars terrain | [MOLA 463 m](https://astrogeology.usgs.gov/) | NASA and USGS open data |
-| Moon terrain | [LOLA LDEM_60S_240MPP](https://pgda.gsfc.nasa.gov/products/90) | NASA open data |
-| Moon temperature | [Diviner polar resource product](https://ode.rsl.wustl.edu/moon/pagehelp/Content/Missions_Instruments/LRO/DIVINER/PRP.htm) | NASA PDS open data |
+| Mars terrain | [MOLA 463 m](https://planetarymaps.usgs.gov/mosaic/Mars_MGS_MOLA_DEM_mosaic_global_463m.tif) | NASA and USGS open data |
 | Mars temperature | [Mars Climate Database v6.2](https://www-mars.lmd.jussieu.fr/mcd_python/) | Cite the MCD (a model, so basis is literature) |
+| Moon terrain | [LOLA 118 m](https://planetarymaps.usgs.gov/mosaic/Lunar_LRO_LOLA_Global_LDEM_118m_Mar2014.tif) and [LOLA south polar](https://pgda.gsfc.nasa.gov/products/90) | NASA open data |
+| Moon temperature | [Diviner global table](https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/) | NASA PDS open data |

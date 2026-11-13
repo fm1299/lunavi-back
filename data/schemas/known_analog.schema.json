@@ -1,4 +1,5 @@
 {
+  "description": "A documented Earth analog, shown as a pin on the map.",
   "properties": {
     "id": {
       "title": "Id",

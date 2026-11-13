@@ -1,4 +1,8 @@
-"""LUNAVI read-only API (spec 4.2). Run with: uv run uvicorn api.main:app --reload"""
+"""LUNAVI read-only API (spec 4.2). Run with: uv run uvicorn api.main:app --reload
+
+Pick a Moon or Mars site, then compare it with every Earth cell. /sites/resolve reads a location
+from open data. /results and /cells take a preset ID or the ID of a resolved location.
+"""
 
 import os
 from contextlib import asynccontextmanager
@@ -12,11 +16,11 @@ from fastapi.middleware.gzip import GZipMiddleware
 from api.store import Store
 from pipeline import scoring
 from pipeline.contract import Profile, Target
+from pipeline.earth import beyond_earth_keys
 
 LIMITS_STATEMENT = (
     "LUNAVI screens and prioritizes candidate regions using open data. It does not replace field "
-    'geology, does not reproduce lunar or Martian physics such as vacuum or radiation, and "new" '
-    "means not present in the project's catalog of documented analogs."
+    "geology and does not reproduce lunar or Martian physics such as vacuum or radiation."
 )
 
 
@@ -26,8 +30,8 @@ async def lifespan(app: FastAPI):
     yield
 
 
-app = FastAPI(title="LUNAVI API", version="0.1.0", lifespan=lifespan)
-app.add_middleware(GZipMiddleware, minimum_size=1000)
+app = FastAPI(title="LUNAVI API", version="0.2.0", lifespan=lifespan)
+app.add_middleware(GZipMiddleware, minimum_size=1000, compresslevel=5)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=os.environ.get("LUNAVI_CORS_ORIGINS", "http://localhost:5173").split(","),
@@ -41,7 +45,7 @@ def _store(request: Request) -> Store:
 
 
 def _target(store: Store, target_id: str) -> Target:
-    target = store.config.targets.get(target_id)
+    target = store.find_target(target_id)
     if target is None:
         raise HTTPException(404, f"unknown target {target_id}")
     return target
@@ -75,7 +79,7 @@ def _weights(store: Store, profile: Profile, raw: str | None) -> dict[str, float
 @app.get("/health")
 def health(request: Request) -> dict:
     store = _store(request)
-    return {"status": "ok", "dummy": store.manifest["dummy"], "targets": len(store.targets)}
+    return {"status": "ok", "dummy": store.manifest["dummy"], "land_cells": len(store.earth.table)}
 
 
 @app.get("/meta")
@@ -85,7 +89,7 @@ def meta(request: Request) -> dict:
     return {
         **store.manifest,
         "region_presets": [preset.model_dump() for preset in run.region_presets],
-        "novelty_km": run.novelty_km,
+        "site_window_km": run.site_window_km,
         "confidence_bands": run.confidence_bands,
         "limits_statement": LIMITS_STATEMENT,
     }
@@ -93,11 +97,31 @@ def meta(request: Request) -> dict:
 
 @app.get("/targets")
 def targets(request: Request) -> list[dict]:
+    """Preset sites. Any other location comes from /sites/resolve."""
     store = _store(request)
-    return [
-        {**target.model_dump(), "beyond_earth": store.beyond_earth(target)}
-        for target in store.config.targets.values()
-    ]
+    return [store.describe_target(target) for target in store.config.targets.values()]
+
+
+@app.get("/sites/resolve")
+def resolve_site(
+    request: Request,
+    body: Literal["moon", "mars"],
+    lat: float = Query(ge=-90, le=90),
+    lon: float = Query(ge=-180, le=180),
+) -> dict:
+    """Read a Moon or Mars location. The first read takes seconds, then it is cached on disk."""
+    store = _store(request)
+    return store.describe_target(store.sites.resolve(body, lat, lon))
+
+
+@app.get("/sites/{site_id}/climate")
+def site_climate(request: Request, site_id: str) -> dict:
+    """Finish a location whose temperature query is slow (Mars). Safe to call more than once."""
+    store = _store(request)
+    target = store.sites.finish_climate(site_id)
+    if target is None:
+        raise HTTPException(404, f"unknown site {site_id}")
+    return store.describe_target(target)
 
 
 @app.get("/profiles")
@@ -125,58 +149,62 @@ def results(
     terrain: str | None = Query(None, description="comma-separated terrain classes"),
     top_n: int | None = Query(None, ge=1),
     min_confidence: float = Query(0.0, ge=0.0, le=1.0),
+    min_separation_km: float = Query(0.0, ge=0.0, description="spacing between top_n cells"),
     detail: Literal["compact", "full"] = "compact",
 ) -> dict:
     store = _store(request)
-    target_config = _target(store, target)
-    profile_config = _profile(store, target_config, profile)
+    site = _target(store, target)
+    profile_config = _profile(store, site, profile)
     active_weights = _weights(store, profile_config, weights)
-    data = store.targets[target]
-    scored = store.compute(data, active_weights, profile_config)
+    scored = store.compute(site, active_weights, profile_config)
+    earth = store.earth
 
-    keep = data.eligible & (scored.confidence >= min_confidence)
-    lats = data.table["lat"].to_numpy()
-    lons = data.table["lon"].to_numpy()
+    keep = earth.eligible & (scored.confidence >= min_confidence)
     if bbox:
         try:
             west, south, east, north = (float(v) for v in bbox.split(","))
         except ValueError as error:
             raise HTTPException(422, "bbox must be west,south,east,north") from error
-        keep &= (lons >= west) & (lons <= east) & (lats >= south) & (lats <= north)
+        keep &= (earth.lon >= west) & (earth.lon <= east)
+        keep &= (earth.lat >= south) & (earth.lat <= north)
     if terrain:
         wanted = set(terrain.split(","))
-        keep &= np.array([bool(wanted.intersection(t)) for t in data.terrain])
+        keep &= np.array([bool(wanted.intersection(t)) for t in earth.terrain])
 
     indices = np.flatnonzero(keep)
     indices = indices[np.argsort(-scored.score[indices], kind="stable")]
+    count = int(indices.size)
     if top_n is not None:
-        indices = indices[:top_n]
+        positive = indices[scored.score[indices] > 0]
+        if min_separation_km > 0:
+            indices = store.spaced_top(positive, top_n, min_separation_km)
+        else:
+            indices = positive[:top_n]
 
-    flagged = set(store.beyond_earth(target_config))
+    flagged = beyond_earth_keys(store.config.features, site)
     response_meta = {
-        "target": target,
+        "target": site.id,
         "profile": profile_config.id,
         "weights": active_weights,
         "gates": profile_config.gates,
-        "count": int(indices.size),
-        "eligible_cells": int(data.eligible.sum()),
+        "count": count,
+        "eligible_cells": int(earth.eligible.sum()),
         "grid_resolution_deg": store.manifest["grid_resolution_deg"],
         "beyond_earth": sorted(flagged),
         "beyond_earth_weight_share": round(scoring.weight_share(active_weights, flagged), 3),
         "dummy": store.manifest["dummy"],
     }
     if detail == "full":
-        cells = [store.full_cell(data, int(i), scored) for i in indices]
+        cells = [store.full_cell(int(i), scored) for i in indices]
         return {"meta": response_meta, "cells": cells}
     return {
         "meta": response_meta,
         "cells": {
-            "cell_id": data.table["cell_id"].to_numpy()[indices].tolist(),
-            "lat": lats[indices].tolist(),
-            "lon": lons[indices].tolist(),
+            "cell_id": earth.cell_id[indices].tolist(),
+            "lat": earth.lat[indices].tolist(),
+            "lon": earth.lon[indices].tolist(),
             "score": np.round(scored.score[indices], 1).tolist(),
             "confidence": np.round(scored.confidence[indices], 3).tolist(),
-            "novelty": data.table["novelty"].to_numpy()[indices].tolist(),
         },
     }
 
@@ -190,35 +218,11 @@ def cell(
     weights: str | None = None,
 ) -> dict:
     store = _store(request)
-    target_config = _target(store, target)
-    profile_config = _profile(store, target_config, profile)
+    site = _target(store, target)
+    profile_config = _profile(store, site, profile)
     active_weights = _weights(store, profile_config, weights)
-    data = store.targets[target]
-    index = data.index_by_cell.get(cell_id)
+    index = store.earth.index_by_cell.get(cell_id)
     if index is None:
         raise HTTPException(404, f"no land cell {cell_id}")
-    scored = store.compute(data, active_weights, profile_config)
-    return store.cell_sheet(target_config, data, index, scored, active_weights, profile_config)
-
-
-@app.get("/validation")
-def validation(request: Request) -> dict:
-    return _store(request).validation
-
-
-@app.get("/findings")
-def findings(request: Request, target: str) -> dict:
-    """Named findings for a target, plus candidates still waiting for a literature check."""
-    store = _store(request)
-    target_config = _target(store, target)
-    reviewed = next((f for f in store.findings if f["target_id"] == target), None)
-    pending = next((c for c in store.candidates["targets"] if c["target_id"] == target), None)
-    return {
-        "target_id": target,
-        "profile": target_config.default_profile,
-        "candidates": reviewed["candidates"] if reviewed else [],
-        "pending": pending["pending"] if pending else [],
-        "catalog_size_verified": store.candidates["catalog_size_verified"],
-        "catalog_size_required": store.candidates["catalog_size_required"],
-        "ready_for_findings": store.candidates["ready_for_findings"],
-    }
+    scored = store.compute(site, active_weights, profile_config)
+    return store.cell_sheet(site, index, scored, active_weights, profile_config)

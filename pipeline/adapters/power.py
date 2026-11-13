@@ -1,38 +1,42 @@
 """Climate features from the NASA POWER climatology API (no account needed).
 
-The regional endpoint allows one parameter and 10 x 10 degrees per request, so the region is split.
-TS is surface (skin) temperature, the same kind of value as the Moon and Mars target temperatures.
+The regional endpoint allows one parameter and 10 x 10 degrees per request, so the area is split
+into a fixed 10-degree layout. TS is surface (skin) temperature, the same kind of value as the Moon
+and Mars temperatures.
 """
 
 import json
+import math
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
-import httpx
 import numpy as np
 from scipy.interpolate import RegularGridInterpolator
 
 from pipeline.adapters import Context, Layer, cached_arrays
 from pipeline.grid import Grid
+from pipeline.net import fetch
 
 API_URL = "https://power.larc.nasa.gov/api/temporal/climatology/regional"
 MONTHS = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"]
-MAX_SPAN_DEG = 10.0
-MARGIN_DEG = 1.0  # read past the region edge so that interpolation covers every cell
+SPAN_DEG = 10
+MARGIN_DEG = 1.0  # read past the edge of the land so that interpolation covers every cell
 DAYS_PER_YEAR = 365.25
 FILL_VALUE = -999
+WORKERS = 4  # the API limits concurrent requests
 
 
-def _chunks(start: float, stop: float) -> list[tuple[float, float]]:
-    edges = np.arange(start, stop, MAX_SPAN_DEG).tolist() + [stop]
-    return list(zip(edges[:-1], edges[1:], strict=True))
+def aligned_chunks(low: float, high: float, minimum: int, maximum: int) -> list[tuple[int, int]]:
+    """Split a range into 10-degree steps on multiples of 10, inside the valid limits."""
+    start = max(minimum, math.floor(low / SPAN_DEG) * SPAN_DEG)
+    stop = min(maximum, math.ceil(high / SPAN_DEG) * SPAN_DEG)
+    return [(edge, edge + SPAN_DEG) for edge in range(start, stop, SPAN_DEG)]
 
 
 def _fetch_chunk(raw_dir: Path, parameter: str, lats: tuple, lons: tuple) -> list[dict]:
-    name = f"{parameter}_{lats[0]}_{lats[1]}_{lons[0]}_{lons[1]}.json"
-    path = raw_dir / "power" / name
+    path = raw_dir / "power" / f"{parameter}_{lats[0]}_{lats[1]}_{lons[0]}_{lons[1]}.json"
     if not path.exists():
-        path.parent.mkdir(parents=True, exist_ok=True)
-        response = httpx.get(
+        response = fetch(
             API_URL,
             params={
                 "parameters": parameter,
@@ -45,23 +49,41 @@ def _fetch_chunk(raw_dir: Path, parameter: str, lats: tuple, lons: tuple) -> lis
             },
             timeout=180,
         )
-        response.raise_for_status()
+        path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(response.text, encoding="utf-8")
     return json.loads(path.read_text(encoding="utf-8"))["features"]
 
 
+def _chunks_with_land(ctx: Context) -> list[tuple[tuple[int, int], tuple[int, int]]]:
+    grid = ctx.grid
+    lat_chunks = aligned_chunks(grid.lats[0] - MARGIN_DEG, grid.lats[-1] + MARGIN_DEG, -90, 90)
+    lon_chunks = aligned_chunks(grid.lons[0] - MARGIN_DEG, grid.lons[-1] + MARGIN_DEG, -180, 180)
+    chunks = []
+    for lats in lat_chunks:
+        rows = (grid.lats >= lats[0] - MARGIN_DEG) & (grid.lats <= lats[1] + MARGIN_DEG)
+        for lons in lon_chunks:
+            cols = (grid.lons >= lons[0] - MARGIN_DEG) & (grid.lons <= lons[1] + MARGIN_DEG)
+            if ctx.land_mask[np.ix_(rows, cols)].any():
+                chunks.append((lats, lons))
+    return chunks
+
+
 def _fetch_parameter(ctx: Context, parameter: str) -> dict[str, np.ndarray]:
     """Return lats, lons and a 13 x ny x nx array: twelve months, then the annual value."""
-    grid = ctx.grid
+    chunks = _chunks_with_land(ctx)
+    print(f"    power {parameter}: {len(chunks)} requests", flush=True)
+
+    def read(chunk: tuple) -> list[dict]:
+        return _fetch_chunk(ctx.raw_dir, parameter, chunk[0], chunk[1])
+
     records: dict[tuple[float, float], list[float]] = {}
-    lat_range = (grid.lats[0] - MARGIN_DEG, grid.lats[-1] + MARGIN_DEG)
-    lon_range = (grid.lons[0] - MARGIN_DEG, grid.lons[-1] + MARGIN_DEG)
-    for lat_chunk in _chunks(*lat_range):
-        for lon_chunk in _chunks(*lon_range):
-            for feature in _fetch_chunk(ctx.raw_dir, parameter, lat_chunk, lon_chunk):
+    with ThreadPoolExecutor(max_workers=WORKERS) as pool:
+        for features in pool.map(read, chunks):
+            for feature in features:
                 lon, lat = feature["geometry"]["coordinates"][:2]
                 values = feature["properties"]["parameter"][parameter]
                 records[(lat, lon)] = [values[m] for m in MONTHS] + [values["ANN"]]
+
     lats = np.array(sorted({key[0] for key in records}))
     lons = np.array(sorted({key[1] for key in records}))
     stack = np.full((13, len(lats), len(lons)), np.nan)
@@ -75,7 +97,7 @@ def _fetch_parameter(ctx: Context, parameter: str) -> dict[str, np.ndarray]:
 
 def _to_grid(lats: np.ndarray, lons: np.ndarray, values: np.ndarray, grid: Grid) -> np.ndarray:
     interpolate = RegularGridInterpolator(
-        (lats, lons), values, method="linear", bounds_error=False, fill_value=np.nan
+        (lats, lons), values, method="linear", bounds_error=False, fill_value=None
     )
     lat2d, lon2d = grid.mesh()
     return interpolate(np.stack([lat2d, lon2d], axis=-1))
