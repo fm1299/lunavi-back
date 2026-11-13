@@ -3,15 +3,30 @@
 # Safe to run again: each step checks what is already there.
 #
 # Usage, from the lunavi-back checkout on the server:
-#   bash deploy/setup.sh <host>
+#   bash deploy/setup.sh <host>     the first time
+#   bash deploy/setup.sh            later runs reuse the saved host
 # where <host> is a domain pointing at the server, or <ip-with-dashes>.sslip.io.
+#
+# The web app is built from a lunavi-front checkout next to lunavi-back when one exists,
+# otherwise it is copied from an uploaded build in ~/lunavi-web.
 set -euo pipefail
 
-HOST="${1:?usage: bash deploy/setup.sh <host>, for example 129-146-10-20.sslip.io}"
+HOST_FILE="$HOME/.lunavi-host"
+if [ -n "${1:-}" ]; then
+	HOST="$1"
+	echo "$HOST" > "$HOST_FILE"
+elif [ -f "$HOST_FILE" ]; then
+	HOST="$(cat "$HOST_FILE")"
+else
+	echo "usage: bash deploy/setup.sh <host>, for example 129-146-10-20.sslip.io" >&2
+	exit 1
+fi
 REPO_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+FRONT_DIR="${LUNAVI_FRONT_DIR:-$(dirname "$REPO_DIR")/lunavi-front}"
 WEB_UPLOAD="$HOME/lunavi-web"
 WEB_ROOT="/var/www/lunavi"
 SERVICE="lunavi-api"
+NODE_MAJOR=24  # Vite 8 needs Node 20.19 or newer; Ubuntu's own package is older
 
 step() { printf '\n== %s\n' "$1"; }
 
@@ -83,14 +98,29 @@ sudo systemctl enable "$SERVICE" >/dev/null
 sudo systemctl restart "$SERVICE"
 
 step "Web app"
+WEB_SOURCE=""
+if [ -f "$FRONT_DIR/package.json" ]; then
+	node_major="$(node -p 'process.versions.node.split(".")[0]' 2>/dev/null || echo 0)"
+	if [ "$node_major" -lt 20 ]; then
+		echo "Installing Node.js $NODE_MAJOR from NodeSource."
+		curl -fsSL "https://deb.nodesource.com/setup_${NODE_MAJOR}.x" -o /tmp/nodesource_setup.sh
+		sudo -E bash /tmp/nodesource_setup.sh
+		sudo apt-get install -y nodejs
+	fi
+	echo "Building the web app in $FRONT_DIR."
+	(cd "$FRONT_DIR" && npm ci --no-audit --no-fund && npm run build)
+	WEB_SOURCE="$FRONT_DIR/dist"
+elif [ -f "$WEB_UPLOAD/index.html" ]; then
+	WEB_SOURCE="$WEB_UPLOAD"
+fi
 sudo mkdir -p "$WEB_ROOT"
-if [ -d "$WEB_UPLOAD" ] && [ -f "$WEB_UPLOAD/index.html" ]; then
+if [ -n "$WEB_SOURCE" ]; then
 	sudo rm -rf "${WEB_ROOT:?}"/*
-	sudo cp -r "$WEB_UPLOAD"/. "$WEB_ROOT"/
+	sudo cp -r "$WEB_SOURCE"/. "$WEB_ROOT"/
 	sudo chmod -R a+rX "$WEB_ROOT"
-	echo "Installed the web app from $WEB_UPLOAD."
+	echo "Installed the web app from $WEB_SOURCE."
 else
-	echo "No web build found in $WEB_UPLOAD. Upload lunavi-front's dist folder there and run this again."
+	echo "No web app found. Clone lunavi-front next to lunavi-back, or upload a dist folder to $WEB_UPLOAD."
 fi
 
 step "Caddy configuration"
