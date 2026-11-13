@@ -1,0 +1,17 @@
+# LUNAVI on one server. setup.sh replaces __HOST__ and writes this to /etc/caddy/Caddyfile.
+# Caddy gets and renews the HTTPS certificate for the host on its own.
+__HOST__ {
+	encode zstd gzip
+
+	# The API, with the /api prefix removed before it reaches FastAPI.
+	handle_path /api/* {
+		reverse_proxy 127.0.0.1:8000
+	}
+
+	# The web app. Unknown paths fall back to index.html.
+	handle {
+		root * /var/www/lunavi
+		try_files {path} /index.html
+		file_server
+	}
+}

@@ -18,6 +18,8 @@ uv run uvicorn api.main:app --reload    # API on http://localhost:8000, docs at 
 
 Without real results, the API serves the dummy table in `data/dummy/results` and says so in `/health`.
 
+To put it online on one Oracle Cloud Always Free server, see [deploy/README.md](deploy/README.md).
+
 ## Build the Earth table
 
 ```powershell
