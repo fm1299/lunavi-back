@@ -4,12 +4,14 @@ Pick a Moon or Mars site, then compare it with every Earth cell. /sites/resolve 
 from open data. /results and /cells take a preset ID or the ID of a resolved location.
 """
 
+import csv
+import io
 import os
 from contextlib import asynccontextmanager
 from typing import Literal
 
 import numpy as np
-from fastapi import FastAPI, HTTPException, Query, Request
+from fastapi import FastAPI, HTTPException, Query, Request, Response
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.gzip import GZipMiddleware
 
@@ -207,6 +209,47 @@ def results(
             "confidence": np.round(scored.confidence[indices], 3).tolist(),
         },
     }
+
+
+@app.get("/export")
+def export(
+    request: Request,
+    target: str,
+    profile: str | None = None,
+    weights: str | None = None,
+    bbox: str | None = None,
+    terrain: str | None = None,
+    top_n: int = Query(20, ge=1, le=1000),
+    min_confidence: float = Query(0.0, ge=0.0, le=1.0),
+    min_separation_km: float = Query(0.0, ge=0.0),
+    format: Literal["csv"] = "csv",
+) -> Response:
+    """The shortlist as a CSV file (spec FR-A5). Takes the same filters as /results."""
+    ranked = results(
+        request, target, profile, weights, bbox, terrain, top_n,
+        min_confidence, min_separation_km, "full",
+    )  # fmt: skip
+    keys = list(_store(request).config.features)
+    out = io.StringIO()
+    writer = csv.writer(out)
+    writer.writerow(
+        ["rank", "cell_id", "lat", "lon", "country", "terrain", "score", "confidence", "band"]
+        + [f"raw_{k}" for k in keys]
+        + [f"s_{k}" for k in keys]
+    )
+    for rank, c in enumerate(ranked["cells"], start=1):
+        writer.writerow(
+            [rank, c["cell_id"], c["lat"], c["lon"], c["country"], "|".join(c["terrain"])]
+            + [c["score"], c["confidence"], c["band"]]
+            + [c["raw"][k] for k in keys]
+            + [c["s"][k] for k in keys]
+        )
+    name = f"lunavi_{ranked['meta']['target']}_{ranked['meta']['profile']}.csv"
+    return Response(
+        out.getvalue(),
+        media_type="text/csv",
+        headers={"Content-Disposition": f'attachment; filename="{name}"'},
+    )
 
 
 @app.get("/cells/{cell_id}")

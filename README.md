@@ -59,6 +59,7 @@ Composition has no source yet. `pipeline/adapters/lithology.py` is a ready optio
 | `GET /sites/{id}/climate` | Finish a location's slow temperature query (Mars) |
 | `GET /results?target={id}&profile=&weights=&bbox=&terrain=&top_n=&min_confidence=&min_separation_km=&detail=` | Rank Earth cells against a site |
 | `GET /cells/{cell_id}?target={id}` | Explain one Earth cell |
+| `GET /export?format=csv&target={id}&top_n=20` | The shortlist as a CSV file, with the same filters as `/results` |
 | `GET /profiles`, `/features`, `/analogs`, `/meta`, `/health` | Config and status |
 
 ## Layout

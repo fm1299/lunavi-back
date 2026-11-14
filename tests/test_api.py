@@ -1,5 +1,7 @@
 """API tests against the dummy Earth table. Moon and Mars reads are replaced, so no network runs."""
 
+import csv
+import io
 from pathlib import Path
 
 import pytest
@@ -198,3 +200,15 @@ def test_responses_are_compressed_when_large(client):
         headers={"Accept-Encoding": "gzip"},
     )
     assert response.headers.get("content-encoding") == "gzip"
+
+
+def test_export_gives_the_shortlist_as_csv(client):
+    response = client.get("/export", params={"target": "jezero", "top_n": 5})
+    assert response.status_code == 200
+    assert response.headers["content-type"].startswith("text/csv")
+    assert "jezero" in response.headers["content-disposition"]
+    rows = list(csv.DictReader(io.StringIO(response.text)))
+    ranked = client.get("/results", params={"target": "jezero", "top_n": 5}).json()["cells"]
+    assert [row["cell_id"] for row in rows] == ranked["cell_id"]
+    assert [float(row["score"]) for row in rows] == ranked["score"]
+    assert rows[0]["rank"] == "1" and "raw_slope" in rows[0] and "s_slope" in rows[0]
