@@ -12,6 +12,7 @@ from pipeline.contract import Config, Profile, Target, load_config
 from pipeline.earth import Comparison, beyond_earth_keys, compare, load_earth
 from pipeline.geo import haversine_km
 from pipeline.sites import SiteBook
+from pipeline.validate import build_report
 
 REAL_RESULTS = Path("data/results")
 DUMMY_RESULTS = Path("data/dummy/results")
@@ -56,6 +57,13 @@ class Store:
         self.earth = load_earth(self.directory / "earth.parquet")
         self.sites = sites or SiteBook(window_km=self.config.run.site_window_km)
         self.analog_cells = self._analog_cells()
+        self._validation: dict | None = None
+
+    def validation(self) -> dict:
+        """The validation report for the loaded Earth table, built once (spec FR-A4)."""
+        if self._validation is None:
+            self._validation = build_report(self.config, self.earth, self.manifest["dummy"])
+        return self._validation
 
     def _analog_cells(self) -> dict[str, int]:
         """The Earth cell that stands for each documented analog, leaving out negative controls."""

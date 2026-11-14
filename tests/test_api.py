@@ -229,22 +229,62 @@ def test_gaps_say_which_site_conditions_a_documented_analog_covers(client):
     rows = {row["key"]: row for row in body["conditions"]}
     # The dummy cells sit around the Atacama, so at least that analog is compared.
     assert body["analogs_compared"] >= 1
-    assert rows["composition"]["covered"] is None  # no Earth source yet, so it cannot be judged
+    assert rows["composition"]["covered"] is not None  # composition has an Earth source now
     slope = rows["slope"]
     assert slope["covered"] == (slope["best_s"] >= body["threshold"])
     assert (slope["best_analog"] in slope["covered_by"]) == slope["covered"]
     strict = client.get("/gaps", params={"target": "jezero", "threshold": 1.0}).json()
-    assert not any(row["covered"] for row in strict["conditions"])
+    # Only a class can match exactly; a measured number never does.
+    assert not any(row["covered"] for row in strict["conditions"] if row["key"] != "composition")
 
 
 def test_portfolio_cells_cover_the_conditions_together(client):
     body = client.get("/portfolio", params={"target": "jezero"}).json()
     covered = {key for cell in body["cells"] for key in cell["covers"]}
     assert covered | set(body["uncovered"]) == set(body["conditions"])
-    assert "composition" not in body["conditions"]  # no Earth source, so nothing can cover it
+    assert "composition" in body["conditions"]
     for cell in body["cells"]:
         assert all(cell["s"][key] >= body["threshold"] for key in cell["covers"])
     one = client.get("/portfolio", params={"target": "jezero", "max_cells": 1}).json()
     assert len(one["cells"]) == 1
     none = client.get("/portfolio", params={"target": "jezero", "threshold": 1.0}).json()
-    assert none["cells"] == [] and none["uncovered"] == none["conditions"]
+    assert {key for cell in none["cells"] for key in cell["covers"]} <= {"composition"}
+
+
+def test_sources_list_what_fills_each_feature(client):
+    sources = client.get("/sources").json()
+    by_id = {source["id"]: source for source in sources}
+    assert by_id["glim"]["features"] == ["composition"] and by_id["glim"]["status"] == "in_use"
+    assert by_id["diviner_global"]["body"] == "moon"
+    in_use = {key for s in sources if s["status"] == "in_use" and s["body"] == "earth"
+              for key in s["features"]}  # fmt: skip
+    assert in_use == {f["key"] for f in client.get("/features").json()}
+
+
+def test_validation_ranks_the_controls_of_each_preset(client):
+    report = client.get("/validation").json()
+    assert report["dummy"] is True
+    assert set(report["methods"]) == {"arithmetic", "geometric"}
+    jezero = next(t for t in report["targets"] if t["target"] == "jezero")
+    controls = {row["id"]: row for row in jezero["positive_controls"]}
+    # The dummy cells sit around the Atacama; Death Valley is far outside them.
+    assert controls["atacama"]["comparable"] and 0.0 <= controls["atacama"]["top_share"] <= 1.0
+    assert controls["death_valley"]["comparable"] is False
+    assert {"kind": "not_comparable", "target": "jezero", "id": "death_valley"} in report[
+        "honest_gaps"
+    ]
+    funnel = jezero["funnel"]
+    assert funnel["land_cells"] >= funnel["after_masks"] >= funnel["after_gates"]
+    assert {row["feature"] for row in jezero["leave_one_out"]} <= set(jezero_weights(client))
+    assert all(0.0 <= row["top_overlap"] <= 1.0 for row in jezero["weight_sensitivity"])
+
+
+def jezero_weights(client) -> dict:
+    profiles = {p["id"]: p for p in client.get("/profiles").json()}
+    return profiles["rover_mobility"]["weights"]
+
+
+def test_meta_reports_the_spread_of_each_feature(client):
+    ranges = client.get("/meta").json()["feature_ranges"]
+    assert ranges["slope"]["lo"] == 0 and ranges["slope"]["land_p1"] <= ranges["slope"]["land_p99"]
+    assert "composition" not in ranges

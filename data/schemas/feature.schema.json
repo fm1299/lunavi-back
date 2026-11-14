@@ -81,6 +81,28 @@
       "default": null,
       "title": "Similarity Matrix"
     },
+    "class_map": {
+      "anyOf": [
+        {
+          "additionalProperties": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Class Map"
+    },
     "source_quality": {
       "title": "Source Quality",
       "type": "number"

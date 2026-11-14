@@ -66,6 +66,29 @@ def build_table(
     return table
 
 
+def feature_ranges(table: pd.DataFrame, config: Config) -> dict[str, dict]:
+    """Percentiles 1 and 99 of each numeric feature, next to its lo and hi (spec 5.1).
+
+    A normalization range much wider than the data squeezes every cell into a small part of the
+    0 to 1 scale, so the feature barely tells cells apart. "eligible" covers the ranked cells.
+    """
+    eligible = np.array([len(classes) > 0 for classes in table["terrain"]], dtype=bool)
+    ranges = {}
+    for key, feature in config.features.items():
+        if feature.type != "numeric":
+            continue
+        values = table[f"raw_{key}"].to_numpy(dtype=np.float64)
+        entry = {"lo": feature.lo, "hi": feature.hi}
+        for name, subset in (("land", values), ("eligible", values[eligible])):
+            subset = subset[~np.isnan(subset)]
+            entry[f"{name}_p1"] = round(float(np.percentile(subset, 1)), 3) if subset.size else None
+            entry[f"{name}_p99"] = (
+                round(float(np.percentile(subset, 99)), 3) if subset.size else None
+            )
+        ranges[key] = entry
+    return ranges
+
+
 def write_outputs(
     table: pd.DataFrame,
     results_dir: Path,
@@ -73,6 +96,7 @@ def write_outputs(
     region: dict,
     dummy: bool,
     available: dict[str, int],
+    ranges: dict[str, dict] | None = None,
 ) -> None:
     results_dir.mkdir(parents=True, exist_ok=True)
     table.to_parquet(results_dir / "earth.parquet", index=False)
@@ -83,6 +107,7 @@ def write_outputs(
         "region": region,
         "land_cells": int(len(table)),
         "cells_with_data": available,
+        "feature_ranges": ranges or {},
     }
     (results_dir / "manifest.json").write_text(
         json.dumps(manifest, indent=2) + "\n", encoding="utf-8"
@@ -123,7 +148,15 @@ def main() -> None:
 
     fraction = land_fraction(grid, RAW_DIR)
     land = fraction >= config.masks.min_land_fraction
-    ctx = Context(grid, RAW_DIR, DERIVED_DIR, config.run.reference_year, land)
+    ctx = Context(
+        grid,
+        RAW_DIR,
+        DERIVED_DIR,
+        config.run.reference_year,
+        land,
+        tuple(config.run.modis.months),
+        config.run.modis.min_valid_share,
+    )
     print(f"Land cells: {int(land.sum())}", flush=True)
 
     layers: dict[str, Layer] = {}
@@ -145,7 +178,15 @@ def main() -> None:
     for name, values in access_layers(grid, RAW_DIR, config.run.access).items():
         table[name] = values[land]
     print("  access: roads and airports", flush=True)
-    write_outputs(table, args.results_dir, grid.res, region, dummy=False, available=available)
+    write_outputs(
+        table,
+        args.results_dir,
+        grid.res,
+        region,
+        dummy=False,
+        available=available,
+        ranges=feature_ranges(table, config),
+    )
     print(f"Wrote {len(table)} land cells to {args.results_dir}", flush=True)
 
 

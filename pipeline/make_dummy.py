@@ -11,7 +11,7 @@ import pandas as pd
 from pipeline import scoring
 from pipeline.contract import Config, load_config
 from pipeline.grid import cell_id
-from pipeline.run import write_outputs
+from pipeline.run import feature_ranges, write_outputs
 
 DUMMY_DIR = Path("data/dummy/results")
 SEED = 7
@@ -66,6 +66,7 @@ def main() -> None:
         config.run.region.model_dump(),
         dummy=True,
         available=dict.fromkeys(config.features, CELLS),
+        ranges=feature_ranges(table, config),
     )
     print(f"Dummy Earth table written to {DUMMY_DIR}")
 

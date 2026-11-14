@@ -1,0 +1,124 @@
+{
+  "description": "One row of the data source inventory: where a value comes from and under what license.",
+  "properties": {
+    "id": {
+      "title": "Id",
+      "type": "string"
+    },
+    "name": {
+      "title": "Name",
+      "type": "string"
+    },
+    "agency": {
+      "title": "Agency",
+      "type": "string"
+    },
+    "url": {
+      "title": "Url",
+      "type": "string"
+    },
+    "body": {
+      "enum": [
+        "earth",
+        "moon",
+        "mars",
+        "moon_mars",
+        "all"
+      ],
+      "title": "Body",
+      "type": "string"
+    },
+    "category": {
+      "enum": [
+        "data",
+        "tool",
+        "portal",
+        "imagery",
+        "documentation"
+      ],
+      "title": "Category",
+      "type": "string"
+    },
+    "features": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Features",
+      "type": "array"
+    },
+    "use": {
+      "title": "Use",
+      "type": "string"
+    },
+    "resolution": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Resolution"
+    },
+    "license": {
+      "title": "License",
+      "type": "string"
+    },
+    "needs_account": {
+      "title": "Needs Account",
+      "type": "boolean"
+    },
+    "on_organizer_list": {
+      "title": "On Organizer List",
+      "type": "boolean"
+    },
+    "status": {
+      "enum": [
+        "in_use",
+        "proposed",
+        "alternative"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "priority": {
+      "enum": [
+        "P0",
+        "P1"
+      ],
+      "title": "Priority",
+      "type": "string"
+    },
+    "verified": {
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Verified"
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "agency",
+    "url",
+    "body",
+    "category",
+    "features",
+    "use",
+    "resolution",
+    "license",
+    "needs_account",
+    "on_organizer_list",
+    "status",
+    "priority"
+  ],
+  "title": "Source",
+  "type": "object"
+}

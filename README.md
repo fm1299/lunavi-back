@@ -30,6 +30,7 @@ No account or API key is needed. Downloads are cached in `data/raw` and `data/de
 Other commands:
 
 ```powershell
+uv run python -m pipeline.validate      # validation report for the real table, written to data/results/validation.json
 uv run python -m pipeline.make_dummy    # regenerate the dummy table (about 50 cells)
 uv run python -m pipeline.contract      # validate config and export JSON Schemas to data/schemas
 uv run pytest                           # tests, no network needed
@@ -42,6 +43,13 @@ uv run ruff check .                     # linter
 - **Gaps.** A documented analog covers a site condition when the similarity at the analog's cell reaches `cover_threshold` (0.8). `covered: null` means it cannot be judged: the site has no value, the Earth has no source, or no analog lies in the table.
 - **Portfolio.** A greedy set cover over the features with weight above 0. It takes the cell that covers the most conditions still open, until all are covered or nothing more can be.
 
+## Validation, ranges and sources
+
+- **Validation.** `pipeline/validate.py` runs the tests of spec section 8 for the preset sites, each with its default purpose: where each positive control ranks among the eligible cells (it passes inside the top 20%), whether each negative control falls in the lower half of all land cells with masks and gates off, how far the controls move when one feature is dropped, how many of the top 50 cells stay when a weight moves by 20%, and the screening funnel. It also compares the arithmetic and geometric mean, so the team can keep the one that ranks the controls better. Weak results go in `honest_gaps` instead of being tuned away. The novelty and findings steps stay `null` until those features exist. `GET /validation` builds the same report for the table the API has loaded.
+- **Ranges.** `manifest.json` (and `/meta`) carries `feature_ranges`: percentiles 1 and 99 of each numeric feature over all land cells and over the eligible cells, next to its `lo` and `hi`. When `lo` to `hi` is much wider than the data, the feature barely tells cells apart, and the range in `features.json` should be narrowed. A table built before this needs one more `uv run python -m pipeline.run` (cached, so it is quick).
+- **Sources.** `data/config/sources.json` is the team's source inventory: which source fills each feature on each body, its license, whether the organizers list it, and whether the pipeline reads it today. `GET /sources` serves it. `verified` stays `null` until a team member checks the source.
+- **MODIS sampling.** `modis` in `run.json` sets which months are read (one composite each) and the share of valid composites a cell needs to keep a value (0.2). Adding months gives a truer yearly maximum NDVI, at the cost of more downloads.
+
 ## Add a data source
 
 Missing values are normal here. A value with no source stays blank, is left out of the score, and lowers confidence, so the app works before every source exists.
@@ -52,7 +60,7 @@ Missing values are normal here. A value with no source stays blank, is left out 
 2. Point that feature's `adapter` in `data/config/features.json` at it, and update its source, license and quality values. `"adapter": null` means no source yet.
 3. Run `uv run python -m pipeline.run`. Delete that feature's file in `data/derived` first if it already exists.
 
-Composition has no source yet. `pipeline/adapters/lithology.py` is a ready option using Macrostrat, but it needs about 88,000 requests for the whole Earth.
+Composition comes from GLiM gridded to 0.5 degrees (`pipeline/adapters/glim.py`), a 38 KB download with no account. Each cell takes its most common class, and the share outside that class counts as a gap, so a mixed cell has lower confidence. `class_map` in `features.json` maps the 16 GLiM classes to the four LUNAVI classes; it is proposed and the team should confirm it. To leave composition blank again, set its `adapter` to `null`. `pipeline/adapters/lithology.py` is another option using Macrostrat, but it needs about 88,000 requests for the whole Earth.
 
 **Moon and Mars.** Add a reader in `pipeline/sites.py` and call it from `SiteBook.resolve`. Delete `data/derived/sites` afterward so that locations are read again.
 
@@ -68,6 +76,8 @@ Composition has no source yet. `pipeline/adapters/lithology.py` is a ready optio
 | `GET /export?format=csv&target={id}&top_n=20` | The shortlist as a CSV file, with the same filters as `/results` |
 | `GET /gaps?target={id}&threshold=` | For each condition of a site, whether a documented analog covers it |
 | `GET /portfolio?target={id}&profile=&weights=&bbox=&terrain=&min_confidence=&threshold=&max_cells=` | The fewest cells that together cover the site's conditions |
+| `GET /validation` | How the documented analogs and the negative controls rank for the preset sites |
+| `GET /sources` | The data source inventory, with license and status |
 | `GET /profiles`, `/features`, `/analogs`, `/meta`, `/health` | Config and status |
 
 ## Layout
@@ -81,8 +91,9 @@ Composition has no source yet. `pipeline/adapters/lithology.py` is a ready optio
 | `pipeline/access.py` | Distance to roads and airports, and the access score per cell |
 | `pipeline/contract.py` | The data contract as Pydantic models |
 | `pipeline/run.py` | The one command that builds the Earth table |
+| `pipeline/validate.py` | The validation report from spec section 8 |
 | `api/` | FastAPI app |
-| `data/config/` | Preset sites, features, profiles, documented analogs, masks and run settings |
+| `data/config/` | Preset sites, features, profiles, documented analogs, masks, sources and run settings |
 | `data/dummy/results/` | A dummy Earth table in the real format |
 | `data/results/` | The real Earth table (git-ignored) |
 
@@ -94,7 +105,8 @@ The spec describes one repository with `pipeline/`, `api/`, `web/` and `data/`. 
 |---|---|---|
 | Earth slope, roughness, elevation | [AWS Terrain Tiles](https://registry.opendata.aws/terrain-tiles/) | Open data, attribution required |
 | Earth surface temperature, precipitation | [NASA POWER](https://power.larc.nasa.gov/) | NASA open data |
-| Earth NDVI, day-night temperature | MODIS MOD13A1 and MYD11A2 through [Planetary Computer](https://planetarycomputer.microsoft.com/) | NASA open data |
+| Earth NDVI, day-night temperature | MODIS [MOD13A1](https://lpdaac.usgs.gov/products/mod13a1v061/) and [MYD11A2](https://lpdaac.usgs.gov/products/myd11a2v061/), read through [Planetary Computer](https://planetarycomputer.microsoft.com/) | NASA open data |
+| Earth composition | [GLiM v1.0 at 0.5 degrees](https://doi.org/10.1594/PANGAEA.788537) (Hartmann and Moosdorf 2012) | CC BY 3.0 |
 | Land mask, countries | [Natural Earth](https://www.naturalearthdata.com/) | Public domain |
 | Roads and airports, for the access score | [Natural Earth](https://www.naturalearthdata.com/) | Public domain |
 | Holocene volcanoes | [Smithsonian GVP](https://volcano.si.edu/) | Cite the GVP |

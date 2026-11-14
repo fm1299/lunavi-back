@@ -22,6 +22,8 @@ class Context:
     derived_dir: Path
     reference_year: int
     land_mask: np.ndarray  # True where the cell passes the minimum land fraction
+    composite_months: tuple[int, ...] = (1, 3, 5, 7, 9, 11)  # MODIS composites, one per month
+    min_valid_share: float = 0.2  # below this share of valid composites a value stays blank
 
 
 @dataclass(frozen=True)

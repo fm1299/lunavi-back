@@ -59,6 +59,7 @@ class Feature(BaseModel):
     hi: float | None = None
     classes: list[str] | None = None
     similarity_matrix: dict[str, dict[str, float]] | None = None
+    class_map: dict[str, str | None] | None = None  # source class to one of `classes`, or null
     source_quality: float
     resolution_factor: float
     adapter: str | None  # null means no Earth data source yet, so the feature stays blank
@@ -74,6 +75,9 @@ class Feature(BaseModel):
             raise ValueError(f"{self.key}: numeric features need lo < hi")
         if self.type == "categorical" and not self.similarity_matrix:
             raise ValueError(f"{self.key}: categorical features need a similarity_matrix")
+        unknown = set((self.class_map or {}).values()) - {None, *(self.classes or [])}
+        if unknown:
+            raise ValueError(f"{self.key}: class_map names unknown classes {sorted(unknown)}")
         return self
 
 
@@ -138,6 +142,42 @@ class AccessConfig(BaseModel):
     airport_far_km: float
 
 
+class ModisConfig(BaseModel):
+    """Which MODIS composites to read, and when a cell has too few of them to keep a value."""
+
+    months: list[int] = [1, 3, 5, 7, 9, 11]  # one composite from each month listed
+    min_valid_share: float = 0.2  # below this share of valid composites the value stays blank
+
+
+class ValidationConfig(BaseModel):
+    """Settings for the validation report (spec section 8)."""
+
+    accept_top_share: float = 0.2  # a positive control passes inside this top share
+    stretch_top_share: float = 0.1
+    weight_change: float = 0.2  # each weight is moved up and down by this share
+    top_cells: int = 50  # how many top cells are compared after a weight change
+
+
+class Source(BaseModel):
+    """One row of the data source inventory: where a value comes from and under what license."""
+
+    id: str
+    name: str
+    agency: str
+    url: str
+    body: Literal["earth", "moon", "mars", "moon_mars", "all"]
+    category: Literal["data", "tool", "portal", "imagery", "documentation"]
+    features: list[str]  # contract features this source fills, empty for masks, maps and portals
+    use: str
+    resolution: str | None
+    license: str
+    needs_account: bool
+    on_organizer_list: bool
+    status: Literal["in_use", "proposed", "alternative"]
+    priority: Literal["P0", "P1"]
+    verified: bool | None = None  # null until a team member checks the source
+
+
 class RunConfig(BaseModel):
     grid_resolution_deg: float
     region: Region
@@ -149,6 +189,8 @@ class RunConfig(BaseModel):
     access: AccessConfig
     cover_threshold: float  # a similarity at or above this covers a site condition (FR-P12, FR-P13)
     analog_match_km: float  # a documented analog is read from the nearest cell within this distance
+    modis: ModisConfig = ModisConfig()
+    validation: ValidationConfig = ValidationConfig()
 
 
 class ResultCell(BaseModel):
@@ -175,6 +217,7 @@ class Config:
     profiles: dict[str, Profile]
     analogs: list[KnownAnalog]
     masks: Masks
+    sources: list[Source]
 
 
 def _read(path: Path) -> dict:
@@ -189,6 +232,7 @@ def load_config(config_dir: Path = CONFIG_DIR) -> Config:
         profiles={p["id"]: Profile(**p) for p in _read(config_dir / "profiles.json")["profiles"]},
         analogs=[KnownAnalog(**s) for s in _read(config_dir / "known_analogs.json")["sites"]],
         masks=Masks(**_read(config_dir / "masks.json")),
+        sources=[Source(**s) for s in _read(config_dir / "sources.json")["sources"]],
     )
     _cross_check(config)
     return config
@@ -205,6 +249,10 @@ def _cross_check(config: Config) -> None:
         for key in [*profile.weights, *profile.gates]:
             if key not in config.features:
                 raise ValueError(f"{profile.id}: unknown feature {key}")
+    for source in config.sources:
+        for key in source.features:
+            if key not in config.features:
+                raise ValueError(f"{source.id}: unknown feature {key}")
 
 
 def export_schemas(out_dir: Path = SCHEMA_DIR) -> None:
@@ -216,6 +264,7 @@ def export_schemas(out_dir: Path = SCHEMA_DIR) -> None:
         "known_analog": KnownAnalog,
         "masks": Masks,
         "run": RunConfig,
+        "source": Source,
         "result_cell": ResultCell,
     }
     for name, model in models.items():

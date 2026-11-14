@@ -155,6 +155,18 @@ def features(request: Request) -> list[dict]:
     return [f.model_dump(exclude={"adapter"}) for f in _store(request).config.features.values()]
 
 
+@app.get("/sources")
+def sources(request: Request) -> list[dict]:
+    """The data source inventory: what fills each feature on each body, and its license."""
+    return [s.model_dump() for s in _store(request).config.sources]
+
+
+@app.get("/validation")
+def validation(request: Request) -> dict:
+    """How documented analogs and unlikely places rank for the preset sites (spec FR-A4)."""
+    return _store(request).validation()
+
+
 @app.get("/analogs")
 def analogs(request: Request) -> list[dict]:
     return [a.model_dump() for a in _store(request).config.analogs]

@@ -27,7 +27,6 @@ from pipeline.net import fetch
 STAC_URL = "https://planetarycomputer.microsoft.com/api/stac/v1/search"
 TOKEN_URL = "https://planetarycomputer.microsoft.com/api/sas/v1/token/{account}/{container}"
 SUBCELLS = 5  # read at a fifth of a cell
-MONTHS = (1, 3, 5, 7, 9, 11)  # six composites across the year
 WORKERS = 12
 TILE_ATTEMPTS = 3
 NDVI_OVERVIEW = 2  # factor 8 of 463 m pixels, about 3.7 km
@@ -183,24 +182,33 @@ def _diurnal_month(ctx: Context, month: int) -> np.ndarray:
     return cached_arrays(ctx, f"modis_lst_{ctx.reference_year}_{month:02d}", build)["values"]
 
 
-def _stack(ctx: Context, read_month) -> tuple[np.ndarray, np.ndarray]:
-    """Return the monthly stack, and the share of months with no valid data for each cell."""
-    stack = np.stack([read_month(ctx, month) for month in MONTHS])
+def _stack(ctx: Context, read_month) -> np.ndarray:
+    return np.stack([read_month(ctx, month) for month in ctx.composite_months])
+
+
+def summarize(stack: np.ndarray, how: str, min_valid_share: float) -> tuple[np.ndarray, np.ndarray]:
+    """Reduce composites to one value per cell, and the share of composites with no valid data.
+
+    A cell with too few valid composites stays blank: one clear week does not describe a year.
+    """
     valid = (~np.isnan(stack)).sum(axis=0)
-    return stack, 1.0 - valid / len(MONTHS)
+    gaps = 1.0 - valid / stack.shape[0]
+    if how == "max":
+        values = np.where(np.isnan(stack), -np.inf, stack).max(axis=0)
+    else:
+        with np.errstate(invalid="ignore", divide="ignore"):
+            values = np.nan_to_num(stack).sum(axis=0) / valid
+    enough = (valid > 0) & (valid / stack.shape[0] >= min_valid_share)
+    return np.where(enough, values, np.nan), gaps
 
 
 def vegetation(ctx: Context) -> Layer:
     """Maximum NDVI across the sampled composites."""
-    stack, gaps = _stack(ctx, _ndvi_month)
-    filled = np.where(np.isnan(stack), -np.inf, stack).max(axis=0)
-    return Layer(values=np.where(gaps < 1.0, filled, np.nan), gap_filled=gaps)
+    values, gaps = summarize(_stack(ctx, _ndvi_month), "max", ctx.min_valid_share)
+    return Layer(values=values, gap_filled=gaps)
 
 
 def temp_diurnal_range(ctx: Context) -> Layer:
     """Mean day minus night land surface temperature, in kelvin."""
-    stack, gaps = _stack(ctx, _diurnal_month)
-    valid = (~np.isnan(stack)).sum(axis=0)
-    totals = np.nan_to_num(stack).sum(axis=0)
-    with np.errstate(invalid="ignore", divide="ignore"):
-        return Layer(values=np.where(valid > 0, totals / valid, np.nan), gap_filled=gaps)
+    values, gaps = summarize(_stack(ctx, _diurnal_month), "mean", ctx.min_valid_share)
+    return Layer(values=values, gap_filled=gaps)

@@ -1,6 +1,6 @@
 {
   "dummy": true,
-  "generated_at": "2026-11-14T14:47:09+00:00",
+  "generated_at": "2026-11-14T18:57:37+00:00",
   "grid_resolution_deg": 0.5,
   "region": {
     "id": "global",
@@ -21,5 +21,71 @@
     "vegetation": 50,
     "composition": 50,
     "elevation": 50
+  },
+  "feature_ranges": {
+    "slope": {
+      "lo": 0.0,
+      "hi": 25.0,
+      "land_p1": 0.693,
+      "land_p99": 24.335,
+      "eligible_p1": 0.693,
+      "eligible_p99": 24.335
+    },
+    "roughness": {
+      "lo": 0.0,
+      "hi": 250.0,
+      "land_p1": 5.159,
+      "land_p99": 241.639,
+      "eligible_p1": 5.159,
+      "eligible_p99": 241.639
+    },
+    "temp_annual_range": {
+      "lo": 0.0,
+      "hi": 60.0,
+      "land_p1": 4.245,
+      "land_p99": 58.113,
+      "eligible_p1": 4.245,
+      "eligible_p99": 58.113
+    },
+    "temp_diurnal_range": {
+      "lo": 0.0,
+      "hi": 40.0,
+      "land_p1": 1.468,
+      "land_p99": 38.994,
+      "eligible_p1": 1.468,
+      "eligible_p99": 38.994
+    },
+    "mean_temperature": {
+      "lo": -55.0,
+      "hi": 32.0,
+      "land_p1": -50.35,
+      "land_p99": 29.737,
+      "eligible_p1": -50.35,
+      "eligible_p99": 29.737
+    },
+    "aridity": {
+      "lo": 0.0,
+      "hi": 3000.0,
+      "land_p1": 50.496,
+      "land_p99": 2928.121,
+      "eligible_p1": 50.496,
+      "eligible_p99": 2928.121
+    },
+    "vegetation": {
+      "lo": 0.0,
+      "hi": 1.0,
+      "land_p1": 0.023,
+      "land_p99": 0.961,
+      "eligible_p1": 0.023,
+      "eligible_p99": 0.961
+    },
+    "elevation": {
+      "lo": -430.0,
+      "hi": 6500.0,
+      "land_p1": -310.068,
+      "land_p99": 6438.151,
+      "eligible_p1": -310.068,
+      "eligible_p99": 6438.151
+    }
   }
 }
