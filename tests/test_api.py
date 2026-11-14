@@ -7,6 +7,7 @@ from pathlib import Path
 import pytest
 from fastapi.testclient import TestClient
 
+from api.assistant import Assistant, LlmSettings
 from api.main import app
 from pipeline import sites
 from pipeline.contract import TargetFeature
@@ -49,6 +50,8 @@ def client(tmp_path_factory):
         )
         with TestClient(app) as test_client:
             test_client.app.state.store.sites.directory = tmp_path_factory.mktemp("book")
+            # No model by default, even on a machine with a key set, so no test calls one.
+            test_client.app.state.store.assistant = Assistant(None)
             yield test_client
 
 
@@ -288,3 +291,116 @@ def test_meta_reports_the_spread_of_each_feature(client):
     ranges = client.get("/meta").json()["feature_ranges"]
     assert ranges["slope"]["lo"] == 0 and ranges["slope"]["land_p1"] <= ranges["slope"]["land_p99"]
     assert "composition" not in ranges
+
+
+class _Reply:
+    def __init__(self, content):
+        self.content = content
+
+    def raise_for_status(self):
+        pass
+
+    def json(self):
+        return {"choices": [{"message": {"content": self.content}}]}
+
+
+def _use_model(client, reply):
+    """Swap in a model that always answers with `reply`. Returns a function that removes it."""
+    store = client.app.state.store
+    before = store.assistant
+    settings = LlmSettings("gemini", "test-model", "https://example.org/v1", "key")
+    store.assistant = Assistant(settings, post=lambda url, **kwargs: _Reply(reply))
+    return lambda: setattr(store, "assistant", before)
+
+
+def test_without_a_model_the_app_still_gets_facts_for_its_own_summary(client):
+    assert client.get("/meta").json()["ai"] == {"available": False, "provider": None, "model": None}
+    assert client.get("/ask", params={"text": "like Jezero"}).status_code == 503
+    body = client.get("/summary", params={"target": "jezero", "lang": "es"}).json()
+    assert body["text"] is None and body["source"] == "template" and body["model"] is None
+    top = body["facts"]["top"]
+    listed = client.get(
+        "/results",
+        params={"target": "jezero", "detail": "full", "top_n": 5, "min_separation_km": 300},
+    ).json()["cells"]
+    assert [row["score"] for row in top] == [cell["score"] for cell in listed]
+    assert body["facts"]["site"] == "Jezero crater" and body["facts"]["purpose"] == "Rover mobility"
+
+
+def test_full_results_say_what_each_cell_matches_best_and_worst(client):
+    params = {"target": "jezero", "detail": "full", "top_n": 3}
+    for cell in client.get("/results", params=params).json()["cells"]:
+        assert 1 <= len(cell["closest_matches"]) <= 2
+        assert not set(cell["closest_matches"]) & set(cell["weakest_matches"])
+
+
+def test_ask_turns_a_request_into_the_settings_of_a_search(client):
+    reply = """{"understood": true, "target": "jezero", "coordinates": null, "profile": null,
+        "emphasis": "mean_temperature", "region": "south_america", "terrain": [],
+        "min_confidence": 0, "not_applied": ["con caminos cerca"]}"""
+    undo = _use_model(client, reply)
+    try:
+        assert client.get("/meta").json()["ai"]["available"] is True
+        params = {"text": "Sudamerica como Jezero pero mas frio", "lang": "es",
+                  "target": "arcadia_planitia", "profile": "ice_water"}  # fmt: skip
+        body = client.get("/ask", params=params).json()
+    finally:
+        undo()
+    assert body["understood"] is True and body["model"] == "test-model"
+    plan = body["plan"]
+    assert plan["target"]["id"] == "jezero" and "beyond_earth" in plan["target"]
+    assert plan["profile"] == "rover_mobility"  # the new site's default purpose
+    assert (plan["emphasis"], plan["region"]) == ("mean_temperature", "south_america")
+    assert body["not_applied"] == ["con caminos cerca"]
+
+
+def test_ask_reads_typed_coordinates_as_a_new_site(client):
+    reply = """{"understood": true, "target": null, "coordinates": {"body": "moon", "lat": 10.5,
+        "lon": 20.25}, "profile": null, "emphasis": null, "region": null, "terrain": ["arid"],
+        "min_confidence": 0.75, "not_applied": []}"""
+    undo = _use_model(client, reply)
+    try:
+        body = client.get("/ask", params={"text": "Moon 10.5 20.25 deserts", "target": "jezero"})
+    finally:
+        undo()
+    plan = body.json()["plan"]
+    assert plan["target"]["id"] == "moon_10.50_20.25" and plan["profile"] == "habitat_thermal"
+    assert plan["terrain"] == ["arid"] and plan["min_confidence"] == 0.75
+
+
+def test_ask_changes_nothing_when_the_request_is_not_understood(client):
+    undo = _use_model(client, '{"understood": false, "not_applied": []}')
+    try:
+        body = client.get("/ask", params={"text": "hola", "target": "jezero"}).json()
+    finally:
+        undo()
+    assert body == {"understood": False, "plan": None, "not_applied": [], "model": "test-model"}
+
+
+def test_ask_reports_a_broken_model_reply(client):
+    undo = _use_model(client, "sorry, no JSON today")
+    try:
+        assert client.get("/ask", params={"text": "like Jezero"}).status_code == 502
+    finally:
+        undo()
+    assert client.get("/ask", params={"text": ""}).status_code == 422
+
+
+def test_summary_keeps_a_model_text_only_when_its_numbers_are_real(client):
+    facts = client.get("/summary", params={"target": "jezero"}).json()["facts"]
+    best = facts["top"][0]["score"]
+    undo = _use_model(client, f"The best place scores {best} of 100.")
+    try:
+        params = {"target": "jezero", "emphasis": "mean_temperature", "region": "south_america"}
+        good = client.get("/summary", params=params).json()
+    finally:
+        undo()
+    assert good["source"] == "ai" and good["model"] == "test-model" and str(best) in good["text"]
+    assert good["facts"]["emphasis"]["feature"] == "Mean temperature"
+    assert good["facts"]["region"] == "South America"
+    undo = _use_model(client, "The best place scores 12.34 of 100.")
+    try:
+        invented = client.get("/summary", params={"target": "jezero"}).json()
+    finally:
+        undo()
+    assert invented["text"] is None and invented["source"] == "template"
