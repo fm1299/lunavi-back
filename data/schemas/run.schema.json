@@ -1,5 +1,24 @@
 {
   "$defs": {
+    "AccessConfig": {
+      "description": "Distances at which the access score reaches 0 (spec FR-P11).",
+      "properties": {
+        "road_far_km": {
+          "title": "Road Far Km",
+          "type": "number"
+        },
+        "airport_far_km": {
+          "title": "Airport Far Km",
+          "type": "number"
+        }
+      },
+      "required": [
+        "road_far_km",
+        "airport_far_km"
+      ],
+      "title": "AccessConfig",
+      "type": "object"
+    },
     "Region": {
       "properties": {
         "id": {
@@ -127,6 +146,17 @@
     "reference_year": {
       "title": "Reference Year",
       "type": "integer"
+    },
+    "access": {
+      "$ref": "#/$defs/AccessConfig"
+    },
+    "cover_threshold": {
+      "title": "Cover Threshold",
+      "type": "number"
+    },
+    "analog_match_km": {
+      "title": "Analog Match Km",
+      "type": "number"
     }
   },
   "required": [
@@ -136,7 +166,10 @@
     "site_window_km",
     "target_quality",
     "confidence_bands",
-    "reference_year"
+    "reference_year",
+    "access",
+    "cover_threshold",
+    "analog_match_km"
   ],
   "title": "RunConfig",
   "type": "object"

@@ -55,6 +55,19 @@ class Store:
         self.manifest = json.loads((self.directory / "manifest.json").read_text(encoding="utf-8"))
         self.earth = load_earth(self.directory / "earth.parquet")
         self.sites = sites or SiteBook(window_km=self.config.run.site_window_km)
+        self.analog_cells = self._analog_cells()
+
+    def _analog_cells(self) -> dict[str, int]:
+        """The Earth cell that stands for each documented analog, leaving out negative controls."""
+        cells = {}
+        for site in self.config.analogs:
+            if site.role == "negative_control" or len(self.earth.lat) == 0:
+                continue
+            distances = haversine_km(site.lat, site.lon, self.earth.lat, self.earth.lon)
+            nearest = int(distances.argmin())
+            if distances[nearest] <= self.config.run.analog_match_km:
+                cells[site.id] = nearest
+        return cells
 
     def find_target(self, identifier: str) -> Target | None:
         """A preset from targets.json, or a location chosen on the map."""
@@ -113,6 +126,66 @@ class Store:
             "score": round(float(scored.score[index]), 1),
             "confidence": round(float(scored.confidence[index]), 3),
             "band": self.band(float(scored.confidence[index])),
+            **{k: _clean(v) for k, v in self.earth.access.iloc[index].items()},
+        }
+
+    def gaps(self, target: Target, scored: Scored, threshold: float) -> list[dict]:
+        """For each site condition, whether a documented analog covers it (spec FR-P12)."""
+        flagged = beyond_earth_keys(self.config.features, target)
+        names = {site.id: site.name for site in self.config.analogs}
+        rows = []
+        for column, key in enumerate(scored.comparison.keys):
+            entry = target.features.get(key)
+            similar = {
+                analog: scored.comparison.s[index, column]
+                for analog, index in self.analog_cells.items()
+                if not np.isnan(scored.comparison.s[index, column])
+            }
+            best = max(similar, key=similar.get, default=None)
+            rows.append(
+                {
+                    "key": key,
+                    "label": self.config.features[key].label,
+                    "target_value": entry.value if entry else None,
+                    "beyond_earth": key in flagged,
+                    # None means it cannot be judged: no site value, no Earth source, or no analog.
+                    "covered": bool(similar[best] >= threshold) if best else None,
+                    "best_analog": names[best] if best else None,
+                    "best_s": _clean(similar[best]) if best else None,
+                    "covered_by": [names[a] for a, s in similar.items() if s >= threshold],
+                }
+            )
+        return rows
+
+    def portfolio(
+        self,
+        scored: Scored,
+        weights: dict[str, float],
+        candidates: np.ndarray,
+        threshold: float,
+        max_cells: int,
+    ) -> dict:
+        """The fewest cells that together cover the site's weighted conditions (spec FR-P13)."""
+        keys = scored.comparison.keys
+        columns = [
+            i
+            for i, key in enumerate(keys)
+            if weights.get(key, 0.0) > 0 and not np.isnan(scored.comparison.s[:, i]).all()
+        ]
+        covers = np.nan_to_num(scored.comparison.s[np.ix_(candidates, columns)]) >= threshold
+        picks = scoring.greedy_cover(covers, scored.score[candidates], max_cells)
+        cells = [
+            {
+                **self.full_cell(int(candidates[pick]), scored),
+                "covers": [keys[c] for c, hit in zip(columns, covers[pick], strict=True) if hit],
+            }
+            for pick in picks
+        ]
+        covered = {key for cell in cells for key in cell["covers"]}
+        return {
+            "cells": cells,
+            "conditions": [keys[c] for c in columns],
+            "uncovered": [keys[c] for c in columns if keys[c] not in covered],
         }
 
     def cell_sheet(

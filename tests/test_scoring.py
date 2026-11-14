@@ -126,3 +126,30 @@ def test_beyond_earth_feature_is_never_a_closest_match():
 def test_weight_share_counts_only_active_weight():
     share = scoring.weight_share({"a": 3, "b": 1, "c": 0}, {"a", "c"})
     assert share == pytest.approx(0.75)
+
+
+def test_access_score_is_half_road_and_half_airport():
+    score = scoring.access_score([0, 100, 50, 500], [0, 500, 250, 9000], 100, 500)
+    assert score == pytest.approx([1.0, 0.0, 0.5, 0.0])
+
+
+def test_greedy_cover_takes_the_fewest_cells():
+    covers = np.array(
+        [
+            [True, True, False, False],
+            [False, False, True, True],
+            [True, False, True, False],
+            [False, False, False, False],
+        ]
+    )
+    assert scoring.greedy_cover(covers, np.array([2.0, 1.0, 0.0, 9.0]), 10) == [0, 1]
+
+
+def test_greedy_cover_breaks_ties_by_rank_and_stops_when_nothing_is_left():
+    covers = np.array([[True, False, False], [True, False, False]])
+    assert scoring.greedy_cover(covers, np.array([1.0, 2.0]), 10) == [1]
+    assert scoring.greedy_cover(np.zeros((0, 3), dtype=bool), np.array([]), 10) == []
+
+
+def test_greedy_cover_respects_the_cell_limit():
+    assert len(scoring.greedy_cover(np.eye(4, dtype=bool), np.ones(4), 2)) == 2

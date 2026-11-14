@@ -212,3 +212,39 @@ def test_export_gives_the_shortlist_as_csv(client):
     assert [row["cell_id"] for row in rows] == ranked["cell_id"]
     assert [float(row["score"]) for row in rows] == ranked["score"]
     assert rows[0]["rank"] == "1" and "raw_slope" in rows[0] and "s_slope" in rows[0]
+
+
+def test_results_and_export_carry_the_access_score(client):
+    compact = client.get("/results", params={"target": "jezero"}).json()["cells"]
+    assert len(compact["access"]) == len(compact["cell_id"])
+    assert all(0 <= value <= 1 for value in compact["access"])
+    full = client.get("/results", params={"target": "jezero", "top_n": 1, "detail": "full"})
+    assert {"access", "road_km", "airport_km"} <= full.json()["cells"][0].keys()
+    header = client.get("/export", params={"target": "jezero"}).text.splitlines()[0]
+    assert "access,road_km,airport_km" in header
+
+
+def test_gaps_say_which_site_conditions_a_documented_analog_covers(client):
+    body = client.get("/gaps", params={"target": "jezero"}).json()
+    rows = {row["key"]: row for row in body["conditions"]}
+    # The dummy cells sit around the Atacama, so at least that analog is compared.
+    assert body["analogs_compared"] >= 1
+    assert rows["composition"]["covered"] is None  # no Earth source yet, so it cannot be judged
+    slope = rows["slope"]
+    assert slope["covered"] == (slope["best_s"] >= body["threshold"])
+    assert (slope["best_analog"] in slope["covered_by"]) == slope["covered"]
+    strict = client.get("/gaps", params={"target": "jezero", "threshold": 1.0}).json()
+    assert not any(row["covered"] for row in strict["conditions"])
+
+
+def test_portfolio_cells_cover_the_conditions_together(client):
+    body = client.get("/portfolio", params={"target": "jezero"}).json()
+    covered = {key for cell in body["cells"] for key in cell["covers"]}
+    assert covered | set(body["uncovered"]) == set(body["conditions"])
+    assert "composition" not in body["conditions"]  # no Earth source, so nothing can cover it
+    for cell in body["cells"]:
+        assert all(cell["s"][key] >= body["threshold"] for key in cell["covers"])
+    one = client.get("/portfolio", params={"target": "jezero", "max_cells": 1}).json()
+    assert len(one["cells"]) == 1
+    none = client.get("/portfolio", params={"target": "jezero", "threshold": 1.0}).json()
+    assert none["cells"] == [] and none["uncovered"] == none["conditions"]

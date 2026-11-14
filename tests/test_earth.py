@@ -5,7 +5,7 @@ import pandas as pd
 import pytest
 
 from pipeline.contract import Feature, Target, TargetFeature
-from pipeline.earth import Earth, beyond_earth_keys, compare
+from pipeline.earth import ACCESS_COLUMNS, Earth, beyond_earth_keys, compare
 
 QUALITY = {"measured": 1.0, "physical": 1.0, "literature": 0.7}
 
@@ -65,6 +65,7 @@ def _earth() -> Earth:
         terrain=list(table["terrain"]),
         eligible=np.array([True, True, False]),
         index_by_cell={"a": 0, "b": 1, "c": 2},
+        access=table.reindex(columns=ACCESS_COLUMNS),
     )
 
 

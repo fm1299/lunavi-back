@@ -8,6 +8,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
+from pipeline import scoring
 from pipeline.contract import Config, load_config
 from pipeline.grid import cell_id
 from pipeline.run import write_outputs
@@ -43,6 +44,15 @@ def dummy_table(config: Config, rng: np.random.Generator) -> pd.DataFrame:
             table[f"raw_{key}"] = rng.choice(feature.classes, size=CELLS).astype(object)
         else:
             table[f"raw_{key}"] = rng.uniform(feature.lo, feature.hi, size=CELLS)
+    # Drawn after the features, so adding access left every earlier dummy value unchanged.
+    table["road_km"] = rng.uniform(0.0, 150.0, size=CELLS)
+    table["airport_km"] = rng.uniform(0.0, 600.0, size=CELLS)
+    table["access"] = scoring.access_score(
+        table["road_km"],
+        table["airport_km"],
+        config.run.access.road_far_km,
+        config.run.access.airport_far_km,
+    )
     return table
 
 

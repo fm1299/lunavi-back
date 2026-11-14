@@ -21,5 +21,8 @@
   "site_window_km": 28.0,
   "target_quality": { "measured": 1.0, "physical": 1.0, "literature": 0.7 },
   "confidence_bands": { "high": 0.75, "medium": 0.5 },
-  "reference_year": 2023
+  "reference_year": 2023,
+  "access": { "road_far_km": 100.0, "airport_far_km": 500.0 },
+  "cover_threshold": 0.8,
+  "analog_match_km": 50.0
 }

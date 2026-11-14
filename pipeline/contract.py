@@ -131,6 +131,13 @@ class RegionPreset(BaseModel):
     bbox: tuple[float, float, float, float]  # west, south, east, north
 
 
+class AccessConfig(BaseModel):
+    """Distances at which the access score reaches 0 (spec FR-P11)."""
+
+    road_far_km: float
+    airport_far_km: float
+
+
 class RunConfig(BaseModel):
     grid_resolution_deg: float
     region: Region
@@ -139,6 +146,9 @@ class RunConfig(BaseModel):
     target_quality: dict[Basis, float]
     confidence_bands: dict[Literal["high", "medium"], float]
     reference_year: int
+    access: AccessConfig
+    cover_threshold: float  # a similarity at or above this covers a site condition (FR-P12, FR-P13)
+    analog_match_km: float  # a documented analog is read from the nearest cell within this distance
 
 
 class ResultCell(BaseModel):

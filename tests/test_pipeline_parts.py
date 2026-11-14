@@ -170,3 +170,12 @@ def test_a_named_exception_survives_the_ice_mask():
         id="site", name="site", bbox=(9.0, 9.0, 11.0, 11.0), reason="ice free", source_ref=None
     )
     assert _classify(aridity=20.0, glaciated=1.0, exceptions=[exception]) == ["other"]
+
+
+def test_nearest_km_measures_along_the_great_circle():
+    from pipeline.access import nearest_km
+
+    lat2d, lon2d = np.array([[0.0, 0.0]]), np.array([[0.0, 179.0]])
+    points = np.array([[1.0, 0.0], [-179.0, 0.0]])  # (lon, lat), one across the antimeridian
+    assert nearest_km(lat2d, lon2d, points)[0] == pytest.approx([111.19, 222.39], abs=0.1)
+    assert np.isnan(nearest_km(lat2d, lon2d, np.empty((0, 2)))).all()

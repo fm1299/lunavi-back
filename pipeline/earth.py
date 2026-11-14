@@ -13,6 +13,8 @@ import pandas as pd
 from pipeline import scoring
 from pipeline.contract import Basis, Feature, Target
 
+ACCESS_COLUMNS = ["access", "road_km", "airport_km"]
+
 
 @dataclass(frozen=True)
 class Earth:
@@ -22,6 +24,7 @@ class Earth:
     cell_id: np.ndarray
     terrain: list[list[str]]
     eligible: np.ndarray  # a cell with no terrain class is masked out of the ranking
+    access: pd.DataFrame  # access, road_km, airport_km; NaN in a table built before FR-P11
     index_by_cell: dict[str, int]
 
 
@@ -54,6 +57,7 @@ def load_earth(path: Path) -> Earth:
         cell_id=cell_ids,
         terrain=terrain,
         eligible=np.array([len(values) > 0 for values in terrain], dtype=bool),
+        access=table.reindex(columns=ACCESS_COLUMNS).astype(np.float64),
         index_by_cell={cell: index for index, cell in enumerate(cell_ids)},
     )
 

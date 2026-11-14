@@ -36,6 +36,12 @@ uv run pytest                           # tests, no network needed
 uv run ruff check .                     # linter
 ```
 
+## Access, gaps and portfolio
+
+- **Access.** Each cell gets `road_km`, `airport_km` and an `access` score from 0 to 1. Half comes from the distance to a road and half from the distance to an airport, each falling to 0 at the far distance set in `data/config/run.json`. Access never changes the analog score. Protected areas are not included yet, because Natural Earth has no global layer for them. A table built before this needs one more `uv run python -m pipeline.run`; until then the API returns `null` for access.
+- **Gaps.** A documented analog covers a site condition when the similarity at the analog's cell reaches `cover_threshold` (0.8). `covered: null` means it cannot be judged: the site has no value, the Earth has no source, or no analog lies in the table.
+- **Portfolio.** A greedy set cover over the features with weight above 0. It takes the cell that covers the most conditions still open, until all are covered or nothing more can be.
+
 ## Add a data source
 
 Missing values are normal here. A value with no source stays blank, is left out of the score, and lowers confidence, so the app works before every source exists.
@@ -60,6 +66,8 @@ Composition has no source yet. `pipeline/adapters/lithology.py` is a ready optio
 | `GET /results?target={id}&profile=&weights=&bbox=&terrain=&top_n=&min_confidence=&min_separation_km=&detail=` | Rank Earth cells against a site |
 | `GET /cells/{cell_id}?target={id}` | Explain one Earth cell |
 | `GET /export?format=csv&target={id}&top_n=20` | The shortlist as a CSV file, with the same filters as `/results` |
+| `GET /gaps?target={id}&threshold=` | For each condition of a site, whether a documented analog covers it |
+| `GET /portfolio?target={id}&profile=&weights=&bbox=&terrain=&min_confidence=&threshold=&max_cells=` | The fewest cells that together cover the site's conditions |
 | `GET /profiles`, `/features`, `/analogs`, `/meta`, `/health` | Config and status |
 
 ## Layout
@@ -70,6 +78,7 @@ Composition has no source yet. `pipeline/adapters/lithology.py` is a ready optio
 | `pipeline/adapters/` | One adapter per Earth feature |
 | `pipeline/sites.py` | Reads any Moon or Mars location |
 | `pipeline/earth.py` | Loads the Earth table and compares a site with it |
+| `pipeline/access.py` | Distance to roads and airports, and the access score per cell |
 | `pipeline/contract.py` | The data contract as Pydantic models |
 | `pipeline/run.py` | The one command that builds the Earth table |
 | `api/` | FastAPI app |
@@ -87,6 +96,7 @@ The spec describes one repository with `pipeline/`, `api/`, `web/` and `data/`. 
 | Earth surface temperature, precipitation | [NASA POWER](https://power.larc.nasa.gov/) | NASA open data |
 | Earth NDVI, day-night temperature | MODIS MOD13A1 and MYD11A2 through [Planetary Computer](https://planetarycomputer.microsoft.com/) | NASA open data |
 | Land mask, countries | [Natural Earth](https://www.naturalearthdata.com/) | Public domain |
+| Roads and airports, for the access score | [Natural Earth](https://www.naturalearthdata.com/) | Public domain |
 | Holocene volcanoes | [Smithsonian GVP](https://volcano.si.edu/) | Cite the GVP |
 | Mars terrain | [MOLA 463 m](https://planetarymaps.usgs.gov/mosaic/Mars_MGS_MOLA_DEM_mosaic_global_463m.tif) | NASA and USGS open data |
 | Mars temperature | [Mars Climate Database v6.2](https://www-mars.lmd.jussieu.fr/mcd_python/) | Cite the MCD (a model, so basis is literature) |

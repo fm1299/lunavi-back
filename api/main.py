@@ -78,6 +78,25 @@ def _weights(store: Store, profile: Profile, raw: str | None) -> dict[str, float
     return weights
 
 
+def _keep(
+    store: Store, scored, bbox: str | None, terrain: str | None, min_confidence: float
+) -> np.ndarray:
+    """Eligible cells that pass the area, terrain and confidence filters."""
+    earth = store.earth
+    keep = earth.eligible & (scored.confidence >= min_confidence)
+    if bbox:
+        try:
+            west, south, east, north = (float(v) for v in bbox.split(","))
+        except ValueError as error:
+            raise HTTPException(422, "bbox must be west,south,east,north") from error
+        keep &= (earth.lon >= west) & (earth.lon <= east)
+        keep &= (earth.lat >= south) & (earth.lat <= north)
+    if terrain:
+        wanted = set(terrain.split(","))
+        keep &= np.array([bool(wanted.intersection(t)) for t in earth.terrain])
+    return keep
+
+
 @app.get("/health")
 def health(request: Request) -> dict:
     store = _store(request)
@@ -161,19 +180,7 @@ def results(
     scored = store.compute(site, active_weights, profile_config)
     earth = store.earth
 
-    keep = earth.eligible & (scored.confidence >= min_confidence)
-    if bbox:
-        try:
-            west, south, east, north = (float(v) for v in bbox.split(","))
-        except ValueError as error:
-            raise HTTPException(422, "bbox must be west,south,east,north") from error
-        keep &= (earth.lon >= west) & (earth.lon <= east)
-        keep &= (earth.lat >= south) & (earth.lat <= north)
-    if terrain:
-        wanted = set(terrain.split(","))
-        keep &= np.array([bool(wanted.intersection(t)) for t in earth.terrain])
-
-    indices = np.flatnonzero(keep)
+    indices = np.flatnonzero(_keep(store, scored, bbox, terrain, min_confidence))
     indices = indices[np.argsort(-scored.score[indices], kind="stable")]
     count = int(indices.size)
     if top_n is not None:
@@ -207,8 +214,57 @@ def results(
             "lon": earth.lon[indices].tolist(),
             "score": np.round(scored.score[indices], 1).tolist(),
             "confidence": np.round(scored.confidence[indices], 3).tolist(),
+            # None in a table built before the access layer existed (spec FR-P11).
+            "access": [
+                None if np.isnan(v) else round(float(v), 2)
+                for v in earth.access["access"].to_numpy()[indices]
+            ],
         },
     }
+
+
+@app.get("/gaps")
+def gaps(
+    request: Request,
+    target: str,
+    threshold: float | None = Query(None, ge=0.0, le=1.0),
+) -> dict:
+    """Which conditions of a site no documented analog covers (spec FR-P12)."""
+    store = _store(request)
+    site = _target(store, target)
+    profile_config = _profile(store, site, None)
+    scored = store.compute(site, dict(profile_config.weights), profile_config)
+    limit = store.config.run.cover_threshold if threshold is None else threshold
+    return {
+        "target": site.id,
+        "threshold": limit,
+        "analogs_compared": len(store.analog_cells),
+        "conditions": store.gaps(site, scored, limit),
+    }
+
+
+@app.get("/portfolio")
+def portfolio(
+    request: Request,
+    target: str,
+    profile: str | None = None,
+    weights: str | None = None,
+    bbox: str | None = None,
+    terrain: str | None = None,
+    min_confidence: float = Query(0.0, ge=0.0, le=1.0),
+    threshold: float | None = Query(None, ge=0.0, le=1.0),
+    max_cells: int = Query(10, ge=1, le=50),
+) -> dict:
+    """The fewest cells that together cover the site's conditions (spec FR-P13)."""
+    store = _store(request)
+    site = _target(store, target)
+    profile_config = _profile(store, site, profile)
+    active_weights = _weights(store, profile_config, weights)
+    scored = store.compute(site, active_weights, profile_config)
+    keep = _keep(store, scored, bbox, terrain, min_confidence) & (scored.score > 0)
+    limit = store.config.run.cover_threshold if threshold is None else threshold
+    result = store.portfolio(scored, active_weights, np.flatnonzero(keep), limit, max_cells)
+    return {"target": site.id, "profile": profile_config.id, "threshold": limit, **result}
 
 
 @app.get("/export")
@@ -234,6 +290,7 @@ def export(
     writer = csv.writer(out)
     writer.writerow(
         ["rank", "cell_id", "lat", "lon", "country", "terrain", "score", "confidence", "band"]
+        + ["access", "road_km", "airport_km"]
         + [f"raw_{k}" for k in keys]
         + [f"s_{k}" for k in keys]
     )
@@ -241,6 +298,7 @@ def export(
         writer.writerow(
             [rank, c["cell_id"], c["lat"], c["lon"], c["country"], "|".join(c["terrain"])]
             + [c["score"], c["confidence"], c["band"]]
+            + [c["access"], c["road_km"], c["airport_km"]]
             + [c["raw"][k] for k in keys]
             + [c["s"][k] for k in keys]
         )

@@ -14,6 +14,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
+from pipeline.access import access_layers
 from pipeline.adapters import Context, Layer, load_adapter
 from pipeline.adapters.land import country_names, glaciated_fraction, land_fraction
 from pipeline.contract import Config, load_config
@@ -141,6 +142,9 @@ def main() -> None:
         print(f"  {key}: {available[key]} cells", flush=True)
 
     table = build_table(config, grid, land, fraction, layers)
+    for name, values in access_layers(grid, RAW_DIR, config.run.access).items():
+        table[name] = values[land]
+    print("  access: roads and airports", flush=True)
     write_outputs(table, args.results_dir, grid.res, region, dummy=False, available=available)
     print(f"Wrote {len(table)} land cells to {args.results_dir}", flush=True)
 

@@ -34,6 +34,36 @@ def quality(
     return source_quality * resolution_factor * (1.0 - gap) * target_quality
 
 
+def access_score(road_km, airport_km, road_far_km: float, airport_far_km: float) -> np.ndarray:
+    """From 0 to 1: half from the distance to a road, half from the distance to an airport.
+
+    Each half falls in a straight line from 1 at the road or airport to 0 at its far distance.
+    """
+    road = np.clip(1.0 - np.asarray(road_km, dtype=np.float64) / road_far_km, 0.0, 1.0)
+    airport = np.clip(1.0 - np.asarray(airport_km, dtype=np.float64) / airport_far_km, 0.0, 1.0)
+    return 0.5 * road + 0.5 * airport
+
+
+def greedy_cover(covers: np.ndarray, rank: np.ndarray, max_cells: int) -> list[int]:
+    """Greedy set cover (spec FR-P13): the fewest rows of `covers` that together cover the columns.
+
+    covers is n_cells x n_conditions, True where a cell covers a condition. Each step takes the
+    cell that covers the most conditions still open, and the higher `rank` on a tie. It stops
+    when nothing more can be covered. Greedy is not always the true minimum, but it is close.
+    """
+    covers = np.asarray(covers, dtype=bool)
+    open_columns = np.ones(covers.shape[1], dtype=bool)
+    picks: list[int] = []
+    while open_columns.any() and len(picks) < max_cells and covers.shape[0] > 0:
+        gains = covers[:, open_columns].sum(axis=1)
+        best = int(np.lexsort((rank, gains))[-1])
+        if gains[best] == 0:
+            break
+        picks.append(best)
+        open_columns &= ~covers[best]
+    return picks
+
+
 def combined_score(
     s: np.ndarray,
     weights: np.ndarray,
