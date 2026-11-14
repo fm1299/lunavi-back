@@ -3,14 +3,17 @@ from pathlib import Path
 import numpy as np
 import pytest
 
+from pipeline.adapters import Context
+from pipeline.adapters.glim import GRID_FILE, LEGEND_FILE, composition, majority_class, read_legend
 from pipeline.adapters.land import SUBCELLS, cell_shares
 from pipeline.adapters.lithology import classify_lithology
-from pipeline.adapters.modis import composite_start
+from pipeline.adapters.modis import composite_start, summarize
 from pipeline.adapters.power import aligned_chunks
 from pipeline.adapters.terrain import _tile_x, _tile_y, baseline_factor
-from pipeline.contract import MaskException, Masks, load_config
+from pipeline.contract import Feature, MaskException, Masks, load_config
 from pipeline.geo import haversine_km
 from pipeline.grid import Grid, block_nanmean, cell_id
+from pipeline.run import feature_ranges
 from pipeline.terrain_classes import classify_terrain
 from pipeline.terrain_metrics import terrain_metrics
 
@@ -179,3 +182,70 @@ def test_nearest_km_measures_along_the_great_circle():
     points = np.array([[1.0, 0.0], [-179.0, 0.0]])  # (lon, lat), one across the antimeridian
     assert nearest_km(lat2d, lon2d, points)[0] == pytest.approx([111.19, 222.39], abs=0.1)
     assert np.isnan(nearest_km(lat2d, lon2d, np.empty((0, 2)))).all()
+
+
+def test_modis_keeps_a_value_only_with_enough_valid_composites():
+    nan = np.nan
+    stack = np.array([[[0.2, nan, nan]], [[0.6, 0.3, nan]], [[0.4, nan, nan]], [[nan] * 3] * 1])
+    stack = np.concatenate([stack, np.full((2, 1, 3), nan)])  # six composites, like the default
+    values, gaps = summarize(stack, "max", 0.2)
+    assert values[0, 0] == 0.6 and np.isnan(values[0, 1]) and np.isnan(values[0, 2])
+    np.testing.assert_allclose(gaps[0], [0.5, 5 / 6, 1.0])
+    means, _ = summarize(stack, "mean", 0.0)
+    np.testing.assert_allclose(means[0, :2], [0.4, 0.3])
+
+
+def test_glim_legend_maps_grid_values_to_class_codes():
+    text = '"OBJECTID";"Value_";"Count_";"xx"\r\n1;1;35356728.000000;"su"\r\n2;2;6329752.0;"vb"\r\n'
+    assert read_legend(text) == {1: "su", 2: "vb"}
+
+
+def test_majority_class_reports_how_mixed_a_cell_is():
+    samples = np.array(
+        [
+            ["basaltic", "basaltic", "felsic", None],
+            [None, None, None, None],
+            ["felsic", "sedimentary", "felsic", "sedimentary"],
+        ],
+        dtype=object,
+    )
+    values, mixed = majority_class(samples, ["basaltic", "felsic", "sedimentary", "evaporite"])
+    assert list(values) == ["basaltic", None, "felsic"]  # a tie goes to the class listed first
+    np.testing.assert_allclose(mixed, [0.5, 1.0, 0.5])
+
+
+def test_glim_adapter_reads_the_cells_under_each_grid_cell(tmp_path):
+    folder = tmp_path / "glim"
+    folder.mkdir()
+    # Four 0.5 degree cells around 0, 0: basalt (2) in the north, sand (1) and no data in the south.
+    rows = ["2 2", "1 -9999"]
+    header = "ncols 2\nnrows 2\nxllcorner -0.5\nyllcorner -0.5\ncellsize 0.5\nNODATA_value -9999\n"
+    (folder / GRID_FILE).write_text(header + "\n".join(rows) + "\n", encoding="ascii")
+    (folder / LEGEND_FILE).write_text('"a";"b";"c";"xx"\n1;1;1.0;"su"\n2;2;1.0;"vb"\n', "ascii")
+    grid = Grid.from_bbox(0.0, 0.0, 0.0, 0.0, 0.5)
+    ctx = Context(grid, tmp_path, tmp_path, 2023, np.array([[True]]))
+    layer = composition(ctx)
+    assert layer.values[0, 0] == "basaltic"
+    assert layer.gap_filled[0, 0] == 0.5
+
+
+def test_class_map_must_name_known_classes():
+    config = load_config(Path("data/config"))
+    composition_feature = config.features["composition"]
+    assert set(composition_feature.class_map.values()) - {None} <= set(composition_feature.classes)
+    bad = composition_feature.model_dump() | {"class_map": {"vb": "granite"}}
+    with pytest.raises(ValueError, match="unknown classes"):
+        Feature(**bad)
+
+
+def test_feature_ranges_report_percentiles_next_to_lo_and_hi():
+    import pandas as pd
+
+    config = load_config(Path("data/config"))
+    table = pd.DataFrame({"terrain": [["arid"], [], ["polar"]]})
+    for key, feature in config.features.items():
+        table[f"raw_{key}"] = None if feature.type == "categorical" else [1.0, 50.0, 3.0]
+    ranges = feature_ranges(table, config)
+    assert ranges["slope"]["land_p99"] > ranges["slope"]["eligible_p99"]
+    assert ranges["slope"]["hi"] == config.features["slope"].hi
+    assert "composition" not in ranges

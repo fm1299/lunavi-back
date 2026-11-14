@@ -60,9 +60,9 @@
       "resolution_factor": 1.0,
       "adapter": "pipeline.adapters.modis:temp_diurnal_range",
       "source_name": "MODIS MYD11A2 v061 land surface temperature",
-      "source_url": "https://planetarycomputer.microsoft.com/dataset/modis-11A2-061",
+      "source_url": "https://lpdaac.usgs.gov/products/myd11a2v061/",
       "license": "NASA open data",
-      "note": "Six 8-day composites across the reference year."
+      "note": "One 8-day composite from each sampled month of the reference year, read from the Planetary Computer mirror of the NASA product."
     },
     {
       "key": "mean_temperature",
@@ -108,9 +108,9 @@
       "resolution_factor": 1.0,
       "adapter": "pipeline.adapters.modis:vegetation",
       "source_name": "MODIS MOD13A1 v061 NDVI",
-      "source_url": "https://planetarycomputer.microsoft.com/dataset/modis-13A1-061",
+      "source_url": "https://lpdaac.usgs.gov/products/mod13a1v061/",
       "license": "NASA open data",
-      "note": "Six 16-day composites across the reference year. Used as a gate, never for ranking."
+      "note": "One 16-day composite from each sampled month of the reference year, read from the Planetary Computer mirror of the NASA product. Used as a gate, never for ranking."
     },
     {
       "key": "composition",
@@ -125,13 +125,20 @@
         "sedimentary": { "basaltic": 0.2, "felsic": 0.3, "sedimentary": 1.0, "evaporite": 0.5 },
         "evaporite": { "basaltic": 0.1, "felsic": 0.1, "sedimentary": 0.5, "evaporite": 1.0 }
       },
-      "source_quality": 0.5,
-      "resolution_factor": 0.8,
-      "adapter": null,
-      "source_name": "No source yet",
-      "source_url": null,
-      "license": null,
-      "note": "Left blank for now and expected from the event data. pipeline/adapters/lithology.py is a ready option: set this adapter to pipeline.adapters.lithology:composition to use the Macrostrat API."
+      "class_map": {
+        "su": "sedimentary", "ss": "sedimentary", "sm": "sedimentary", "sc": "sedimentary",
+        "ev": "evaporite",
+        "vb": "basaltic", "pb": "basaltic", "vi": "basaltic",
+        "va": "felsic", "pa": "felsic", "pi": "felsic", "py": "felsic", "mt": "felsic",
+        "ig": null, "wb": null, "nd": null
+      },
+      "source_quality": 0.6,
+      "resolution_factor": 0.5,
+      "adapter": "pipeline.adapters.glim:composition",
+      "source_name": "GLiM v1.0 global lithological map, 0.5 degrees",
+      "source_url": "https://doi.org/10.1594/PANGAEA.788537",
+      "license": "CC BY 3.0",
+      "note": "Bedrock class, not the loose surface layer. The most common class in the cell; a mixed cell lowers confidence. class_map is proposed: intermediate volcanic counts as basaltic, and intermediate plutonic, pyroclastic and metamorphic rock as felsic."
     },
     {
       "key": "elevation",
