@@ -15,6 +15,7 @@ from fastapi import FastAPI, HTTPException, Query, Request, Response
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.gzip import GZipMiddleware
 
+from api.assistant import LANGUAGES, MAX_REQUEST_CHARS, TERRAIN_CLASSES, AssistantError
 from api.store import Store
 from pipeline import scoring
 from pipeline.contract import Profile, Target
@@ -113,6 +114,7 @@ def meta(request: Request) -> dict:
         "site_window_km": run.site_window_km,
         "confidence_bands": run.confidence_bands,
         "limits_statement": LIMITS_STATEMENT,
+        "ai": store.assistant.describe(),
     }
 
 
@@ -216,7 +218,13 @@ def results(
         "dummy": store.manifest["dummy"],
     }
     if detail == "full":
-        cells = [store.full_cell(int(i), scored) for i in indices]
+        cells = [
+            {
+                **store.full_cell(int(i), scored),
+                **store.matches(int(i), scored, active_weights, flagged),
+            }
+            for i in indices
+        ]
         return {"meta": response_meta, "cells": cells}
     return {
         "meta": response_meta,
@@ -232,6 +240,141 @@ def results(
                 for v in earth.access["access"].to_numpy()[indices]
             ],
         },
+    }
+
+
+@app.get("/ask")
+def ask(
+    request: Request,
+    text: str = Query(min_length=1, max_length=MAX_REQUEST_CHARS),
+    lang: str = "en",
+    target: str | None = Query(None, description="the current site"),
+    profile: str | None = Query(None, description="the current purpose"),
+    emphasis: str | None = None,
+    region: str | None = None,
+    terrain: str | None = None,
+    min_confidence: float = Query(0.0, ge=0.0, le=1.0),
+) -> dict:
+    """Turn a request in plain words into a search (spec FR-AI2). It never changes a score.
+
+    The reply holds the same settings the controls hold: a site, a purpose, one feature to stress,
+    a region, terrain classes and a minimum confidence. Results still come from /results.
+    """
+    store = _store(request)
+    if not store.assistant.available:
+        raise HTTPException(503, "no language model is set up")
+    current = {
+        "target": target,
+        "profile": profile,
+        "emphasis": emphasis,
+        "region": region,
+        "terrain": [t for t in (terrain or "").split(",") if t in TERRAIN_CLASSES],
+        "min_confidence": min_confidence,
+    }
+    try:
+        plan = store.assistant.interpret(text, lang, current, store.config)
+    except AssistantError as error:
+        raise HTTPException(502, str(error)) from error
+    model = store.assistant.describe()["model"]
+    if not plan["understood"]:
+        return {
+            "understood": False,
+            "plan": None,
+            "not_applied": plan["not_applied"],
+            "model": model,
+        }
+
+    if plan["site"]:
+        site = store.sites.resolve(*plan["site"])
+    else:
+        site = store.find_target(plan["target"]) if plan["target"] else None
+    if site is None:
+        site = next(iter(store.config.targets.values()))
+    purpose = store.config.profiles.get(plan["profile"] or site.default_profile)
+    stress = plan["emphasis"] if purpose and plan["emphasis"] not in purpose.gates else None
+    return {
+        "understood": True,
+        "plan": {
+            "target": store.describe_target(site),
+            "profile": purpose.id if purpose else site.default_profile,
+            "emphasis": stress,
+            "region": plan["region"],
+            "terrain": plan["terrain"],
+            "min_confidence": plan["min_confidence"],
+        },
+        "not_applied": plan["not_applied"],
+        "model": model,
+    }
+
+
+@app.get("/summary")
+def summary(
+    request: Request,
+    target: str,
+    profile: str | None = None,
+    weights: str | None = None,
+    bbox: str | None = None,
+    terrain: str | None = None,
+    min_confidence: float = Query(0.0, ge=0.0, le=1.0),
+    min_separation_km: float = Query(300.0, ge=0.0),
+    emphasis: str | None = None,
+    region: str | None = None,
+    lang: str = "en",
+) -> dict:
+    """A short answer about the best results, written from their numbers (spec FR-AI2).
+
+    The facts are always returned. `text` is null when no model is set up, when it fails, or when
+    it writes a number that is not in the facts; the app then writes its own sentence from them.
+    """
+    store = _store(request)
+    ranked = results(
+        request, target, profile, weights, bbox, terrain, 5,
+        min_confidence, min_separation_km, "full",
+    )  # fmt: skip
+    site = _target(store, target)
+    features = store.config.features
+    labels = {key: feature.label for key, feature in features.items()}
+    purpose = store.config.profiles[ranked["meta"]["profile"]]
+    presets = {preset.id: preset.name for preset in store.config.run.region_presets}
+    stressed = None
+    if emphasis in features:
+        entry = site.features.get(emphasis)
+        stressed = {
+            "feature": labels[emphasis],
+            "site_value": entry.value if entry else None,
+            "unit": features[emphasis].unit,
+            "beyond_earth_range": emphasis in ranked["meta"]["beyond_earth"],
+        }
+    facts = {
+        "site": site.name,
+        "body": site.body,
+        "purpose": purpose.label,
+        "region": presets.get(region or "", None),
+        "terrain_filter": [t for t in (terrain or "").split(",") if t],
+        "cells_compared": ranked["meta"]["count"],
+        "emphasis": stressed,
+        "beyond_earth_features": [labels[key] for key in ranked["meta"]["beyond_earth"]],
+        "top": [
+            {
+                "rank": rank,
+                "country": cell["country"],
+                "lat": cell["lat"],
+                "lon": cell["lon"],
+                "score": cell["score"],
+                "confidence": cell["band"],
+                "closest_matches": [labels[key] for key in cell["closest_matches"]],
+                "weakest_matches": [labels[key] for key in cell["weakest_matches"]],
+            }
+            for rank, cell in enumerate(ranked["cells"], start=1)
+        ],
+    }
+    language = lang if lang in LANGUAGES else "en"
+    text = store.assistant.summarize(facts, language)
+    return {
+        "text": text,
+        "source": "ai" if text else "template",
+        "model": store.assistant.describe()["model"] if text else None,
+        "facts": facts,
     }
 
 

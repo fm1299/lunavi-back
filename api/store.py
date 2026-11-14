@@ -7,6 +7,7 @@ from pathlib import Path
 
 import numpy as np
 
+from api.assistant import Assistant, settings_from_env
 from pipeline import scoring
 from pipeline.contract import Config, Profile, Target, load_config
 from pipeline.earth import Comparison, beyond_earth_keys, compare, load_earth
@@ -50,12 +51,14 @@ class Store:
         directory: Path | None = None,
         config: Config | None = None,
         sites: SiteBook | None = None,
+        assistant: Assistant | None = None,
     ):
         self.config = config or load_config()
         self.directory = directory or results_dir()
         self.manifest = json.loads((self.directory / "manifest.json").read_text(encoding="utf-8"))
         self.earth = load_earth(self.directory / "earth.parquet")
         self.sites = sites or SiteBook(window_km=self.config.run.site_window_km)
+        self.assistant = assistant or Assistant(settings_from_env())
         self.analog_cells = self._analog_cells()
         self._validation: dict | None = None
 
@@ -136,6 +139,18 @@ class Store:
             "band": self.band(float(scored.confidence[index])),
             **{k: _clean(v) for k, v in self.earth.access.iloc[index].items()},
         }
+
+    def matches(
+        self, index: int, scored: Scored, weights: dict[str, float], flagged: set[str]
+    ) -> dict:
+        """The weighted features a cell matches best and worst, so a list can say why it ranks."""
+        similarities = {
+            key: float(scored.comparison.s[index, column])
+            for column, key in enumerate(scored.comparison.keys)
+            if weights.get(key, 0.0) > 0 and not np.isnan(scored.comparison.s[index, column])
+        }
+        closest, weakest = scoring.closest_and_weakest(similarities, flagged, limit=2)
+        return {"closest_matches": closest, "weakest_matches": weakest}
 
     def gaps(self, target: Target, scored: Scored, threshold: float) -> list[dict]:
         """For each site condition, whether a documented analog covers it (spec FR-P12)."""

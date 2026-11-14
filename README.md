@@ -52,6 +52,29 @@ uv run ruff check .                     # linter
 - **Sources.** `data/config/sources.json` is the team's source inventory: which source fills each feature on each body, its license, whether the organizers list it, and whether the pipeline reads it today. `GET /sources` serves it. `verified` stays `null` until a team member checks the source.
 - **MODIS sampling.** `modis` in `run.json` sets which months are read (one composite each) and the share of valid composites a cell needs to keep a value (0.2). Adding months gives a truer yearly maximum NDVI, at the cost of more downloads.
 
+## Search in plain words (FR-AI2)
+
+`GET /ask` sends a request such as "places in South America like Jezero but colder" to a free language model and gets back the settings of a search: a site, a purpose, one feature to stress, a region, terrain classes and a minimum confidence. `GET /summary` returns the facts about the five best results and, when a model is set up, a short answer written from them.
+
+The model never sees or changes a score. Its reply is checked against the config: unknown sites, purposes, features or regions are dropped and reported in `not_applied`. Coordinates count only when the person typed them. A summary that quotes a number missing from the facts is thrown away, and the app writes its own sentence from the facts instead. A comparison such as "colder" gives that feature more importance; it is not a hard filter.
+
+Set one of these before starting the API. Without any, `/meta` reports `ai.available: false`, `/ask` answers 503 and the app works as before.
+
+| Variable | What it does |
+|---|---|
+| `GEMINI_API_KEY` | Use Gemini (free key from Google AI Studio). The default provider |
+| `GROQ_API_KEY` | Use Groq |
+| `LUNAVI_LLM_PROVIDER` | `gemini`, `groq` or `ollama`. Needed for Ollama, which has no key and runs on `http://localhost:11434` |
+| `LUNAVI_LLM_MODEL` | Another model name. Defaults: `gemini-flash-lite-latest`, `llama-3.3-70b-versatile`, `llama3.2` |
+| `LUNAVI_LLM_BASE_URL` | Another address that speaks the OpenAI chat format |
+
+```powershell
+$env:GEMINI_API_KEY = "your key"
+uv run uvicorn api.main:app --reload
+```
+
+Never commit a key. If a provider renames its models, set `LUNAVI_LLM_MODEL`. Free plans allow only a few requests per minute, and the larger Gemini models are often busy or out of free quota, which is why the default is the small one. Summaries are cached, and after a failed summary the API waits a minute before asking the model for another, so questions keep working; the app writes its own answer meanwhile.
+
 ## Add a data source
 
 Missing values are normal here. A value with no source stays blank, is left out of the score, and lowers confidence, so the app works before every source exists.
@@ -78,6 +101,8 @@ Composition comes from GLiM gridded to 0.5 degrees (`pipeline/adapters/glim.py`)
 | `GET /export?format=csv&target={id}&top_n=20` | The shortlist as a CSV file, with the same filters as `/results` |
 | `GET /gaps?target={id}&threshold=` | For each condition of a site, whether a documented analog covers it |
 | `GET /portfolio?target={id}&profile=&weights=&bbox=&terrain=&min_confidence=&threshold=&max_cells=` | The fewest cells that together cover the site's conditions |
+| `GET /ask?text=&lang=&target=&profile=&emphasis=&region=&terrain=&min_confidence=` | Turn a request in plain words into search settings. The other parameters are the current search |
+| `GET /summary?target={id}&lang=` plus the `/results` filters | Facts about the five best results, and a short answer when a model is set up |
 | `GET /validation` | How the documented analogs and the negative controls rank for the preset sites |
 | `GET /sources` | The data source inventory, with license and status |
 | `GET /profiles`, `/features`, `/analogs`, `/meta`, `/health` | Config and status |
@@ -95,6 +120,7 @@ Composition comes from GLiM gridded to 0.5 degrees (`pipeline/adapters/glim.py`)
 | `pipeline/run.py` | The one command that builds the Earth table |
 | `pipeline/validate.py` | The validation report from spec section 8 |
 | `api/` | FastAPI app |
+| `api/assistant.py` | The language model client, its prompts and the checks on its replies |
 | `data/config/` | Preset sites, features, profiles, documented analogs, masks, sources and run settings |
 | `data/dummy/results/` | A dummy Earth table in the real format |
 | `data/results/` | The real Earth table (git-ignored) |
