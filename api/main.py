@@ -20,6 +20,7 @@ from api.store import Store
 from pipeline import scoring
 from pipeline.contract import Profile, Target
 from pipeline.earth import beyond_earth_keys
+from pipeline.findings import findings_for
 
 LIMITS_STATEMENT = (
     "LUNAVI screens and prioritizes candidate regions using open data. It does not replace field "
@@ -172,6 +173,15 @@ def validation(request: Request) -> dict:
 @app.get("/analogs")
 def analogs(request: Request) -> list[dict]:
     return [a.model_dump() for a in _store(request).config.analogs]
+
+
+@app.get("/findings")
+def findings(request: Request, target: str | None = None) -> list[dict]:
+    """New regions for the preset sites, checked in the literature, with live score (FR-P16)."""
+    store = _store(request)
+    if target is not None and target not in store.config.targets:
+        raise HTTPException(404, f"no findings for unknown preset {target}")
+    return findings_for(store.config, store.earth, target)
 
 
 @app.get("/caves")

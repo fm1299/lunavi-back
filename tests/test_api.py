@@ -425,3 +425,27 @@ def test_summary_keeps_a_model_text_only_when_its_numbers_are_real(client):
     finally:
         undo()
     assert invented["text"] is None and invented["source"] == "template"
+
+
+def test_findings_come_with_live_values_and_checks(client):
+    sets = {s["target_id"]: s for s in client.get("/findings").json()}
+    assert set(sets) == {"shackleton_ridge", "arcadia_planitia", "jezero"}
+    assert sum(len(s["findings"]) for s in sets.values()) == 13
+    one = sets["jezero"]["findings"][0]
+    assert one["literature_check"]["result"] in {
+        "studied_in_other_context",
+        "no_analog_literature_found",
+    }
+    # The dummy table only covers the Atacama, so the finding's cell is missing there.
+    assert one["live"]["score"] is None
+    assert one["checks"]["cells_missing_from_table"] == one["cell_ids"]
+    only = client.get("/findings", params={"target": "jezero"}).json()
+    assert [s["target_id"] for s in only] == ["jezero"]
+    assert client.get("/findings", params={"target": "nowhere"}).status_code == 404
+
+
+def test_validation_audits_the_findings(client):
+    audit = client.get("/validation").json()["findings_audit"]
+    assert audit["findings"] == 13
+    assert sum(audit["literature_results"].values()) == 13
+    assert "jezero_N3300_E05300" in audit["without_sources"]  # Nain: no source was found

@@ -147,3 +147,25 @@ def test_shapefile_reader_handles_holes_and_attributes():
     header = struct.pack("<4xIHH20x", 2, 32 + 32 + 1, 9) + field + b"\x0d"
     dbf = header + b" lHl     " + b"*Av      "
     assert read_dbf(dbf) == [{"Unit": "lHl"}, {}]
+
+
+def test_findings_use_the_test_tags_of_their_profile():
+    for group in CONFIG.findings:
+        tags = CONFIG.profiles[group.profile].test_tags
+        assert group.profile == CONFIG.targets[group.target_id].default_profile
+        for finding in group.findings:
+            assert finding.test_first and set(finding.test_first) <= set(tags)
+            assert finding.cell_ids[0].startswith(("N", "S"))
+
+
+def test_findings_keep_every_source_and_query_of_the_review():
+    original = json.loads(
+        Path("data/reference/findings.propuesto.json").read_text(encoding="utf-8")
+    )
+    by_id = {f.id: f for group in CONFIG.findings for f in group.findings}
+    for group in original:
+        for c in group["candidates"]:
+            finding = by_id[c["id"]]
+            assert finding.sources == c["sources"]
+            assert finding.literature_check.queries == c["literature_check"]["busquedas"]
+            assert finding.cell_ids == c["cell_ids"] and finding.score_at_review == c["score"]

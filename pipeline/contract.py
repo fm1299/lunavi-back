@@ -178,6 +178,36 @@ class PlanetRules(BaseModel):
     mars: MarsRules
 
 
+class LiteratureCheck(BaseModel):
+    date: str
+    queries: list[str]
+    result: Literal["studied_in_other_context", "no_analog_literature_found", "used_as_analog"]
+
+
+class Finding(BaseModel):
+    """A new Earth region for a preset site, checked in the literature (spec 6.5, FR-P16)."""
+
+    id: str
+    name: str
+    cell_ids: list[str]  # the first is the region's main cell
+    bbox: tuple[float, float, float, float]  # west, south, east, north
+    n_cells: int  # cells in the region, which can be more than cell_ids
+    lat: float
+    lon: float
+    score_at_review: float
+    test_first: list[str]  # test tags of the profile, in order
+    sources: list[str]
+    literature_check: LiteratureCheck
+    limits: str
+    status: Literal["proposed", "confirmed", "rejected"]
+
+
+class FindingSet(BaseModel):
+    target_id: str
+    profile: str
+    findings: list[Finding]
+
+
 class MaskException(BaseModel):
     id: str
     name: str
@@ -295,6 +325,7 @@ class Config:
     sources: list[Source]
     caves: tuple[CaveSite, ...] = ()
     rules: PlanetRules | None = None
+    findings: tuple[FindingSet, ...] = ()
 
 
 def _read(path: Path) -> dict:
@@ -312,6 +343,7 @@ def load_config(config_dir: Path = CONFIG_DIR) -> Config:
         sources=[Source(**s) for s in _read(config_dir / "sources.json")["sources"]],
         caves=tuple(CaveSite(**s) for s in _read(config_dir / "cave_sites.json")["sites"]),
         rules=PlanetRules(**_read(config_dir / "planet_rules.json")),
+        findings=tuple(FindingSet(**s) for s in _read(config_dir / "findings.json")["sets"]),
     )
     _cross_check(config)
     return config
@@ -328,6 +360,13 @@ def _cross_check(config: Config) -> None:
         for key in [*profile.weights, *profile.gates]:
             if key not in config.features:
                 raise ValueError(f"{profile.id}: unknown feature {key}")
+    for group in config.findings:
+        if group.target_id not in config.targets or group.profile not in config.profiles:
+            raise ValueError(f"findings: unknown target or profile {group.target_id}")
+        tags = set(config.profiles[group.profile].test_tags)
+        for finding in group.findings:
+            if not set(finding.test_first) <= tags:
+                raise ValueError(f"{finding.id}: test_first is not a test tag of {group.profile}")
     for source in config.sources:
         for key in source.features:
             if key not in config.features:
@@ -344,6 +383,7 @@ def export_schemas(out_dir: Path = SCHEMA_DIR) -> None:
         "masks": Masks,
         "cave_site": CaveSite,
         "planet_rules": PlanetRules,
+        "finding_set": FindingSet,
         "run": RunConfig,
         "source": Source,
         "result_cell": ResultCell,

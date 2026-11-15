@@ -16,6 +16,7 @@ import numpy as np
 from pipeline import scoring
 from pipeline.contract import Config, KnownAnalog, Target, load_config
 from pipeline.earth import Comparison, Earth, compare, load_earth
+from pipeline.findings import audit, findings_for
 from pipeline.geo import haversine_km
 from pipeline.grid import cell_id
 
@@ -189,9 +190,9 @@ def target_report(config: Config, earth: Earth, target: Target, method: str) -> 
         "medium_confidence_or_better": int(
             (after_gates & (confidence >= config.run.confidence_bands["medium"])).sum()
         ),
-        # Novelty (FR-P8) and findings (FR-P16) are not built yet, so these steps stay blank.
+        # Novelty (FR-P8) is not built yet, so that step stays blank.
         "new": None,
-        "findings": None,
+        "findings": sum(len(g.findings) for g in config.findings if g.target_id == target.id),
     }
 
     return {
@@ -266,8 +267,8 @@ def build_report(config: Config, earth: Earth, dummy: bool) -> dict:
         "methods": {method: _method_summary(reports) for method, reports in by_method.items()},
         "targets": targets,
         "honest_gaps": honest_gaps(targets),
-        # Test 7 needs the findings literature review (FR-P16), which is not built yet.
-        "findings_audit": None,
+        # Test 7: the literature review of the findings (FR-P16), with live values.
+        "findings_audit": audit(findings_for(config, earth), config.run.confidence_bands["medium"]),
     }
 
 
@@ -282,6 +283,11 @@ def main() -> None:
     report = build_report(config, earth, manifest["dummy"])
     path = args.results_dir / "validation.json"
     path.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
+    findings_path = args.results_dir / "findings.json"  # spec 6.5
+    findings_path.write_text(
+        json.dumps(findings_for(config, earth), indent=2, ensure_ascii=False) + "\n",
+        encoding="utf-8",
+    )
 
     for target in report["targets"]:
         print(f"{target['target']} ({target['profile']})")
@@ -299,7 +305,8 @@ def main() -> None:
                 print(f"  - {row['name']}: not comparable")
     for method, summary in report["methods"].items():
         print(f"{method}: {summary}")
-    print(f"Wrote {path}")
+    print(f"findings: {report['findings_audit']}")
+    print(f"Wrote {path} and {findings_path}")
 
 
 if __name__ == "__main__":

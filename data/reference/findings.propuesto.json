@@ -1,0 +1,755 @@
+[
+  {
+    "target_id": "shackleton_ridge",
+    "profile": "habitat_thermal",
+    "candidates": [
+      {
+        "id": "shackleton_ridge_N3750_E07300",
+        "name": "Altiplano del Pamir oriental",
+        "cell_ids": [
+          "N3750_E07300"
+        ],
+        "bbox": [
+          71.5,
+          36.5,
+          75.5,
+          39.0
+        ],
+        "n_cells": 18,
+        "lat": 37.5,
+        "lon": 73.0,
+        "score": 81.2,
+        "confidence": null,
+        "closest_matches": [
+          [
+            "composition",
+            1
+          ],
+          [
+            "aridity",
+            0.96
+          ]
+        ],
+        "weakest_matches": [
+          [
+            "temp_annual_range",
+            0.79
+          ],
+          [
+            "slope",
+            0.89
+          ]
+        ],
+        "test_first": "Control térmico del hábitat",
+        "sources": [
+          "https://www.geo.fu-berlin.de/geog/fachrichtungen/anthrogeog/zelf/Medien/download/Kraudzun/Vanselow_Kraudzun_Samimi_2012_Grazing_Practices.pdf",
+          "https://tc.copernicus.org/articles/19/6591/2025/tc-19-6591-2025.pdf",
+          "https://en.wikipedia.org/wiki/Pamir_alpine_desert_and_tundra"
+        ],
+        "literature_check": {
+          "fecha": "2026-11-15",
+          "busquedas": [
+            "Pamir Mars analog OR lunar analog Tashkurgan Wakhan",
+            "\"Mars analog\" Tajikistan OR Pamir plateau field site",
+            "帕米尔 塔什库尔干 火星 模拟 OR 类比 OR 月球",
+            "Eastern Pamir high-altitude cold desert climate permafrost study Tajikistan"
+          ],
+          "resultado": "estudiado en otro contexto, sin uso como análogo"
+        },
+        "limits": "Zona fronteriza de tres países: el lado afgano (Wakhán) tiene acceso muy restringido por seguridad, el lado tayiko exige permiso GBAO y el chino es zona militar fronteriza. Hay pastoreo estacional. Solo hay descripciones turísticas de paisaje \"lunar\", no estudios.",
+        "status": "propuesto"
+      },
+      {
+        "id": "shackleton_ridge_N4650_E09150",
+        "name": "Altái mongol sur (Bulgan)",
+        "cell_ids": [
+          "N4650_E09150"
+        ],
+        "bbox": [
+          90.5,
+          46.5,
+          91.5,
+          48.0
+        ],
+        "n_cells": 8,
+        "lat": 46.5,
+        "lon": 91.5,
+        "score": 79.7,
+        "confidence": null,
+        "closest_matches": [
+          [
+            "composition",
+            1
+          ],
+          [
+            "slope",
+            0.97
+          ]
+        ],
+        "weakest_matches": [
+          [
+            "temp_annual_range",
+            0.91
+          ],
+          [
+            "roughness",
+            0.92
+          ]
+        ],
+        "test_first": "Ciclos de energía y aislamiento",
+        "sources": [
+          "https://journal.num.edu.mn/gi/article/view/10124",
+          "https://www.britannica.com/place/Junggar-Gobi"
+        ],
+        "literature_check": {
+          "fecha": "2026-11-15",
+          "busquedas": [
+            "Mongolian Altai Mars analog Gobi Dzungaria planetary analogue",
+            "Junggar Basin OR Dzungarian Gobi Mars analog",
+            "Khovd Bulgan Mongolian Altai permafrost cold desert analog Mars"
+          ],
+          "resultado": "estudiado en otro contexto, sin uso como análogo"
+        },
+        "limits": "Vegetación esteparia estacional notable (0.26, la segunda más alta del top 5) y oscilación diaria más baja que las otras regiones (similitud 0.59). Cerca del área estrictamente protegida Gran Gobi B y de la frontera, lo que exige permisos.",
+        "status": "propuesto"
+      },
+      {
+        "id": "shackleton_ridge_N3700_E07050",
+        "name": "Montañas de Badakhshán (Kokcha)",
+        "cell_ids": [
+          "N3700_E07050"
+        ],
+        "bbox": [
+          70.5,
+          37.0,
+          70.5,
+          37.5
+        ],
+        "n_cells": 2,
+        "lat": 37.0,
+        "lon": 70.5,
+        "score": 77.8,
+        "confidence": null,
+        "closest_matches": [
+          [
+            "slope",
+            1.0
+          ],
+          [
+            "composition",
+            1
+          ]
+        ],
+        "weakest_matches": [
+          [
+            "temp_annual_range",
+            0.68
+          ],
+          [
+            "aridity",
+            0.91
+          ]
+        ],
+        "test_first": "Construcción y anclaje sobre regolito",
+        "sources": [
+          "https://earthobservatory.nasa.gov/images/153016/a-river-runs-through-fayzabad"
+        ],
+        "literature_check": {
+          "fecha": "2026-11-15",
+          "busquedas": [
+            "Badakhshan Afghanistan Mars analog",
+            "Pamir Mars analog OR lunar analog Tashkurgan Wakhan",
+            "\"Mars analog\" Tajikistan OR Pamir plateau field site"
+          ],
+          "resultado": "sin literatura de análogo encontrada"
+        },
+        "limits": "Es la región menos parecida en temperatura: media de 9.7 °C (similitud 0.23) y la vegetación más alta del top 5 (0.33), con agricultura en el valle y una ciudad en la celda. Acceso hoy muy difícil por seguridad y situación política en Afganistán.",
+        "status": "propuesto"
+      },
+      {
+        "id": "shackleton_ridge_N4300_E08750",
+        "name": "Tian Shan oriental, vertiente de Toksun",
+        "cell_ids": [
+          "N4300_E08750"
+        ],
+        "bbox": [
+          87.5,
+          42.5,
+          88.0,
+          43.0
+        ],
+        "n_cells": 3,
+        "lat": 43.0,
+        "lon": 87.5,
+        "score": 77.4,
+        "confidence": null,
+        "closest_matches": [
+          [
+            "composition",
+            1
+          ],
+          [
+            "roughness",
+            0.97
+          ]
+        ],
+        "weakest_matches": [
+          [
+            "temp_annual_range",
+            0.8
+          ],
+          [
+            "aridity",
+            0.91
+          ]
+        ],
+        "test_first": "Construcción y anclaje sobre regolito (la rugosidad es la variable que mejor coincide); luego control térmico del hábitat.",
+        "sources": [
+          "https://en.wikipedia.org/wiki/Turpan_Depression",
+          "https://bohrium.dp.tech/paper/arxiv/64b6c8753fda6d7f06fabd84",
+          "https://www.geog.com.cn/EN/abstract/article/0375-5444/50472"
+        ],
+        "literature_check": {
+          "fecha": "2026-11-15",
+          "busquedas": [
+            "Turpan Basin Mars analog",
+            "Kumtag desert Mars analogue site",
+            "Lop Nur Mars analog Xinjiang yardang",
+            "Hami yardang OR Dahaidao OR Kumtag Mars analog study",
+            "Xinjiang Mars analogue site Tian Shan OR Turpan analog planetary (búsqueda extendida)",
+            "吐鲁番 火星 类比 OR 模拟 地貌 研究",
+            "罗布泊 火星 类比 研究 OR Lop Nur Mars analog playa salt",
+            "新疆 吐鲁番 OR 托克逊 OR 库姆塔格 火星 地貌 类比 模拟 基地"
+          ],
+          "resultado": "sin literatura de análogo encontrada"
+        },
+        "limits": "Rango térmico anual (0.80) y aridez (0.91) son las peores coincidencias; la temperatura media (1.2 °C) está muy lejos del polo lunar y no tiene vacío ni radiación. Vegetación 0.24. Es un parecido de terreno y roca, no de ambiente.",
+        "status": "propuesto"
+      },
+      {
+        "id": "shackleton_ridge_N4750_E09700",
+        "name": "Khangai occidental (Zavkhan)",
+        "cell_ids": [
+          "N4750_E09700"
+        ],
+        "bbox": [
+          97.0,
+          47.0,
+          98.0,
+          47.5
+        ],
+        "n_cells": 5,
+        "lat": 47.5,
+        "lon": 97.0,
+        "score": 74.8,
+        "confidence": null,
+        "closest_matches": [
+          [
+            "composition",
+            1
+          ],
+          [
+            "temp_annual_range",
+            0.96
+          ]
+        ],
+        "weakest_matches": [
+          [
+            "roughness",
+            0.71
+          ],
+          [
+            "slope",
+            0.73
+          ]
+        ],
+        "test_first": "Ciclos de energía y aislamiento (la oscilación térmica anual es la mejor coincidencia); luego control térmico del hábitat.",
+        "sources": [
+          "https://www.mdpi.com/2075-163X/10/9/792",
+          "https://wikiwand.com/en/B%C3%B6%C3%B6n_Tsagaan_Lake",
+          "https://cosmos.isas.jaxa.jp/digging-in-mongolia-to-uncover-ice-on-mars/",
+          "https://localnews8.com/life/cnn-style/2025/10/23/inside-mongolias-mars-camp-the-extreme-adventure-that-wants-to-turn-tourists-into-astronauts/"
+        ],
+        "literature_check": {
+          "fecha": "2026-11-15",
+          "busquedas": [
+            "Mongolia Mars analog site Valley of Lakes Gobi",
+            "Zavkhan Mongolia Mars analogue dunes OR Khangai planetary analog",
+            "Mongolia permafrost OR Khyargas OR Uvs Mars analog study",
+            "Hasegawa Mongolia thermal contraction polygons brain terrain Mars analog field site Arkhangai OR Khuvsgul OR Zavkhan",
+            "Valley of Gobi Lakes Mars analog Böön Tsagaan Nuur groundwater Minerals 2020",
+            "Böön Tsagaan Nuur coordinates"
+          ],
+          "resultado": "sin literatura de análogo encontrada"
+        },
+        "limits": "Pendiente (0.73) y rugosidad (0.71) coinciden mal: es más suave que una cresta lunar. Vegetación 0.42, alta para un análogo lunar (revisar contra el veto de vegetación). Sin vacío ni radiación.",
+        "status": "propuesto"
+      }
+    ],
+    "note": "5 hallazgos tras 2 rondas de revisión bibliográfica (15/11/2026); confidence la calcula la app"
+  },
+  {
+    "target_id": "arcadia_planitia",
+    "profile": "ice_water",
+    "candidates": [
+      {
+        "id": "arcadia_planitia_N6800_E14000",
+        "name": "Interfluvio Yana-Indigirka (Selenniaj)",
+        "cell_ids": [
+          "N6800_E14000",
+          "N6850_E14150"
+        ],
+        "bbox": [
+          139.5,
+          67.5,
+          140.5,
+          68.0
+        ],
+        "n_cells": 4,
+        "lat": 68.0,
+        "lon": 140.0,
+        "score": 79.0,
+        "confidence": null,
+        "closest_matches": [
+          [
+            "composition",
+            1
+          ],
+          [
+            "aridity",
+            0.8
+          ]
+        ],
+        "weakest_matches": [
+          [
+            "aridity",
+            0.8
+          ],
+          [
+            "composition",
+            1
+          ]
+        ],
+        "test_first": "radar de hielo en el suelo",
+        "sources": [
+          "https://epic.awi.de/id/eprint/59653/1/Murton_2023_PPP_Batagay%20megaslump_A%20review.pdf"
+        ],
+        "literature_check": {
+          "fecha": "2026-11-15",
+          "busquedas": [
+            "Batagaika crater Mars analog",
+            "Chersky Range OR Selennyakh OR \"Polousny\" Mars analog permafrost",
+            "Yakutia thermokarst alas Mars analog scalloped depressions Séjourné",
+            "Grosse 2002 polygons thermokarst northern Yakutia possible Martian analogues Bykovsky",
+            "Яно-Индигирская низменность Абыйская низменность аналог Марса мерзлота",
+            "Nominatim reverse geocoding 68.0 N, 140.0 E"
+          ],
+          "resultado": "sin literatura de análogo encontrada"
+        },
+        "limits": "Terreno de montaña media (807 m, pendiente cercana a 7°), poco parecido a la llanura de Arcadia; acceso muy difícil, sin carreteras permanentes; vegetación de tundra y taiga rala en verano (el dato de vegetación de la celda está vacío, así que el veto no se aplicó).",
+        "status": "propuesto"
+      },
+      {
+        "id": "arcadia_planitia_N6800_E09750",
+        "name": "Meseta de Putorana (sectores sureste y norte)",
+        "cell_ids": [
+          "N6800_E09750",
+          "N6900_E09400"
+        ],
+        "bbox": [
+          97.5,
+          68.0,
+          97.5,
+          68.0
+        ],
+        "n_cells": 36,
+        "lat": 68.0,
+        "lon": 97.5,
+        "score": 75.9,
+        "confidence": null,
+        "closest_matches": [
+          [
+            "composition",
+            1
+          ],
+          [
+            "aridity",
+            0.78
+          ]
+        ],
+        "weakest_matches": [
+          [
+            "aridity",
+            0.78
+          ],
+          [
+            "composition",
+            1
+          ]
+        ],
+        "test_first": "radar de hielo en el suelo",
+        "sources": [
+          "https://ipfs.ssi.eecc.de/ipfs/QmXoypizjW3WknFiJnKLwHCnL72vedxjQkDDP1mXWo6uco/wiki/Putoran_plateau.html"
+        ],
+        "literature_check": {
+          "fecha": "2026-11-15",
+          "busquedas": [
+            "Putorana Plateau Mars analog",
+            "плато Путорана аналог Марса",
+            "Nominatim reverse geocoding 68.0 N, 97.5 E"
+          ],
+          "resultado": "sin literatura de análogo encontrada"
+        },
+        "limits": "Meseta alta disecada por cañones (888 m), no una llanura con hielo somero como Arcadia; vegetación de 0,49 (bosque de alerces y tundra), la más alta del grupo; zona de acceso extremadamente difícil. Solo se halló una mención turística de 'paisaje marciano', que no se usa como cita.",
+        "status": "propuesto"
+      },
+      {
+        "id": "arcadia_planitia_N8300_W07700",
+        "name": "Norte de Ellesmere (Quttinirpaaq)",
+        "cell_ids": [
+          "N8300_W07700"
+        ],
+        "bbox": [
+          -78.0,
+          83.0,
+          -77.0,
+          83.0
+        ],
+        "n_cells": 3,
+        "lat": 83.0,
+        "lon": -77.0,
+        "score": 75.1,
+        "confidence": null,
+        "closest_matches": [
+          [
+            "composition",
+            1
+          ],
+          [
+            "aridity",
+            0.91
+          ]
+        ],
+        "weakest_matches": [
+          [
+            "aridity",
+            0.91
+          ],
+          [
+            "composition",
+            1
+          ]
+        ],
+        "test_first": "Radar de hielo en el suelo en desierto polar; luego manejo de volátiles.",
+        "sources": [
+          "https://assets.science.nasa.gov/content/dam/science/psd/astrobiology/for-researchers/early-career-field-research-fund/Gleeson%20-%20Borup%20Fiord%20Pass%202006.pdf",
+          "https://www.frontiersin.org/articles/10.3389/fspas.2022.825019/full",
+          "https://ui.adsabs.harvard.edu/abs/2015LPI....46.1006A/abstract",
+          "https://science.cen.ulaval.ca/warwickvincent/PDFfiles/272.pdf",
+          "https://www.sciencedirect.com/science/article/abs/pii/S0032063309000245"
+        ],
+        "literature_check": {
+          "fecha": "2026-11-15",
+          "busquedas": [
+            "Ward Hunt Island Mars analog",
+            "Ellesmere Island Mars analog Lake Hazen OR Ward Hunt OR Quttinirpaaq",
+            "Borup Fiord Pass sulfur spring Mars Europa analog coordinates",
+            "Ward Hunt lake microbial mats astrobiology Mars analogue",
+            "Ellesmere Island Mars analogue ice-wedge polygons OR Lake Hazen OR Ward Hunt planetary analog paper (búsqueda extendida)"
+          ],
+          "resultado": "estudiado en otro contexto, sin uso como análogo"
+        },
+        "limits": "La celda está en la costa con plataformas de hielo cercanas; la mezcla de hielo marino y glaciar puede confundir la señal. La clase basáltica de la celda debe verificarse con un mapa geológico (no se verificó en esta revisión). Acceso logístico muy difícil.",
+        "status": "propuesto"
+      }
+    ],
+    "note": "3 hallazgos tras 2 rondas de revisión bibliográfica (15/11/2026); confidence la calcula la app"
+  },
+  {
+    "target_id": "jezero",
+    "profile": "rover_mobility",
+    "candidates": [
+      {
+        "id": "jezero_N1550_E02650",
+        "name": "Campo volcánico de Meidob",
+        "cell_ids": [
+          "N1550_E02650"
+        ],
+        "bbox": [
+          26.5,
+          15.0,
+          26.5,
+          15.5
+        ],
+        "n_cells": 2,
+        "lat": 15.5,
+        "lon": 26.5,
+        "score": 96.6,
+        "confidence": null,
+        "closest_matches": [
+          [
+            "composition",
+            1
+          ],
+          [
+            "roughness",
+            0.99
+          ]
+        ],
+        "weakest_matches": [
+          [
+            "slope",
+            0.94
+          ],
+          [
+            "aridity",
+            0.97
+          ]
+        ],
+        "test_first": "navegación autónoma",
+        "sources": [
+          "https://science.nasa.gov/earth/earth-observatory/meidob-volcanic-field-90326/",
+          "https://doi.org/10.1007/BF01083232"
+        ],
+        "literature_check": {
+          "fecha": "2026-11-15",
+          "busquedas": [
+            "Meidob volcanic field Sudan Mars analog",
+            "Darfur Jebel Marra OR Meidob \"Mars\" analog volcanic Sudan planetary",
+            "Meidob volcanic field geology paper Franz basanite Sudan"
+          ],
+          "resultado": "estudiado en otro contexto, sin uso como análogo"
+        },
+        "limits": "Darfur está en zona de conflicto armado (guerra en Sudán desde 2023); el acceso de campo es inviable hoy. Además, tiene conos de escoria y maares, rasgos explosivos poco comunes en Marte, y no hay delta.",
+        "status": "propuesto"
+      },
+      {
+        "id": "jezero_N3300_E05300",
+        "name": "Meseta de Nain",
+        "cell_ids": [
+          "N3300_E05300"
+        ],
+        "bbox": [
+          53.0,
+          32.5,
+          53.0,
+          33.0
+        ],
+        "n_cells": 2,
+        "lat": 33.0,
+        "lon": 53.0,
+        "score": 96.2,
+        "confidence": null,
+        "closest_matches": [
+          [
+            "composition",
+            1
+          ],
+          [
+            "roughness",
+            0.99
+          ]
+        ],
+        "weakest_matches": [
+          [
+            "temp_annual_range",
+            0.74
+          ],
+          [
+            "aridity",
+            0.96
+          ]
+        ],
+        "test_first": "tracción y desgaste de ruedas",
+        "sources": [],
+        "literature_check": {
+          "fecha": "2026-11-15",
+          "busquedas": [
+            "Iran desert Mars analog Dasht-e Kavir OR Lut planetary analogue",
+            "Nain Isfahan Iran Mars analog OR planetary analogue",
+            "نائین آنالوگ مریخ کویر"
+          ],
+          "resultado": "sin literatura de análogo encontrada"
+        },
+        "limits": "Irán tiene sanciones y restricciones de viaje e investigación para extranjeros; la colaboración tendría que pasar por instituciones iraníes. La oscilación anual de temperatura es la peor coincidencia (0.74).",
+        "status": "propuesto"
+      },
+      {
+        "id": "jezero_N2300_E04000",
+        "name": "Harrat Rahat central",
+        "cell_ids": [
+          "N2300_E04000"
+        ],
+        "bbox": [
+          39.5,
+          23.0,
+          40.5,
+          24.0
+        ],
+        "n_cells": 5,
+        "lat": 23.0,
+        "lon": 40.0,
+        "score": 95.6,
+        "confidence": null,
+        "closest_matches": [
+          [
+            "composition",
+            1
+          ],
+          [
+            "aridity",
+            0.99
+          ]
+        ],
+        "weakest_matches": [
+          [
+            "temp_annual_range",
+            0.95
+          ],
+          [
+            "slope",
+            0.97
+          ]
+        ],
+        "test_first": "operaciones de muestreo",
+        "sources": [
+          "https://pubs.usgs.gov/publication/pp1862",
+          "https://pubs.usgs.gov/publication/sim3428"
+        ],
+        "literature_check": {
+          "fecha": "2026-11-15",
+          "busquedas": [
+            "Harrat Rahat Saudi Arabia Mars OR lunar analog",
+            "Harrat Khaybar Umm Jirsan lava tube Mars analog paper",
+            "Saudi Arabia harrat basalt lunar analogue astronaut training OR rover test",
+            "حرة رهط مماثل المريخ أو القمر",
+            "Harrat Rahat geologic map USGS Saudi Geological Survey Professional Paper"
+          ],
+          "resultado": "estudiado en otro contexto, sin uso como análogo"
+        },
+        "limits": "Es el más accesible de los cinco, pero requiere permisos y coordinación con el Saudi Geological Survey; parte del campo está junto a Medina, con restricciones de acceso para visitantes. No hay delta ni sedimentos lacustres.",
+        "status": "propuesto"
+      },
+      {
+        "id": "jezero_N2550_E03900",
+        "name": "Campo basáltico de Khaybar",
+        "cell_ids": [
+          "N2550_E03900"
+        ],
+        "bbox": [
+          39.0,
+          25.0,
+          40.0,
+          26.0
+        ],
+        "n_cells": 6,
+        "lat": 25.5,
+        "lon": 39.0,
+        "score": 95.6,
+        "confidence": null,
+        "closest_matches": [
+          [
+            "composition",
+            1
+          ],
+          [
+            "aridity",
+            0.99
+          ]
+        ],
+        "weakest_matches": [
+          [
+            "temp_annual_range",
+            0.87
+          ],
+          [
+            "roughness",
+            0.97
+          ]
+        ],
+        "test_first": "Tracción y desgaste de ruedas (sobre coladas basálticas y grava suelta); luego navegación autónoma.",
+        "sources": [
+          "https://science.nasa.gov/earth/earth-observatory/harrat-khaybar-volcanic-field-8650",
+          "https://www.slate.com/blogs/bad_astronomy/2010/12/02/guess_the_planet.html",
+          "https://en.wikipedia.org/wiki/Harrat_Khaybar",
+          "https://astrobiology.com/2026/04/13/extreme-arabian-environments-and-their-microbiomes-new-frontiers-for-astrobiology-and-biosignature-discovery/"
+        ],
+        "literature_check": {
+          "fecha": "2026-11-15",
+          "busquedas": [
+            "Harrat Khaybar Mars analog lunar analogue lava field",
+            "\"Harrat\" Saudi Arabia \"Mars analog\" OR \"Martian analogue\" OR \"lunar analogue\" study",
+            "حرة خيبر المريخ القمر تشابه دراسة",
+            "Umm Jirsan lava tube Harrat Khaybar Mars analog astrobiology coordinates",
+            "Lectura: NASA Earth Observatory Harrat Khaybar; Slate Bad Astronomy 2010; Wikipedia Harrat Khaybar; reseña Astrobiology.com de Extremophiles 2026"
+          ],
+          "resultado": "estudiado en otro contexto, sin uso como análogo"
+        },
+        "limits": "No hay delta ni sedimentos lacustres comparables al delta de Jezero; el rango térmico anual (similitud 0.87) y diurno (0.87) es la peor coincidencia; las coladas jóvenes pueden ser más ásperas que el piso de Jezero. Es cribado por similitud de variables, no prueba geológica.",
+        "status": "propuesto"
+      },
+      {
+        "id": "jezero_N3250_E05750",
+        "name": "Llanuras basálticas de Tabas y Deyhuk",
+        "cell_ids": [
+          "N3250_E05750"
+        ],
+        "bbox": [
+          57.5,
+          32.0,
+          58.0,
+          34.0
+        ],
+        "n_cells": 5,
+        "lat": 32.5,
+        "lon": 57.5,
+        "score": 95.6,
+        "confidence": null,
+        "closest_matches": [
+          [
+            "composition",
+            1
+          ],
+          [
+            "roughness",
+            0.99
+          ]
+        ],
+        "weakest_matches": [
+          [
+            "temp_annual_range",
+            0.72
+          ],
+          [
+            "aridity",
+            0.97
+          ]
+        ],
+        "test_first": "Navegación autónoma (superficie llana y poco rugosa, extensa); luego tracción y desgaste de ruedas.",
+        "sources": [
+          "https://doi.org/10.1016/j.icarus.2016.03.025",
+          "https://iugs-geoheritage.org/?p=3403",
+          "https://www.ensani.ir/fa/article/download/645048"
+        ],
+        "literature_check": {
+          "fecha": "2026-11-15",
+          "busquedas": [
+            "Lut desert Mars analog megaripples yardangs Kalut coordinates",
+            "Foroutan Zimbelman 2016 mega-ripples Lut desert transverse aeolian ridges Geomorphology location latitude",
+            "Lut desert megaripples study area \"N\" \"E\" coordinates Foroutan transverse aeolian ridges gravel ripples northern Lut",
+            "Foroutan Lut megaripples \"Shahdad\" OR \"Nayband\" OR \"Gandom Beryan\" OR \"Rig-e Yalan\" TAR analog location",
+            "Hesarakizad Maghsoudi yardangs Lut Aeolis Mars comparison 2025",
+            "\"South Khorasan\" OR Birjand OR Tabas OR Deyhuk Mars analog basalt volcanic terrain study",
+            "دشت لوت مریخ آنالوگ کلوت شهداد مشابه مریخ مقاله",
+            "خراسان جنوبی شبیه مریخ آنالوگ مریخ بیرجند طبس",
+            "Crossref: autor Foroutan Zimbelman (verificación de revista y volumen)"
+          ],
+          "resultado": "sin literatura de análogo encontrada"
+        },
+        "limits": "El rango térmico anual es la peor coincidencia (similitud 0.72); no hay delta comparable al de Jezero; la clase basáltica viene de un mapa global a 0.5 grados y la zona tiene también rocas andesíticas y sedimentarias. Los análogos documentados del Lut son eólicos (megaripples, yardangs), no de piso basáltico. Es cribado, no prueba geológica.",
+        "status": "propuesto"
+      }
+    ],
+    "note": "5 hallazgos tras 2 rondas de revisión bibliográfica (15/11/2026); confidence la calcula la app"
+  }
+]
