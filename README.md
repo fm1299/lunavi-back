@@ -65,6 +65,12 @@ No global map gives one of the four classes directly, so a location gets its cla
 
 **Caves.** `data/config/cave_sites.json` lists documented lava tubes. The nearest Earth cell to each, within `analog_match_km`, gets the terrain tag `cave`, so `terrain=cave` finds them. The tag does not make a masked cell eligible.
 
+## Findings (FR-P16)
+
+`data/config/findings.json` holds the team's findings for the preset sites: new regions from the top 1% of cells, grouped and checked in the literature (13 regions on 2026-11-15, after 2 rounds and 21 regions reviewed). Each one keeps its cells, box, what to test first, the sources read, the searches run with their result, and an honest limit. The originals, in Spanish, are in `data/reference/findings.propuesto.json`.
+
+The app recomputes score, confidence and the best and worst matches from the loaded table, so a finding never shows a number the table no longer supports. `GET /findings` serves them, `pipeline.validate` writes `data/results/findings.json` (spec 6.5), and the validation report audits them in `findings_audit`: findings without sources, below medium confidence, near a known analog, with cells outside their box, or whose score changed since the review.
+
 ## Search in plain words (FR-AI2)
 
 `GET /ask` sends a request such as "places in South America like Jezero but colder" to a free language model and gets back the settings of a search: a site, a purpose, one feature to stress, a region, terrain classes and a minimum confidence. `GET /summary` returns the facts about the five best results and, when a model is set up, a short answer written from them.
@@ -118,6 +124,7 @@ Composition comes from GLiM gridded to 0.5 degrees (`pipeline/adapters/glim.py`)
 | `GET /summary?target={id}&lang=` plus the `/results` filters | Facts about the five best results, and a short answer when a model is set up |
 | `GET /validation` | How the documented analogs and the negative controls rank for the preset sites |
 | `GET /sources` | The data source inventory, with license and status |
+| `GET /findings?target=` | The team's findings with live score, confidence and checks |
 | `GET /caves` | Documented lava tubes and caves, and whether a cell of the table holds each |
 | `GET /profiles`, `/features`, `/analogs`, `/meta`, `/health` | Config and status |
 
@@ -130,6 +137,7 @@ Composition comes from GLiM gridded to 0.5 degrees (`pipeline/adapters/glim.py`)
 | `pipeline/sites.py` | Reads any Moon or Mars location |
 | `pipeline/planet_rules.py` | Composition class on the Moon and Mars, and the Moon's annual range |
 | `pipeline/shapefile.py` | A small polygon shapefile reader, and reading one file out of a remote ZIP |
+| `pipeline/findings.py` | Recomputes and audits the findings |
 | `pipeline/check_sites.py` | Compares the site reader with the team's test points |
 | `pipeline/earth.py` | Loads the Earth table and compares a site with it |
 | `pipeline/access.py` | Distance to roads and airports, and the access score per cell |

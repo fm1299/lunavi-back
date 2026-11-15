@@ -205,6 +205,17 @@
       "citation_status": "verified"
     },
     {
+      "id": "mojave",
+      "name": "Mojave Desert (Dumont Dunes)",
+      "lat": 35.6833,
+      "lon": -116.2194,
+      "type": "desert",
+      "role": "catalog_only",
+      "control_for": [],
+      "source_ref": "https://www.jpl.nasa.gov/news/mojave-desert-tests-prepare-for-nasa-mars-roving/",
+      "citation_status": "verified"
+    },
+    {
       "id": "craters_of_the_moon",
       "name": "Craters of the Moon",
       "lat": 43.4617,
@@ -370,6 +381,17 @@
       "citation_status": "verified"
     },
     {
+      "id": "qaidam",
+      "name": "Qaidam Basin (Dalangtan)",
+      "lat": 38.33,
+      "lon": 91.67,
+      "type": "desert",
+      "role": "catalog_only",
+      "control_for": [],
+      "source_ref": "https://doi.org/10.1089/ast.2018.1830",
+      "citation_status": "verified"
+    },
+    {
       "id": "ladakh",
       "name": "Ladakh (Leh and Tso Kar)",
       "lat": 33.3,
@@ -389,6 +411,17 @@
       "role": "catalog_only",
       "control_for": [],
       "source_ref": "https://www.usgs.gov/publications/hydrothermal-alteration-lonar-lake-impact-structure-india-implications-impact",
+      "citation_status": "verified"
+    },
+    {
+      "id": "dhofar",
+      "name": "Dhofar, Oman (AMADEE-18)",
+      "lat": 18.4232,
+      "lon": 55.0433,
+      "type": "desert",
+      "role": "catalog_only",
+      "control_for": [],
+      "source_ref": "https://doi.org/10.1089/ast.2019.2031",
       "citation_status": "verified"
     },
     {
@@ -505,6 +538,39 @@
       ],
       "source_ref": "https://www.keybiodiversityareas.org/site/factsheet/14690",
       "citation_status": "to_verify"
+    },
+    {
+      "id": "qaidam_qarhan",
+      "name": "Eastern Qaidam Basin, Qarhan playa (China)",
+      "lat": 36.617,
+      "lon": 96.233,
+      "type": "desert",
+      "role": "catalog_only",
+      "control_for": [],
+      "source_ref": "https://doi.org/10.1002/2017JE005293",
+      "citation_status": "verified"
+    },
+    {
+      "id": "kolyma_duvanny_yar",
+      "name": "Kolyma Lowland, Duvanny Yar (Russia)",
+      "lat": 68.633,
+      "lon": 159.079,
+      "type": "polar",
+      "role": "catalog_only",
+      "control_for": [],
+      "source_ref": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3545801",
+      "citation_status": "verified"
+    },
+    {
+      "id": "tibesti_emi_koussi",
+      "name": "Tibesti massif, Emi Koussi volcano (Chad)",
+      "lat": 19.79,
+      "lon": 18.55,
+      "type": "volcanic",
+      "role": "catalog_only",
+      "control_for": [],
+      "source_ref": "https://thesis.library.caltech.edu/4435/",
+      "citation_status": "verified"
     }
   ]
 }

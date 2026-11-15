@@ -16,10 +16,12 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.gzip import GZipMiddleware
 
 from api.assistant import LANGUAGES, MAX_REQUEST_CHARS, TERRAIN_CLASSES, AssistantError
+from api.process import build_process
 from api.store import Store
 from pipeline import scoring
 from pipeline.contract import Profile, Target
 from pipeline.earth import beyond_earth_keys
+from pipeline.findings import findings_for
 
 LIMITS_STATEMENT = (
     "LUNAVI screens and prioritizes candidate regions using open data. It does not replace field "
@@ -176,9 +178,40 @@ def validation(request: Request) -> dict:
     return _store(request).validation()
 
 
+@app.get("/process")
+def process(
+    request: Request,
+    target: str,
+    profile: str | None = None,
+    weights: str | None = None,
+    top_share: float = Query(0.01, gt=0.0, le=1.0, description="share of top scores kept"),
+) -> dict:
+    """How LUNAVI reaches its analogs for one site, step by step, with live numbers.
+
+    Grid, Earth data, site values, common scale, similarity, score and veto, terrain, confidence,
+    novelty, candidate regions, literature-checked findings and validation, plus the funnel of
+    cells left after each step and the best cell worked out term by term.
+    """
+    store = _store(request)
+    site = _target(store, target)
+    profile_config = _profile(store, site, profile)
+    return build_process(
+        store, site, profile_config, _weights(store, profile_config, weights), top_share
+    )
+
+
 @app.get("/analogs")
 def analogs(request: Request) -> list[dict]:
     return [a.model_dump() for a in _store(request).config.analogs]
+
+
+@app.get("/findings")
+def findings(request: Request, target: str | None = None) -> list[dict]:
+    """New regions for the preset sites, checked in the literature, with live score (FR-P16)."""
+    store = _store(request)
+    if target is not None and target not in store.config.targets:
+        raise HTTPException(404, f"no findings for unknown preset {target}")
+    return findings_for(store.config, store.earth, target)
 
 
 @app.get("/caves")

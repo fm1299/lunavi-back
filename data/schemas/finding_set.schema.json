@@ -1,0 +1,162 @@
+{
+  "$defs": {
+    "Finding": {
+      "description": "A new Earth region for a preset site, checked in the literature (spec 6.5, FR-P16).",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "cell_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Cell Ids",
+          "type": "array"
+        },
+        "bbox": {
+          "maxItems": 4,
+          "minItems": 4,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Bbox",
+          "type": "array"
+        },
+        "n_cells": {
+          "title": "N Cells",
+          "type": "integer"
+        },
+        "lat": {
+          "title": "Lat",
+          "type": "number"
+        },
+        "lon": {
+          "title": "Lon",
+          "type": "number"
+        },
+        "score_at_review": {
+          "title": "Score At Review",
+          "type": "number"
+        },
+        "test_first": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Test First",
+          "type": "array"
+        },
+        "sources": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Sources",
+          "type": "array"
+        },
+        "literature_check": {
+          "$ref": "#/$defs/LiteratureCheck"
+        },
+        "limits": {
+          "title": "Limits",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "proposed",
+            "confirmed",
+            "rejected"
+          ],
+          "title": "Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "cell_ids",
+        "bbox",
+        "n_cells",
+        "lat",
+        "lon",
+        "score_at_review",
+        "test_first",
+        "sources",
+        "literature_check",
+        "limits",
+        "status"
+      ],
+      "title": "Finding",
+      "type": "object"
+    },
+    "LiteratureCheck": {
+      "properties": {
+        "date": {
+          "title": "Date",
+          "type": "string"
+        },
+        "queries": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Queries",
+          "type": "array"
+        },
+        "result": {
+          "enum": [
+            "studied_in_other_context",
+            "no_analog_literature_found",
+            "used_as_analog"
+          ],
+          "title": "Result",
+          "type": "string"
+        }
+      },
+      "required": [
+        "date",
+        "queries",
+        "result"
+      ],
+      "title": "LiteratureCheck",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "target_id": {
+      "title": "Target Id",
+      "type": "string"
+    },
+    "profile": {
+      "title": "Profile",
+      "type": "string"
+    },
+    "findings": {
+      "items": {
+        "$ref": "#/$defs/Finding"
+      },
+      "title": "Findings",
+      "type": "array"
+    }
+  },
+  "required": [
+    "target_id",
+    "profile",
+    "findings"
+  ],
+  "title": "FindingSet",
+  "type": "object"
+}
