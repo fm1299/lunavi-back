@@ -79,6 +79,18 @@ bash deploy/setup.sh 129-146-10-20.sslip.io
 
 It installs Caddy, uv and Node.js 24, sets up Python 3.12 and the dependencies, opens ports 80 and 443 in the server's firewall, starts the API as a service, builds and installs the web app, and configures Caddy. It saves the host name for later runs. Then open `https://129-146-10-20.sslip.io`.
 
+## 5. Turn on the search in plain words
+
+The setup creates `/etc/lunavi/api.env`, readable only by root and outside the repository. Put a free key from Google AI Studio (Gemini) or Groq there:
+
+```bash
+sudo nano /etc/lunavi/api.env      # uncomment one line, for example GEMINI_API_KEY=...
+sudo systemctl restart lunavi-api
+curl -s http://127.0.0.1:8000/meta | grep -o '"ai":{[^}]*}'
+```
+
+`"available":true` means the search works. Without a key the app works as before, without the question box answers. Never commit a key to either repository.
+
 ## Updating
 
 After pushing changes to GitHub, on the server:

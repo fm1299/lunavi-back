@@ -78,6 +78,24 @@ else
 fi
 
 step "API service"
+# Secrets such as GEMINI_API_KEY or GROQ_API_KEY live in this file, outside the repository.
+ENV_FILE="/etc/lunavi/api.env"
+if [ ! -f "$ENV_FILE" ]; then
+	sudo mkdir -p "$(dirname "$ENV_FILE")"
+	sudo tee "$ENV_FILE" >/dev/null <<'EOF'
+# Settings for the LUNAVI API. Set one key to turn on the search in plain words, then run:
+#   sudo systemctl restart lunavi-api
+# GEMINI_API_KEY=
+# GROQ_API_KEY=
+# LUNAVI_LLM_PROVIDER=gemini
+EOF
+	sudo chmod 600 "$ENV_FILE"
+	echo "Created $ENV_FILE. Add a GEMINI_API_KEY or GROQ_API_KEY there to turn on the AI search."
+elif sudo grep -Eq '^(GEMINI_API_KEY|GROQ_API_KEY|LUNAVI_LLM_PROVIDER)=.+' "$ENV_FILE"; then
+	echo "AI search settings found in $ENV_FILE."
+else
+	echo "No model key in $ENV_FILE yet: the AI search stays off."
+fi
 sudo tee "/etc/systemd/system/$SERVICE.service" >/dev/null <<EOF
 [Unit]
 Description=LUNAVI API
@@ -87,6 +105,7 @@ Wants=network-online.target
 [Service]
 User=$USER
 WorkingDirectory=$REPO_DIR
+EnvironmentFile=-$ENV_FILE
 ExecStart=$REPO_DIR/.venv/bin/uvicorn api.main:app --host 127.0.0.1 --port 8000
 Restart=on-failure
 
