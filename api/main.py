@@ -236,7 +236,7 @@ def results(
     min_confidence: float = Query(0.0, ge=0.0, le=1.0),
     min_separation_km: float = Query(0.0, ge=0.0, description="spacing between top_n cells"),
     detail: Literal["compact", "full"] = "compact",
-    new_only: bool = False,  # only cells far from every documented analog (run.json novelty_km)
+    new_only: bool = False,  # only new cells: farther than novelty_km["near"] from the catalog
 ) -> dict:
     store = _store(request)
     site = _target(store, target)

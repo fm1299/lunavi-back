@@ -213,9 +213,21 @@
       "type": "number"
     },
     "novelty_km": {
-      "default": 300.0,
+      "additionalProperties": {
+        "type": "number"
+      },
+      "default": {
+        "known": 150.0,
+        "near": 500.0
+      },
+      "propertyNames": {
+        "enum": [
+          "known",
+          "near"
+        ]
+      },
       "title": "Novelty Km",
-      "type": "number"
+      "type": "object"
     },
     "modis": {
       "$ref": "#/$defs/ModisConfig",

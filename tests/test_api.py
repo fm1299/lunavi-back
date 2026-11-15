@@ -291,7 +291,8 @@ def test_new_candidates_are_far_from_every_documented_analog(client):
     full = client.get("/results", params={"target": "jezero", "detail": "full", "top_n": 50}).json()
     limit = full["meta"]["novelty_km"]
     for cell in full["cells"]:
-        assert cell["new_candidate"] == (cell["nearest_known"]["km"] > limit)
+        assert cell["new_candidate"] == (cell["nearest_known"]["km"] > limit["near"])
+        assert cell["new_candidate"] == (cell["novelty"] == "new")
     only = client.get(
         "/results", params={"target": "jezero", "detail": "full", "new_only": True}
     ).json()

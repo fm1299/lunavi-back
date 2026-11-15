@@ -65,30 +65,32 @@ class Store:
         )
         self.assistant = assistant or Assistant(settings_from_env())
         self.analog_cells = self._analog_cells()
-        self.known_km, self.known_name = self._nearest_known()
-        self.new_candidate = self.known_km > self.config.run.novelty_km
+        self.known_km, self.known_name = self._nearest_catalog()
+        # One novelty rule for the list, the map and /process (spec 5.5, run.json novelty_km).
+        self.new_candidate = self.known_km > self.config.run.novelty_km["near"]
         self._validation: dict | None = None
-        self._catalog_km: np.ndarray | None = None
 
-    def _nearest_known(self) -> tuple[np.ndarray, list[str | None]]:
-        """For every cell, the distance in km to the nearest documented analog or cave, and its name
+    def _nearest_catalog(self) -> tuple[np.ndarray, list[str | None]]:
+        """For every cell, the distance in km to the nearest catalog site, and that site's name.
 
-        Negative controls do not count: they are documented as unlike the Moon and Mars.
+        Negative controls are not in the catalog: they are documented as unlike the Moon and Mars.
         """
-        places = [
-            (site.lat, site.lon, site.name)
-            for site in self.config.analogs
-            if site.role != "negative_control"
-        ] + [(cave.lat, cave.lon, cave.name) for cave in self.config.caves]
+        places = [a for a in self.config.analogs if a.role != "negative_control"]
         count = len(self.earth.lat)
         if not places or count == 0:
             return np.full(count, np.inf), [None] * count
         distances = np.stack(
-            [haversine_km(lat, lon, self.earth.lat, self.earth.lon) for lat, lon, _ in places]
+            [haversine_km(site.lat, site.lon, self.earth.lat, self.earth.lon) for site in places]
         )
         nearest = distances.argmin(axis=0)
-        names = [places[i][2] for i in nearest]
-        return distances[nearest, np.arange(count)], names
+        return distances[nearest, np.arange(count)], [places[i].name for i in nearest]
+
+    def novelty(self, index: int) -> str:
+        """known, near_known or new, by the distance to the nearest catalog site (spec 5.5)."""
+        km = self.known_km[index]
+        if km < self.config.run.novelty_km["known"]:
+            return "known"
+        return "new" if km > self.config.run.novelty_km["near"] else "near_known"
 
     def validation(self) -> dict:
         """The validation report for the loaded Earth table, built once (spec FR-A4)."""
@@ -103,14 +105,7 @@ class Store:
 
     def catalog_distance_km(self) -> np.ndarray:
         """Distance from each Earth cell to the nearest catalog site, for novelty (spec 5.5)."""
-        if self._catalog_km is None:
-            distance = np.full(len(self.earth.lat), np.inf)
-            for site in self.catalog:
-                distance = np.minimum(
-                    distance, haversine_km(site.lat, site.lon, self.earth.lat, self.earth.lon)
-                )
-            self._catalog_km = distance
-        return self._catalog_km
+        return self.known_km
 
     def _analog_cells(self) -> dict[str, int]:
         """The Earth cell that stands for each documented analog, leaving out negative controls."""
@@ -188,6 +183,7 @@ class Store:
                 if np.isinf(self.known_km[index])
                 else round(float(self.known_km[index])),
             },
+            "novelty": self.novelty(index),
             "new_candidate": bool(self.new_candidate[index]),
         }
 
