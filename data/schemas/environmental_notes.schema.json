@@ -1,0 +1,133 @@
+{
+  "$defs": {
+    "EnvironmentalArea": {
+      "description": "Environmental observations for an analog site or a finding: protected areas, fragile\nfeatures, wildlife, season windows, hazards and impact rules. Planning only, never a score.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "applies_to": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Applies To",
+          "type": "array"
+        },
+        "countries": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Countries",
+          "type": "array"
+        },
+        "bbox": {
+          "maxItems": 4,
+          "minItems": 4,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Bbox",
+          "type": "array"
+        },
+        "environmental_notes": {
+          "items": {
+            "$ref": "#/$defs/EnvironmentalNote"
+          },
+          "title": "Environmental Notes",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "applies_to",
+        "countries",
+        "bbox",
+        "environmental_notes"
+      ],
+      "title": "EnvironmentalArea",
+      "type": "object"
+    },
+    "EnvironmentalNote": {
+      "properties": {
+        "topic": {
+          "title": "Topic",
+          "type": "string"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "source_url": {
+          "title": "Source Url",
+          "type": "string"
+        },
+        "source_kind": {
+          "enum": [
+            "official",
+            "news",
+            "secondary"
+          ],
+          "title": "Source Kind",
+          "type": "string"
+        },
+        "category": {
+          "title": "Category",
+          "type": "string"
+        }
+      },
+      "required": [
+        "topic",
+        "text",
+        "source_url",
+        "source_kind",
+        "category"
+      ],
+      "title": "EnvironmentalNote",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "checked": {
+      "title": "Checked",
+      "type": "string"
+    },
+    "categories": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Categories",
+      "type": "object"
+    },
+    "areas": {
+      "items": {
+        "$ref": "#/$defs/EnvironmentalArea"
+      },
+      "title": "Areas",
+      "type": "array"
+    }
+  },
+  "required": [
+    "checked",
+    "categories",
+    "areas"
+  ],
+  "title": "EnvironmentalNotes",
+  "type": "object"
+}

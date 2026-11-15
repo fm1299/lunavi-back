@@ -9,7 +9,7 @@ from dataclasses import dataclass
 
 import numpy as np
 
-from pipeline import scoring
+from pipeline import environment, scoring
 from pipeline.contract import BeyondMode, Config, Finding, FindingSet
 from pipeline.earth import Comparison, Earth, beyond_earth_keys, compare
 from pipeline.geo import haversine_km
@@ -110,7 +110,19 @@ def review_finding(
         country = earth.table["country"].iloc[main] if main is not None else None
         zones = zones_at(config.restrictions, country, finding.lat, finding.lon)
         restrictions = {**describe(config.restrictions, zones), "country": country}
-    return {**finding.model_dump(), "live": live, "checks": checks, "restrictions": restrictions}
+    notes = None
+    if config.environment is not None:
+        country = earth.table["country"].iloc[main] if main is not None else None
+        ids = environment.areas_for_site(config.environment, finding.id)
+        ids += environment.areas_at(config.environment, country, finding.lat, finding.lon)
+        notes = environment.describe(config.environment, ids)
+    return {
+        **finding.model_dump(),
+        "live": live,
+        "checks": checks,
+        "restrictions": restrictions,
+        "environment": notes,
+    }
 
 
 def review_set(config: Config, earth: Earth, group: FindingSet) -> list[dict]:

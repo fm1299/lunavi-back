@@ -1,0 +1,2739 @@
+{
+  "checked": "2026-11-15",
+  "_note": "Environmental observations per analog site and finding (protected areas, fragile features, wildlife, season windows, climate hazards, impact rules, pressure on the site). Planning information only: never changes a score. Proposed by the analysis team; boxes are approximate.",
+  "categories": {
+    "Protected area": "Protected area",
+    "Fragile feature": "Fragile feature",
+    "Wildlife": "Wildlife",
+    "Season window": "Season window",
+    "Climate hazard": "Climate hazard",
+    "Impact rules": "Impact rules",
+    "Environmental pressure": "Environmental pressure",
+    "Field hazard": "Field hazard"
+  },
+  "areas": [
+    {
+      "id": "env_atacama",
+      "name": "Desierto de Atacama, Yungay",
+      "applies_to": [
+        "atacama"
+      ],
+      "countries": [
+        "Chile"
+      ],
+      "bbox": [
+        -70.29,
+        -24.38,
+        -69.69,
+        -23.78
+      ],
+      "environmental_notes": [
+        {
+          "topic": "Lithium salares",
+          "text": "Under the National Lithium Strategy, Salar Grande is part of ENAMI's state lithium project group (with Infieles, Isla and Aguilar), and a network covering at least 30% of salares is to be protected. Whether Salar de Pajonales is protected or under concession was not confirmed.",
+          "source_url": "https://www.reporteminero.cl/noticia/noticias/2025/11/red-salares-protegidos-chile-estrategia-nacional-litio",
+          "source_kind": "news",
+          "category": "Environmental pressure"
+        },
+        {
+          "topic": "Fragile feature",
+          "text": "Surface soil microbial communities in the hyperarid core are adapted to near-total dryness; after rare rains (2015, 2017) 75-87% of pre-rain species became undetectable. Wetting or disturbing soils during sampling can destroy the communities being studied.",
+          "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6232106",
+          "source_kind": "official",
+          "category": "Fragile feature"
+        },
+        {
+          "topic": "Fragile feature",
+          "text": "Maria Elena Sur is drier than Yungay (mean air RH 17.3%, soil RH about 14% at 1 m) and still hosts viable bacteria in its soil profile, making undisturbed profiles scientifically valuable.",
+          "source_url": "https://phys.org/news351240437.html",
+          "source_kind": "news",
+          "category": "Fragile feature"
+        },
+        {
+          "topic": "Climate hazard",
+          "text": "Summer (Dec-Mar) 'altiplanic winter' storms reactivate dry rivers in northern Chile and cause floods and debris flows (e.g., Rio Loa, Calama); Chile lacks a flood early-warning system for these events.",
+          "source_url": "https://www.meteored.cl/noticias/ciencia/cuando-comienza-la-temporada-de-lluvias-en-el-norte-de-chile.html",
+          "source_kind": "news",
+          "category": "Climate hazard"
+        }
+      ]
+    },
+    {
+      "id": "env_atacama_maria_elena_sur",
+      "name": "Desierto de Atacama, María Elena Sur",
+      "applies_to": [
+        "atacama_maria_elena_sur"
+      ],
+      "countries": [
+        "Chile"
+      ],
+      "bbox": [
+        -70.02,
+        -22.56,
+        -69.42,
+        -21.96
+      ],
+      "environmental_notes": [
+        {
+          "topic": "Lithium salares",
+          "text": "Under the National Lithium Strategy, Salar Grande is part of ENAMI's state lithium project group (with Infieles, Isla and Aguilar), and a network covering at least 30% of salares is to be protected. Whether Salar de Pajonales is protected or under concession was not confirmed.",
+          "source_url": "https://www.reporteminero.cl/noticia/noticias/2025/11/red-salares-protegidos-chile-estrategia-nacional-litio",
+          "source_kind": "news",
+          "category": "Environmental pressure"
+        },
+        {
+          "topic": "Fragile feature",
+          "text": "Surface soil microbial communities in the hyperarid core are adapted to near-total dryness; after rare rains (2015, 2017) 75-87% of pre-rain species became undetectable. Wetting or disturbing soils during sampling can destroy the communities being studied.",
+          "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6232106",
+          "source_kind": "official",
+          "category": "Fragile feature"
+        },
+        {
+          "topic": "Fragile feature",
+          "text": "Maria Elena Sur is drier than Yungay (mean air RH 17.3%, soil RH about 14% at 1 m) and still hosts viable bacteria in its soil profile, making undisturbed profiles scientifically valuable.",
+          "source_url": "https://phys.org/news351240437.html",
+          "source_kind": "news",
+          "category": "Fragile feature"
+        },
+        {
+          "topic": "Climate hazard",
+          "text": "Summer (Dec-Mar) 'altiplanic winter' storms reactivate dry rivers in northern Chile and cause floods and debris flows (e.g., Rio Loa, Calama); Chile lacks a flood early-warning system for these events.",
+          "source_url": "https://www.meteored.cl/noticias/ciencia/cuando-comienza-la-temporada-de-lluvias-en-el-norte-de-chile.html",
+          "source_kind": "news",
+          "category": "Climate hazard"
+        }
+      ]
+    },
+    {
+      "id": "env_salar_grande",
+      "name": "Salar Grande",
+      "applies_to": [
+        "salar_grande"
+      ],
+      "countries": [
+        "Chile"
+      ],
+      "bbox": [
+        -70.33,
+        -21.18,
+        -69.73,
+        -20.58
+      ],
+      "environmental_notes": [
+        {
+          "topic": "Lithium salares",
+          "text": "Under the National Lithium Strategy, Salar Grande is part of ENAMI's state lithium project group (with Infieles, Isla and Aguilar), and a network covering at least 30% of salares is to be protected. Whether Salar de Pajonales is protected or under concession was not confirmed.",
+          "source_url": "https://www.reporteminero.cl/noticia/noticias/2025/11/red-salares-protegidos-chile-estrategia-nacional-litio",
+          "source_kind": "news",
+          "category": "Environmental pressure"
+        },
+        {
+          "topic": "Fragile feature",
+          "text": "Halite nodules host endolithic and epilithic consortia from all three domains of life plus viruses, kept alive by moisture from frequent coastal fog; breaking or removing nodules destroys these habitats.",
+          "source_url": "https://www.mdpi.com/2076-2607/7/12/619",
+          "source_kind": "official",
+          "category": "Fragile feature"
+        },
+        {
+          "topic": "Season window",
+          "text": "Altiplano pre-rainy season (Sep-Nov) rainfall has declined over 40 years and models predict a drier Dec-Feb rainy season; seasonal flooding creates the shallow pools flamingos use.",
+          "source_url": "https://sciencedaily.com/releases/2025/02/250210183627.htm",
+          "source_kind": "news",
+          "category": "Season window"
+        },
+        {
+          "topic": "Environmental pressure",
+          "text": "Lithium projects on the salar are criticized by local scientists for lacking environmental impact assessments required by Bolivia's 1992 Environmental Law; communities push back against foreign-backed projects.",
+          "source_url": "https://news.mongabay.com/2025/04/bolivian-communities-push-back-against-foreign-backed-lithium-projects/",
+          "source_kind": "news",
+          "category": "Environmental pressure"
+        },
+        {
+          "topic": "Environmental pressure",
+          "text": "Wastewater analysis at the lithium operation found elevated arsenic, a possible threat to flamingos via brine shrimp; brine pumping may also lower groundwater and cause subsidence, as seen at Salar de Atacama.",
+          "source_url": "https://sciencedaily.com/releases/2025/02/250210183627.htm",
+          "source_kind": "news",
+          "category": "Environmental pressure"
+        },
+        {
+          "topic": "Wildlife",
+          "text": "Bolivian salt flats support flamingo populations that depend on seasonal brine pools.",
+          "source_url": "https://www.worldwildlife.org/magazine/issues/winter-2023/articles/discovering-flamingos-in-bolivia-s-unique-salt-flats",
+          "source_kind": "secondary",
+          "category": "Wildlife"
+        }
+      ]
+    },
+    {
+      "id": "env_licancabur_high_lakes",
+      "name": "Licancabur y lagos de altura",
+      "applies_to": [
+        "licancabur_high_lakes"
+      ],
+      "countries": [
+        "Bolivia"
+      ],
+      "bbox": [
+        -68.19,
+        -23.14,
+        -67.59,
+        -22.54
+      ],
+      "environmental_notes": [
+        {
+          "topic": "Wildlife",
+          "text": "Laguna Colorada is described as the most important flamingo breeding site in the world and the main breeding ground of the threatened James's flamingo; breeding success varies strongly between years.",
+          "source_url": "https://www.nwf.org/Magazines/National-Wildlife/2004/Farewell-to-Flamingos",
+          "source_kind": "secondary",
+          "category": "Wildlife"
+        },
+        {
+          "topic": "Protected area",
+          "text": "Laguna Colorada was listed as a Ramsar site in 1990, later enlarged to the Los Lipez Ramsar site (about 1.43 million ha), half inside Eduardo Avaroa Andean Fauna National Reserve.",
+          "source_url": "https://rsis.ramsar.org/ris/489",
+          "source_kind": "official",
+          "category": "Protected area"
+        },
+        {
+          "topic": "Fragile feature",
+          "text": "The Licancabur summit crater lake (about 5,900 m) hosts diverse microbes and cyanobacterial mats on the lake bottom; it is ice-covered roughly April-September.",
+          "source_url": "https://astronomy.com/science/extreme-life",
+          "source_kind": "news",
+          "category": "Fragile feature"
+        },
+        {
+          "topic": "Climate hazard",
+          "text": "UV radiation at about 6,000 m is the main stressor even for lake microbes; field teams face extreme UV and severe altitude.",
+          "source_url": "https://astronomy.com/science/extreme-life",
+          "source_kind": "news",
+          "category": "Climate hazard"
+        }
+      ]
+    },
+    {
+      "id": "env_salar_pajonales",
+      "name": "Salar de Pajonales",
+      "applies_to": [
+        "salar_pajonales"
+      ],
+      "countries": [
+        "Chile"
+      ],
+      "bbox": [
+        -69.12,
+        -25.44,
+        -68.52,
+        -24.84
+      ],
+      "environmental_notes": [
+        {
+          "topic": "Lithium salares",
+          "text": "Under the National Lithium Strategy, Salar Grande is part of ENAMI's state lithium project group (with Infieles, Isla and Aguilar), and a network covering at least 30% of salares is to be protected. Whether Salar de Pajonales is protected or under concession was not confirmed.",
+          "source_url": "https://www.reporteminero.cl/noticia/noticias/2025/11/red-salares-protegidos-chile-estrategia-nacional-litio",
+          "source_kind": "news",
+          "category": "Environmental pressure"
+        },
+        {
+          "topic": "Fragile feature",
+          "text": "Gypsum domes, crusts and living stromatolites host specialized cyanobacteria and archaea; about 10% of non-polygon gypsum habitats are colonized by endoliths, so trampling or driving on gypsum crusts can destroy rare microhabitats.",
+          "source_url": "https://www.frontiersin.org/journals/astronomy-and-space-sciences/articles/10.3389/fspas.2025.1693302/full",
+          "source_kind": "official",
+          "category": "Fragile feature"
+        },
+        {
+          "topic": "Fragile feature",
+          "text": "Gypsum here also preserves fossil stromatolites and diatom frustules (biosignature archive); the authors flag it as a priority Mars astrobiology target, which argues for minimal-impact sampling.",
+          "source_url": "https://ui.adsabs.harvard.edu/abs/2019EGUGA..2118068T/abstract",
+          "source_kind": "official",
+          "category": "Fragile feature"
+        }
+      ]
+    },
+    {
+      "id": "env_puna_laguna_negra",
+      "name": "Puna argentina, Laguna Negra",
+      "applies_to": [
+        "puna_laguna_negra"
+      ],
+      "countries": [
+        "Argentina"
+      ],
+      "bbox": [
+        -68.85,
+        -27.95,
+        -68.25,
+        -27.35
+      ],
+      "environmental_notes": [
+        {
+          "topic": "Ramsar wetland",
+          "text": "Laguna Negra and Laguna Tres Quebradas are listed in the Ramsar site 'Lagunas Altoandinas y Puneñas de Catamarca' (designated 2 February 2009, about 1.23 million ha, Argentina's largest).",
+          "source_url": "https://www.argentina.gob.ar/ambiente/agua/humedales/sitiosramsar/catamarca",
+          "source_kind": "official",
+          "category": "Protected area"
+        },
+        {
+          "topic": "Lithium and Indigenous conflicts",
+          "text": "In 2024 a Catamarca court ordered lithium activity at Salar del Hombre Muerto halted after a complaint by an Indigenous community leader, which shows active disputes over Puna water and land.",
+          "source_url": "https://www.diariodecuyo.com.ar/argentina/Catamarca-ordenan-paralizar-la-extraccion-de-litio-tras-la-queja-de-un-cacique-porque-un-rio-se-seco-20240314-0026.html",
+          "source_kind": "news",
+          "category": "Environmental pressure"
+        },
+        {
+          "topic": "Fragile feature",
+          "text": "Puna lagoons host living stromatolites and microbial mats forming large mounds on lagoon floors; high Andean wetlands also hold extremophile microbial communities.",
+          "source_url": "https://phys.org/news/2023-12-deep-inhospitable-window-life-earth.pdf",
+          "source_kind": "news",
+          "category": "Fragile feature"
+        },
+        {
+          "topic": "Environmental pressure",
+          "text": "Local tourism providers allege that a lithium operation near Fiambala is drying mountain lagoons (Laguna Verde reportedly down up to 5 m); Laguna Negra itself is not confirmed as affected.",
+          "source_url": "https://noticiasambientales.com/?p=141359",
+          "source_kind": "news",
+          "category": "Environmental pressure"
+        },
+        {
+          "topic": "Environmental pressure",
+          "text": "Argentine NGO FARN argues salt flats are wetlands and highlights water use by lithium extraction across the Puna.",
+          "source_url": "https://farn.org.ar/wp-content/uploads/2025/11/FARN_Los-Salares-son-Humedales-INGLES_17oct-1.pdf",
+          "source_kind": "secondary",
+          "category": "Environmental pressure"
+        }
+      ]
+    },
+    {
+      "id": "env_pampas_la_joya",
+      "name": "Pampas de La Joya, Arequipa",
+      "applies_to": [
+        "pampas_la_joya"
+      ],
+      "countries": [
+        "Peru"
+      ],
+      "bbox": [
+        -72.31,
+        -16.99,
+        -71.71,
+        -16.39
+      ],
+      "environmental_notes": [
+        {
+          "topic": "Fragile feature",
+          "text": "Hyperarid soils (e.g., 'Mar de Cuarzo') hold less organic matter than Yungay and very low, patchy microbial populations, with patches differing even a few metres apart; contamination and disturbance can bias life-detection tests.",
+          "source_url": "https://meetingorganizer.copernicus.org/EPSC-DPS2011/EPSC-DPS2011-1798.pdf",
+          "source_kind": "official",
+          "category": "Fragile feature"
+        },
+        {
+          "topic": "Fragile feature",
+          "text": "Previously unstudied endolithic and epilithic lichens were reported here, among the first reports of these organisms in this desert.",
+          "source_url": "https://cris.utec.edu.pe/en/publications/isolation-culture-and-molecular-identification-of-extreme-lichen-/",
+          "source_kind": "official",
+          "category": "Fragile feature"
+        },
+        {
+          "topic": "Climate hazard",
+          "text": "Four years of monitoring (2004-2008) documented extreme temperature, moisture and radiation conditions; specific hazard thresholds not confirmed here.",
+          "source_url": "https://www.cambridge.org/core/journals/international-journal-of-astrobiology/article/abs/climatological-characteristics-in-the-extreme-hyperarid-region-of-pampas-de-la-joya-peru-astrobiological-approach-in-four-years-of-observation-20042008/2997D5A36434B310BCA2FB4C48CF84C8",
+          "source_kind": "official",
+          "category": "Climate hazard"
+        }
+      ]
+    },
+    {
+      "id": "env_salar_uyuni",
+      "name": "Salar de Uyuni",
+      "applies_to": [
+        "salar_uyuni"
+      ],
+      "countries": [
+        "Bolivia"
+      ],
+      "bbox": [
+        -67.79,
+        -20.43,
+        -67.19,
+        -19.83
+      ],
+      "environmental_notes": [
+        {
+          "topic": "Fragile feature",
+          "text": "Halite nodules host endolithic and epilithic consortia from all three domains of life plus viruses, kept alive by moisture from frequent coastal fog; breaking or removing nodules destroys these habitats.",
+          "source_url": "https://www.mdpi.com/2076-2607/7/12/619",
+          "source_kind": "official",
+          "category": "Fragile feature"
+        },
+        {
+          "topic": "Season window",
+          "text": "Altiplano pre-rainy season (Sep-Nov) rainfall has declined over 40 years and models predict a drier Dec-Feb rainy season; seasonal flooding creates the shallow pools flamingos use.",
+          "source_url": "https://sciencedaily.com/releases/2025/02/250210183627.htm",
+          "source_kind": "news",
+          "category": "Season window"
+        },
+        {
+          "topic": "Environmental pressure",
+          "text": "Lithium projects on the salar are criticized by local scientists for lacking environmental impact assessments required by Bolivia's 1992 Environmental Law; communities push back against foreign-backed projects.",
+          "source_url": "https://news.mongabay.com/2025/04/bolivian-communities-push-back-against-foreign-backed-lithium-projects/",
+          "source_kind": "news",
+          "category": "Environmental pressure"
+        },
+        {
+          "topic": "Environmental pressure",
+          "text": "Wastewater analysis at the lithium operation found elevated arsenic, a possible threat to flamingos via brine shrimp; brine pumping may also lower groundwater and cause subsidence, as seen at Salar de Atacama.",
+          "source_url": "https://sciencedaily.com/releases/2025/02/250210183627.htm",
+          "source_kind": "news",
+          "category": "Environmental pressure"
+        },
+        {
+          "topic": "Wildlife",
+          "text": "Bolivian salt flats support flamingo populations that depend on seasonal brine pools.",
+          "source_url": "https://www.worldwildlife.org/magazine/issues/winter-2023/articles/discovering-flamingos-in-bolivia-s-unique-salt-flats",
+          "source_kind": "secondary",
+          "category": "Wildlife"
+        }
+      ]
+    },
+    {
+      "id": "env_death_valley",
+      "name": "Valle de la Muerte (Badwater, Ubehebe)",
+      "applies_to": [
+        "death_valley"
+      ],
+      "countries": [
+        "United States of America"
+      ],
+      "bbox": [
+        -117.13,
+        35.95,
+        -116.53,
+        36.55
+      ],
+      "environmental_notes": [
+        {
+          "topic": "Wilderness and mechanized equipment",
+          "text": "Standard NPS permit conditions ban mechanized equipment in designated, proposed or potential wilderness unless the superintendent authorizes it in specific conditions. NPS history sources put designated wilderness at about 91% of the park (other NPS-linked pages say about 93%).",
+          "source_url": "https://www.npshistory.com/publications/deva/index.htm",
+          "source_kind": "secondary",
+          "category": "Impact rules"
+        },
+        {
+          "topic": "Vehicles",
+          "text": "Driving off designated roads is illegal in the park, and in most places the wilderness boundary starts 50 feet from designated roads. Bicycles are not allowed off roads, on trails or in wilderness.",
+          "source_url": "https://www.nps.gov/deva/learn/no-driving-off-designated-roads.htm",
+          "source_kind": "official",
+          "category": "Impact rules"
+        },
+        {
+          "topic": "Season window",
+          "text": "Summer temperatures can reach 130-134 F; heat kills 1-3 people a year, and the park discourages low-elevation hiking after 10 a.m. in summer. Helicopters may be unable to fly in extreme heat, so field work belongs in the cool season.",
+          "source_url": "https://www.nps.gov/deva/learn/news/heat-press-kit.htm",
+          "source_kind": "official",
+          "category": "Season window"
+        },
+        {
+          "topic": "Climate hazard",
+          "text": "Flash floods: remnants of Hurricane Hilary (20 Aug 2023) gave the park's wettest day on record, closing all roads and the park for about two months.",
+          "source_url": "https://www.nps.gov/deva/learn/news/death-valley-national-park-remains-closed-due-to-damage-from-hilary-storm.htm",
+          "source_kind": "official",
+          "category": "Climate hazard"
+        },
+        {
+          "topic": "Climate hazard",
+          "text": "The park maintains official flash flood guidance; canyons and washes are the danger zones.",
+          "source_url": "https://www.nps.gov/deva/learn/nature/flash-floods.htm",
+          "source_kind": "official",
+          "category": "Climate hazard"
+        }
+      ]
+    },
+    {
+      "id": "env_haughton",
+      "name": "Cráter Haughton, isla Devon",
+      "applies_to": [
+        "haughton"
+      ],
+      "countries": [
+        "Canada"
+      ],
+      "bbox": [
+        -89.97,
+        75.07,
+        -89.37,
+        75.67
+      ],
+      "environmental_notes": [
+        {
+          "topic": "Season window",
+          "text": "Field work (Haughton-Mars Project) runs in the short Arctic summer, with a core team on the island through summer only.",
+          "source_url": "https://spaceref.com/?p=24443",
+          "source_kind": "news",
+          "category": "Season window"
+        },
+        {
+          "topic": "Wildlife",
+          "text": "Polar bears occur on the island and are a lethal hazard to field teams.",
+          "source_url": "https://spaceref.com/?p=24443",
+          "source_kind": "news",
+          "category": "Wildlife"
+        },
+        {
+          "topic": "Fragile feature",
+          "text": "Continuous permafrost with a thin summer active layer; summer temperatures about -5 to +5 C with sleet and snow, and thaw produces mud that vehicles can rut.",
+          "source_url": "https://www.crewes.org/Documents/ResearchReports/2003/2003-08.pdf",
+          "source_kind": "secondary",
+          "category": "Fragile feature"
+        }
+      ]
+    },
+    {
+      "id": "env_mauna_kea",
+      "name": "Mauna Kea",
+      "applies_to": [
+        "mauna_kea"
+      ],
+      "countries": [
+        "United States of America"
+      ],
+      "bbox": [
+        -155.77,
+        19.46,
+        -155.17,
+        20.06
+      ],
+      "environmental_notes": [
+        {
+          "topic": "Wildlife",
+          "text": "The endemic wekiu bug lives only on summit cinder cones above about 3,500 m, mainly near crater rims; cinder disturbance affects its habitat.",
+          "source_url": "https://hilo.hawaii.edu/maunakea/library/ref/317",
+          "source_kind": "official",
+          "category": "Wildlife"
+        },
+        {
+          "topic": "Climate hazard",
+          "text": "Altitude sickness: spend at least 30 minutes at the Visitor Information Station (about 2,800 m) before going higher; pregnant women, people in poor health and children under 13 should not go above it.",
+          "source_url": "https://hilo.hawaii.edu/maunakea/visitor-information/station",
+          "source_kind": "official",
+          "category": "Climate hazard"
+        },
+        {
+          "topic": "Climate hazard",
+          "text": "Winter snow and ice cause injuries and road closures; rangers urge 4WD and caution.",
+          "source_url": "https://hilo.hawaii.edu/chancellor/stories/2021/02/03/maunakea-summit-weather-conditions/",
+          "source_kind": "official",
+          "category": "Climate hazard"
+        }
+      ]
+    },
+    {
+      "id": "env_askja",
+      "name": "Askja, Islandia",
+      "applies_to": [
+        "askja"
+      ],
+      "countries": [
+        "Iceland"
+      ],
+      "bbox": [
+        -17.08,
+        64.73,
+        -16.48,
+        65.33
+      ],
+      "environmental_notes": [
+        {
+          "topic": "Off-road driving ban",
+          "text": "Driving motor vehicles off-road is forbidden in Iceland. The exception is glaciers and frozen or snow-covered ground outside urban areas with no apparent risk of damage.",
+          "source_url": "https://ust.is/english/visiting-iceland/faq",
+          "source_kind": "official",
+          "category": "Impact rules"
+        },
+        {
+          "topic": "Season window",
+          "text": "Highland road F88 to Askja has opened between 14 June and 1 July in recent years and has large river fords; access is roughly late June to September.",
+          "source_url": "https://www.northbound.is/blog/292/driving-highland-road-f88-askja-in-iceland",
+          "source_kind": "secondary",
+          "category": "Season window"
+        },
+        {
+          "topic": "Climate hazard",
+          "text": "A 21 July 2014 rockslide into the caldera caused a tsunami in Oskjuvatn reaching about 400 m inland; IMO expects further rockslides.",
+          "source_url": "https://en.vedur.is/about-imo/news/nr/2919",
+          "source_kind": "official",
+          "category": "Climate hazard"
+        },
+        {
+          "topic": "Climate hazard",
+          "text": "Ground uplift since 2021 (over 70 cm) indicates magma accumulation; Civil Protection uncertainty level in force, bathing in Viti discouraged and prolonged stays not recommended.",
+          "source_url": "https://vatnajokulsthjodgardur.is/en/news/uncertainty-level-for-askja",
+          "source_kind": "official",
+          "category": "Climate hazard"
+        }
+      ]
+    },
+    {
+      "id": "env_dry_valleys",
+      "name": "Valles Secos de McMurdo",
+      "applies_to": [
+        "dry_valleys"
+      ],
+      "countries": [
+        "Antarctica"
+      ],
+      "bbox": [
+        161.7,
+        -77.8,
+        162.3,
+        -77.2
+      ],
+      "environmental_notes": [
+        {
+          "topic": "Environmental Protocol",
+          "text": "Activities need prior environmental assessment and authorization by the national authority of the organizing country. Entering an Antarctic Specially Protected Area needs a special permit.",
+          "source_url": "https://antarcticanz.govt.nz/environment/protecting-special-areas",
+          "source_kind": "official",
+          "category": "Impact rules"
+        },
+        {
+          "topic": "McMurdo Dry Valleys",
+          "text": "The Dry Valleys are Antarctic Specially Managed Area No. 2 (Measure 18, 2015); following its management plan is a legal obligation under US and New Zealand law, and it holds five ASPAs (123, 131, 138, 154, 172).",
+          "source_url": "https://www.era.gs/resources/asma2manual/index.shtml",
+          "source_kind": "official",
+          "category": "Protected area"
+        },
+        {
+          "topic": "Protected area",
+          "text": "ASMA No. 2: the largest ice-free region in Antarctica, with coordinated management.",
+          "source_url": "https://www.env.go.jp/nature/nankyoku/kankyohogo/database/jyouyaku/asma/asma_pdf_en/ASMA02_en.pdf",
+          "source_kind": "official",
+          "category": "Protected area"
+        },
+        {
+          "topic": "Impact rules",
+          "text": "Code of conduct asks visitors to prevent cross-contamination between sites.",
+          "source_url": "https://www.usap.gov/onlinelearningcenter/documents/McMurdo-Dry-Valleys-ASMA.pdf",
+          "source_kind": "official",
+          "category": "Impact rules"
+        },
+        {
+          "topic": "Fragile feature",
+          "text": "Human DNA contamination measured in soils at camps.",
+          "source_url": "https://researchcommons.waikato.ac.nz/bitstreams/8120638c-9939-4bae-bc92-2e5428ccb5d5/download",
+          "source_kind": "official",
+          "category": "Fragile feature"
+        }
+      ]
+    },
+    {
+      "id": "env_rio_tinto",
+      "name": "Río Tinto",
+      "applies_to": [
+        "rio_tinto"
+      ],
+      "countries": [
+        "Spain"
+      ],
+      "bbox": [
+        -6.86,
+        37.43,
+        -6.26,
+        38.03
+      ],
+      "environmental_notes": [
+        {
+          "topic": "Tabernas: vehicles",
+          "text": "Cross-country vehicle driving and motorcycles or quads off paved roads or tracks are banned in the Parajes Naturales. After research, the ministry inspects the site for damage.",
+          "source_url": "https://www.juntadeandalucia.es/boja/2016/245/BOJA16-245-00122-21925-04_00104550.pdf",
+          "source_kind": "official",
+          "category": "Impact rules"
+        },
+        {
+          "topic": "Río Tinto: protection status",
+          "text": "Decree 558/2004 declared the Río Tinto Protected Landscape (Paisaje Protegido), whose aims include conserving the geomorphology created by mining. The use regime in its Article 4 was not read, so specific sampling rules are not confirmed.",
+          "source_url": "https://cdn.juntadeandalucia.es/boja/2005/10/d2.pdf",
+          "source_kind": "official",
+          "category": "Protected area"
+        },
+        {
+          "topic": "Río Tinto: Natura 2000",
+          "text": "The river corridor is also a Special Area of Conservation (ZEC ES6150021, Corredor Ecológico del río Tinto), with a management plan approved 8 May 2015.",
+          "source_url": "https://www.juntadeandalucia.es/medioambiente/portal/documents/20151/387338/ES6150021.pdf",
+          "source_kind": "official",
+          "category": "Protected area"
+        },
+        {
+          "topic": "Fragile feature",
+          "text": "Acidic river (mean pH 2.3, 92 km) with high metal loads and unexpectedly high acidophile diversity (iron-oxidizing Leptospirillum, Acidithiobacillus); sampling should avoid disturbing microbial biofilms.",
+          "source_url": "https://mdpi.com/2075-1729/4/3/511",
+          "source_kind": "official",
+          "category": "Fragile feature"
+        },
+        {
+          "topic": "Climate hazard",
+          "text": "Waters carry Fe, Cu, Zn and As at high concentrations, a contact hazard for people and equipment.",
+          "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4206857",
+          "source_kind": "official",
+          "category": "Climate hazard"
+        }
+      ]
+    },
+    {
+      "id": "env_sf_volcanic_field",
+      "name": "San Francisco Volcanic Field y Cinder Lake",
+      "applies_to": [
+        "sf_volcanic_field"
+      ],
+      "countries": [
+        "United States of America"
+      ],
+      "bbox": [
+        -111.82,
+        35.02,
+        -111.22,
+        35.62
+      ],
+      "environmental_notes": [
+        {
+          "topic": "Impact rules",
+          "text": "Cinder Lake lies inside the Coconino NF Cinder Hills OHV Area (about 13,500 acres), where riding is on designated routes; the Apollo crater field was blasted in 1967.",
+          "source_url": "https://www.fs.usda.gov/sites/nfs/files/r03/coconino/publication/cinder-hills-ohv-map.pdf",
+          "source_kind": "official",
+          "category": "Impact rules"
+        },
+        {
+          "topic": "Fragile feature",
+          "text": "Cinder cones erode easily and scars heal slowly: the nearby Sunset Crater summit trail was closed in 1973 and its scars remain decades later.",
+          "source_url": "https://home.nps.gov/sucr/faqs.htm",
+          "source_kind": "official",
+          "category": "Fragile feature"
+        },
+        {
+          "topic": "Environmental pressure",
+          "text": "Heavy OHV use has required restoration work in the Cinder Hills OHV Area, which can alter the historic Apollo crater field surface.",
+          "source_url": "https://treadlightly.org/?p=8593",
+          "source_kind": "secondary",
+          "category": "Environmental pressure"
+        }
+      ]
+    },
+    {
+      "id": "env_meteor_crater",
+      "name": "Meteor Crater",
+      "applies_to": [
+        "meteor_crater"
+      ],
+      "countries": [
+        "United States of America"
+      ],
+      "bbox": [
+        -111.32,
+        34.73,
+        -110.72,
+        35.33
+      ],
+      "environmental_notes": [
+        {
+          "topic": "Impact rules",
+          "text": "Cinder Lake lies inside the Coconino NF Cinder Hills OHV Area (about 13,500 acres), where riding is on designated routes; the Apollo crater field was blasted in 1967.",
+          "source_url": "https://www.fs.usda.gov/sites/nfs/files/r03/coconino/publication/cinder-hills-ohv-map.pdf",
+          "source_kind": "official",
+          "category": "Impact rules"
+        },
+        {
+          "topic": "Fragile feature",
+          "text": "Cinder cones erode easily and scars heal slowly: the nearby Sunset Crater summit trail was closed in 1973 and its scars remain decades later.",
+          "source_url": "https://home.nps.gov/sucr/faqs.htm",
+          "source_kind": "official",
+          "category": "Fragile feature"
+        },
+        {
+          "topic": "Environmental pressure",
+          "text": "Heavy OHV use has required restoration work in the Cinder Hills OHV Area, which can alter the historic Apollo crater field surface.",
+          "source_url": "https://treadlightly.org/?p=8593",
+          "source_kind": "secondary",
+          "category": "Environmental pressure"
+        },
+        {
+          "topic": "Impact rules",
+          "text": "Privately owned (Barringer Crater Company) National Natural Landmark; rim access is via guided walks only. Rules on sampling or collecting are not confirmed and must be asked of the operator.",
+          "source_url": "https://americansouthwest.net/arizona/meteor_crater",
+          "source_kind": "secondary",
+          "category": "Impact rules"
+        }
+      ]
+    },
+    {
+      "id": "env_mdrs",
+      "name": "Mars Desert Research Station",
+      "applies_to": [
+        "mdrs"
+      ],
+      "countries": [
+        "United States of America"
+      ],
+      "bbox": [
+        -111.09,
+        38.11,
+        -110.49,
+        38.71
+      ],
+      "environmental_notes": [
+        {
+          "topic": "West Mojave closures",
+          "text": "The Barstow Field Office reports a court-ordered closure of desert tortoise critical habitat to OHV use in the West Mojave planning area. Whether it affects Dumont Dunes is not confirmed.",
+          "source_url": "https://www.blm.gov/office/barstow-field-office",
+          "source_kind": "official",
+          "category": "Wildlife"
+        },
+        {
+          "topic": "Season window",
+          "text": "MDRS crews operate roughly late autumn to spring; summer heat ends the field season and the hot months are used for maintenance.",
+          "source_url": "https://www.ksl.com/article/25593168",
+          "source_kind": "news",
+          "category": "Season window"
+        },
+        {
+          "topic": "Fragile feature",
+          "text": "Colorado Plateau biological soil crusts (cyanobacteria, lichens, mosses) stabilize soil; damage can take 50-250 years to recover, so stay on trails, slickrock or washes.",
+          "source_url": "https://home.nps.gov/elmo/learn/nature/biological-soil-crust.htm",
+          "source_kind": "official",
+          "category": "Fragile feature"
+        }
+      ]
+    },
+    {
+      "id": "env_mojave",
+      "name": "Mojave, Dumont Dunes",
+      "applies_to": [
+        "mojave"
+      ],
+      "countries": [
+        "United States of America"
+      ],
+      "bbox": [
+        -116.52,
+        35.38,
+        -115.92,
+        35.98
+      ],
+      "environmental_notes": [
+        {
+          "topic": "West Mojave closures",
+          "text": "The Barstow Field Office reports a court-ordered closure of desert tortoise critical habitat to OHV use in the West Mojave planning area. Whether it affects Dumont Dunes is not confirmed.",
+          "source_url": "https://www.blm.gov/office/barstow-field-office",
+          "source_kind": "official",
+          "category": "Wildlife"
+        },
+        {
+          "topic": "Wildlife",
+          "text": "The Mojave fringe-toed lizard, a dune specialist, is listed as 'sensitive' by BLM and has been petitioned for protection.",
+          "source_url": "https://www.biologicaldiversity.org/news/media-archive/Lizard%20eyed%20for%20shielding.pdf",
+          "source_kind": "secondary",
+          "category": "Wildlife"
+        },
+        {
+          "topic": "Wildlife",
+          "text": "A federal court order closed desert tortoise and Lane Mountain milk-vetch critical habitat routes in the West Mojave to OHV use from 24 March 2026; whether Dumont Dunes lies in that habitat is not confirmed.",
+          "source_url": "https://www.blm.gov/office/barstow-field-office",
+          "source_kind": "official",
+          "category": "Wildlife"
+        },
+        {
+          "topic": "Impact rules",
+          "text": "Dumont Dunes is a 7,620-acre BLM OHV recreation area, so vehicle driving on dunes is a permitted use; check BLM maps for closed zones.",
+          "source_url": "https://www.blm.gov/visit/dumont-dunes-ohv-area",
+          "source_kind": "official",
+          "category": "Impact rules"
+        }
+      ]
+    },
+    {
+      "id": "env_craters_of_the_moon",
+      "name": "Craters of the Moon",
+      "applies_to": [
+        "craters_of_the_moon"
+      ],
+      "countries": [
+        "United States of America"
+      ],
+      "bbox": [
+        -113.86,
+        43.16,
+        -113.26,
+        43.76
+      ],
+      "environmental_notes": [
+        {
+          "topic": "Wilderness",
+          "text": "The monument includes designated wilderness, where the standard NPS permit conditions bar mechanized equipment unless specifically authorized.",
+          "source_url": "https://home.nps.gov/places/crmo-wilderness.htm",
+          "source_kind": "official",
+          "category": "Impact rules"
+        },
+        {
+          "topic": "Wildlife",
+          "text": "A free cave permit is required to enter lava tubes, as a measure against white-nose syndrome; the fungus was confirmed in Idaho in 2022 but not detected at the park.",
+          "source_url": "https://www.nps.gov/crmo/planyourvisit/white-nose-syndrome-and-cave-permitting.htm",
+          "source_kind": "official",
+          "category": "Wildlife"
+        },
+        {
+          "topic": "Impact rules",
+          "text": "Visitors must observe cave closures, avoid caves with hibernating bats, and use different clothing and gear if they have visited other caves (decontamination).",
+          "source_url": "https://www.nps.gov/crmo/planyourvisit/white-nose-syndrome-and-cave-permitting.htm",
+          "source_kind": "official",
+          "category": "Impact rules"
+        },
+        {
+          "topic": "Impact rules",
+          "text": "Cave access operates under interim guidance until a new Cave Management Plan is completed.",
+          "source_url": "https://www.nps.gov/crmo/learn/news/changes-in-cave-access.htm",
+          "source_kind": "official",
+          "category": "Impact rules"
+        }
+      ]
+    },
+    {
+      "id": "env_mistastin",
+      "name": "Mistastin / Kamestastin",
+      "applies_to": [
+        "mistastin"
+      ],
+      "countries": [
+        "Canada"
+      ],
+      "bbox": [
+        -63.6,
+        55.58,
+        -63.0,
+        56.18
+      ],
+      "environmental_notes": [
+        {
+          "topic": "Protected area",
+          "text": "The basin is Kameshtashtan National Historic Site, a cultural landscape of profound meaning to the Mushuau Innu within their hunting territory; fieldwork requires Innu engagement.",
+          "source_url": "https://parks.canada.ca/culture/designation/lieu-site/kameshtashtan",
+          "source_kind": "official",
+          "category": "Protected area"
+        }
+      ]
+    },
+    {
+      "id": "env_sudbury",
+      "name": "Sudbury",
+      "applies_to": [
+        "sudbury"
+      ],
+      "countries": [
+        "Canada"
+      ],
+      "bbox": [
+        -81.48,
+        46.3,
+        -80.88,
+        46.9
+      ],
+      "environmental_notes": [
+        {
+          "topic": "Environmental pressure",
+          "text": "Nickel-copper smelting left about 17,000 ha of barren land and 64,000 ha of stunted forest; metals remain bioavailable in acidic soils.",
+          "source_url": "https://www.publish.csiro.au/sr/SR24155",
+          "source_kind": "official",
+          "category": "Environmental pressure"
+        },
+        {
+          "topic": "Fragile feature",
+          "text": "A regreening program since 1978 (lime, fertilizer, seeding, tree planting) has reclaimed roughly half the landscape; disturbing limed, revegetated soils can undo restoration.",
+          "source_url": "https://old.ser-rrc.org/?p=10964",
+          "source_kind": "secondary",
+          "category": "Fragile feature"
+        }
+      ]
+    },
+    {
+      "id": "env_cuatro_cienegas",
+      "name": "Cuatro Ciénegas",
+      "applies_to": [
+        "cuatro_cienegas"
+      ],
+      "countries": [
+        "Mexico"
+      ],
+      "bbox": [
+        -102.37,
+        26.69,
+        -101.77,
+        27.29
+      ],
+      "environmental_notes": [
+        {
+          "topic": "Protected-area status",
+          "text": "Cuatrociénegas was decreed a Flora and Fauna Protection Area in 1994, is administered by CONANP and is a Ramsar wetland.",
+          "source_url": "https://www.ramsar.org/sites/default/files/documents/pdf/wwd/10/wwd2010_rpts_mexico_cuatro.pdf",
+          "source_kind": "official",
+          "category": "Protected area"
+        },
+        {
+          "topic": "Fragile feature",
+          "text": "One of the rare places with living stromatolites and microbial mats, a relict bacterial niche in a desert oasis.",
+          "source_url": "https://elifesciences.org/articles/38278",
+          "source_kind": "official",
+          "category": "Fragile feature"
+        },
+        {
+          "topic": "Environmental pressure",
+          "text": "Canals, deep wells and alfalfa irrigation have drained wetlands and interrupted aquifer recharge; dry stromatolites are now common along the main road.",
+          "source_url": "https://springerlink.bibliotecabuap.elogim.com/chapter/10.1007/978-3-030-83270-4_11",
+          "source_kind": "official",
+          "category": "Environmental pressure"
+        },
+        {
+          "topic": "Environmental pressure",
+          "text": "Federal operations have closed illegal water wells in the valley.",
+          "source_url": "https://vanguardia.com.mx/coahuila/despliegan-operativo-federal-en-cuatro-cienegas-contra-extraccion-ilegal-de-agua-clausuran-pozos-BP19704647",
+          "source_kind": "news",
+          "category": "Environmental pressure"
+        },
+        {
+          "topic": "Impact rules",
+          "text": "Area de Proteccion de Flora y Fauna (1994) managed by CONANP; swimming in pools has long been restricted, with only Las Playitas reopened under strict controls.",
+          "source_url": "https://vanguardia.com.mx/coahuila/no-es-reapertura-es-regulacion-del-nado-asi-explican-empresarios-y-autoridades-el-regreso-controlado-a-las-playitas-de-cuatro-cienegas-JI15593028",
+          "source_kind": "news",
+          "category": "Impact rules"
+        }
+      ]
+    },
+    {
+      "id": "env_el_pinacate",
+      "name": "El Pinacate",
+      "applies_to": [
+        "el_pinacate"
+      ],
+      "countries": [
+        "Mexico"
+      ],
+      "bbox": [
+        -113.79,
+        31.47,
+        -113.19,
+        32.07
+      ],
+      "environmental_notes": [
+        {
+          "topic": "Protected-area status",
+          "text": "El Pinacate y Gran Desierto de Altar is a CONANP-managed federal biosphere reserve and was inscribed as a UNESCO World Heritage site in 2013.",
+          "source_url": "https://es.mongabay.com/2021/12/expedicion-virtual-reserva-biosfera-el-pinacate-y-el-gran-desierto-de-altar-mexico/",
+          "source_kind": "news",
+          "category": "Protected area"
+        },
+        {
+          "topic": "Protected area",
+          "text": "UNESCO World Heritage Site (2013) and Biosphere Reserve covering 714,566 ha of volcanic shields, craters, lava flows and dunes.",
+          "source_url": "https://worldheritageoutlook.iucn.org/node/1177",
+          "source_kind": "official",
+          "category": "Protected area"
+        },
+        {
+          "topic": "Wildlife",
+          "text": "The US border wall disrupts wildlife movement, including the endangered Sonoran pronghorn; the World Heritage Committee has urged action.",
+          "source_url": "https://news.mongabay.com/2024/01/u-s-border-wall-threatens-world-heritage-status-of-mexican-reserve",
+          "source_kind": "news",
+          "category": "Wildlife"
+        },
+        {
+          "topic": "Environmental pressure",
+          "text": "Conservation groups have pushed for listing the site as World Heritage in Danger due to border-wall impacts.",
+          "source_url": "https://biologicaldiversity.org/w/news/press-releases/world-heritage-committee-urges-us-mexican-action-to-protect-site-from-border-wall-damage-2024-07-25/",
+          "source_kind": "secondary",
+          "category": "Environmental pressure"
+        }
+      ]
+    },
+    {
+      "id": "env_tabernas",
+      "name": "Desierto de Tabernas",
+      "applies_to": [
+        "tabernas"
+      ],
+      "countries": [
+        "Spain"
+      ],
+      "bbox": [
+        -2.75,
+        36.7,
+        -2.15,
+        37.3
+      ],
+      "environmental_notes": [
+        {
+          "topic": "Tabernas: vehicles",
+          "text": "Cross-country vehicle driving and motorcycles or quads off paved roads or tracks are banned in the Parajes Naturales. After research, the ministry inspects the site for damage.",
+          "source_url": "https://www.juntadeandalucia.es/boja/2016/245/BOJA16-245-00122-21925-04_00104550.pdf",
+          "source_kind": "official",
+          "category": "Impact rules"
+        },
+        {
+          "topic": "Río Tinto: protection status",
+          "text": "Decree 558/2004 declared the Río Tinto Protected Landscape (Paisaje Protegido), whose aims include conserving the geomorphology created by mining. The use regime in its Article 4 was not read, so specific sampling rules are not confirmed.",
+          "source_url": "https://cdn.juntadeandalucia.es/boja/2005/10/d2.pdf",
+          "source_kind": "official",
+          "category": "Protected area"
+        },
+        {
+          "topic": "Río Tinto: Natura 2000",
+          "text": "The river corridor is also a Special Area of Conservation (ZEC ES6150021, Corredor Ecológico del río Tinto), with a management plan approved 8 May 2015.",
+          "source_url": "https://www.juntadeandalucia.es/medioambiente/portal/documents/20151/387338/ES6150021.pdf",
+          "source_kind": "official",
+          "category": "Protected area"
+        },
+        {
+          "topic": "Protected area",
+          "text": "Paraje Natural (Law 2/1989) and Natura 2000 site (ZEC and ZEPA bird protection area).",
+          "source_url": "https://www.juntadeandalucia.es/medioambiente/portal/documents/20151/510930/ES0000047.pdf",
+          "source_kind": "official",
+          "category": "Protected area"
+        },
+        {
+          "topic": "Climate hazard",
+          "text": "Ramblas are dry most of the year but fill during 3-4 days of torrential rain annually, often producing flash floods.",
+          "source_url": "https://andalucia.com/environment/protect/tabernas.htm",
+          "source_kind": "secondary",
+          "category": "Climate hazard"
+        },
+        {
+          "topic": "Wildlife",
+          "text": "Birds nest in rambla banks and walls; endemic plants include Euzomodendron bourgaeanum and endangered Limonium insigne.",
+          "source_url": "https://datazone.birdlife.org/site/factsheet/tabernas-desert-iba-spain/details",
+          "source_kind": "official",
+          "category": "Wildlife"
+        }
+      ]
+    },
+    {
+      "id": "env_bardenas_reales",
+      "name": "Bardenas Reales",
+      "applies_to": [
+        "bardenas_reales"
+      ],
+      "countries": [
+        "Spain"
+      ],
+      "bbox": [
+        -1.8,
+        41.77,
+        -1.2,
+        42.37
+      ],
+      "environmental_notes": [
+        {
+          "topic": "Collection ban and restoration",
+          "text": "Collecting, destroying or damaging minerals or plants is generally prohibited. Researchers must restore the site afterwards and report results to the president (Arts. 48-49).",
+          "source_url": "https://bon.navarra.es/es/anuncio/-/texto/2021/148/36",
+          "source_kind": "official",
+          "category": "Impact rules"
+        },
+        {
+          "topic": "Vehicles and drones",
+          "text": "Motor vehicles may use only marked tracks, with a 40 km/h limit and no groups of five or more vehicles (Arts. 15-16). Special transit permits on restricted tracks and temporary camps may be granted for research (Art. 47), and recreational drones are banned (Art. 40).",
+          "source_url": "https://bon.navarra.es/es/anuncio/-/texto/2021/148/36",
+          "source_kind": "official",
+          "category": "Impact rules"
+        },
+        {
+          "topic": "Seasonal closures",
+          "text": "The Comunidad has closed areas to all visitors during bird nesting season, which in 2024 coincided with military air exercises at the range.",
+          "source_url": "https://www.noticiasdenavarra.com/navarra/2024/02/19/ejercicios-militares-poligono-tiro-bardenas-7893588.amp.html",
+          "source_kind": "news",
+          "category": "Wildlife"
+        },
+        {
+          "topic": "Wildlife",
+          "text": "Access to some zones (e.g., Rallon, Pisquerra, La Balsa, Zapata) is closed from mid-February to end of August for bird breeding; exact zones vary by source, check the park centre.",
+          "source_url": "https://bardenasreales.es/wp-content/uploads/2022/09/GUIA-INGLES-2014.pdf",
+          "source_kind": "official",
+          "category": "Wildlife"
+        },
+        {
+          "topic": "Protected area",
+          "text": "UNESCO Biosphere Reserve with raptors (griffon vulture, golden eagle) and steppe birds (great bustard, Dupont's lark).",
+          "source_url": "https://www.miteco.gob.es/ca/parques-nacionales-oapn/reservas-biosfera-mab/programa-mab-espana/nuestras-reservas-de-la-biosfera/bardenasrealesnavarra.html",
+          "source_kind": "official",
+          "category": "Protected area"
+        },
+        {
+          "topic": "Environmental pressure",
+          "text": "An Air Force firing range (about 2,244 ha) operates inside the park since 1951; a June 2026 proposal to end it was rejected in Congress.",
+          "source_url": "https://orain.eus/en/politics/2026/06/10/majority-of-congress-refuses-to-suspend-military-activity-in-bardenas/",
+          "source_kind": "news",
+          "category": "Environmental pressure"
+        }
+      ]
+    },
+    {
+      "id": "env_teide",
+      "name": "Teide, Tenerife",
+      "applies_to": [
+        "teide"
+      ],
+      "countries": [
+        "Spain"
+      ],
+      "bbox": [
+        -16.92,
+        27.96,
+        -16.32,
+        28.56
+      ],
+      "environmental_notes": [
+        {
+          "topic": "Timanfaya: reserve zone",
+          "text": "Because the ecosystems are fragile, access to the reserve zone is allowed only for scientific or management purposes.",
+          "source_url": "https://sede.gobiernodecanarias.org/sede/tramites/8391",
+          "source_kind": "official",
+          "category": "Fragile feature"
+        },
+        {
+          "topic": "Protected area",
+          "text": "UNESCO World Heritage Site (2007) recognized for volcanic features and endemic flora.",
+          "source_url": "https://spain.info/en/nature/teide-national-park",
+          "source_kind": "official",
+          "category": "Protected area"
+        },
+        {
+          "topic": "Fragile feature",
+          "text": "The Teide violet grows only above about 3,000 m on Teide and is described as the park's most fragile species; off-trail walking risks it.",
+          "source_url": "https://www.webtenerife.co.uk/tenerife/the-island/flora-fauna/plant/violeta-teide/",
+          "source_kind": "official",
+          "category": "Fragile feature"
+        },
+        {
+          "topic": "Environmental pressure",
+          "text": "Visitor crowding causes trail erosion and disturbance to endemic flora; since late 2024 trails on Teide and Pico Viejo slopes need a free permit (not fully confirmed).",
+          "source_url": "https://kwx.liehendr.com/content/wikivoyage_en_all_maxi_2025-02/A/Teide",
+          "source_kind": "secondary",
+          "category": "Environmental pressure"
+        }
+      ]
+    },
+    {
+      "id": "env_lanzarote",
+      "name": "Lanzarote, tubo de La Corona",
+      "applies_to": [
+        "lanzarote"
+      ],
+      "countries": [
+        "Spain"
+      ],
+      "bbox": [
+        -13.74,
+        28.86,
+        -13.14,
+        29.46
+      ],
+      "environmental_notes": [
+        {
+          "topic": "Timanfaya: reserve zone",
+          "text": "Because the ecosystems are fragile, access to the reserve zone is allowed only for scientific or management purposes.",
+          "source_url": "https://sede.gobiernodecanarias.org/sede/tramites/8391",
+          "source_kind": "official",
+          "category": "Fragile feature"
+        },
+        {
+          "topic": "Wildlife",
+          "text": "The endemic blind squat lobster Munidopsis polymorpha lives in the anchialine pool of Jameos del Agua, where the La Corona tube meets the sea.",
+          "source_url": "https://decapoda.nhm.org/pdfs/30207/30207.pdf",
+          "source_kind": "official",
+          "category": "Wildlife"
+        },
+        {
+          "topic": "Environmental pressure",
+          "text": "Its population dropped after construction and opening of Jameos del Agua for tourism.",
+          "source_url": "https://decapoda.nhm.org/pdfs/30207/30207.pdf",
+          "source_kind": "official",
+          "category": "Environmental pressure"
+        }
+      ]
+    },
+    {
+      "id": "env_nordlinger_ries",
+      "name": "Nördlinger Ries",
+      "applies_to": [
+        "nordlinger_ries"
+      ],
+      "countries": [
+        "Germany"
+      ],
+      "bbox": [
+        10.27,
+        48.58,
+        10.87,
+        49.18
+      ],
+      "environmental_notes": [
+        {
+          "topic": "Geotope status",
+          "text": "The Bavarian Environment Agency (LfU) states that 'geotope' is not a legal protection category. Where protection is needed, sites are designated under nature conservation law or as monuments.",
+          "source_url": "https://www.lfu.bayern.de/geologie/geotope/index.htm",
+          "source_kind": "official",
+          "category": "Protected area"
+        },
+        {
+          "topic": "Protected area",
+          "text": "UNESCO Global Geopark Ries lists about 150 geotopes including the Altenburg suevite quarry, where coesite and stishovite proved the impact origin.",
+          "source_url": "https://en.geopark-ries.de/geologische-besonderheiten/?addPage=4",
+          "source_kind": "official",
+          "category": "Protected area"
+        },
+        {
+          "topic": "Impact rules",
+          "text": "The Alte Burg suevite quarry is reported as inside a protected area; individual outcrop protection status is not confirmed.",
+          "source_url": "https://www.komoot.com/highlight/350040",
+          "source_kind": "secondary",
+          "category": "Impact rules"
+        }
+      ]
+    },
+    {
+      "id": "env_lofoten",
+      "name": "Lofoten (anortosita)",
+      "applies_to": [
+        "lofoten"
+      ],
+      "countries": [
+        "Norway"
+      ],
+      "bbox": [
+        13.0,
+        67.77,
+        13.6,
+        68.37
+      ],
+      "environmental_notes": [
+        {
+          "topic": "Protected areas and vehicles",
+          "text": "Whether specific anorthosite outcrops lie in a protected area (for example Lofotodden National Park), and what Norwegian motor traffic rules mean for rover tests, is not confirmed.",
+          "source_url": "https://www.miljodirektoratet.no/nye-temasider---ansvarsomrader/ny---allemannsretten/",
+          "source_kind": "official",
+          "category": "Protected area"
+        },
+        {
+          "topic": "Fragile feature",
+          "text": "One of the finest anorthosite exposures on Earth, used for ESA PANGAEA lunar geology training; no specific environmental restriction found (not confirmed).",
+          "source_url": "https://www.esa.int/ESA_Multimedia/Images/2023/07/The_Moon_in_a_fjord",
+          "source_kind": "official",
+          "category": "Fragile feature"
+        }
+      ]
+    },
+    {
+      "id": "env_erfoud",
+      "name": "Erfoud y Rissani (Tafilalt)",
+      "applies_to": [
+        "erfoud"
+      ],
+      "countries": [
+        "Morocco"
+      ],
+      "bbox": [
+        -4.53,
+        31.14,
+        -3.93,
+        31.74
+      ],
+      "environmental_notes": [
+        {
+          "topic": "Environmental pressure",
+          "text": "Fossil digging is a major livelihood (about 70% of Erfoud residents depend on it by local estimates); over-excavation and weak controls damage paleontological heritage.",
+          "source_url": "https://atmos.earth/science-and-nature/in-an-economy-built-on-fossils-who-owns-deep-time/",
+          "source_kind": "news",
+          "category": "Environmental pressure"
+        },
+        {
+          "topic": "Environmental pressure",
+          "text": "Meteorite hunting is intense and largely unregulated ('finders keepers').",
+          "source_url": "https://phys.org/news/2018-05-moroccan-meteorite-hunters-rich.pdf",
+          "source_kind": "news",
+          "category": "Environmental pressure"
+        }
+      ]
+    },
+    {
+      "id": "env_dallol",
+      "name": "Dallol, Danakil",
+      "applies_to": [
+        "dallol"
+      ],
+      "countries": [
+        "Eritrea"
+      ],
+      "bbox": [
+        40.0,
+        13.94,
+        40.6,
+        14.54
+      ],
+      "environmental_notes": [
+        {
+          "topic": "Fragile feature",
+          "text": "Colorful hydrothermal salt and iron-rich deposits are fragile and at risk from unprotected tourism; visible damage to delicate structures has been reported.",
+          "source_url": "https://link.springer.com/article/10.1007/s12371-020-00499-8",
+          "source_kind": "official",
+          "category": "Fragile feature"
+        },
+        {
+          "topic": "Climate hazard",
+          "text": "Gaet'ale spring nearby emits deadly gas (almost certainly CO2) evidenced by dead birds; hydrothermal areas warrant extreme caution.",
+          "source_url": "https://doi.org/10.1186/s13617-015-0042-x",
+          "source_kind": "official",
+          "category": "Climate hazard"
+        },
+        {
+          "topic": "Impact rules",
+          "text": "Access is via approved agencies only, with security and Afar community participation as conditions.",
+          "source_url": "https://www.capmad.com/post/dallol-in-the-danakil-how-ethiopias-geological-hellscape-is-becoming-a-tightly-controlled-tourism-product",
+          "source_kind": "news",
+          "category": "Impact rules"
+        }
+      ]
+    },
+    {
+      "id": "env_makgadikgadi",
+      "name": "Salinas de Makgadikgadi",
+      "applies_to": [
+        "makgadikgadi"
+      ],
+      "countries": [
+        "Botswana"
+      ],
+      "bbox": [
+        25.2,
+        -21.1,
+        25.8,
+        -20.5
+      ],
+      "environmental_notes": [
+        {
+          "topic": "Wildlife",
+          "text": "Sua Pan is among the world's top ten breeding sites for lesser and greater flamingos; breeding depends on rainy-season flooding.",
+          "source_url": "https://doaj.org/article/adf8b577f988417f876629e8193e1ad8",
+          "source_kind": "official",
+          "category": "Wildlife"
+        },
+        {
+          "topic": "Season window",
+          "text": "The pan floods (about 30 cm) from Nata River inflow during the rains, may stay dry in poor years, and rapid drying can force chicks to walk over 50 km.",
+          "source_url": "https://ajol.info/index.php/ostrich/article/view/20145",
+          "source_kind": "official",
+          "category": "Season window"
+        },
+        {
+          "topic": "Environmental pressure",
+          "text": "A soda ash plant on the NE edge of Sua Pan has lowered the water table; veterinary fence collisions kill adult flamingos.",
+          "source_url": "https://www.oneearth.org/ecoregions/makgadikgadi-halophytics/",
+          "source_kind": "secondary",
+          "category": "Environmental pressure"
+        }
+      ]
+    },
+    {
+      "id": "env_namib_gobabeb",
+      "name": "Desierto del Namib, Gobabeb",
+      "applies_to": [
+        "namib_gobabeb"
+      ],
+      "countries": [
+        "Namibia"
+      ],
+      "bbox": [
+        14.73,
+        -23.85,
+        15.33,
+        -23.25
+      ],
+      "environmental_notes": [
+        {
+          "topic": "Fragile feature",
+          "text": "Vehicle tracks on central Namib gravel plains reduce lichen cover by up to 80% and ruts can persist for decades.",
+          "source_url": "https://digital.unam.edu.na/handle/11070.1/4432?show=full",
+          "source_kind": "official",
+          "category": "Fragile feature"
+        },
+        {
+          "topic": "Impact rules",
+          "text": "Gobabeb's restoration unit works on rehabilitation of vehicle track scars; staying on existing tracks is the standard rule.",
+          "source_url": "https://news-namibia.org/stay-on-track-and-enjoy-pristine-nature/",
+          "source_kind": "news",
+          "category": "Impact rules"
+        },
+        {
+          "topic": "Protected area",
+          "text": "Namib Sand Sea World Heritage Site (2013): fauna depends on fog, with high endemism; water extraction and mineral exploration are emerging threats.",
+          "source_url": "https://www.iucn.org/node/13228",
+          "source_kind": "official",
+          "category": "Protected area"
+        }
+      ]
+    },
+    {
+      "id": "env_qaidam",
+      "name": "Cuenca de Qaidam, Dalangtan",
+      "applies_to": [
+        "qaidam"
+      ],
+      "countries": [
+        "China"
+      ],
+      "bbox": [
+        91.37,
+        38.03,
+        91.97,
+        38.63
+      ],
+      "environmental_notes": [
+        {
+          "topic": "Fragile feature",
+          "text": "Dalangtan playa salts (Mg sulfates, chlorides, perchlorates) and yardangs covering about 20,000 km2 resemble Martian features.",
+          "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6205091",
+          "source_kind": "official",
+          "category": "Fragile feature"
+        },
+        {
+          "topic": "Environmental pressure",
+          "text": "Qarhan liquid potash output and grade are declining, and alkaline solution mining can cause environmental harm.",
+          "source_url": "https://busca.umc.cl/Record/oai:doaj.org-article:efe8a94cb9f7470faead38e42e84ee3a/Description",
+          "source_kind": "official",
+          "category": "Environmental pressure"
+        }
+      ]
+    },
+    {
+      "id": "env_ladakh",
+      "name": "Ladakh, Leh y Tso Kar",
+      "applies_to": [
+        "ladakh"
+      ],
+      "countries": [
+        "India"
+      ],
+      "bbox": [
+        77.7,
+        33.0,
+        78.3,
+        33.6
+      ],
+      "environmental_notes": [
+        {
+          "topic": "Protected area",
+          "text": "Tso Kar Wetland Complex became a Ramsar site in December 2020.",
+          "source_url": "https://rsis.ramsar.org/ris/2443",
+          "source_kind": "official",
+          "category": "Protected area"
+        },
+        {
+          "topic": "Wildlife",
+          "text": "Key breeding site for black-necked crane; the basin is undisturbed June-October, matching the crane breeding season.",
+          "source_url": "https://www.keybiodiversityareas.org/site/factsheet/18197",
+          "source_kind": "official",
+          "category": "Wildlife"
+        },
+        {
+          "topic": "Environmental pressure",
+          "text": "Grazing and unregulated tourism (garbage) are main threats.",
+          "source_url": "https://www.keybiodiversityareas.org/site/factsheet/18197",
+          "source_kind": "official",
+          "category": "Environmental pressure"
+        }
+      ]
+    },
+    {
+      "id": "env_lonar",
+      "name": "Cráter Lonar",
+      "applies_to": [
+        "lonar"
+      ],
+      "countries": [
+        "India"
+      ],
+      "bbox": [
+        76.21,
+        19.68,
+        76.81,
+        20.28
+      ],
+      "environmental_notes": [
+        {
+          "topic": "Protected area",
+          "text": "Ramsar site (2020), Wildlife Sanctuary and National Geo-heritage Monument.",
+          "source_url": "https://en.wikipedia.org/wiki/Lonar_Wildlife_Sanctuary",
+          "source_kind": "secondary",
+          "category": "Protected area"
+        },
+        {
+          "topic": "Environmental pressure",
+          "text": "Sewage from the town and rising water levels threaten the lake; causes debated.",
+          "source_url": "https://www.deccanherald.com/india/conservation-preservation-key-to-lonar-lakes-development-hc-864566.html",
+          "source_kind": "news",
+          "category": "Environmental pressure"
+        },
+        {
+          "topic": "Fragile feature",
+          "text": "The lake turned pink in 2020 due to haloarchaea, indicating sensitive saline microbial communities.",
+          "source_url": "https://www.tribuneindia.com/news/nation/lonar-lake-colour-changes-to-pink-experts-locals-surprised-97645/amp",
+          "source_kind": "news",
+          "category": "Fragile feature"
+        }
+      ]
+    },
+    {
+      "id": "env_dhofar",
+      "name": "Dhofar, Omán (AMADEE-18)",
+      "applies_to": [
+        "dhofar"
+      ],
+      "countries": [
+        "Oman"
+      ],
+      "bbox": [
+        54.74,
+        18.12,
+        55.34,
+        18.72
+      ],
+      "environmental_notes": [
+        {
+          "topic": "Impact rules",
+          "text": "Collecting or exporting meteorites without permits violates Omani law; authorities combat smuggling.",
+          "source_url": "https://mht.gov.om/media-center/news/mht-hosts-second-edition-of-meteorite-workshop/",
+          "source_kind": "official",
+          "category": "Impact rules"
+        },
+        {
+          "topic": "Environmental pressure",
+          "text": "Over 3,600 meteorites have been recovered from Dhofar and Al Wusta, and illicit collecting depletes the fields.",
+          "source_url": "https://www.newarab.com/features/omans-illicit-meteorite-industry-unearthed",
+          "source_kind": "news",
+          "category": "Environmental pressure"
+        }
+      ]
+    },
+    {
+      "id": "env_negev",
+      "name": "Makhtesh Ramon, Négev (D-MARS)",
+      "applies_to": [
+        "negev"
+      ],
+      "countries": [
+        "Israel"
+      ],
+      "bbox": [
+        34.52,
+        30.28,
+        35.12,
+        30.88
+      ],
+      "environmental_notes": [
+        {
+          "topic": "Reserve management",
+          "text": "Ramon Crater is an INPA-managed nature reserve of about 1,100 km2 and an International Dark Sky Park. Part of its land lies within the Israel Nuclear Research Center site.",
+          "source_url": "https://darksky.org/our-work/conservation/idsp/parks/ramoncrater",
+          "source_kind": "secondary",
+          "category": "Protected area"
+        },
+        {
+          "topic": "Wildlife",
+          "text": "Nubian ibex are commonly seen in the reserve.",
+          "source_url": "https://www.lonelyplanet.com/points-of-interest/makhtesh-ramon-nature-reserve/1445650",
+          "source_kind": "secondary",
+          "category": "Wildlife"
+        },
+        {
+          "topic": "Impact rules",
+          "text": "Stay on designated tracks to protect fragile desert crusts.",
+          "source_url": "https://app.advcollective.com/journal/day-in-the-wheelhouse-4x4-descent-into-makhtesh-ramon",
+          "source_kind": "secondary",
+          "category": "Impact rules"
+        },
+        {
+          "topic": "Climate hazard",
+          "text": "Negev wadis flood very suddenly; check forecasts (not confirmed for the crater specifically).",
+          "source_url": "https://www.trekkingthroughisrael.com/post/mt-ramon-wadi-eliav-negev-highland",
+          "source_kind": "secondary",
+          "category": "Climate hazard"
+        }
+      ]
+    },
+    {
+      "id": "env_armash",
+      "name": "Armash, Armenia (AMADEE-24)",
+      "applies_to": [
+        "armash"
+      ],
+      "countries": [
+        "Armenia"
+      ],
+      "bbox": [
+        44.51,
+        39.47,
+        45.11,
+        40.07
+      ],
+      "environmental_notes": [
+        {
+          "topic": "Important Bird Area",
+          "text": "BirdLife lists Armash fish farm as an Important Bird Area and Key Biodiversity Area of 4,639 ha, mostly privately owned, and reports illegal and legal shooting of waterbirds there. The site has been proposed for Ramsar status but is not confirmed as designated.",
+          "source_url": "https://datazone.birdlife.org/site/factsheet/armash-fish-farm-iba-armenia",
+          "source_kind": "secondary",
+          "category": "Wildlife"
+        },
+        {
+          "topic": "Wildlife",
+          "text": "Armash fishponds IBA: more than 230 bird species recorded, with breeding of White-headed Duck and other threatened species; a major flyway stopover.",
+          "source_url": "https://datazone.birdlife.org/site/factsheet/armash-fish-farm-iba-armenia",
+          "source_kind": "official",
+          "category": "Wildlife"
+        },
+        {
+          "topic": "Protected area",
+          "text": "Emerald Site since 2016 and potential Ramsar site.",
+          "source_url": "https://www.ecolur.org/en/news/water/16475/",
+          "source_kind": "news",
+          "category": "Protected area"
+        },
+        {
+          "topic": "Environmental pressure",
+          "text": "Waterbirds are shot due to conflict with fish-farming.",
+          "source_url": "https://datazone.birdlife.org/site/factsheet/armash-fish-farm-iba-armenia",
+          "source_kind": "official",
+          "category": "Environmental pressure"
+        }
+      ]
+    },
+    {
+      "id": "env_pilbara",
+      "name": "Pilbara, Dresser Formation",
+      "applies_to": [
+        "pilbara"
+      ],
+      "countries": [
+        "Australia"
+      ],
+      "bbox": [
+        119.14,
+        -21.45,
+        119.74,
+        -20.85
+      ],
+      "environmental_notes": [
+        {
+          "topic": "Geoheritage reserves",
+          "text": "Five Pilbara early-life sites have been declared State Geoheritage Reserves, and permission is needed to visit or sample in them. The oldest microbial structures in the historic North Pole mining area are within Buick Reserve.",
+          "source_url": "https://www.wa.gov.au/organisation/department-of-mines-petroleum-and-exploration/geological-survey-of-western-australia/microbialites-and-other-early-life",
+          "source_kind": "official",
+          "category": "Fragile feature"
+        },
+        {
+          "topic": "Fragile feature",
+          "text": "3.48 Ga stromatolites in the North Pole Chert Member are irreplaceable evidence of early life.",
+          "source_url": "https://discovery-pp.ucl.ac.uk/10087275/1/Baumgartner%20et%20al%202019%20accepted.pdf",
+          "source_kind": "official",
+          "category": "Fragile feature"
+        },
+        {
+          "topic": "Climate hazard",
+          "text": "Pilbara summers (Dec-Feb) regularly exceed 40 C with thunderstorms and cyclones; park closures occur.",
+          "source_url": "https://karijiniecoretreat.com.au/page.weather.html",
+          "source_kind": "secondary",
+          "category": "Climate hazard"
+        }
+      ]
+    },
+    {
+      "id": "env_svalbard",
+      "name": "Svalbard, Bockfjord",
+      "applies_to": [
+        "svalbard"
+      ],
+      "countries": [
+        "Norway"
+      ],
+      "bbox": [
+        13.0,
+        79.13,
+        13.61,
+        79.73
+      ],
+      "environmental_notes": [
+        {
+          "topic": "Motor traffic",
+          "text": "Off-road motor traffic on bare, unfrozen ground is allowed only on designated routes or with a Governor permit (Svalbard Environmental Protection Act s. 80). Aircraft landings outside approved strips also need an exemption (s. 83).",
+          "source_url": "https://www.sysselmesteren.no/contentassets/45f24e88de42498387da557becffa26f/en-svalbard-environmental-protection-act.pdf",
+          "source_kind": "official",
+          "category": "Impact rules"
+        },
+        {
+          "topic": "Bockfjorden",
+          "text": "Bockfjorden lies in Nordvest-Spitsbergen National Park, which specifically protects its thermal springs, carbonate deposits and volcanic remains. A 2020 amendment (s. 5b) bans travel within a mapped zone at Trollkjeldene.",
+          "source_url": "https://www.sysselmesteren.no/contentassets/f1d44bf6dfb740f6a3ac6ea37838355d/forskrift-om-endring-i-forskrift-om-storre-naturvernomrader-og-fuglereservater-pa-svalbard-viderefort-fra-1973.pdf",
+          "source_kind": "official",
+          "category": "Fragile feature"
+        },
+        {
+          "topic": "Polar bear protection",
+          "text": "Anyone travelling outside settlements must carry suitable means to scare off polar bears, and the Governor recommends carrying a firearm. Renting a rifle generally needs a police lending permit.",
+          "source_url": "https://www.sysselmesteren.no/en/weapon/",
+          "source_kind": "official",
+          "category": "Wildlife"
+        },
+        {
+          "topic": "Fragile feature",
+          "text": "The world's northernmost terrestrial hot springs; plants and mosses found nowhere else in Svalbard grow in about 1,000 m2 around them.",
+          "source_url": "https://cruise-handbook.npolar.no/en/woodfjorden/jotunkjeldene.html",
+          "source_kind": "official",
+          "category": "Fragile feature"
+        },
+        {
+          "topic": "Impact rules",
+          "text": "Inside Nordvest-Spitsbergen National Park; a permanent traffic ban applies around the Trollkjeldene springs.",
+          "source_url": "https://cruise-handbook.npolar.no/en/svalbard/protected-areas.html",
+          "source_kind": "official",
+          "category": "Impact rules"
+        },
+        {
+          "topic": "Wildlife",
+          "text": "Anyone outside settlements must carry means of scaring polar bears, and the Governor recommends a firearm.",
+          "source_url": "https://www.sysselmesteren.no/en/weapon/",
+          "source_kind": "official",
+          "category": "Wildlife"
+        }
+      ]
+    },
+    {
+      "id": "env_kangerlussuaq",
+      "name": "Kangerlussuaq, Groenlandia",
+      "applies_to": [
+        "kangerlussuaq"
+      ],
+      "countries": [
+        "Greenland"
+      ],
+      "bbox": [
+        -50.99,
+        66.71,
+        -50.39,
+        67.31
+      ],
+      "environmental_notes": [
+        {
+          "topic": "Fragile feature",
+          "text": "Continuous permafrost and dry polar climate; the only road in Greenland reaches Point 660 and Russell Glacier.",
+          "source_url": "https://phys.au.dk/forskning/forskningsomraader/planetology/greenland-kangerlussuaq-field-site",
+          "source_kind": "official",
+          "category": "Fragile feature"
+        },
+        {
+          "topic": "Climate hazard",
+          "text": "Rivers swell with meltwater as summer progresses and glacial outburst floods (jokulhlaups) have become more frequent locally.",
+          "source_url": "https://informahealthcare.com/journals/uaar20/collections/Kangerlussuaq-West-Greenland",
+          "source_kind": "official",
+          "category": "Climate hazard"
+        },
+        {
+          "topic": "Season window",
+          "text": "Field campaigns are typically a few weeks each summer.",
+          "source_url": "https://www.scientificamerican.com/blog/expeditions/following-the-ice-in-the-beginning/",
+          "source_kind": "news",
+          "category": "Season window"
+        }
+      ]
+    },
+    {
+      "id": "env_amazon_central",
+      "name": "Amazonía central (control negativo)",
+      "applies_to": [
+        "amazon_central"
+      ],
+      "countries": [
+        "Brazil"
+      ],
+      "bbox": [
+        -60.3,
+        -3.4,
+        -59.7,
+        -2.8
+      ],
+      "environmental_notes": []
+    },
+    {
+      "id": "env_congo_basin",
+      "name": "Cuenca del Congo (control negativo)",
+      "applies_to": [
+        "congo_basin"
+      ],
+      "countries": [
+        "Dem. Rep. Congo"
+      ],
+      "bbox": [
+        19.7,
+        -0.8,
+        20.3,
+        -0.2
+      ],
+      "environmental_notes": []
+    },
+    {
+      "id": "env_farmland_iowa",
+      "name": "Corn Belt, Iowa (control negativo de cultivo intensivo)",
+      "applies_to": [
+        "farmland_iowa"
+      ],
+      "countries": [
+        "United States of America"
+      ],
+      "bbox": [
+        -93.8,
+        41.7,
+        -93.2,
+        42.3
+      ],
+      "environmental_notes": []
+    },
+    {
+      "id": "env_amazon_madre_de_dios",
+      "name": "Amazonía sur, Reserva Nacional Tambopata, Madre de Dios (control negativo)",
+      "applies_to": [
+        "amazon_madre_de_dios"
+      ],
+      "countries": [
+        "Peru"
+      ],
+      "bbox": [
+        -69.8,
+        -12.9,
+        -69.2,
+        -12.3
+      ],
+      "environmental_notes": [
+        {
+          "topic": "Management plan",
+          "text": "SERNANP approved the Reserva Nacional Tambopata Master Plan for 2025-2030, the area's top planning document, which sets use zones. The zone-by-zone rules were not reviewed.",
+          "source_url": "https://legislacionanp.org.pe/wp-content/uploads/2026/01/7288448-resolucion-de-presidencia-ejecutiva-000084-2025-pe.pdf",
+          "source_kind": "official",
+          "category": "Protected area"
+        }
+      ]
+    },
+    {
+      "id": "env_qaidam_qarhan",
+      "name": "Cuenca de Qaidam este, playa de Qarhan (China)",
+      "applies_to": [
+        "qaidam_qarhan"
+      ],
+      "countries": [
+        "China"
+      ],
+      "bbox": [
+        95.93,
+        36.32,
+        96.53,
+        36.92
+      ],
+      "environmental_notes": [
+        {
+          "topic": "Fragile feature",
+          "text": "Dalangtan playa salts (Mg sulfates, chlorides, perchlorates) and yardangs covering about 20,000 km2 resemble Martian features.",
+          "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6205091",
+          "source_kind": "official",
+          "category": "Fragile feature"
+        },
+        {
+          "topic": "Environmental pressure",
+          "text": "Qarhan liquid potash output and grade are declining, and alkaline solution mining can cause environmental harm.",
+          "source_url": "https://busca.umc.cl/Record/oai:doaj.org-article:efe8a94cb9f7470faead38e42e84ee3a/Description",
+          "source_kind": "official",
+          "category": "Environmental pressure"
+        }
+      ]
+    },
+    {
+      "id": "env_kolyma_duvanny_yar",
+      "name": "Tierras bajas del Kolyma, Duvanny Yar (Rusia)",
+      "applies_to": [
+        "kolyma_duvanny_yar"
+      ],
+      "countries": [
+        "Russia"
+      ],
+      "bbox": [
+        158.78,
+        68.33,
+        159.38,
+        68.93
+      ],
+      "environmental_notes": [
+        {
+          "topic": "Fragile feature",
+          "text": "Yedoma stratotype, ice-rich and highly vulnerable to thermokarst and erosion.",
+          "source_url": "https://www.frontiersin.org/journals/earth-science/articles/10.3389/feart.2021.727315/pdf",
+          "source_kind": "official",
+          "category": "Fragile feature"
+        },
+        {
+          "topic": "Environmental pressure",
+          "text": "Thaw streams release CO2 and turbidity in the Kolyma rises by about 20% downstream.",
+          "source_url": "https://research.vu.nl/en/publications/greenhouse-gas-emissions-and-lateral-carbon-dynamics-at-an-erodin/",
+          "source_kind": "official",
+          "category": "Environmental pressure"
+        }
+      ]
+    },
+    {
+      "id": "env_tibesti_emi_koussi",
+      "name": "Macizo del Tibesti, volcan Emi Koussi (Chad)",
+      "applies_to": [
+        "tibesti_emi_koussi"
+      ],
+      "countries": [
+        "Chad"
+      ],
+      "bbox": [
+        18.25,
+        19.49,
+        18.85,
+        20.09
+      ],
+      "environmental_notes": [
+        {
+          "topic": "Climate hazard",
+          "text": "More than half of Chad's mined area is in Tibesti; no survey in over a decade due to insecurity.",
+          "source_url": "https://www.mineactionreview.org/assets/downloads/Chad_Clearing_the_Mines_2025.pdf",
+          "source_kind": "secondary",
+          "category": "Field hazard"
+        }
+      ]
+    },
+    {
+      "id": "env_shackleton_ridge_N3750_E07300",
+      "name": "Altiplano del Pamir oriental",
+      "applies_to": [
+        "shackleton_ridge_N3750_E07300"
+      ],
+      "countries": [
+        "Afghanistan"
+      ],
+      "bbox": [
+        71.5,
+        36.5,
+        75.5,
+        39.0
+      ],
+      "environmental_notes": [
+        {
+          "topic": "Protected area",
+          "text": "Zorkul Lake Ramsar Site No. 1086 (3,800 ha, centred 37.38 N, 73.33 E, designated 2001) lies about 30 km east of the point, inside Zorkul Nature Reserve, which is also a BirdLife IBA/KBA. Whether the point itself falls inside the reserve boundary is not confirmed.",
+          "source_url": "https://rsis.ramsar.org/sites/default/files/rsiswp_search/exports/Ramsar-Sites-annotated-summary-Tajikistan.pdf?1508575317",
+          "source_kind": "official",
+          "category": "Protected area"
+        },
+        {
+          "topic": "Protected area",
+          "text": "Tajik National Park (Mountains of the Pamirs) is a World Heritage property covering much of the eastern Pamir; IUCN treats Zorkul as a separate neighbouring reserve linked by a wildlife corridor project. Overlap of the point with the World Heritage boundary is not confirmed.",
+          "source_url": "https://worldheritageoutlook.iucn.org/explore-sites/wdpaid/555556049",
+          "source_kind": "official",
+          "category": "Protected area"
+        },
+        {
+          "topic": "Wildlife",
+          "text": "Snow leopard and Marco Polo argali are the flagship mammals; argali lambing is in the second half of May and first half of June and the rut is around December-January, so spring calving and winter rut periods should be avoided near herds.",
+          "source_url": "https://tb.plazi.org/GgServer/html/03F50713993CFF8806DDF529F6C9FD9A",
+          "source_kind": "secondary",
+          "category": "Wildlife"
+        },
+        {
+          "topic": "Wildlife",
+          "text": "Bar-headed goose breeds on islands in Zorkul Lake (60-125 pairs, 2000-2006), the species for which the area was first protected in 1972; avoid the lake shores and islands in the summer breeding season.",
+          "source_url": "https://datazone.birdlife.org/site/factsheet/zorkul-nature-reserve-(lake-victoria)-iba-tajikistan/details",
+          "source_kind": "official",
+          "category": "Wildlife"
+        },
+        {
+          "topic": "Climate hazard",
+          "text": "Very high, cold and arid plateau: the eastern Pamirs record winter temperatures below -50 C, and nearby Murghob sits at about 3,600 m, so altitude sickness and cold limit fieldwork outside summer.",
+          "source_url": "https://www.britannica.com:443/place/Pamirs/Geology",
+          "source_kind": "secondary",
+          "category": "Climate hazard"
+        },
+        {
+          "topic": "Impact rules",
+          "text": "IUCN notes off-road driving on 4WD tracks as a (low) threat to fragile alpine desert, waste disposal and littering as a problem, and use of teresken shrub as fuel as a concern if visitor numbers rise; vehicles should stay on existing tracks and all waste and fuel should be brought in and out.",
+          "source_url": "https://worldheritageoutlook.iucn.org/explore-sites/wdpaid/555556049",
+          "source_kind": "official",
+          "category": "Impact rules"
+        }
+      ]
+    },
+    {
+      "id": "env_shackleton_ridge_N4650_E09150",
+      "name": "Altái mongol sur (Bulgan)",
+      "applies_to": [
+        "shackleton_ridge_N4650_E09150"
+      ],
+      "countries": [
+        "Mongolia"
+      ],
+      "bbox": [
+        90.5,
+        46.5,
+        91.5,
+        48.0
+      ],
+      "environmental_notes": [
+        {
+          "topic": "Protected area",
+          "text": "Munkhkhairkhan National Park (about 5,061 km2, Khovd and Bayan-Olgii, snow leopard, argali and Siberian ibex habitat) is centred about 50 km north of the point; Bulgan Gol Nature Reserve (beaver, sable, stone marten) lies on the border with China to the south-west. Overlap of the point with either is not confirmed.",
+          "source_url": "https://en.wikipedia.org/wiki/Munkhkhairkhan_National_Park",
+          "source_kind": "secondary",
+          "category": "Protected area"
+        },
+        {
+          "topic": "Fragile feature",
+          "text": "Permafrost underlies about 29% of Mongolia, continuous in high-altitude areas and degrading under warming; ground disturbance in high Altai terrain may accelerate thaw.",
+          "source_url": "https://www.frontiersin.org/articles/10.3389/feart.2021.713498/pdf",
+          "source_kind": "official",
+          "category": "Fragile feature"
+        },
+        {
+          "topic": "Fragile feature",
+          "text": "Off-road vehicle tracks are a major land-degradation driver in Mongolia; in central Mongolia revegetation of abandoned tracks takes roughly 10-15 years, so rover tests should reuse existing tracks.",
+          "source_url": "https://landportal.org/issues/1250/organization/landlibrary_resource?page=17",
+          "source_kind": "secondary",
+          "category": "Fragile feature"
+        },
+        {
+          "topic": "Climate hazard",
+          "text": "Khovd is among the western provinces repeatedly rated high or very high dzud (severe winter) risk; winter lows in western Mongolia reached -47 C in January 2024.",
+          "source_url": "https://www.aljazeera.com/news/2024/3/19/harsh-mongolian-winter-leaves-4-7m-animals-dead-red-cross-issues-appeal",
+          "source_kind": "news",
+          "category": "Climate hazard"
+        },
+        {
+          "topic": "Season window",
+          "text": "Snow can persist in the Altai into June in some years, so the practical window is summer; a station-based field-window source was not found (not confirmed).",
+          "source_url": "https://www.aljazeera.com/gallery/2023/7/19/photos-mongolias-brutal-winters",
+          "source_kind": "news",
+          "category": "Season window"
+        },
+        {
+          "topic": "Impact rules",
+          "text": "Mongolia's Law on Special Protected Areas allows only observational research that does not affect the natural state in core zones of national parks, so any test inside a park core zone would be excluded.",
+          "source_url": "https://events.development.asia/system/files/materials/1994/11/199411-mon-law-protected-areas.pdf",
+          "source_kind": "official",
+          "category": "Impact rules"
+        }
+      ]
+    },
+    {
+      "id": "env_shackleton_ridge_N3700_E07050",
+      "name": "Montañas de Badakhshán (Kokcha)",
+      "applies_to": [
+        "shackleton_ridge_N3700_E07050"
+      ],
+      "countries": [
+        "Afghanistan"
+      ],
+      "bbox": [
+        70.5,
+        37.0,
+        70.5,
+        37.5
+      ],
+      "environmental_notes": [
+        {
+          "topic": "Protected area",
+          "text": "No protected area, Ramsar site or IBA/KBA was found at the Kokcha point; Afghanistan has only 15 protected areas in WDPA and the search could not list their boundaries, so absence is not confirmed.",
+          "source_url": "https://www.protectedplanet.net/country/AFG",
+          "source_kind": "official",
+          "category": "Protected area"
+        },
+        {
+          "topic": "Wildlife",
+          "text": "Markhor and Siberian ibex were documented in northern Badakhshan (Darwaz, Shahr-e Buzurg) in 2011, with the Amu Darya strip proposed as a priority area that also matters for snow leopard; these sites are north of the point and presence at the point is not confirmed.",
+          "source_url": "https://library.wcs.org/en-us/doi/ctl/view/mid/33065/pubid/PUB24112.aspx",
+          "source_kind": "secondary",
+          "category": "Wildlife"
+        },
+        {
+          "topic": "Wildlife",
+          "text": "Uncontrolled hunting of wild and rare birds has increased substantially in Badakhshan, threatening several species.",
+          "source_url": "https://gandhara.rferl.mobi/a/illegal-hunting-of-rare-birds-on-the-rise-in-badakhshan-/30990118.html",
+          "source_kind": "news",
+          "category": "Wildlife"
+        },
+        {
+          "topic": "Climate hazard",
+          "text": "Badakhshan is classed as a high avalanche-risk province and roads are closed every winter by snow and avalanches, isolating districts.",
+          "source_url": "https://www.thenewhumanitarian.org/Report/94662/AFGHANISTAN-Avalanches-cut-off-parts-of-drought-hit-northeast",
+          "source_kind": "news",
+          "category": "Climate hazard"
+        },
+        {
+          "topic": "Climate hazard",
+          "text": "Spring snowmelt and heavy rain cause flash floods and avalanches (for example February 2023), and frequent earthquakes in north-east Afghanistan trigger landslides.",
+          "source_url": "https://kabulnow.com/2023/02/avalanche-kills-four-members-of-a-family-in-badakhshan/",
+          "source_kind": "news",
+          "category": "Climate hazard"
+        },
+        {
+          "topic": "Season window",
+          "text": "Winter road closures imply a summer-autumn window, but no dedicated source on a safe field season was found (not confirmed).",
+          "source_url": "https://the.akdn/en/where-we-work/central-asia/afghanistan/disaster-preparedness-and-response-afghanistan",
+          "source_kind": "secondary",
+          "category": "Season window"
+        }
+      ]
+    },
+    {
+      "id": "env_shackleton_ridge_N4300_E08750",
+      "name": "Tian Shan oriental, vertiente de Toksun",
+      "applies_to": [
+        "shackleton_ridge_N4300_E08750"
+      ],
+      "countries": [
+        "China"
+      ],
+      "bbox": [
+        87.5,
+        42.5,
+        88.0,
+        43.0
+      ],
+      "environmental_notes": [
+        {
+          "topic": "Protected area",
+          "text": "Xinjiang Tianshan World Heritage (2013) has four components including Bogda (Fukang/Urumqi side); Bogda is also a UNESCO Biosphere Reserve since 1990. No source places the Toksun slope inside a component, so overlap is not confirmed.",
+          "source_url": "https://whc.unesco.org/en/decisions/5127",
+          "source_kind": "official",
+          "category": "Protected area"
+        },
+        {
+          "topic": "Fragile feature",
+          "text": "Urumqi Glacier No. 1 (about 60 km west, a long-term monitored glacier) has retreated throughout 1962-2006, its terminus averaging about 4.4 m per year and its two branches separating in 1993; glaciers and monitoring installations in this range should not be disturbed.",
+          "source_url": "https://www.cambridge.org/core/services/aop-cambridge-core/content/view/C367C28751E3B9907DBA5C189774BAE1/S0260305500261971a.pdf/mass-balance-and-recession-of-urumqi-glacier-no-1-tien-shan-china-over-the-last-45-years.pdf",
+          "source_kind": "official",
+          "category": "Fragile feature"
+        },
+        {
+          "topic": "Climate hazard",
+          "text": "Toksun county regularly issues strong-wind warnings for the 'thirty-mile wind zone' with gusts of force 10-12 and sand and dust, which can damage equipment and stop drone flights.",
+          "source_url": "https://www.meteoblue.com/ro/vreme/warnings/index/tuokexun_china_1529125",
+          "source_kind": "secondary",
+          "category": "Climate hazard"
+        },
+        {
+          "topic": "Climate hazard",
+          "text": "The Turpan Depression, where Toksun lies, often exceeds 40 C in summer and receives under 20 mm of precipitation per year.",
+          "source_url": "https://wiki.krisyotam.com/content/wikipedia_en_all_nopic_2026-03/Climate_of_China",
+          "source_kind": "secondary",
+          "category": "Climate hazard"
+        },
+        {
+          "topic": "Climate hazard",
+          "text": "Tian Shan glacial lakes grew 148% in number between 1990 and 2023, raising outburst-flood risk, and China warned of extreme summer floods in Xinjiang in June 2026 linked to heat and glacier melt.",
+          "source_url": "https://doaj.org/article/73f76395f0f34b07b6fcdeaf437ac048",
+          "source_kind": "official",
+          "category": "Climate hazard"
+        }
+      ]
+    },
+    {
+      "id": "env_shackleton_ridge_N4750_E09700",
+      "name": "Khangai occidental (Zavkhan)",
+      "applies_to": [
+        "shackleton_ridge_N4750_E09700"
+      ],
+      "countries": [
+        "Mongolia"
+      ],
+      "bbox": [
+        97.0,
+        47.0,
+        98.0,
+        47.5
+      ],
+      "environmental_notes": [
+        {
+          "topic": "Protected area",
+          "text": "Otgontenger Strictly Protected Area (declared 1992, about 955 km2) surrounds the Khangai's highest peak about 40 km east of the point; it is also a state-sanctioned sacred mountain. Overlap of the point with the SPA is not confirmed.",
+          "source_url": "https://www.lonelyplanet.com/mongolia/western-mongolia/zavkhan/attractions/otgon-tenger-uul-strictly-protected-area/a/poi-sig/1406634/357080",
+          "source_kind": "secondary",
+          "category": "Protected area"
+        },
+        {
+          "topic": "Wildlife",
+          "text": "Otgontenger Mountain is a Key Biodiversity Area listing argali, Siberian ibex and snow leopard (Endangered).",
+          "source_url": "https://www.keybiodiversityareas.org/site/factsheet/16334",
+          "source_kind": "official",
+          "category": "Wildlife"
+        },
+        {
+          "topic": "Fragile feature",
+          "text": "Otgontenger holds the only permanent glacier in the Khangai range, and locals report steady recession of snow levels.",
+          "source_url": "https://en.wikipedia.org/wiki/Otgontenger",
+          "source_kind": "secondary",
+          "category": "Fragile feature"
+        },
+        {
+          "topic": "Fragile feature",
+          "text": "In the Khangai forest-steppe, near-surface discontinuous permafrost is limited to large forest stands on north-facing slopes, so these patches are sensitive to disturbance.",
+          "source_url": "https://openpolar.no/Record/crwiley:10.1002%2Fesp.5116",
+          "source_kind": "official",
+          "category": "Fragile feature"
+        },
+        {
+          "topic": "Climate hazard",
+          "text": "Zavkhan is one of the western provinces repeatedly rated high or very high dzud risk, with extreme winter cold; fieldwork is realistically a summer activity (dedicated window source not found).",
+          "source_url": "https://www.aljazeera.com/news/2024/3/19/harsh-mongolian-winter-leaves-4-7m-animals-dead-red-cross-issues-appeal",
+          "source_kind": "news",
+          "category": "Climate hazard"
+        }
+      ]
+    },
+    {
+      "id": "env_arcadia_planitia_N6800_E14000",
+      "name": "Interfluvio Yana-Indigirka (Selenniaj)",
+      "applies_to": [
+        "arcadia_planitia_N6800_E14000"
+      ],
+      "countries": [
+        "Russia"
+      ],
+      "bbox": [
+        139.5,
+        67.5,
+        140.5,
+        68.0
+      ],
+      "environmental_notes": [
+        {
+          "topic": "Protected area",
+          "text": "No federal or regional protected area was confirmed at the point; regional resource reserves exist in the Verkhoyansk and Abyy districts (for example Tuostakh), but overlap is not confirmed.",
+          "source_url": "https://e.nlrs.ru/open/109129",
+          "source_kind": "secondary",
+          "category": "Protected area"
+        },
+        {
+          "topic": "Fragile feature",
+          "text": "The Yana-Indigirka lowland is part of the ice-rich Yedoma domain, where drained thermokarst basins cover up to 80-100% of low terrain; the IRYP v2 map should be checked at the exact cell. Vehicle traffic on ice-rich ground can trigger thermokarst.",
+          "source_url": "https://frontiersin.org/journals/earth-science/articles/10.3389/feart.2021.758360/full",
+          "source_kind": "official",
+          "category": "Fragile feature"
+        },
+        {
+          "topic": "Fragile feature",
+          "text": "Permafrost prevails across the Selennyakh Range itself.",
+          "source_url": "https://www.wikiwand.com/en/Selennyakh_Range",
+          "source_kind": "secondary",
+          "category": "Fragile feature"
+        },
+        {
+          "topic": "Wildlife",
+          "text": "The Critically Endangered Siberian crane breeds on about 82,000 km2 of tundra between the Yana and Kolyma rivers (densest at Kytalyk, farther north); laying is late May-early June and departure mid-August to early October. Use of the 68 N interfluve is not confirmed.",
+          "source_url": "https://siberian-crane.cms.int/es/node/366",
+          "source_kind": "official",
+          "category": "Wildlife"
+        },
+        {
+          "topic": "Wildlife",
+          "text": "The CMS Siberian crane programme lists human disturbance from oil exploration and development in Yakutia as a significant threat, relevant to any motorised field campaign in breeding habitat.",
+          "source_url": "https://siberian-crane.cms.int/threats",
+          "source_kind": "official",
+          "category": "Wildlife"
+        },
+        {
+          "topic": "Climate hazard",
+          "text": "The upper Yana-Indigirka basins hold the Northern Hemisphere pole of cold; Verkhoyansk averages -44.7 C in January and +16.5 C in July, so work is effectively limited to the short summer.",
+          "source_url": "https://www.britannica.com/place/Verkhoyansk",
+          "source_kind": "secondary",
+          "category": "Climate hazard"
+        }
+      ]
+    },
+    {
+      "id": "env_arcadia_planitia_N6800_E09750",
+      "name": "Meseta de Putorana (sectores sureste y norte)",
+      "applies_to": [
+        "arcadia_planitia_N6800_E09750"
+      ],
+      "countries": [
+        "Russia"
+      ],
+      "bbox": [
+        97.5,
+        68.0,
+        97.5,
+        68.0
+      ],
+      "environmental_notes": [
+        {
+          "topic": "Allowed uses",
+          "text": "The site is UNESCO World Heritage (2010), and within the core reserve no land or resource use is allowed other than scientific research and monitoring. Access is by helicopter or water, with no road.",
+          "source_url": "https://www.worldheritagesite.org/list/id/1234",
+          "source_kind": "secondary",
+          "category": "Protected area"
+        },
+        {
+          "topic": "Protected area",
+          "text": "Putorana Plateau World Heritage (2010) coincides with the Putoransky State Nature Reserve; whether the 68.0 N, 97.5 E cell lies inside the reserve or its buffer zone is not confirmed.",
+          "source_url": "https://whc.unesco.org/en/decisions/?id_decision=3988",
+          "source_kind": "official",
+          "category": "Protected area"
+        },
+        {
+          "topic": "Wildlife",
+          "text": "One of the largest wild reindeer migration routes crosses the property, and the plateau hosts the endemic Putorana snow sheep (Russian Red Book) and is a key staging area for Arctic migratory birds.",
+          "source_url": "https://whc.unesco.org/en/decisions/?id_decision=3988",
+          "source_kind": "official",
+          "category": "Wildlife"
+        },
+        {
+          "topic": "Fragile feature",
+          "text": "IUCN reports that climate change is causing permafrost thaw and vegetation change in the property.",
+          "source_url": "https://worldheritageoutlook.iucn.org/node/1161",
+          "source_kind": "official",
+          "category": "Fragile feature"
+        },
+        {
+          "topic": "Season window",
+          "text": "Snow cover lasts about eight months and melts fully only in mid-June, and lakes carry about 2 m of ice for about six months, so the field window is roughly late June to early September.",
+          "source_url": "https://russiadiscovery.com/travel-guides/putorana_plateau",
+          "source_kind": "secondary",
+          "category": "Season window"
+        },
+        {
+          "topic": "Climate hazard",
+          "text": "Sulphur dioxide from Norilsk smelters on the plateau's western edge is a major pollution source; the reserve buffer is 80-100 km from production sites.",
+          "source_url": "https://earthobservatory.nasa.gov/images/6506/norilsk-northeast-siberia",
+          "source_kind": "official",
+          "category": "Climate hazard"
+        }
+      ]
+    },
+    {
+      "id": "env_arcadia_planitia_N8300_W07700",
+      "name": "Norte de Ellesmere (Quttinirpaaq)",
+      "applies_to": [
+        "arcadia_planitia_N8300_W07700"
+      ],
+      "countries": [
+        "Canada"
+      ],
+      "bbox": [
+        -78.0,
+        83.0,
+        -77.0,
+        83.0
+      ],
+      "environmental_notes": [
+        {
+          "topic": "Protected area",
+          "text": "Northern Ellesmere is inside Quttinirpaaq National Park; offshore, the Milne Ice Shelf lies in the Tuvaijuittuq Marine Protected Area (2019), which does not extend onto land.",
+          "source_url": "https://thenarwhal.ca/milne-arctic-ice-shelf-collapse/",
+          "source_kind": "news",
+          "category": "Protected area"
+        },
+        {
+          "topic": "Fragile feature",
+          "text": "The Milne Ice Shelf lost 43% of its area in 2020 and its epishelf lake has since drained; Ward Hunt Ice Shelf also fractured in 2011-2012. These collapsing ice shelves are both fragile and hazardous to work on.",
+          "source_url": "https://ualberta.ca/en/folio/2026/09/canadas-last-epishelf-lake-drained.html",
+          "source_kind": "secondary",
+          "category": "Fragile feature"
+        },
+        {
+          "topic": "Impact rules",
+          "text": "Parks Canada requires packing out all garbage and toilet paper, human waste 100 m from water and camps, no collection of plants, rocks or fossils, no disturbance of rocks at possible archaeological features, a permit for aircraft landings, and no recreational drones; research needs a permit.",
+          "source_url": "https://www.parks.canada.ca/pn-np/nu/quttinirpaaq/securite-safety/comportements-guidelines",
+          "source_kind": "official",
+          "category": "Impact rules"
+        },
+        {
+          "topic": "Wildlife",
+          "text": "Park monitoring records muskox herds near Lake Hazen and small Peary caribou herds (7 animals in two sightings); Parks Canada guidelines prohibit disturbing wildlife and require avoiding nesting, calving and denning areas.",
+          "source_url": "https://pc.gc.ca/pn-np/nu/quttinirpaaq/nature/conservation/recherche-research/faune-wildlife",
+          "source_kind": "official",
+          "category": "Wildlife"
+        },
+        {
+          "topic": "Season window",
+          "text": "24-hour daylight runs May-August and the recommended visiting period is late May to mid-August, but winter conditions can occur at any time.",
+          "source_url": "https://parks.canada.ca/pn-np/nu/quttinirpaaq/visit/meteo-weather",
+          "source_kind": "official",
+          "category": "Season window"
+        }
+      ]
+    },
+    {
+      "id": "env_jezero_N1550_E02650",
+      "name": "Campo volcánico de Meidob",
+      "applies_to": [
+        "jezero_N1550_E02650"
+      ],
+      "countries": [
+        "Sudan"
+      ],
+      "bbox": [
+        26.5,
+        15.0,
+        26.5,
+        15.5
+      ],
+      "environmental_notes": [
+        {
+          "topic": "Protected area",
+          "text": "No protected area was confirmed at Meidob; Wadi Howar National Park (proclaimed 2001, about 100,000 km2, UNESCO Tentative List) lies to the north, but its boundaries were not found, so overlap is not confirmed.",
+          "source_url": "https://whc.unesco.org/en/tentativelists/1951/",
+          "source_kind": "official",
+          "category": "Protected area"
+        },
+        {
+          "topic": "Fragile feature",
+          "text": "The field has about 700 vents and some 30 maars; Malha crater (about 150 m deep) holds the only remaining crater lake, a rare permanent desert water body.",
+          "source_url": "https://en.wikipedia.org/wiki/Meidob_volcanic_field",
+          "source_kind": "secondary",
+          "category": "Fragile feature"
+        },
+        {
+          "topic": "Climate hazard",
+          "text": "Wadis radiating from the field carry water during flash floods.",
+          "source_url": "https://en.wikipedia.org/wiki/Meidob_volcanic_field",
+          "source_kind": "secondary",
+          "category": "Climate hazard"
+        },
+        {
+          "topic": "Season window",
+          "text": "For North Darfur (El Fasher data, about 250 km south-east), rain peaks July-August and highs reach about 41 C in May; the cooler dry months (about November-February) look most workable, but no Meidob-specific source was found.",
+          "source_url": "https://nomadseason.com/climate/sudan/northern-darfur.html",
+          "source_kind": "secondary",
+          "category": "Season window"
+        },
+        {
+          "topic": "Wildlife",
+          "text": "Armed conflict in the Sahara-Sahel has been linked to steep declines of dorcas gazelle (Vulnerable); current Darfur or Meidob wildlife data were not found (not confirmed).",
+          "source_url": "https://ugr.es/node/13172",
+          "source_kind": "secondary",
+          "category": "Wildlife"
+        }
+      ]
+    },
+    {
+      "id": "env_jezero_N3300_E05300",
+      "name": "Meseta de Nain",
+      "applies_to": [
+        "jezero_N3300_E05300"
+      ],
+      "countries": [
+        "Iran"
+      ],
+      "bbox": [
+        53.0,
+        32.5,
+        53.0,
+        33.0
+      ],
+      "environmental_notes": [
+        {
+          "topic": "Protected area",
+          "text": "Abbasabad Wildlife Refuge (about 3,000 km2, desert and steppe east of Naein) is close to the point; exact boundary overlap is not confirmed.",
+          "source_url": "https://www.internationalparks.org/iran/Abbas%20Abad",
+          "source_kind": "secondary",
+          "category": "Protected area"
+        },
+        {
+          "topic": "Wildlife",
+          "text": "Abbasabad is one of the remaining habitats of the Critically Endangered Asiatic cheetah, with caracal, wild sheep and goitered gazelle; a cheetah was camera-trapped there after about 14 years without records.",
+          "source_url": "https://goodnewsagency.ir/?p=68876",
+          "source_kind": "news",
+          "category": "Wildlife"
+        },
+        {
+          "topic": "Wildlife",
+          "text": "Five of Iran's eight wild felid species have been recorded in the Abbasabad reserve.",
+          "source_url": "https://www.wildlife.ir/Files/library/NaeinFelids.pdf",
+          "source_kind": "secondary",
+          "category": "Wildlife"
+        },
+        {
+          "topic": "Climate hazard",
+          "text": "Desert climate on the edge of the Dasht-e Kavir, with summer maxima around 41 C and winter minima around -9 C; blowing dust occurs.",
+          "source_url": "https://ipfs.aleph.im/ipfs/QmXoypizjW3WknFiJnKLwHCnL72vedxjQkDDP1mXWo6uco/wiki/Na'in.html",
+          "source_kind": "secondary",
+          "category": "Climate hazard"
+        },
+        {
+          "topic": "Impact rules",
+          "text": "No environmental rules specific to vehicles, drones or sampling at this site were found (not confirmed).",
+          "source_url": "https://www.internationalparks.org/iran/Abbas%20Abad",
+          "source_kind": "secondary",
+          "category": "Impact rules"
+        }
+      ]
+    },
+    {
+      "id": "env_jezero_N2300_E04000",
+      "name": "Harrat Rahat central",
+      "applies_to": [
+        "jezero_N2300_E04000"
+      ],
+      "countries": [
+        "Saudi Arabia"
+      ],
+      "bbox": [
+        39.5,
+        23.0,
+        40.5,
+        24.0
+      ],
+      "environmental_notes": [
+        {
+          "topic": "Protected area",
+          "text": "No protected area, IBA or Ramsar site was found at the point; the nearest found is the fenced Mahazat as-Sayd Protected Area (oryx and houbara reintroduction) about 170 km north-east of Taif, which does not appear to overlap. Absence is not confirmed.",
+          "source_url": "https://en.wikipedia.org/wiki/Mahazat_as-Sayd_Protected_Area",
+          "source_kind": "secondary",
+          "category": "Protected area"
+        },
+        {
+          "topic": "Fragile feature",
+          "text": "Harrat Rahat has about 1,000 small volcanoes and a historical lava flow (1256 AD, near Medina far to the north); fresh flow surfaces are geoheritage.",
+          "source_url": "https://www.earth-prints.org/handle/2122/11281?mode=full",
+          "source_kind": "official",
+          "category": "Fragile feature"
+        },
+        {
+          "topic": "Fragile feature",
+          "text": "North-west Arabian harrats host prehistoric stone structures (mustatils, kites, pendants, stone circles), and 5 of 10 sites proposed for UNESCO's 'Prehistoric stone structures' tentative listing are harrats; a Rahat-specific inventory at the point was not found (not confirmed).",
+          "source_url": "https://www.worldheritagesite.org/tentative/id/6636",
+          "source_kind": "secondary",
+          "category": "Fragile feature"
+        },
+        {
+          "topic": "Impact rules",
+          "text": "Saudi Arabia's Executive Regulation for Vegetation Cover requires a licence, permit or approval to use vegetation-cover lands for activities, with fines for violations.",
+          "source_url": "https://ncvc.gov.sa/en/digitalKnowledge/violations",
+          "source_kind": "official",
+          "category": "Impact rules"
+        },
+        {
+          "topic": "Climate hazard",
+          "text": "Desert climate with 60-100 mm rain, mostly December-February, and occasional severe flash floods in the Medina region (for example August 2024).",
+          "source_url": "https://watchers.news/2024/08/22/severe-flash-floods-hit-medina-saudi-arabia/",
+          "source_kind": "news",
+          "category": "Climate hazard"
+        }
+      ]
+    },
+    {
+      "id": "env_jezero_N2550_E03900",
+      "name": "Campo basáltico de Khaybar",
+      "applies_to": [
+        "jezero_N2550_E03900"
+      ],
+      "countries": [
+        "Saudi Arabia"
+      ],
+      "bbox": [
+        39.0,
+        25.0,
+        40.0,
+        26.0
+      ],
+      "environmental_notes": [
+        {
+          "topic": "Fragile feature",
+          "text": "Harrat Khaybar holds dense prehistoric stone structures: mustatils (about 7,000 years old, among the oldest monumental structures known), kites of shapes unique to Khaybar, pendants and funerary avenues, surveyed by the AAKSAU Khaybar project since 2019. Rover driving or sampling could damage them.",
+          "source_url": "https://cambridge.org/core/services/aop-cambridge-core/content/view/S0003598X2100051X",
+          "source_kind": "official",
+          "category": "Fragile feature"
+        },
+        {
+          "topic": "Fragile feature",
+          "text": "The Khaybar aerial archaeology project produced some of the first radiometric dates for 'pendant' (tailed cairn) monuments in Saudi Arabia, showing these structures are a dated, scientifically important resource on the harrat.",
+          "source_url": "https://pmc.ncbi.nlm.nih.gov/articles/pmid/36920897",
+          "source_kind": "official",
+          "category": "Fragile feature"
+        },
+        {
+          "topic": "Protected area",
+          "text": "No WDPA site, IBA or Ramsar site was found on western Harrat Khaybar; the harrat is under intensive land-use and tourism development (not confirmed as protected).",
+          "source_url": "https://www.preprints.org/manuscript/202507.2531",
+          "source_kind": "secondary",
+          "category": "Protected area"
+        },
+        {
+          "topic": "Impact rules",
+          "text": "Saudi vegetation-cover rules require a licence for activities on vegetation-cover lands; in nearby AlUla the Royal Commission fines vehicle activity that damages vegetation (500 then 1,000 SAR). Whether the AlUla rule applies at Khaybar is not confirmed.",
+          "source_url": "https://www.arabnews.pk/node/2629308",
+          "source_kind": "news",
+          "category": "Impact rules"
+        },
+        {
+          "topic": "Climate hazard",
+          "text": "Khaybar is named in regional flash-flood and storm events (for example November 2015), and the Medina region gets most of its 60-100 mm annual rain in winter.",
+          "source_url": "https://www.aljazeera.com/amp/news/2015/11/18/twelve-killed-as-flash-floods-hit-saudi-arabia",
+          "source_kind": "news",
+          "category": "Climate hazard"
+        }
+      ]
+    },
+    {
+      "id": "env_jezero_N3250_E05750",
+      "name": "Llanuras basálticas de Tabas y Deyhuk",
+      "applies_to": [
+        "jezero_N3250_E05750"
+      ],
+      "countries": [
+        "Iran"
+      ],
+      "bbox": [
+        57.5,
+        32.0,
+        58.0,
+        34.0
+      ],
+      "environmental_notes": [
+        {
+          "topic": "Protected area",
+          "text": "Naybandan Wildlife Refuge spans about 31.8-33.4 N and 55.5-57.5 E (about 14,000-15,000 km2), so the point sits on or near its eastern edge; overlap is possible but not confirmed.",
+          "source_url": "https://bioone.org/journals/Folia-Zoologica/volume-66/issue-1/fozo.v66.i1.a7.2017/Predation-of-montane-deserts-ungulates-by-Asiatic-Cheetah-Acinonyx-jubatus/10.25225/fozo.v66.i1.a7.2017.full",
+          "source_kind": "official",
+          "category": "Protected area"
+        },
+        {
+          "topic": "Wildlife",
+          "text": "Naybandan is described as the most important Asiatic cheetah habitat, with animals moving between Naybandan and Ravar refuges; cheetahs prey on wild goat, wild sheep and gazelle there.",
+          "source_url": "https://www.tehrantimes.com/news/438119/Asiatic-cheetahs-spotted-in-eastern-Iran",
+          "source_kind": "news",
+          "category": "Wildlife"
+        },
+        {
+          "topic": "Climate hazard",
+          "text": "ThinkHazard rates Tabas extreme heat as High and earthquake as Medium.",
+          "source_url": "https://thinkhazard.org/en/report/41120-islamic-republic-of-iran-khorasan-tabas",
+          "source_kind": "official",
+          "category": "Climate hazard"
+        },
+        {
+          "topic": "Season window",
+          "text": "June-August highs average about 39-40 C with almost no rain, so summer field tests are heat-limited; cooler months are preferable (dedicated field-window source not found).",
+          "source_url": "https://kupi.com/en/explore/iran/tabas/weather",
+          "source_kind": "secondary",
+          "category": "Season window"
+        },
+        {
+          "topic": "Climate hazard",
+          "text": "South Khorasan was among 25 provinces hit by flash floods from December 2025.",
+          "source_url": "https://go-api.ifrc.org/api/DownloadFile/95121/MDRIR017OU1",
+          "source_kind": "official",
+          "category": "Climate hazard"
+        }
+      ]
+    }
+  ]
+}

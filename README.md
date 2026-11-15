@@ -73,6 +73,12 @@ A Moon or Mars value outside the Earth range (a day-night swing of 125 K, a mean
 
 `data/config/access_restrictions.json` lists places where fieldwork is unsafe or limited, each with a level (`do_not_travel`, `restricted`, `permit`), the countries (and box) it covers, and legal notes with their source and the kind of source (official, news, secondary). It was reviewed on the web on 2026-11-15 and is informational only, not legal advice. Every cell, sheet and finding carries its level; `avoid=do_not_travel,restricted` on `/results`, `/summary`, `/export` and `/portfolio` leaves those places out. The label never changes a score. `GET /restrictions` serves the zones and the general notes (samples, Nagoya Protocol, sanctions by nationality).
 
+The team's proposals live in `data/reference/access_restrictions.propuesto.json` and `environmental_notes.propuesto.json`. The config copies differ in two ways: zones the proposal left without a box but that cover only part of a country (BLM Utah and Dumont Dunes, Río Tinto and Tabernas, Teide and Timanfaya) are split into boxed zones, so they no longer label all of the United States or Spain; and Dallol also lists Ethiopia, Licancabur also lists Chile.
+
+## Environmental notes
+
+`data/config/environmental_notes.json` holds environmental notes for every analog site and finding: protected areas, fragile features, wildlife and breeding seasons, season windows, climate hazards, impact rules and pressure on the site, each with its source. An area applies to the sites in `applies_to` and to every cell inside its box (widened by half a cell, since some boxes are a single point) in one of its countries. Cell sheets and findings carry the notes, list rows and the CSV carry the number of areas, and `GET /analogs` lists each site's areas. A new candidate with no area shows a checklist of what to review before fieldwork. Like restrictions, the notes never change a score. `GET /environment` serves the whole file.
+
 ## Findings (FR-P16)
 
 `data/config/findings.json` holds the team's findings for the preset sites: new regions from the top 1% of cells, grouped and checked in the literature (13 regions on 2026-11-15, after 2 rounds and 21 regions reviewed). Each one keeps its cells, box, what to test first, the sources read, the searches run with their result, and an honest limit. The originals, in Spanish, are in `data/reference/findings.propuesto.json`.
@@ -134,6 +140,7 @@ Composition comes from GLiM gridded to 0.5 degrees (`pipeline/adapters/glim.py`)
 | `GET /sources` | The data source inventory, with license and status |
 | `GET /findings?target=` | The team's findings with live score, confidence and checks |
 | `GET /restrictions` | Fieldwork restriction zones with their legal notes |
+| `GET /environment` | Environmental notes per analog site and finding |
 | `GET /caves` | Documented lava tubes and caves, and whether a cell of the table holds each |
 | `GET /profiles`, `/features`, `/analogs`, `/meta`, `/health` | Config and status |
 
@@ -147,6 +154,7 @@ Composition comes from GLiM gridded to 0.5 degrees (`pipeline/adapters/glim.py`)
 | `pipeline/planet_rules.py` | Composition class on the Moon and Mars, and the Moon's annual range |
 | `pipeline/shapefile.py` | A small polygon shapefile reader, and reading one file out of a remote ZIP |
 | `pipeline/restrictions.py` | Which restriction zones hold each cell |
+| `pipeline/environment.py` | Which environmental areas hold each site and cell |
 | `pipeline/findings.py` | Recomputes and audits the findings |
 | `pipeline/check_sites.py` | Compares the site reader with the team's test points |
 | `pipeline/earth.py` | Loads the Earth table and compares a site with it |

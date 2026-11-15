@@ -239,6 +239,28 @@ class AccessRestrictions(BaseModel):
     general_notes: list[LegalNote]
 
 
+class EnvironmentalNote(LegalNote):
+    category: str  # a key of EnvironmentalNotes.categories
+
+
+class EnvironmentalArea(BaseModel):
+    """Environmental observations for an analog site or a finding: protected areas, fragile
+    features, wildlife, season windows, hazards and impact rules. Planning only, never a score."""
+
+    id: str
+    name: str
+    applies_to: list[str]  # known analog or finding ids
+    countries: list[str]  # country names as in the Earth table
+    bbox: tuple[float, float, float, float]  # west, south, east, north; approximate
+    environmental_notes: list[EnvironmentalNote]
+
+
+class EnvironmentalNotes(BaseModel):
+    checked: str
+    categories: dict[str, str]
+    areas: list[EnvironmentalArea]
+
+
 class MaskException(BaseModel):
     id: str
     name: str
@@ -362,6 +384,7 @@ class Config:
     rules: PlanetRules | None = None
     findings: tuple[FindingSet, ...] = ()
     restrictions: AccessRestrictions | None = None
+    environment: EnvironmentalNotes | None = None
 
 
 def _read(path: Path) -> dict:
@@ -381,6 +404,7 @@ def load_config(config_dir: Path = CONFIG_DIR) -> Config:
         rules=PlanetRules(**_read(config_dir / "planet_rules.json")),
         findings=tuple(FindingSet(**s) for s in _read(config_dir / "findings.json")["sets"]),
         restrictions=AccessRestrictions(**_read(config_dir / "access_restrictions.json")),
+        environment=EnvironmentalNotes(**_read(config_dir / "environmental_notes.json")),
     )
     _cross_check(config)
     return config
@@ -404,6 +428,16 @@ def _cross_check(config: Config) -> None:
         for finding in group.findings:
             if not set(finding.test_first) <= tags:
                 raise ValueError(f"{finding.id}: test_first is not a test tag of {group.profile}")
+    if config.environment is not None:
+        sites = {a.id for a in config.analogs}
+        sites |= {f.id for group in config.findings for f in group.findings}
+        for area in config.environment.areas:
+            unknown = set(area.applies_to) - sites
+            if unknown:
+                raise ValueError(f"{area.id}: applies to unknown sites {sorted(unknown)}")
+            for note in area.environmental_notes:
+                if note.category not in config.environment.categories:
+                    raise ValueError(f"{area.id}: unknown category {note.category}")
     for source in config.sources:
         for key in source.features:
             if key not in config.features:
@@ -422,6 +456,7 @@ def export_schemas(out_dir: Path = SCHEMA_DIR) -> None:
         "planet_rules": PlanetRules,
         "finding_set": FindingSet,
         "access_restrictions": AccessRestrictions,
+        "environmental_notes": EnvironmentalNotes,
         "run": RunConfig,
         "source": Source,
         "result_cell": ResultCell,

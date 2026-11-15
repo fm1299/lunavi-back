@@ -261,4 +261,22 @@ def test_restriction_zones_follow_country_and_box():
     turpan = zones_at(restrictions, "China", 43.0, 87.5)
     assert turpan == ["china"]
     assert "china_tibet" in zones_at(restrictions, "China", 29.6, 91.1)
-    assert zones_at(restrictions, "Chile", -24.0, -69.0) == []
+    assert zones_at(restrictions, "Chile", -24.0, -69.0) == ["chile_atacama_hyperarid_core"]
+    assert zones_at(restrictions, "Chile", -33.4, -70.6) == []  # Santiago: no zone
+    # Local zones never cover a whole country by mistake.
+    assert zones_at(restrictions, "United States of America", 40.0, -100.0) == []
+    assert zones_at(restrictions, "Spain", 40.4, -3.7) == []
+    assert "us_blm_mdrs_utah" in zones_at(restrictions, "United States of America", 38.4, -110.8)
+
+
+def test_environment_areas_follow_sites_and_boxes():
+    from pipeline.environment import areas_at, areas_for_site
+
+    config = load_config(Path("data/config"))
+    env = config.environment
+    assert {a.id for a in config.analogs} <= {s for a in env.areas for s in a.applies_to}
+    assert areas_for_site(env, "atacama") == ["env_atacama"]
+    # A box that is only a point still holds the cell around it.
+    assert "env_jezero_N1550_E02650" in areas_at(env, "Sudan", 15.5, 26.5)
+    assert areas_at(env, "Sudan", 15.5, 30.0) == []
+    assert "env_dallol" in areas_at(env, "Ethiopia", 14.24, 40.3)

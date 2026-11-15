@@ -549,3 +549,18 @@ def test_new_only_reaches_every_list_built_from_the_results(client):
     every = client.get("/export", params={"target": "jezero", "top_n": 1000}).text.splitlines()
     new = client.get("/export", params={**params, "top_n": 1000}).text.splitlines()
     assert len(new) <= len(every)
+
+
+def test_environmental_notes_reach_sheets_findings_and_analogs(client):
+    notes = client.get("/environment").json()
+    assert notes["areas"] and notes["categories"]
+    analogs = client.get("/analogs").json()
+    assert all("environment_areas" in a for a in analogs)
+    cells = client.get("/results", params={"target": "jezero", "top_n": 3, "detail": "full"}).json()
+    assert all("environment_areas" in c for c in cells["cells"])
+    sheet = client.get(f"/cells/{cells['cells'][0]['cell_id']}", params={"target": "jezero"}).json()
+    assert set(sheet["environment"]) == {"areas", "categories", "checked"}
+    for group in client.get("/findings").json():
+        for finding in group["findings"]:
+            ids = [a["id"] for a in finding["environment"]["areas"]]
+            assert f"env_{finding['id']}" in ids

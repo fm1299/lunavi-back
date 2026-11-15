@@ -1,0 +1,2076 @@
+{
+  "_note": "Places where fieldwork is unsafe, legally restricted or needs special permits, with the legal notes behind each. A cell takes every zone that holds its country (and box, when given). Reviewed on the web on 2026-11-15; source_kind says whether a note rests on an official page, a news report or a secondary source. Informational only, not legal advice. Zonas agregadas por el equipo de análisis el 2026-11-15 (propuesto).",
+  "checked": "2026-11-15",
+  "levels": {
+    "do_not_travel": "Active conflict or highest travel advisory: no fieldwork.",
+    "restricted": "Sanctions or laws that limit research, data collection or access.",
+    "permit": "Fieldwork is possible with special permits."
+  },
+  "zones": [
+    {
+      "id": "us_level4",
+      "name": "US State Department Level 4: Do Not Travel",
+      "level": "do_not_travel",
+      "countries": [
+        "Afghanistan",
+        "Belarus",
+        "Burkina Faso",
+        "Myanmar",
+        "Central African Rep.",
+        "Chad",
+        "Dem. Rep. Congo",
+        "Haiti",
+        "Iran",
+        "Iraq",
+        "Lebanon",
+        "Libya",
+        "Mali",
+        "Niger",
+        "North Korea",
+        "Russia",
+        "Somalia",
+        "S. Sudan",
+        "Sudan",
+        "Syria",
+        "Uganda",
+        "Ukraine",
+        "Yemen",
+        "Palestine"
+      ],
+      "bbox": null,
+      "summary": "Highest US travel advisory: the US government can give very little help and asks citizens not to go.",
+      "legal_notes": [
+        {
+          "topic": "Travel advisory",
+          "text": "About 22 to 23 countries and territories were at Level 4 in early November 2026. Trackers disagree on a few names (Chad, Uganda, Gaza), so check the official page for each country before planning fieldwork.",
+          "source_url": "https://travel.state.gov/en/international-travel/travel-advisories.html",
+          "source_kind": "official"
+        },
+        {
+          "topic": "List used here",
+          "text": "The country list comes from a secondary tracker, not the State Department page, and is a starting point only.",
+          "source_url": "https://www.squaremouth.com/travel-advice/travel-advisory-guide-level-4-countries-for-u-s-citizens",
+          "source_kind": "secondary"
+        }
+      ]
+    },
+    {
+      "id": "north_korea",
+      "name": "North Korea",
+      "level": "do_not_travel",
+      "countries": [
+        "North Korea"
+      ],
+      "bbox": null,
+      "summary": "A US passport is not valid for travel there, and broad UN and US sanctions apply.",
+      "legal_notes": [
+        {
+          "topic": "Passport restriction",
+          "text": "The US restriction on using a US passport to travel to, in or through North Korea was extended to 31 August 2027. Travel needs a passport with a special validation from the State Department.",
+          "source_url": "https://www.koreatimes.co.kr/foreignaffairs/northkorea/20260806/us-renews-warning-against-travel-to-n-korea-citing-serious-risk-of-arrest-detention",
+          "source_kind": "news"
+        },
+        {
+          "topic": "Sanctions",
+          "text": "North Korea is under comprehensive US sanctions (OFAC) and UN Security Council sanctions, which bar most transactions, equipment transfers and services.",
+          "source_url": "https://ofac.treasury.gov/sanctions-programs-and-country-information",
+          "source_kind": "official"
+        }
+      ]
+    },
+    {
+      "id": "iran",
+      "name": "Iran",
+      "level": "do_not_travel",
+      "countries": [
+        "Iran"
+      ],
+      "bbox": null,
+      "summary": "Level 4 with a documented risk of wrongful detention of academics, and comprehensive US sanctions.",
+      "legal_notes": [
+        {
+          "topic": "Travel advisory",
+          "text": "Level 4, updated 23 October 2026: terrorism, unrest, kidnapping, arbitrary arrest and wrongful detention, naming students, journalists and academics. Iran does not recognize dual nationality and may block departure.",
+          "source_url": "https://travel.state.gov/en/international-travel/travel-advisories/iran.html",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Sanctions",
+          "text": "Iran is under comprehensive US sanctions (Iranian Transactions and Sanctions Regulations). OFAC General License G for academic exchanges was suspended indefinitely on 24 August 2026; the wind-down ended 8 September 2026. A US person or US institution should not collaborate without legal advice and, where needed, a specific license.",
+          "source_url": "https://ofac.treasury.gov/system/files/2026-08/iran_glg.pdf",
+          "source_kind": "official"
+        }
+      ]
+    },
+    {
+      "id": "russia",
+      "name": "Russia",
+      "level": "do_not_travel",
+      "countries": [
+        "Russia"
+      ],
+      "bbox": null,
+      "summary": "Level 4, Western research cooperation largely suspended, and FSB permits for border zones.",
+      "legal_notes": [
+        {
+          "topic": "Research cooperation",
+          "text": "Most EU and NATO members suspended research projects with Russian institutions or taking place in Russia, so joint fieldwork is in practice closed to them.",
+          "source_url": "https://www.themoscowtimes.com/2026/08/06/alienated-from-west-russias-scientists-grapple-with-working-in-isolation",
+          "source_kind": "news"
+        },
+        {
+          "topic": "Sanctions",
+          "text": "US, EU and UK sanctions and export controls on Russia limit payments, equipment and data transfers; check the lists before any contract or shipment.",
+          "source_url": "https://ofac.treasury.gov/sanctions-programs-and-country-information",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Border zones",
+          "text": "Chukotka requires an FSB border-zone permit (propusk) from the FSB border unit in Anadyr, filed by the host organization; it limits route and length of stay. Other Arctic border zones have similar rules.",
+          "source_url": "https://chaogov.ru/vlast/organy-vlasti/apparat-gubernatora-i-pravitelstva/poryadok-oformleniya-razresheniya-na-vezd/pamyatka-vyezzhayushchemu_en.php",
+          "source_kind": "official"
+        }
+      ]
+    },
+    {
+      "id": "afghanistan",
+      "name": "Afghanistan",
+      "level": "do_not_travel",
+      "countries": [
+        "Afghanistan"
+      ],
+      "bbox": null,
+      "summary": "Level 4 under Taliban rule; detention may be arbitrary and the US embassy is closed.",
+      "legal_notes": [
+        {
+          "topic": "Travel advisory",
+          "text": "Level 4, issued 20 February 2026: reasons for detention may be unclear or arbitrary, and the embassy in Kabul is closed, so consular help is very limited.",
+          "source_url": "https://travel.state.gov/en/international-travel/travel-advisories/afghanistan.html",
+          "source_kind": "official"
+        }
+      ]
+    },
+    {
+      "id": "sudan",
+      "name": "Sudan",
+      "level": "do_not_travel",
+      "countries": [
+        "Sudan"
+      ],
+      "bbox": null,
+      "summary": "Civil war since April 2023; Darfur is under RSF control, with mass killings reported in 2025 and 2026.",
+      "legal_notes": [
+        {
+          "topic": "Armed conflict",
+          "text": "El Fasher has been under RSF control since October 2025; the UN Fact-Finding Mission reported a genocidal campaign there, and fighting continued in Darfur and Kordofan in November 2026. Field access is not possible.",
+          "source_url": "https://www.cfr.org/global-conflict-tracker/conflict/power-struggle-sudan",
+          "source_kind": "secondary"
+        }
+      ]
+    },
+    {
+      "id": "syria",
+      "name": "Syria",
+      "level": "do_not_travel",
+      "countries": [
+        "Syria"
+      ],
+      "bbox": null,
+      "summary": "Level 4. The comprehensive US sanctions program ended in July 2025, but targeted sanctions remain.",
+      "legal_notes": [
+        {
+          "topic": "Sanctions",
+          "text": "Executive Order 14312 ended the Syria sanctions program from 1 July 2025. Designations tied to the former Assad government and others remain under the PAARSS program, so screen every partner.",
+          "source_url": "https://www.hklaw.com/en/insights/publications/2025/07/executive-order-terminates-syria-sanctions",
+          "source_kind": "secondary"
+        }
+      ]
+    },
+    {
+      "id": "ukraine_occupied",
+      "name": "Ukraine and occupied regions",
+      "level": "do_not_travel",
+      "countries": [
+        "Ukraine"
+      ],
+      "bbox": null,
+      "summary": "Active war. Crimea, Donetsk and Luhansk are under regional US embargoes.",
+      "legal_notes": [
+        {
+          "topic": "Sanctions",
+          "text": "Crimea and the occupied Donetsk and Luhansk regions are under broad US restrictions (imports, new investment, blocking).",
+          "source_url": "https://ofac.treasury.gov/sanctions-programs-and-country-information",
+          "source_kind": "official"
+        }
+      ]
+    },
+    {
+      "id": "china",
+      "name": "China: surveying and data laws",
+      "level": "restricted",
+      "countries": [
+        "China"
+      ],
+      "bbox": null,
+      "summary": "Foreign surveying and geological data collection need state approval and a Chinese partner.",
+      "legal_notes": [
+        {
+          "topic": "Surveying and Mapping Law (2017)",
+          "text": "Foreign organizations and individuals need approval to survey or map in China and must work with Chinese departments or units; reports on the 2017 revision say collecting geological data needs a permit from the State Council and military authorities. Fines go up to 1 million yuan, with equipment and results confiscated. Elevation models, GPS tracks and rover logs can count as survey data.",
+          "source_url": "https://www.chinajusticeobserver.com/law/x/surveying-and-mapping-law-20170427",
+          "source_kind": "secondary"
+        },
+        {
+          "topic": "Counter-espionage law (2023)",
+          "text": "Since 1 July 2023 espionage covers any documents, data or materials related to national security and interests, terms the law does not define. The US counterintelligence center warns of legal risk for academics and researchers.",
+          "source_url": "https://www.loc.gov/item/global-legal-monitor/2023-09-21/china-counterespionage-law-revised/",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Travel advisory",
+          "text": "The US advisory notes extra security measures in Xinjiang and Tibet and possible arbitrary detention for travelers with ethnic ties to those regions.",
+          "source_url": "https://travel.state.gov/en/international-travel/travel-advisories/china.html",
+          "source_kind": "official"
+        }
+      ]
+    },
+    {
+      "id": "china_tibet",
+      "name": "Tibet Autonomous Region",
+      "level": "permit",
+      "countries": [
+        "China"
+      ],
+      "bbox": [
+        78.4,
+        26.8,
+        99.1,
+        36.5
+      ],
+      "summary": "Foreigners need a TAR travel permit, arranged only through a licensed Chinese agency.",
+      "legal_notes": [
+        {
+          "topic": "Travel permit",
+          "text": "The State Department's 2025 report says travel to the TAR still requires TAR government permits. The box here is approximate and also takes in parts of Qinghai and Xinjiang.",
+          "source_url": "https://www.tibetanreview.net/us-report-tibet-continues-to-be-chinas-most-restricted-region-for-foreign-visitors-overseas-tibetans/",
+          "source_kind": "news"
+        }
+      ]
+    },
+    {
+      "id": "china_xinjiang_border",
+      "name": "Xinjiang border areas (Tashkurgan, Karakoram)",
+      "level": "permit",
+      "countries": [
+        "China"
+      ],
+      "bbox": [
+        73.4,
+        35.5,
+        77.0,
+        40.0
+      ],
+      "summary": "Remote border counties such as Tashkurgan need a border permit.",
+      "legal_notes": [
+        {
+          "topic": "Border permit",
+          "text": "Most of Xinjiang needs no region-wide permit, but border areas such as Tashkurgan County and parts of the Karakoram Highway do. Rules change; confirm with a licensed agency.",
+          "source_url": "https://www.chinatravelchecklists.com/xinjiang",
+          "source_kind": "secondary"
+        }
+      ]
+    },
+    {
+      "id": "tajikistan_gbao",
+      "name": "Gorno-Badakhshan (Tajik Pamir)",
+      "level": "permit",
+      "countries": [
+        "Tajikistan"
+      ],
+      "bbox": [
+        70.9,
+        36.6,
+        75.2,
+        39.6
+      ],
+      "summary": "A GBAO permit is needed for the whole Tajik Pamir and is checked along the Pamir Highway.",
+      "legal_notes": [
+        {
+          "topic": "GBAO permit",
+          "text": "Foreigners need a GBAO permit, which can be added to the Tajik e-visa or obtained at consulates or the OVIR office in Dushanbe; it may list the districts allowed.",
+          "source_url": "https://advantour.com/tajikistan/visa/gbao-permit.htm",
+          "source_kind": "secondary"
+        }
+      ]
+    },
+    {
+      "id": "india_ladakh",
+      "name": "Ladakh inner line areas",
+      "level": "permit",
+      "countries": [
+        "India",
+        "Siachen Glacier"
+      ],
+      "bbox": [
+        75.3,
+        32.3,
+        80.3,
+        36.0
+      ],
+      "summary": "Foreigners need a Protected Area Permit for inner line areas such as Nubra, Pangong and Tso Moriri.",
+      "legal_notes": [
+        {
+          "topic": "Protected Area Permit",
+          "text": "All foreign nationals need a PAP or RAP for the inner line areas of Ladakh, obtained beforehand; travelers without one are turned back at checkpoints. Whether Tso Kar is included differs between sources, and a review of the permit framework was under way in August 2026.",
+          "source_url": "https://www.outlooktraveller.com/News/ladakh-moves-to-simplify-travel-rules-for-foreign-visitors",
+          "source_kind": "news"
+        }
+      ]
+    },
+    {
+      "id": "mongolia_border",
+      "name": "Mongolia: border zones and strictly protected areas",
+      "level": "permit",
+      "countries": [
+        "Mongolia"
+      ],
+      "bbox": null,
+      "summary": "Strictly protected areas and border zones need permits; Great Gobi B is the highest protection category.",
+      "legal_notes": [
+        {
+          "topic": "Protected areas",
+          "text": "Great Gobi B, on the border with China, is a Strictly Protected Area, Mongolia's highest conservation category; access needs special permits and a local guide. No official source on a separate border-zone permit for it was found; confirm with the reserve administration.",
+          "source_url": "https://savethewildhorse.org/en/great-desert-gobi-b-biosphere/",
+          "source_kind": "secondary"
+        }
+      ]
+    },
+    {
+      "id": "antarctica",
+      "name": "Antarctica",
+      "level": "permit",
+      "countries": [
+        "Antarctica"
+      ],
+      "bbox": null,
+      "summary": "All activity needs authorization from a national Antarctic authority under the Antarctic Treaty system.",
+      "legal_notes": [
+        {
+          "topic": "Environmental Protocol",
+          "text": "Activities need prior environmental assessment and authorization by the national authority of the organizing country. Entering an Antarctic Specially Protected Area needs a special permit.",
+          "source_url": "https://antarcticanz.govt.nz/environment/protecting-special-areas",
+          "source_kind": "official"
+        },
+        {
+          "topic": "McMurdo Dry Valleys",
+          "text": "The Dry Valleys are Antarctic Specially Managed Area No. 2 (Measure 18, 2015); following its management plan is a legal obligation under US and New Zealand law, and it holds five ASPAs (123, 131, 138, 154, 172).",
+          "source_url": "https://www.era.gs/resources/asma2manual/index.shtml",
+          "source_kind": "official"
+        }
+      ]
+    },
+    {
+      "id": "canada_nunavut",
+      "name": "Nunavut (Canadian Arctic Archipelago)",
+      "level": "permit",
+      "countries": [
+        "Canada"
+      ],
+      "bbox": [
+        -120.0,
+        60.0,
+        -60.0,
+        84.0
+      ],
+      "summary": "Research needs a Nunavut Research Institute licence, plus a Parks Canada permit inside national parks.",
+      "legal_notes": [
+        {
+          "topic": "Research licence",
+          "text": "Physical and natural science research in Nunavut needs a Scientific Research Licence from the Nunavut Research Institute, with evidence of community consultation (guidelines updated May 2025).",
+          "source_url": "https://www.nri.nu.ca/research-licencing-applications",
+          "source_kind": "official"
+        },
+        {
+          "topic": "National parks",
+          "text": "Quttinirpaaq (northern Ellesmere) needs a Parks Canada Research and Collection Permit, reviewed by the joint Inuit and government park committee. Archaeological sites need a permit from the Inuit Heritage Trust. The box here is approximate.",
+          "source_url": "https://parks.canada.ca/pn-np/nu/quttinirpaaq/info/plan/implementation-2019",
+          "source_kind": "official"
+        }
+      ]
+    },
+    {
+      "id": "greenland",
+      "name": "Greenland",
+      "level": "permit",
+      "countries": [
+        "Greenland"
+      ],
+      "bbox": null,
+      "summary": "The Northeast Greenland National Park needs a government expedition permit, applied for weeks ahead.",
+      "legal_notes": [
+        {
+          "topic": "Expedition permit",
+          "text": "Access to the national park needs a Greenland Government permit (one source says 12 weeks ahead) and a firearms permit. Collecting minerals, soil or sediment and work with genetic resources need separate permits.",
+          "source_url": "https://zackenberg.dk/permits",
+          "source_kind": "official"
+        }
+      ]
+    },
+    {
+      "id": "saudi_medina",
+      "name": "Medina sacred area (Harrat Rahat)",
+      "level": "restricted",
+      "countries": [
+        "Saudi Arabia"
+      ],
+      "bbox": [
+        39.3,
+        24.2,
+        39.9,
+        24.8
+      ],
+      "summary": "Entry to Medina's sacred core is restricted for non-Muslims; part of Harrat Rahat lies next to it.",
+      "legal_notes": [
+        {
+          "topic": "Access",
+          "text": "Sources differ on how far the restriction reaches today (it was relaxed in 2021 and 2023), and no official rule was found. Coordinate fieldwork with the Saudi Geological Survey and confirm access with Saudi authorities. The box is approximate.",
+          "source_url": "https://en.wikivoyage.org/wiki/Medina",
+          "source_kind": "secondary"
+        }
+      ]
+    },
+    {
+      "id": "morocco_tafilalt_erfoud",
+      "name": "Tafilalt (Erfoud, Rissani, Merzouga), Ibn Battuta Centre field sites",
+      "level": "permit",
+      "countries": [
+        "Morocco"
+      ],
+      "bbox": [
+        -4.6,
+        30.8,
+        -3.8,
+        31.6
+      ],
+      "summary": "Fieldwork for rover and instrument tests is established here through the Ibn Battuta Centre, but collecting and exporting meteorites and fossils is regulated and the specific permits are not fully confirmed.",
+      "legal_notes": [
+        {
+          "topic": "Local partner and field base",
+          "text": "The Ibn Battuta Centre was set up in 2006 by the International Research School of Planetary Sciences and Cadi Ayyad University (Marrakech) to test rovers, landing systems and instruments. Its main field base is in Erfoud, and it is listed as a Europlanet research infrastructure facility.",
+          "source_url": "https://www.ibnbattutacentre.org/the-centre.html",
+          "source_kind": "secondary"
+        },
+        {
+          "topic": "Meteorite collection and export",
+          "text": "A peer-reviewed 2024 overview in Meteoritics & Planetary Science describes Morocco's new rules on collecting and exporting meteorites, which come from the 2014 mining law (Law 33-13) and an application decree that took effect around 2020. Secondary reports say licensed hunters must register finds and may then sell or export part of them. The decree text, the exact share allowed and the issuing ministry are not confirmed from an official gazette.",
+          "source_url": "https://cosmochemistry-papers.com/2024/01/15/an-overview-of-the-new-moroccan-regulation-on-collection-and-export-of-meteorites-a-geoheritage-to-promote-and-preserve/",
+          "source_kind": "secondary"
+        },
+        {
+          "topic": "Fossils and heritage law",
+          "text": "Moroccan news reports name Heritage Law 22-80 and the newer Law 33-22 as the legal basis for recovering trafficked fossils, with the Ministry of Youth, Culture and Communication and its Directorate of Cultural Heritage in charge. The article does not describe permit procedures for scientific collection or export. A permit route for fossil export is not confirmed.",
+          "source_url": "https://en.le360.ma/society/the-battle-against-fossil-trafficking-how-morocco-is-protecting-its-geological-heritage_RVGTYZGKBNG7FKVUFQAOLMEGBQ/",
+          "source_kind": "news"
+        },
+        {
+          "topic": "Security advisory",
+          "text": "The US State Department rates Morocco Level 2 (Exercise Increased Caution) because of terrorism. Search snippets date the page September 2026; the full text could not be retrieved.",
+          "source_url": "https://travel.state.gov/en/international-travel/travel-advisories/morocco.html",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Algerian border",
+          "text": "The Tafilalt sites lie near the closed Algerian border. Any official border-zone restriction affecting the Merzouga area is not confirmed.",
+          "source_url": "https://www.globalguardian.com/global-digest/is-morocco-safe",
+          "source_kind": "secondary"
+        }
+      ]
+    },
+    {
+      "id": "ethiopia_danakil_dallol",
+      "name": "Danakil Depression and Dallol (Afar Region)",
+      "level": "do_not_travel",
+      "countries": [
+        "Ethiopia"
+      ],
+      "bbox": [
+        39.6,
+        13.0,
+        41.0,
+        14.6
+      ],
+      "summary": "Canada advises against all travel to Afar, and the UK advises against all travel within 20 km of the Eritrean border, which is where Dallol lies; visits that do happen use approved operators with security escorts.",
+      "legal_notes": [
+        {
+          "topic": "UK advisory",
+          "text": "The UK FCDO advises against all travel to parts of Afar within 20 km of the Eritrean border and within 50 km of the Tigray-Afar border, and against all but essential travel to the rest of Afar. It also says foreign nationals currently cannot travel to airports in Afar because of restrictions imposed by the Ethiopian authorities.",
+          "source_url": "https://www.gov.uk/foreign-travel-advice/ethiopia/regional-risks",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Canada advisory and escort",
+          "text": "Canada rates Afar 'Avoid all travel' (updated 29 October 2026) because of armed conflict and unrest, and notes that armed groups have targeted foreigners in the Danakil before. Anyone who still goes should hire an experienced guide from a reputable company, escorted by official security forces.",
+          "source_url": "https://travel.gc.ca/destinations/ethiopia",
+          "source_kind": "official"
+        },
+        {
+          "topic": "France advisory",
+          "text": "France (updated 5 November 2026) formally advises against the Afar strip along the Eritrean border. It says Danakil visits from Semera are possible only with tourism professionals, limited to a few hours at Dallol and Erta Ale, on routes supervised by local authorities.",
+          "source_url": "https://www.diplomatie.gouv.fr/fr/information-par-pays/ethiopie/conseils-aux-voyageurs-securite",
+          "source_kind": "official"
+        },
+        {
+          "topic": "US advisory",
+          "text": "Search snippets say the US State Department kept Ethiopia at Level 3 (Reconsider Travel) in August 2026, with parts of Afar restricted and US government staff needing special authorization to travel along the Tigray and Amhara borders. An older April 2026 version said not to travel to Afar at all. The live page could not be retrieved.",
+          "source_url": "https://travel.state.gov/en/international-travel/travel-advisories/ethiopia.html",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Local permits and scouts",
+          "text": "Tour operators say entry permits, police or militia fees and local Afar scouts are arranged through the operator, and that Dallol is open only to approved agencies. No official Afar Regional Tourism Bureau page was found. A scientific research or sampling permit (issuing body and lead time) is not confirmed.",
+          "source_url": "https://www.capmad.com/post/dallol-in-the-danakil-how-ethiopias-geological-hellscape-is-becoming-a-tightly-controlled-tourism-product",
+          "source_kind": "secondary"
+        }
+      ]
+    },
+    {
+      "id": "eritrea_danakil_border",
+      "name": "Eritrean Danakil and Ethiopia border strip",
+      "level": "do_not_travel",
+      "countries": [
+        "Eritrea"
+      ],
+      "bbox": [
+        39.8,
+        13.8,
+        42.0,
+        15.5
+      ],
+      "summary": "The Eritrean side of the Danakil lies within or near the 25 km border strip where the UK and Canada advise against all travel, and foreigners need a permit for any trip more than 25 km from Asmara.",
+      "legal_notes": [
+        {
+          "topic": "Border strip advisory",
+          "text": "Canada (updated 14 October 2026) advises against all travel within 25 km of every Eritrean border and against non-essential travel to the rest of the country. It says the Ethiopian border is heavily militarized, all crossings are closed and unmarked landmines are present. The UK FCDO likewise advises against all travel within 25 km of Eritrea's land borders.",
+          "source_url": "https://travel.gc.ca/destinations/eritrea",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Internal travel permits",
+          "text": "Foreigners need a permit for any travel more than 25 km from Asmara, issued by the relevant ministry (Tourism for tourists, Trade and Industry for business, Foreign Affairs for diplomats and NGOs). Checkpoints enforce this strictly, and foreigners have been turned back even with permits.",
+          "source_url": "https://travel.gc.ca/destinations/eritrea",
+          "source_kind": "official"
+        },
+        {
+          "topic": "US advisory",
+          "text": "Search snippets show the US State Department rates Eritrea Level 2, citing travel restrictions, limited consular help, landmines and the risk of wrongful detention. The live page could not be retrieved.",
+          "source_url": "https://travel.state.gov/en/international-travel/travel-advisories/eritrea.html",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Research permits",
+          "text": "Whether foreign scientists can get permits for geological fieldwork or sampling in the Eritrean Danakil, and from which body, is not confirmed.",
+          "source_url": "https://travel.gc.ca/destinations/eritrea",
+          "source_kind": "official"
+        }
+      ]
+    },
+    {
+      "id": "botswana_makgadikgadi",
+      "name": "Makgadikgadi Pans and Nxai Pan National Park",
+      "level": "permit",
+      "countries": [
+        "Botswana"
+      ],
+      "bbox": [
+        24.0,
+        -21.0,
+        26.5,
+        -19.5
+      ],
+      "summary": "Research in protected areas needs a government environmental research permit, a signed Memorandum of Agreement and a residence permit for non-citizens; processing takes roughly 40 to 45 working days.",
+      "legal_notes": [
+        {
+          "topic": "Research permit",
+          "text": "Research in Botswana needs a permit from the ministry or department the research relates to. If approved, the researcher signs a Memorandum of Agreement and the permit is issued once it is returned. Non-citizens must provide a passport copy, a detailed proposal and a CV.",
+          "source_url": "https://gov.bw/learning-and-teaching/application-research-permit",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Protected-area research permit",
+          "text": "A separate 'environmental research permit' covers institutions or individuals doing research in protected areas, which includes Makgadikgadi Pans and Nxai Pan National Parks. The official application form carries the former ministry name (Environment, Natural Resources Conservation and Tourism), so check the current ministry and fees with the Department of Wildlife and National Parks (DWNP).",
+          "source_url": "https://cms2.gov.bw/sites/default/files/2020-03/Application%20for%20Research%20Permit.pdf",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Lead time and immigration",
+          "text": "The government portal estimates 40 to 45 working days, and applicants abroad should apply at least one month before travel. Under the Immigration Act, non-citizen researchers must obtain a temporary residence permit before arrival and must not start work before the research permit is issued.",
+          "source_url": "https://cms2.gov.bw/sites/default/files/2020-03/Guidelines%20for%20Application%20for%20Research%20Permits_0.pdf",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Enforcement",
+          "text": "The DWNP director has said that researchers breaking the terms of their licences in the Okavango Delta, Chobe and the Makgadikgadi Pans are on the rise, and that the department will crack down.",
+          "source_url": "https://www.mmegi.bw/news/dwnp-vows-to-crack-down-on-errant-researchers/news",
+          "source_kind": "news"
+        },
+        {
+          "topic": "Sample export",
+          "text": "Specific rules for exporting rock, salt or sediment samples from Botswana are not confirmed.",
+          "source_url": "https://www.gov.bw/natural-resources/environmental-research-permit",
+          "source_kind": "official"
+        }
+      ]
+    },
+    {
+      "id": "namibia_namib_gobabeb",
+      "name": "Namib Desert, Gobabeb station and Namib-Naukluft National Park",
+      "level": "permit",
+      "countries": [
+        "Namibia"
+      ],
+      "bbox": [
+        14.4,
+        -25.0,
+        16.5,
+        -22.8
+      ],
+      "summary": "Fieldwork is possible with an NCRST research permit, ministry park-entry and research permits, and separate export permits for samples; collecting and exporting meteorites and fossils is controlled under the heritage law.",
+      "legal_notes": [
+        {
+          "topic": "National research permit (NCRST)",
+          "text": "Under the Research, Science and Technology Act 2004 and its regulations, researchers not based in Namibia apply to the National Commission on Research, Science and Technology (NCRST) for a research permit using Form RST3. The permit is not transferable.",
+          "source_url": "https://www.ncrst.na/wp-content/uploads/2025/09/RST-Regulations.pdf",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Park access and research in protected areas",
+          "text": "The Ministry of Environment, Forestry and Tourism (MEFT) requires a research permit to collect biological specimens or study fauna and flora anywhere in Namibia, including parks. The main road through Namib-Naukluft needs no permit, but other parts of the park need a permit from the Ministry in advance.",
+          "source_url": "https://www.meft.gov.na/frequently-asked-questions/what-are-the-entry-permit-requirements-for-the-various-parks-in-Namibia-/136/",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Gobabeb station",
+          "text": "Gobabeb is inside Namib-Naukluft Park and offers to advise visiting researchers on the research permit application. A park entry permit is needed and can be obtained at ministry offices in Windhoek, Swakopmund or Sesriem.",
+          "source_url": "https://gobabeb.org/research/",
+          "source_kind": "secondary"
+        },
+        {
+          "topic": "Meteorites and fossils",
+          "text": "The National Heritage Act 27 of 2004 regulates buying, selling and exporting meteorites and palaeontological objects. Exports need a National Heritage Council permit, endorsed by the National Museum or the Geological Survey, with at least 14 days of processing. An undated Ministry of Mines brochure goes further and says collecting or exporting fossils and meteorites is prohibited by law.",
+          "source_url": "https://nhc-nam.org/wp-content/uploads/2024/04/Export-Permit-Application-Form.pdf",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Rock and mineral sample export",
+          "text": "Mineral exports are governed by Section 127 of the Minerals (Prospecting and Mining) Act 1992. The ministry's export form distinguishes exports not for sale (such as research), and its collector guide says researchers need a Ministry of Mines and Energy permit for all material collected.",
+          "source_url": "https://www.mme.gov.na/files/downloads/0fe_export-permit-application.pdf",
+          "source_kind": "official"
+        }
+      ]
+    },
+    {
+      "id": "oman_dhofar",
+      "name": "Dhofar desert (meteorite fields, AMADEE-18 site at Marmul)",
+      "level": "restricted",
+      "countries": [
+        "Oman"
+      ],
+      "bbox": [
+        53.5,
+        17.8,
+        55.8,
+        19.8
+      ],
+      "summary": "Meteorites are protected cultural heritage under Omani law, so collecting or exporting them without a ministry permit is an offence; the US rates Oman Level 3 and says not to travel to the Yemen border area.",
+      "legal_notes": [
+        {
+          "topic": "Meteorites as protected heritage",
+          "text": "A 2019 Royal Decree classifies meteorite fragments as movable cultural heritage under the Ministry of Heritage and Tourism. Possessing illegally taken heritage items can bring one to three months in prison and fines of 500 to 10,000 OMR. Reports also say anyone holding a meteorite must hand it to the ministry. Sources give conflicting decree numbers (35/2019 and 37/2019).",
+          "source_url": "https://www.muscatdaily.com/2025/07/13/possession-trade-of-meteorites-prohibited-by-law-in-oman/",
+          "source_kind": "news"
+        },
+        {
+          "topic": "Ministry enforcement",
+          "text": "The Ministry of Heritage and Tourism runs meteorite programmes and enforces the Cultural Heritage Law against collection and export without permits, working with customs at Muscat airport.",
+          "source_url": "https://mht.gov.om/media-center/news/mht-hosts-second-edition-of-meteorite-workshop/",
+          "source_kind": "official"
+        },
+        {
+          "topic": "2026 amendment",
+          "text": "News reports say Royal Decree 62/2026 (June 2026) amended the Cultural Heritage Law, including licensing for trading in or exporting heritage objects. The decree text was not checked.",
+          "source_url": "https://www.omanobserver.om/plan-check-meteorite-smuggling/",
+          "source_kind": "news"
+        },
+        {
+          "topic": "Precedent: AMADEE-18",
+          "text": "The Austrian Space Forum ran the AMADEE-18 Mars analog mission in the Marmul desert, Dhofar, in February 2018. It worked under an MoU with the Oman Astronomical Society and an Omani National Steering Committee of government bodies. The formal permit steps the government required are not confirmed.",
+          "source_url": "https://oewf.org/en/?p=13219",
+          "source_kind": "secondary"
+        },
+        {
+          "topic": "Security advisory",
+          "text": "The US State Department rates Oman Level 3 (Reconsider Travel) for armed conflict and terrorism, says not to travel to the Yemen border area, and says Omani authorities routinely detain people who cross it. The UK FCDO warns of high regional escalation risk and advises staying away from security and military facilities.",
+          "source_url": "https://travel.state.gov/en/international-travel/travel-advisories/oman.html",
+          "source_kind": "official"
+        }
+      ]
+    },
+    {
+      "id": "israel_makhtesh_ramon",
+      "name": "Makhtesh Ramon (Ramon Crater Nature Reserve, Negev)",
+      "level": "permit",
+      "countries": [
+        "Israel"
+      ],
+      "bbox": [
+        34.6,
+        30.4,
+        35.0,
+        30.7
+      ],
+      "summary": "The crater is an Israel Nature and Parks Authority reserve where damaging or removing protected natural assets is prohibited without authorization; the US rates Israel Level 3, and the IDF sometimes closes nearby areas.",
+      "legal_notes": [
+        {
+          "topic": "Security advisory",
+          "text": "The US State Department rates Israel Level 3 (Reconsider Travel) for terrorism and unrest (October 2026), with Level 4 zones in the north and near Gaza. The UK FCDO (updated 27 October 2026) does not name the Negev or Mitzpe Ramon among restricted areas, but warns of rocket and drone attacks nationwide.",
+          "source_url": "https://www.gov.uk/foreign-travel-advice/israel",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Protected area law",
+          "text": "The National Parks, Nature Reserves, National Sites and Memorial Sites Law 1998 places reserves under the Israel Nature and Parks Authority (INPA). Related regulations prohibit damaging protected natural values, and exporting them without the Director's authorization. Whether rock sampling in Makhtesh Ramon needs a specific INPA scientific permit, and the procedure and lead time, are not confirmed.",
+          "source_url": "https://www.ecolex.org/fr/details/legislation/national-parks-nature-reserves-national-sites-and-memorial-sites-law-1998-lex-faoc033439/",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Reserve management",
+          "text": "Ramon Crater is an INPA-managed nature reserve of about 1,100 km2 and an International Dark Sky Park. Part of its land lies within the Israel Nuclear Research Center site.",
+          "source_url": "https://darksky.org/our-work/conservation/idsp/parks/ramoncrater",
+          "source_kind": "secondary"
+        },
+        {
+          "topic": "Military closures",
+          "text": "Israeli news has reported IDF closures of Ramon Crater roads for defence activity and restrictions on southern firing zones, especially around holidays. Whether any part of the crater is a permanent firing zone is not confirmed.",
+          "source_url": "https://www.jpost.com/breaking-news/article-742330",
+          "source_kind": "news"
+        }
+      ]
+    },
+    {
+      "id": "armenia_armash",
+      "name": "Armash (AMADEE-24 site, Armash fishponds Important Bird Area)",
+      "level": "permit",
+      "countries": [
+        "Armenia"
+      ],
+      "bbox": [
+        44.7,
+        39.7,
+        44.9,
+        39.85
+      ],
+      "summary": "Armash sits beside the closed Turkish border, on mostly private fish-farm land that is also an Important Bird Area; specific border-zone permit rules for foreigners are not confirmed.",
+      "legal_notes": [
+        {
+          "topic": "Important Bird Area",
+          "text": "BirdLife lists Armash fish farm as an Important Bird Area and Key Biodiversity Area of 4,639 ha, mostly privately owned, and reports illegal and legal shooting of waterbirds there. The site has been proposed for Ramsar status but is not confirmed as designated.",
+          "source_url": "https://datazone.birdlife.org/site/factsheet/armash-fish-farm-iba-armenia",
+          "source_kind": "secondary"
+        },
+        {
+          "topic": "Border zone and private land",
+          "text": "Birding guides say the Armash ponds are in a border zone and are private property, so access needs the owners' consent. The official border-zone permit procedure for foreigners is not confirmed.",
+          "source_url": "https://birdingplaces.eu/en/birdingplaces/armenia/armash-fishponds",
+          "source_kind": "secondary"
+        },
+        {
+          "topic": "Turkish border status",
+          "text": "The Armenia-Turkey land border has been closed since 1993. Since 2025, control at the Margara checkpoint has passed from Russian to Armenian border guards.",
+          "source_url": "https://www.arka.am/en/news/politics/russian-border-guards-at-margara-checkpoint-on-armenian-turkish-border-replaced-by-armenian-border-g",
+          "source_kind": "news"
+        },
+        {
+          "topic": "UK advisory and photography",
+          "text": "The UK FCDO advises against all travel within 5 km of the Azerbaijan border (not the Turkish border, where Armash is). It also warns that photographing military bases, equipment and installations is illegal and has led to detentions.",
+          "source_url": "https://www.gov.uk/foreign-travel-advice/armenia/safety-and-security",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Precedent: AMADEE-24",
+          "text": "Armash was used for the Austrian Space Forum's AMADEE-24 analog mission. The permits obtained for it are not confirmed.",
+          "source_url": "https://oewf.org/en/",
+          "source_kind": "secondary"
+        }
+      ]
+    },
+    {
+      "id": "russia_putorana_norilsk",
+      "name": "Putorana Plateau (Putoransky State Nature Reserve) and Norilsk",
+      "level": "do_not_travel",
+      "countries": [
+        "Russia"
+      ],
+      "bbox": [
+        87.5,
+        67.5,
+        98.0,
+        70.5
+      ],
+      "summary": "The UK advises against all travel to Russia; on top of that, Norilsk (the gateway) is closed to foreigners without special permission, and the reserve is a strict zapovednik needing an administration permit.",
+      "legal_notes": [
+        {
+          "topic": "Country advisory",
+          "text": "The UK FCDO advises against all travel to Russia (last updated 18 September 2026, still current 15 November 2026).",
+          "source_url": "https://www.gov.uk/foreign-travel-advice/russia",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Norilsk closed city",
+          "text": "Norilsk was closed to foreigners by a 2001 government decree, and approval of individual visits was given to the FSB (successor to the KGB). Current sources say it is still closed and that foreigners, except Russian and Belarusian nationals, need special permission. No official text confirming the current renewal was found.",
+          "source_url": "https://www.deseret.com/2001/11/8/19615578/russia-closes-siberian-city/",
+          "source_kind": "news"
+        },
+        {
+          "topic": "Zapovednik entry permit",
+          "text": "Putoransky is a strict nature reserve (zapovednik, IUCN Ia) with headquarters in Norilsk. Under Federal Law 33-FZ on Specially Protected Natural Areas, people may be in a zapovednik only with permission from its administration, and state inspectors can demand that permit. Travel guides say entry permits are issued by the reserve administration in Norilsk.",
+          "source_url": "https://www.consultant.ru/document/cons_doc_LAW_304085/3d0cac60971a511280cbba229d9b6329c07731f7/",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Allowed uses",
+          "text": "The site is UNESCO World Heritage (2010), and within the core reserve no land or resource use is allowed other than scientific research and monitoring. Access is by helicopter or water, with no road.",
+          "source_url": "https://www.worldheritagesite.org/list/id/1234",
+          "source_kind": "secondary"
+        },
+        {
+          "topic": "Lead time",
+          "text": "One traveller account says a foreigner's permit took about two months and that others were refused without explanation. The current official lead time is not confirmed.",
+          "source_url": "https://worldheritagesite.org/community/martina-ruckova/putorana-plateau",
+          "source_kind": "secondary"
+        }
+      ]
+    },
+    {
+      "id": "russia_yana_indigirka",
+      "name": "Yana-Indigirka Lowland (Sakha Republic / Yakutia)",
+      "level": "do_not_travel",
+      "countries": [
+        "Russia"
+      ],
+      "bbox": [
+        133.0,
+        69.0,
+        153.0,
+        72.5
+      ],
+      "summary": "The UK advises against all travel to Russia; the area also includes Kytalyk National Park, and FSB border-zone rules on the Arctic coast may apply, though Yakutia-specific rules are not confirmed.",
+      "legal_notes": [
+        {
+          "topic": "Country advisory",
+          "text": "The UK FCDO advises against all travel to Russia (last updated 18 September 2026).",
+          "source_url": "https://www.gov.uk/foreign-travel-advice/russia",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Kytalyk National Park",
+          "text": "Kytalyk National Park (IUCN II, about 1.89 million ha) covers the Indigirka delta in Allaikhovsky District of the Yana-Indigirka Lowland. It was created in 2020, building on a 1996 Yakutian resource reserve for Siberian Crane and other wetland birds. Research there would need permission from the park; the procedure is not confirmed.",
+          "source_url": "https://en.wikipedia.org/wiki/Kytalyk_National_Park",
+          "source_kind": "secondary"
+        },
+        {
+          "topic": "Arctic coastal border zone",
+          "text": "FSB decrees since 2006 put large parts of Russia's Arctic coastline in the border zone, where non-residents (Russian or foreign) need an FSB pass. Applications were due 60 days ahead for foreigners as of 2017. Whether the Allaikhovsky and Ust-Yansky coastal districts are currently in the border zone is not confirmed.",
+          "source_url": "https://thebarentsobserver.com/en/borders/2017/12/fsb-eases-access-border-zone",
+          "source_kind": "news"
+        },
+        {
+          "topic": "Border pass procedure",
+          "text": "A 2023 FSB order sets the procedure for individual and collective passes into the border zone, including for foreign citizens. Its application to Yakutia was not checked.",
+          "source_url": "https://faolex.fao.org/docs/pdf/rus109668.pdf",
+          "source_kind": "official"
+        }
+      ]
+    },
+    {
+      "id": "saudi_harrat_khaybar",
+      "name": "Harrat Khaybar volcanic field (Khaybar, AlUla region)",
+      "level": "restricted",
+      "countries": [
+        "Saudi Arabia"
+      ],
+      "bbox": [
+        39.5,
+        24.8,
+        40.8,
+        26.4
+      ],
+      "summary": "The volcanic field overlaps heritage areas run by the Royal Commission for AlUla, and Saudi law bans surveying or excavating without a licence; the UK advises against all but essential travel to Saudi Arabia because of missile and drone attacks.",
+      "legal_notes": [
+        {
+          "topic": "Security advisory",
+          "text": "The UK FCDO (updated 27 October 2026) advises against all travel within 10 km of the Yemen border and all but essential travel to the rest of Saudi Arabia, after Houthi missile and drone attacks, including a strike on Riyadh's King Khalid airport on 10 October 2026. News reports say the US raised Saudi Arabia to Level 3 (Reconsider Travel) on 12 October 2026.",
+          "source_url": "https://www.gov.uk/foreign-travel-advice/saudi-arabia",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Antiquities law",
+          "text": "The 2014 Law of Antiquities, Museums and Urban Heritage, overseen by the Heritage Commission since 2019, makes all antiquities state property. Surveying or excavating without a licence is punishable by jail or fines, and the Commission actively records violations, including unlicensed survey and excavation.",
+          "source_url": "https://saudigazette.com.sa/article/663306/saudi-arabia/heritage-commission-uncovers-55-violations-targeting-saudi-archaeological-sites",
+          "source_kind": "news"
+        },
+        {
+          "topic": "Royal Commission for AlUla (RCU)",
+          "text": "RCU supervises archaeological research seasons in AlUla and Khaybar and runs Khaybar heritage projects with partners. The Khaybar Natural Area, which includes the Harrat Khaybar volcanic landscape, is part of the area RCU is developing. Khaybar's formal protected-area status and the RCU permit procedure for geological fieldwork are not confirmed.",
+          "source_url": "https://www.rcu.gov.sa/en/strategic-initiatives/khaybar-heritage-village",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Saudi Geological Survey",
+          "text": "Whether the Saudi Geological Survey requires a permit or partnership for geological sampling or instrument tests on Harrat Khaybar is not confirmed.",
+          "source_url": "https://english.aawsat.com/culture/5194888-rcu-launches-2025-26-archaeology-season-advance-research-alula-khaybar%C2%A0",
+          "source_kind": "news"
+        },
+        {
+          "topic": "Nearby protected area",
+          "text": "The neighbouring Harrat Uwayrid is a national protected area (2020, IUCN VI) managed by RCU and a UNESCO Biosphere Reserve (2022).",
+          "source_url": "https://protectedplanet.net/11948",
+          "source_kind": "secondary"
+        }
+      ]
+    },
+    {
+      "id": "peru_pampas_de_la_joya",
+      "name": "Pampas de La Joya hyperarid desert (Arequipa, Peru)",
+      "level": "permit",
+      "countries": [
+        "Peru"
+      ],
+      "bbox": [
+        -72.2,
+        -16.9,
+        -71.6,
+        -16.3
+      ],
+      "summary": "Fieldwork outside protected areas looks feasible, but archaeological, paleontological, biological/genetic and land-tenure rules each apply on their own track; no specific permit for taking non-biological rock or soil samples was confirmed.",
+      "legal_notes": [
+        {
+          "topic": "Biological research outside protected areas",
+          "text": "SERFOR's TUPA (approved August 2024) includes procedure PA1110D76C, which authorizes research on wild flora or fauna outside protected areas for species that are not threatened and not CITES-listed. Regional forestry authorities (ATFFS/ARFFS) issue these authorizations. The processing time was not confirmed.",
+          "source_url": "https://cdn.www.gob.pe/uploads/document/file/8198934/6854731-ra-r3089-2025-atffs-piura.pdf",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Foreign researchers",
+          "text": "A 2025 SERFOR-system resolution cites the Forestry and Wildlife Law regulation (Ley 29763): when foreigners apply for a research authorization, at least one Peruvian researcher must be on the team and must be credited in publications.",
+          "source_url": "https://cdn.www.gob.pe/uploads/document/file/8142114/6819035-ra-r4864-2025-atffs-selvacentral.pdf",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Genetic resources (microbial sampling)",
+          "text": "Under Andean Decision 391 and DS 019-2021-MINAM, anyone, Peruvian or foreign, who obtains and uses genetic resources must request access. Non-commercial research needs an access authorization and commercial use needs an access contract. Competent authorities include SERFOR, INIA, PRODUCE and SERNANP.",
+          "source_url": "https://genesperu.minam.gob.pe/wp-content/uploads/2021/06/PREGUNTAS-FRECUENTES.ACCESO-1.pdf",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Archaeology",
+          "text": "Exporting archaeological samples for analysis abroad needs an export authorization from the Ministerio de Cultura. Separately, the CIRA certificate (certifying that no archaeological remains are present) is required for investment projects such as mining and roads. Whether a CIRA is needed for short scientific field tests was not confirmed.",
+          "source_url": "https://www.gob.pe/39932",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Paleontology",
+          "text": "Under Ley 31204, fossils belong to the State and INGEMMET is the governing authority. INGEMMET evaluates paleontology permits and authorizes the temporary export of fossils abroad. If fossils turn up by chance during earthworks, work must stop and INGEMMET must be notified within 2 business days.",
+          "source_url": "https://busquedas.elperuano.pe/normaslegales/ley-general-del-patrimonio-paleontologico-del-peru-ley-n-31204-1958026-3/",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Geological (non-biological) samples",
+          "text": "No INGEMMET procedure for authorizing the export of rock or mineral research samples was found. Whether a permit is needed was not confirmed and should be checked with INGEMMET.",
+          "source_url": "https://www.gob.pe/institucion/ingemmet/institucional",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Land tenure and mining concessions",
+          "text": "News reports describe land trafficking and occupation disputes over hundreds of hectares in the Pampas de La Joya. An INGEMMET Arequipa official was quoted saying some mining concessions in the region overlap agricultural projects such as Majes Siguas. The INGEMMET mining cadastre (GEOCATMIN) and the landowner should be checked before entering.",
+          "source_url": "https://elbuho.pe/?p=283273",
+          "source_kind": "news"
+        }
+      ]
+    },
+    {
+      "id": "peru_tambopata",
+      "name": "Reserva Nacional Tambopata (Madre de Dios, Peru)",
+      "level": "permit",
+      "countries": [
+        "Peru"
+      ],
+      "bbox": [
+        -70.1,
+        -13.4,
+        -68.8,
+        -12.3
+      ],
+      "summary": "Any research inside the reserve requires prior SERNANP authorization, and the area faces security risks from illegal gold mining.",
+      "legal_notes": [
+        {
+          "topic": "Protected-area research permit",
+          "text": "All scientific research inside a nationally administered protected area requires prior SERNANP authorization, requested online at investigacionesanp.sernanp.gob.pe. The area's own management office (jefatura) decides when the study covers one protected area, and DGANP in Lima decides when it covers two or more. The authorization is valid for up to 1 year.",
+          "source_url": "https://sinia.minam.gob.pe/documentos/ruta-realizar-investigacion-areas-naturales-protegidas-sistema",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Lead time",
+          "text": "A state news agency report gave about 12 days for research needing prior authorization and 2 days for automatic authorizations. The article's date is unknown, so the current deadline in SERNANP's TUPA is not confirmed.",
+          "source_url": "https://andina.pe/ingles/noticia-sernanp-reduce-plazos-tramites-para-desarrollar-actividades-anp-637995.aspx",
+          "source_kind": "news"
+        },
+        {
+          "topic": "Management plan",
+          "text": "SERNANP approved the Reserva Nacional Tambopata Master Plan for 2025-2030, the area's top planning document, which sets use zones. The zone-by-zone rules were not reviewed.",
+          "source_url": "https://legislacionanp.org.pe/wp-content/uploads/2026/01/7288448-resolucion-de-presidencia-ejecutiva-000084-2025-pe.pdf",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Genetic resources",
+          "text": "SERNANP is one of the competent authorities for access to genetic resources under Decision 391, so microbial or genetic sampling needs a separate access authorization.",
+          "source_url": "https://genesperu.minam.gob.pe/wp-content/uploads/2021/06/PREGUNTAS-FRECUENTES.ACCESO-1.pdf",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Security",
+          "text": "Illegal gold mining has repeatedly invaded the reserve and its buffer zone. A 2024 report says violence has made the State pull back in parts of the surrounding area. US OSAC reporting lists Madre de Dios among departments with rising crime.",
+          "source_url": "https://es.mongabay.com/2024/07/violencia-replego-al-estado-peruano-presiona-reserva-nacional-tambopata-peru/",
+          "source_kind": "news"
+        },
+        {
+          "topic": "Security (official advisory)",
+          "text": "Canada warns that protesters may block rivers in remote areas of Madre de Dios that are essential for transport.",
+          "source_url": "https://travel.gc.ca/destinations/peru",
+          "source_kind": "official"
+        }
+      ]
+    },
+    {
+      "id": "chile_atacama_hyperarid_core",
+      "name": "Atacama hyperarid core: Yungay, María Elena Sur, Salar Grande, Salar de Pajonales (Chile)",
+      "level": "permit",
+      "countries": [
+        "Chile"
+      ],
+      "bbox": [
+        -70.5,
+        -25.5,
+        -68.5,
+        -20.5
+      ],
+      "summary": "Outside SNASPE protected areas no general research permit was confirmed, but fossil and archaeological finds fall under the Consejo de Monumentos Nacionales, foreign teams in border zones need DIFROL approval, and some salares are reserved for state lithium projects.",
+      "legal_notes": [
+        {
+          "topic": "Paleontology and archaeology",
+          "text": "Under Ley 17.288 (art. 21), paleontological pieces and the places where they are found are State property. Paleontological excavation needs prior CMN authorization (art. 22). Finding a fossil is legal if CMN is notified immediately, but removing it can count as appropriation of a National Monument (art. 38 bis).",
+          "source_url": "https://www.monumentos.gob.cl/noticias/que-hago-si-encuentro-un-fosil",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Paleontological permit lead time",
+          "text": "Prospection or excavation permits are granted only to paleontologists who meet the professional profile CMN has approved. CMN has up to 60 days to answer.",
+          "source_url": "https://chileatiende.gob.cl/fichas/928/1/pdf",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Sample export (heritage material)",
+          "text": "Taking archaeological or paleontological samples abroad needs CMN approval. The application must state the analysis planned, the sample weight, the transport conditions and the destination. Approvals are published in the Diario Oficial.",
+          "source_url": "https://www.monumentos.gob.cl/sites/default/files/instructivo_salida_de_muestras_arqueologia_final.pdf",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Foreign expeditions in border zones",
+          "text": "Under DFL 83 of 1979, people and organizations based abroad must get DIFROL authorization for scientific or technical expeditions in border zones. Applications go through DIFROL's online system.",
+          "source_url": "https://www.chileatiende.gob.cl/fichas/1177-autorizacion-de-expediciones-complejas",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Lithium salares",
+          "text": "Under the National Lithium Strategy, Salar Grande is part of ENAMI's state lithium project group (with Infieles, Isla and Aguilar), and a network covering at least 30% of salares is to be protected. Whether Salar de Pajonales is protected or under concession was not confirmed.",
+          "source_url": "https://www.reporteminero.cl/noticia/noticias/2025/11/red-salares-protegidos-chile-estrategia-nacional-litio",
+          "source_kind": "news"
+        },
+        {
+          "topic": "Geological (non-biological) samples",
+          "text": "No Chilean permit specific to non-fossil rock or soil sampling outside protected areas was confirmed. Mining concessions and landowner permission were not researched.",
+          "source_url": "https://www.monumentos.gob.cl/noticias/que-hago-si-encuentro-un-fosil",
+          "source_kind": "official"
+        }
+      ]
+    },
+    {
+      "id": "chile_licancabur_los_flamencos",
+      "name": "Licancabur area and Reserva Nacional Los Flamencos (San Pedro de Atacama, Chile)",
+      "level": "permit",
+      "countries": [
+        "Chile"
+      ],
+      "bbox": [
+        -68.4,
+        -23.4,
+        -67.6,
+        -22.6
+      ],
+      "summary": "Research inside SNASPE areas needs a CONAF permit filed at least two months ahead, and the area is Atacameño (Lickanantay) territory with community co-management and Indigenous consultation rules.",
+      "legal_notes": [
+        {
+          "topic": "CONAF research permit",
+          "text": "A CONAF permit is required for research in SNASPE protected areas and should be filed at least 2 months before fieldwork, with a reply due within 2 months. The procedure is free and requires a research project, institutional sponsorship and commitment to the SNASPE research manual. Foreign researchers need backing from a Chilean institution, plus DIFROL authorization in border zones.",
+          "source_url": "https://www.chileatiende.gob.cl/fichas/721-solicitar-permiso-de-investigacion-en-areas-silvestres-protegidas",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Indigenous co-management",
+          "text": "Atacameño communities and CONAF have co-administered Reserva Nacional Los Flamencos since 1998, according to a University of Chile thesis.",
+          "source_url": "https://repositorio.uchile.cl/handle/2250/175842",
+          "source_kind": "secondary"
+        },
+        {
+          "topic": "Indigenous consultation",
+          "text": "Chile ratified ILO Convention 169 (DS 236 of 2008, in force since September 2009), and DS 66 of 2013 regulates Indigenous consultation. Ley 19.253 (arts. 34-35) requires State services to hear Indigenous organizations and provides for their participation in protected areas inside Indigenous Development Areas. Whether a short science visit triggers formal consultation was not confirmed.",
+          "source_url": "https://www.as-coa.org/sites/default/files/ConsultaPreviaChile2014.pdf",
+          "source_kind": "secondary"
+        },
+        {
+          "topic": "Drones",
+          "text": "A 2023 news report says CONAF restricted drone use in protected areas because of the impact on wildlife. The CONAF permit page itself does not mention drones.",
+          "source_url": "https://eldesconcierto.cl/2023/11/05/restringen-el-uso-de-drones-dentro-de-areas-protegidas-por-su-impacto-en-fauna-silvestre",
+          "source_kind": "news"
+        },
+        {
+          "topic": "Heritage finds",
+          "text": "The same Ley 17.288 rules apply here: archaeological and paleontological material is State property, and excavation or export needs CMN authorization.",
+          "source_url": "https://www.monumentos.gob.cl/sites/default/files/instructivo_salida_de_muestras_arqueologia_final.pdf",
+          "source_kind": "official"
+        }
+      ]
+    },
+    {
+      "id": "bolivia_salar_de_uyuni",
+      "name": "Salar de Uyuni (Potosí, Bolivia)",
+      "level": "permit",
+      "countries": [
+        "Bolivia"
+      ],
+      "bbox": [
+        -68.3,
+        -20.8,
+        -66.8,
+        -19.8
+      ],
+      "summary": "The salar is a state lithium fiscal reserve run through YLB, and no research-specific permit or sample-export procedure was confirmed, so the legal route is unclear.",
+      "legal_notes": [
+        {
+          "topic": "Lithium fiscal reserve",
+          "text": "The Salar de Uyuni is a mining fiscal reserve in which lithium is developed by the State through YLB, with a pilot process and industrial plants contracted in the south of the salar. Access rules for researchers near YLB operations were not confirmed.",
+          "source_url": "https://es.mongabay.com/2025/05/bolivia-cooperativas-mineras-salar-uyuni-explotar-litio/",
+          "source_kind": "news"
+        },
+        {
+          "topic": "Biodiversity research by foreign institutions",
+          "text": "A 2017 Vice-Ministry resolution amending Bolivia's biodiversity research authorization rules requires any national or foreign institution to sign an agreement with an authorized Bolivian scientific institution (ICA), except for projects of national interest. This was read from the FAOLEX summary, not the full text.",
+          "source_url": "https://leap.unep.org/en/countries/bo/national-legislation/resolucion-administrativa-no-052017-modifica-el-texto-del",
+          "source_kind": "secondary"
+        },
+        {
+          "topic": "Mineral sample export",
+          "text": "Exporting minerals requires documents such as the NIM registration and the export declaration and forms, with SENARECOM controlling at the export point. Whether small research samples are exempt was not confirmed.",
+          "source_url": "https://mineria.gob.bo/documentos/guia_expor.pdf",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Security and disruptions",
+          "text": "Canada (updated 14 October 2026) advises a high degree of caution in Bolivia because of demonstrations, localized roadblocks and political tension. Field logistics should plan for road closures.",
+          "source_url": "https://travel.gc.ca/destinations/bolivia",
+          "source_kind": "official"
+        }
+      ]
+    },
+    {
+      "id": "bolivia_eduardo_avaroa",
+      "name": "Reserva Nacional de Fauna Andina Eduardo Avaroa, including the Bolivian side of Licancabur (Potosí, Bolivia)",
+      "level": "permit",
+      "countries": [
+        "Bolivia"
+      ],
+      "bbox": [
+        -68.2,
+        -22.9,
+        -66.8,
+        -21.6
+      ],
+      "summary": "This SERNAP protected area allows scientific research as a permitted use, but the specific research-permit procedure and lead time were not confirmed.",
+      "legal_notes": [
+        {
+          "topic": "Protected-area framework",
+          "text": "Bolivia's General Protected Areas Regulation (DS 24781 of 1997) lists scientific research among the allowed uses of protected areas. Even in the strictest categories it allows authorized research as an exception to the ban on extractive use.",
+          "source_url": "https://www.lexivox.org/norms/BO-RE-DS24781.html",
+          "source_kind": "secondary"
+        },
+        {
+          "topic": "Entry authorization",
+          "text": "SERNAP Administrative Resolution 153/2021 approved the regulation on entry authorizations to protected areas. The available copy is a scanned PDF, so the research-specific content and lead times were not confirmed.",
+          "source_url": "https://www.sernap.gob.bo/wp-content/uploads/2025/09/2021-SERNAP-RES.-ADM.-DE-No.-153-2021-AUTORIZACIONES-DE-INGRESOS-A-AREAS-PROTEGIDAS-REGLAMENTO.pdf",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Foreign institutions",
+          "text": "Under the 2017 amendment to the biodiversity research rules, foreign institutions must sign an agreement with an authorized Bolivian scientific institution (ICA). This was read from the FAOLEX summary.",
+          "source_url": "https://leap.unep.org/en/countries/bo/national-legislation/resolucion-administrativa-no-052017-modifica-el-texto-del",
+          "source_kind": "secondary"
+        },
+        {
+          "topic": "Filming and photography",
+          "text": "SERNAP has a separate regulation for filming and photography in protected areas (RA 048/2017). Its application to research imaging was not confirmed.",
+          "source_url": "https://www.sernap.gob.bo/wp-content/uploads/2024/12/2017-SERNAP-RES.-ADM.-DE-No.-048-2017-REGLAMENTO-DE-FILMACIONES-Y-TOMAS-FOTOGRAFICAS-GUIA.pdf",
+          "source_kind": "official"
+        }
+      ]
+    },
+    {
+      "id": "argentina_catamarca_puna_laguna_negra",
+      "name": "Catamarca Puna and Laguna Negra (Tinogasta, Argentina)",
+      "level": "permit",
+      "countries": [
+        "Argentina"
+      ],
+      "bbox": [
+        -68.9,
+        -27.9,
+        -66.5,
+        -25.2
+      ],
+      "summary": "Studies involving provincial biodiversity need a provincial scientific research permit, Laguna Negra lies inside a Ramsar site, and fossils fall under national heritage law.",
+      "legal_notes": [
+        {
+          "topic": "Provincial research permit",
+          "text": "Catamarca requires a Scientific Research Permit (Permiso de Investigación Científica) for studies involving provincial biodiversity. It is handled by the provincial environment office's area for Access to Natural Resources, Research Permits and the Nagoya Protocol. The current name of the office and the lead times were not confirmed.",
+          "source_url": "https://www.elancasti.com.ar/informacion-general/acceso-recursos-naturales-y-permisos-investigacion-cientifica-n599264",
+          "source_kind": "news"
+        },
+        {
+          "topic": "Ramsar wetland",
+          "text": "Laguna Negra and Laguna Tres Quebradas are listed in the Ramsar site 'Lagunas Altoandinas y Puneñas de Catamarca' (designated 2 February 2009, about 1.23 million ha, Argentina's largest).",
+          "source_url": "https://www.argentina.gob.ar/ambiente/agua/humedales/sitiosramsar/catamarca",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Archaeological and paleontological heritage",
+          "text": "Ley 25.743 gives the national State exclusive power to protect archaeological and paleontological heritage and to defend it against illegal export. Exporting archaeological goods needs authorization from INAPL. The provincial permit for fossil collection was not confirmed.",
+          "source_url": "https://www.argentina.gob.ar/normativa/nacional/norma-264541/texto",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Lithium and Indigenous conflicts",
+          "text": "In 2024 a Catamarca court ordered lithium activity at Salar del Hombre Muerto halted after a complaint by an Indigenous community leader, which shows active disputes over Puna water and land.",
+          "source_url": "https://www.diariodecuyo.com.ar/argentina/Catamarca-ordenan-paralizar-la-extraccion-de-litio-tras-la-queja-de-un-cacique-porque-un-rio-se-seco-20240314-0026.html",
+          "source_kind": "news"
+        },
+        {
+          "topic": "Geological (non-biological) samples",
+          "text": "No provincial rule separating non-fossil rock sampling from biological sampling was confirmed.",
+          "source_url": "https://www.elancasti.com.ar/informacion-general/acceso-recursos-naturales-y-permisos-investigacion-cientifica-n599264",
+          "source_kind": "news"
+        }
+      ]
+    },
+    {
+      "id": "mexico_cuatro_cienegas",
+      "name": "Área de Protección de Flora y Fauna Cuatrociénegas (Coahuila, Mexico)",
+      "level": "restricted",
+      "countries": [
+        "Mexico"
+      ],
+      "bbox": [
+        -102.5,
+        26.6,
+        -101.8,
+        27.2
+      ],
+      "summary": "This CONANP-managed protected area with endemic microbial mats needs SEMARNAT authorization for any biological collection, its water is under heavy pressure, and parts of Coahuila carry serious security advisories.",
+      "legal_notes": [
+        {
+          "topic": "Protected-area status",
+          "text": "Cuatrociénegas was decreed a Flora and Fauna Protection Area in 1994, is administered by CONANP and is a Ramsar wetland.",
+          "source_url": "https://www.ramsar.org/sites/default/files/documents/pdf/wwd/10/wwd2010_rpts_mexico_cuatro.pdf",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Collection inside protected areas",
+          "text": "Art. 88 of the protected-areas regulation of Mexico's general environmental law (LGEEPA) requires SEMARNAT authorization to collect wildlife or other biological resources for research, to handle at-risk species, and to use national waters inside protected areas. Art. 105 allows a simple notice instead for research with no collection or handling of non-at-risk species. The text was read from an unofficial compilation and should be checked against the Diario Oficial.",
+          "source_url": "https://mley.mx/Reg_LGEEPA_ANP/articulo/88/",
+          "source_kind": "secondary"
+        },
+        {
+          "topic": "Scientific collection licence",
+          "text": "Biological collection needs a SEMARNAT scientific collection licence (SEMARNAT-08-049) under the wildlife law regulation and NOM-126-SEMARNAT-2000. A third-party copy of the procedure page lists the processing time as 'not specified' and a fee of MXN 24,065 for foreigners, which is not confirmed on gob.mx.",
+          "source_url": "https://papelea.com/mx/secretaria-de-medio-ambiente-y-recursos-naturales/licencia-de-colecta-cientifica-o-con-propositos-de-ensenanza-gobmx",
+          "source_kind": "secondary"
+        },
+        {
+          "topic": "Notice to the area director",
+          "text": "Researchers authorized to collect must inform the protected area's director when activities start and send copies of required reports (art. 85 of the same regulation).",
+          "source_url": "https://mley.mx/Reg_LGEEPA_ANP/articulo/85/",
+          "source_kind": "secondary"
+        },
+        {
+          "topic": "Geological (non-biological) samples",
+          "text": "Art. 88 lists mining exploration but not small rock samples. Whether rock or stromatolite sampling needs authorization was not confirmed, and the area's management program should be checked.",
+          "source_url": "https://mley.mx/Reg_LGEEPA_ANP/articulo/88/",
+          "source_kind": "secondary"
+        },
+        {
+          "topic": "Security",
+          "text": "A secondary report on a March 2026 US advisory update says parts of Coahuila moved to 'Do Not Travel'. This was not confirmed on travel.state.gov.",
+          "source_url": "https://www.rivieramayanews.mx/us-issues-travel-advisory-for-mexico-ahead-of-2026-world-cup-classifies-states-by-risk-level/",
+          "source_kind": "news"
+        }
+      ]
+    },
+    {
+      "id": "mexico_el_pinacate",
+      "name": "Reserva de la Biosfera El Pinacate y Gran Desierto de Altar (Sonora, Mexico)",
+      "level": "permit",
+      "countries": [
+        "Mexico"
+      ],
+      "bbox": [
+        -114.6,
+        31.4,
+        -112.9,
+        32.4
+      ],
+      "summary": "This federal biosphere reserve and UNESCO World Heritage site allows research, but collection needs SEMARNAT authorization and Sonora carries a US 'Reconsider Travel' advisory.",
+      "legal_notes": [
+        {
+          "topic": "Protected-area status",
+          "text": "El Pinacate y Gran Desierto de Altar is a CONANP-managed federal biosphere reserve and was inscribed as a UNESCO World Heritage site in 2013.",
+          "source_url": "https://es.mongabay.com/2021/12/expedicion-virtual-reserva-biosfera-el-pinacate-y-el-gran-desierto-de-altar-mexico/",
+          "source_kind": "news"
+        },
+        {
+          "topic": "Collection and notices",
+          "text": "The same protected-area rules apply: SEMARNAT must authorize biological collection (art. 88), while research without collection of non-at-risk species only needs a notice (art. 105). Core-zone rules in the reserve's management program were not reviewed.",
+          "source_url": "https://mley.mx/Reg_LGEEPA_ANP/articulo/105/",
+          "source_kind": "secondary"
+        },
+        {
+          "topic": "Recent procedure changes",
+          "text": "A law firm note (August 2026) reports that CONANP simplified procedures; for example, tourism-recreation authorizations take 30 business days. A research-specific CONANP procedure code was not confirmed.",
+          "source_url": "https://www.gtlaw.com/ar/insights/2026/8/acciones-de-simplificacion-para-tramites-y-servicios-ante-la-comision-nacional-de-areas-naturales",
+          "source_kind": "secondary"
+        },
+        {
+          "topic": "Security",
+          "text": "A secondary report on the March 2026 US advisory says Sonora remains at Level 3 ('Reconsider Travel'), and US personnel may use Federal Highway 8 to Puerto Peñasco only in daylight. This was not confirmed on travel.state.gov.",
+          "source_url": "https://www.rivieramayanews.mx/us-issues-travel-advisory-for-mexico-ahead-of-2026-world-cup-classifies-states-by-risk-level/",
+          "source_kind": "news"
+        }
+      ]
+    },
+    {
+      "id": "brazil_central_amazon",
+      "name": "Central Amazon (Brazil, negative control only)",
+      "level": "restricted",
+      "countries": [
+        "Brazil"
+      ],
+      "bbox": [
+        -65.0,
+        -5.0,
+        -58.0,
+        -1.0
+      ],
+      "summary": "Foreign fieldwork needs CNPq/MCTI expedition authorization with a Brazilian partner institution, collection in conservation units needs SISBIO, and any genetic-heritage work must be registered in SisGen.",
+      "legal_notes": [
+        {
+          "topic": "Foreign scientific expeditions",
+          "text": "Decree 98.830/1990 and Portaria MCT 55/1990 govern data and material collection by foreigners, with CNPq granting the authorization. A Brazilian partner institution must co-sponsor the work, supervise it, review the collected material and report to CNPq. Type specimens must be returned to Brazil. The lead time was not confirmed.",
+          "source_url": "https://www.gov.br/cnpq/pt-br/acesso-a-informacao/acoes-e-programas/servicos/copy_of_expedicao-cientifica/requisitos",
+          "source_kind": "official"
+        },
+        {
+          "topic": "SISBIO / ICMBio",
+          "text": "Collection inside conservation units needs SISBIO authorization. For foreign expedition members, the authorization goes to the Brazilian co-responsible researcher and depends on the CNPq/MCTI approval. Collection is prohibited for foreigners on tourist visas.",
+          "source_url": "https://www.gov.br/icmbio/pt-br/servicos/servicos-do-icmbio-no-gov.br/autorizacoes/pesquisa-nas-ucs-sisbio/duvidas-frequentes/pesquisador-estrangeiro",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Genetic heritage (SisGen)",
+          "text": "Under Law 13.123/2015, access to Brazilian genetic heritage, including basic research and microorganisms isolated in Brazil, must be registered in SisGen. A SISBIO permit does not replace this.",
+          "source_url": "https://www.gov.br/cnpq/pt-br/acesso-a-informacao/acoes-e-programas/servicos/patrimonio-genetico",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Geological (non-biological) samples",
+          "text": "No separate rule for non-biological rock or soil sampling was confirmed. The foreign-expedition decree covers collection of scientific data and materials in general.",
+          "source_url": "https://www2.camara.leg.br/legin/fed/decret/1990/decreto-98830-15-janeiro-1990-325388-publicacaooriginal-1-pe.html",
+          "source_kind": "official"
+        }
+      ]
+    },
+    {
+      "id": "us_death_valley_np",
+      "name": "Death Valley National Park (California/Nevada)",
+      "level": "restricted",
+      "countries": [
+        "United States of America"
+      ],
+      "bbox": [
+        -117.8,
+        35.6,
+        -116.3,
+        37.3
+      ],
+      "summary": "Any research or collection needs an NPS Scientific Research and Collecting Permit via RPRS. Ground-disturbing requests currently take a year or more to review, and most of the park is wilderness where mechanized equipment is barred unless specifically authorized.",
+      "legal_notes": [
+        {
+          "topic": "Research permit",
+          "text": "Advance approval in the form of a permit is required before any scientific research or specimen collection in the park. Applications go through the NPS Research Permit and Reporting System (RPRS) with a study proposal.",
+          "source_url": "https://www.nps.gov/deva/scientific-research-permits.htm",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Lead time",
+          "text": "The park says requests involving ground disturbance or collection are currently taking a year or more to review, and it cannot expedite review. Travel should wait until a final permit is issued (page updated July 2025).",
+          "source_url": "https://www.nps.gov/deva/scientific-research-permits.htm",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Sample collection",
+          "text": "Standard NPS permit conditions allow no specimens, including materials, to be collected unless authorized on the permit. Collected specimens must be reported annually.",
+          "source_url": "https://www.nps.gov/thro/learn/nature/general-conditions-for-scientific-research-and-collecting-permit.htm",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Wilderness and mechanized equipment",
+          "text": "Standard NPS permit conditions ban mechanized equipment in designated, proposed or potential wilderness unless the superintendent authorizes it in specific conditions. NPS history sources put designated wilderness at about 91% of the park (other NPS-linked pages say about 93%).",
+          "source_url": "https://www.npshistory.com/publications/deva/index.htm",
+          "source_kind": "secondary"
+        },
+        {
+          "topic": "Vehicles",
+          "text": "Driving off designated roads is illegal in the park, and in most places the wilderness boundary starts 50 feet from designated roads. Bicycles are not allowed off roads, on trails or in wilderness.",
+          "source_url": "https://www.nps.gov/deva/learn/no-driving-off-designated-roads.htm",
+          "source_kind": "official"
+        }
+      ]
+    },
+    {
+      "id": "us_maunakea",
+      "name": "Maunakea summit lands (Hawaii)",
+      "level": "restricted",
+      "countries": [
+        "United States of America"
+      ],
+      "bbox": [
+        -155.55,
+        19.74,
+        -155.4,
+        19.87
+      ],
+      "summary": "Research on Maunakea lands needs a research permit under Hawaii Administrative Rules ch. 20-26 via the Center for Maunakea Stewardship. The area is culturally sacred, and management is moving to the Maunakea Stewardship and Oversight Authority, so who issues permits is in transition.",
+      "legal_notes": [
+        {
+          "topic": "Research permit",
+          "text": "HAR 20-26-62 allows research permits for scientific, educational or management activities that the chapter would otherwise prohibit. Permit requirements on Maunakea lands come from HAR chapter 20-26.",
+          "source_url": "https://www.law.cornell.edu/regulations/hawaii/Haw-Code-R-SS-20-26-62",
+          "source_kind": "secondary"
+        },
+        {
+          "topic": "Who to contact",
+          "text": "The University of Hawaii Hilo visitor page tells anyone who wants to do research on Maunakea to contact the Center for Maunakea Stewardship. Only UH-permitted commercial tour operators may run tours on university-managed lands.",
+          "source_url": "https://hilo.hawaii.edu/maunakea/visitor-information/permits",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Governance transition",
+          "text": "Act 255 (2022) created the Maunakea Stewardship and Oversight Authority, and the transition from University of Hawaii management began in July 2023. Bills in 2025 and 2026 on how conservation district use permits are split between the Authority, lessees and the Board of Land and Natural Resources were seen; whether they passed is not confirmed.",
+          "source_url": "https://dlnr.hawaii.gov/occl/files/2023/08/CMS-Letter-to-Komeiji_Chang-re-Act-255-Implementation-FINAL.pdf",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Conservation district",
+          "text": "The Board of Land and Natural Resources approves conservation district use permits (CDUPs) for land uses on Maunakea. Proposed legislation would change who applies for them.",
+          "source_url": "https://data.capitol.hawaii.gov/sessions/session2025/bills/SB769_.pdf",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Cultural sensitivity",
+          "text": "The Office of Hawaiian Affairs formally objected that research permits under the proposed rules could degrade or destroy cultural and natural resources and sites. The rules also faced a 2020 court challenge, whose outcome is not confirmed.",
+          "source_url": "https://www.oha.org/wp-content/uploads/OHA-Letter-05.31.19-Lassner-of-UH-RE-Mauna-Kea-Admin-Rules.pdf",
+          "source_kind": "official"
+        }
+      ]
+    },
+    {
+      "id": "us_arizona_sfvf_cinder_lake_meteor_crater",
+      "name": "San Francisco Volcanic Field, Cinder Lake and Meteor Crater (Arizona)",
+      "level": "permit",
+      "countries": [
+        "United States of America"
+      ],
+      "bbox": [
+        -112.0,
+        35.0,
+        -111.0,
+        35.7
+      ],
+      "summary": "Volcanic field and Cinder Lake sites are on Coconino National Forest, where research generally needs a Forest Service special use authorization. Meteor Crater is private land and requires the owner's research approval.",
+      "legal_notes": [
+        {
+          "topic": "Forest Service research authorization",
+          "text": "Forest Service guidance says research on National Forest land without a required special use permit violates agency policy and federal environmental regulations. Some projects may only need a lighter nominal-effects determination after review.",
+          "source_url": "https://fs.usda.gov/r03/kaibab/permits",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Lead time",
+          "text": "Another Region 3 forest says permit processing can take 30 days to 6 months. No Coconino-specific timeframe or Cinder Lake-specific rule was confirmed.",
+          "source_url": "https://www.fs.usda.gov/r03/coronado/permits/research-collection-and-other-permits-0",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Coconino review process",
+          "text": "An archived (around 2009) Coconino page said the forest had an agreement with Northern Arizona University to review research proposals. Whether this is still the process is not confirmed.",
+          "source_url": "https://webarchive.library.unt.edu/eot2008/20090114045112/http://www.fs.fed.us/r3/coconino/passes/index.shtml",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Meteor Crater private access",
+          "text": "The Barringer Crater Company asks researchers to read its Field Research Guidelines and submit a proposal. Approved researchers get access to a liability waiver and rim trail map.",
+          "source_url": "https://barringercrater.com/research",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Meteor Crater ownership",
+          "text": "The crater is privately owned by the Barringer family through the Barringer Crater Company, under a 1903 land patent covering 640 acres around the center.",
+          "source_url": "https://en.wikipedia.org/wiki/Meteor_Crater",
+          "source_kind": "secondary"
+        }
+      ]
+    },
+    {
+      "id": "us_blm_mdrs_utah_dumont_dunes",
+      "name": "BLM lands: Mars Desert Research Station area (Utah) and Dumont Dunes OHV Area (California)",
+      "level": "permit",
+      "countries": [
+        "United States of America"
+      ],
+      "bbox": null,
+      "summary": "BLM public land allows casual rock collecting and OHV use under area rules. Commercial, large-volume, vertebrate-fossil, event or vending activities need BLM permits, and terms specific to the MDRS site were not confirmed.",
+      "legal_notes": [
+        {
+          "topic": "Rock collecting on BLM land (Utah)",
+          "text": "Noncommercial hobby collecting of rocks and minerals on BLM land needs no permit. Large quantities or commercial collection need a BLM permit, and explosives and power equipment are forbidden.",
+          "source_url": "https://geology.utah.gov/popular/rocks-minerals/collecting-rules",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Fossils",
+          "text": "Casual collection of common invertebrate fossils is allowed within limits (up to 25 lb per person per day under the casual collection rules). Vertebrate fossils need a paleontological permit.",
+          "source_url": "https://www.blm.gov/programs/paleontology/collecting-fossils",
+          "source_kind": "official"
+        },
+        {
+          "topic": "MDRS site",
+          "text": "The Mars Society owns and operates MDRS near Hanksville, Utah, and pays to rent the land. The landowner and permit type (BLM lease or right-of-way) are not confirmed, so access and EVA terms must come from the Mars Society and the BLM field office.",
+          "source_url": "https://www.dailyherald.com/article/20150502/news/150509716",
+          "source_kind": "news"
+        },
+        {
+          "topic": "Dumont Dunes pass",
+          "text": "Every primary vehicle at Dumont Dunes OHV Area must display a valid pass (season pass Oct 1 to Sep 30, or weekly). OHVs need approved mufflers, spark arresters and whip flags, and shooting is banned.",
+          "source_url": "https://www.recreation.gov/gateways/15175",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Dumont Dunes special permits",
+          "text": "Vending at Dumont Dunes needs a Special Recreation Permit signed by the BLM Barstow Field Manager. Whether an organized research or rover test needs an SRP or another BLM authorization is not confirmed.",
+          "source_url": "https://ehs.sbcounty.gov/?p=10004847",
+          "source_kind": "official"
+        },
+        {
+          "topic": "West Mojave closures",
+          "text": "The Barstow Field Office reports a court-ordered closure of desert tortoise critical habitat to OHV use in the West Mojave planning area. Whether it affects Dumont Dunes is not confirmed.",
+          "source_url": "https://www.blm.gov/office/barstow-field-office",
+          "source_kind": "official"
+        }
+      ]
+    },
+    {
+      "id": "us_craters_of_the_moon",
+      "name": "Craters of the Moon National Monument and Preserve (Idaho)",
+      "level": "restricted",
+      "countries": [
+        "United States of America"
+      ],
+      "bbox": [
+        -113.8,
+        42.8,
+        -113.2,
+        43.5
+      ],
+      "summary": "Removing rocks is illegal without a permit, and research needs an NPS Scientific Research and Collecting Permit via RPRS. The BLM manages the larger remote portion of the monument.",
+      "legal_notes": [
+        {
+          "topic": "Rock collecting ban",
+          "text": "Taking rocks or other natural or cultural items from Craters of the Moon is illegal.",
+          "source_url": "https://home.nps.gov/crmo/faqs.htm",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Research permit",
+          "text": "A permit is required for scientific research in the park, obtained through the NPS Research Permit and Reporting System.",
+          "source_url": "https://home.nps.gov/crmo/planyourvisit/permits-reservations.htm",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Joint NPS/BLM management",
+          "text": "Since 2000 the NPS and BLM have co-managed the expanded monument, and the BLM Shoshone Field Office manages the BLM portion. A separate BLM research authorization process for that portion is not confirmed.",
+          "source_url": "https://www.blm.gov/programs/national-conservation-lands/idaho/craters-of-the-moon",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Wilderness",
+          "text": "The monument includes designated wilderness, where the standard NPS permit conditions bar mechanized equipment unless specifically authorized.",
+          "source_url": "https://home.nps.gov/places/crmo-wilderness.htm",
+          "source_kind": "official"
+        }
+      ]
+    },
+    {
+      "id": "is_vatnajokull_askja",
+      "name": "Vatnajökull National Park including Askja (Iceland)",
+      "level": "permit",
+      "countries": [
+        "Iceland"
+      ],
+      "bbox": [
+        -18.0,
+        63.9,
+        -15.3,
+        65.2
+      ],
+      "summary": "Research in the park needs a permit applied for at least 30 days ahead, off-road driving is banned nationwide, and exporting rock samples needs a separate permit from the Natural Science Institute of Iceland.",
+      "legal_notes": [
+        {
+          "topic": "Research permit",
+          "text": "Research on nature or cultural remains in the park, other than by park authorities, needs a research permit issued by the relevant National Park Warden under Regulation 300/2020. Applications go through the park's service portal at least 30 days in advance.",
+          "source_url": "https://www.vatnajokulsthjodgardur.is/en/permits",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Processing fee",
+          "text": "A 2025 permit notes a processing fee of ISK 50,000 for applications within Vatnajökull National Park under tariff regulation 324/2025. Permits have recently been issued with conditions.",
+          "source_url": "https://umhverfisstofnun.is/library/Skrar/Umsagnir/utgefin-leyfi/Application%20for%20a%20research%20permit%20-%20Durham%20University,%20David%20Roberts%20%e2%80%93%20Brei%c3%b0amerkurj%c3%b6kull%20and%20other%20outlet%20glaciers%20in%20Southeast%20Vatnaj%c3%b6kull%20National%20Park%2024.%20j%c3%ban%c3%ad%202025.pdf",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Off-road driving ban",
+          "text": "Driving motor vehicles off-road is forbidden in Iceland. The exception is glaciers and frozen or snow-covered ground outside urban areas with no apparent risk of damage.",
+          "source_url": "https://ust.is/english/visiting-iceland/faq",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Rock collecting",
+          "text": "In nature conservation areas, disturbing geological features and picking stones is generally not allowed. Sampling needs a research permit, and published permit conditions restrict collection to loose material away from paths and require notifying rangers.",
+          "source_url": "https://www.umhverfisstofnun.is/library/sida/Nattura/Research%20permit%20-%20Fri%c3%b0land%20a%c3%b0%20Fjallabaki,%20Hverfjall%20and%20Sn%c3%a6fellj%c3%b6kul%20National%20Park.pdf",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Sample export",
+          "text": "Exporting rocks and geological research samples needs a permit from the Natural Science Institute of Iceland, with copies of all sampling permits attached. The listed fee is ISK 63,300.",
+          "source_url": "https://www.natt.is/en/about/permits",
+          "source_kind": "official"
+        }
+      ]
+    },
+    {
+      "id": "es_andalucia_rio_tinto_tabernas",
+      "name": "Río Tinto and Desierto de Tabernas (Andalucía)",
+      "level": "permit",
+      "countries": [
+        "Spain"
+      ],
+      "bbox": null,
+      "summary": "Both sites are protected spaces under the Junta de Andalucía. In Tabernas, research without infrastructure only needs prior notice 15 days ahead, and off-road driving is banned. Río Tinto is a Protected Landscape within an active mining district, and its sampling rules were not confirmed.",
+      "legal_notes": [
+        {
+          "topic": "Tabernas: research regime",
+          "text": "In the Parajes Naturales Sierra Alhamilla and Desierto de Tabernas, research that installs infrastructure needs authorization. Research without infrastructure only has to be notified to the environment ministry (Consejería) beforehand (management plan section 5.4.5).",
+          "source_url": "https://www.juntadeandalucia.es/boja/2016/245/BOJA16-245-00122-21925-04_00104550.pdf",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Tabernas: notice lead time",
+          "text": "Notices must reach the Almería Delegación Territorial of the environment ministry at least 15 days before work starts. The administration can object up to 10 days before the start date (section 5.3.6).",
+          "source_url": "https://www.juntadeandalucia.es/boja/2016/245/BOJA16-245-00122-21925-04_00104550.pdf",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Tabernas: vehicles",
+          "text": "Cross-country vehicle driving and motorcycles or quads off paved roads or tracks are banned in the Parajes Naturales. After research, the ministry inspects the site for damage.",
+          "source_url": "https://www.juntadeandalucia.es/boja/2016/245/BOJA16-245-00122-21925-04_00104550.pdf",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Río Tinto: protection status",
+          "text": "Decree 558/2004 declared the Río Tinto Protected Landscape (Paisaje Protegido), whose aims include conserving the geomorphology created by mining. The use regime in its Article 4 was not read, so specific sampling rules are not confirmed.",
+          "source_url": "https://cdn.juntadeandalucia.es/boja/2005/10/d2.pdf",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Río Tinto: Natura 2000",
+          "text": "The river corridor is also a Special Area of Conservation (ZEC ES6150021, Corredor Ecológico del río Tinto), with a management plan approved 8 May 2015.",
+          "source_url": "https://www.juntadeandalucia.es/medioambiente/portal/documents/20151/387338/ES6150021.pdf",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Río Tinto: mining and heritage",
+          "text": "The Riotinto-Nerva mining zone has been under a procedure to be declared a cultural heritage asset (Bien de Interés Cultural, Sitio Histórico). Active mining projects there need Junta authorizations. Access to working mine areas would need the operator's permission (not confirmed in an official source).",
+          "source_url": "https://www.juntadeandalucia.es/boja/2005/117/85",
+          "source_kind": "official"
+        }
+      ]
+    },
+    {
+      "id": "es_bardenas_reales",
+      "name": "Bardenas Reales Natural Park (Navarra)",
+      "level": "permit",
+      "countries": [
+        "Spain"
+      ],
+      "bbox": [
+        -1.75,
+        41.95,
+        -1.25,
+        42.3
+      ],
+      "summary": "Research must be notified to the Comunidad de Bardenas, and any sampling or alteration needs express authorization from its Comisión Permanente. Vehicles are limited to marked tracks, and the military firing range is excluded from the park.",
+      "legal_notes": [
+        {
+          "topic": "Research notification and authorization",
+          "text": "All scientific activity in the planning area must be notified to the Comunidad's president, who may impose limits (Arts. 44-45). Handling, removing or collecting any material, or altering the environment, needs express authorization from the Comisión Permanente plus any other required permits (Art. 46).",
+          "source_url": "https://bon.navarra.es/es/anuncio/-/texto/2021/148/36",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Collection ban and restoration",
+          "text": "Collecting, destroying or damaging minerals or plants is generally prohibited. Researchers must restore the site afterwards and report results to the president (Arts. 48-49).",
+          "source_url": "https://bon.navarra.es/es/anuncio/-/texto/2021/148/36",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Vehicles and drones",
+          "text": "Motor vehicles may use only marked tracks, with a 40 km/h limit and no groups of five or more vehicles (Arts. 15-16). Special transit permits on restricted tracks and temporary camps may be granted for research (Art. 47), and recreational drones are banned (Art. 40).",
+          "source_url": "https://bon.navarra.es/es/anuncio/-/texto/2021/148/36",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Military firing range",
+          "text": "The Ministry of Defence firing range (2,244 to 2,572 ha depending on the source, leased to Defence since 1951) lies inside Bardenas and was excluded from the 1999 park declaration. No research access procedure for the range was found, so treat it as no-access unless Defence authorizes it (not confirmed).",
+          "source_url": "https://bon.navarra.es/es/anuncio/-/texto/2021/148/36",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Seasonal closures",
+          "text": "The Comunidad has closed areas to all visitors during bird nesting season, which in 2024 coincided with military air exercises at the range.",
+          "source_url": "https://www.noticiasdenavarra.com/navarra/2024/02/19/ejercicios-militares-poligono-tiro-bardenas-7893588.amp.html",
+          "source_kind": "news"
+        }
+      ]
+    },
+    {
+      "id": "es_canarias_teide_timanfaya",
+      "name": "Teide National Park (Tenerife) and Timanfaya / Lanzarote lava tubes",
+      "level": "permit",
+      "countries": [
+        "Spain"
+      ],
+      "bbox": null,
+      "summary": "Both national parks require written research authorization that lists sampling locations and quantities. Removing rocks is prohibited for visitors, Timanfaya's reserve zone is open only for science or management, and rules for La Corona / Cueva de los Verdes were not confirmed.",
+      "legal_notes": [
+        {
+          "topic": "Teide: research authorization",
+          "text": "Research authorization in Teide National Park requires a project report covering the team, sampling locations, techniques, quantities and weights. The researcher must agree with park management on where samples go and supply data and a final report.",
+          "source_url": "https://sede.tenerife.es/de/tramites-y-servicios/download/22603/10494/89",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Teide: management plan",
+          "text": "Research is governed by the conditions of the park's Master Plan for Use and Management (PRUG, approved by decree in 2002).",
+          "source_url": "https://www.boe.es/buscar/pdf/2002/BOC-j-2002-90250-consolidado.pdf",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Teide: rock removal",
+          "text": "Authorities state that removing rocks, plants or natural materials from the park is prohibited, with reported fines of about EUR 600 to 1,500 for minor cases. The exact PRUG article is not confirmed.",
+          "source_url": "https://www.euronews.com/travel/2025/04/15/climbing-collecting-rocks-going-off-trail-tourists-accused-of-trashing-tenerifes-teide-par",
+          "source_kind": "news"
+        },
+        {
+          "topic": "Timanfaya: research procedure",
+          "text": "Research activities in Timanfaya are applied for through the Gobierno de Canarias e-office at least one month before the start, with no fee. The Dirección General de Espacios Naturales y Biodiversidad decides.",
+          "source_url": "https://sede.gobiernodecanarias.org/sede/tramites/8391",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Timanfaya: reserve zone",
+          "text": "Because the ecosystems are fragile, access to the reserve zone is allowed only for scientific or management purposes.",
+          "source_url": "https://sede.gobiernodecanarias.org/sede/tramites/8391",
+          "source_kind": "official"
+        },
+        {
+          "topic": "La Corona / Cueva de los Verdes",
+          "text": "Cueva de los Verdes is outside Timanfaya and hosts a module of the Lanzarote Geodynamic Laboratory. Its permit authority (Cabildo de Lanzarote or regional government) and research rules are not confirmed.",
+          "source_url": "https://www.miteco.gob.es/es/parques-nacionales-oapn/red-parques-nacionales/parques-nacionales/timanfaya/valores-culturales/interes-cientifico.html",
+          "source_kind": "official"
+        }
+      ]
+    },
+    {
+      "id": "no_svalbard",
+      "name": "Svalbard including Bockfjorden (Norway)",
+      "level": "permit",
+      "countries": [
+        "Norway"
+      ],
+      "bbox": [
+        10.0,
+        76.4,
+        34.0,
+        80.9
+      ],
+      "summary": "Projects must register in Research in Svalbard (RiS). Most fieldwork needs a Governor (Sysselmesteren) permit with fixed seasonal deadlines, field trips outside Management Area 10 must be notified, polar bear protection is mandatory, and Bockfjorden lies in a national park with a travel-ban zone at Trollkjeldene.",
+      "legal_notes": [
+        {
+          "topic": "RiS registration",
+          "text": "All research projects must be registered in the RiS database, and the RiS-ID is needed before applying for a Governor's permit. Collected material and data must be reported in RiS afterwards.",
+          "source_url": "https://www.forskningsradet.no/en/svalbard-research-office/research-permissions/",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Permit deadlines",
+          "text": "Fixed deadlines apply: 1 January for March-May fieldwork, 1 March for June-August, 1 July for September-November, and 1 October for December-February. Processing can take up to eight weeks.",
+          "source_url": "https://www.sysselmesteren.no/en/news/2023/01/introduces-fixed-application-deadlines-for-research-activity-on-svalbard/",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Travel notification",
+          "text": "Fieldwork outside Management Area 10 must be notified to the Governor using the electronic form, and work may not start until the Governor replies.",
+          "source_url": "https://sysselmesteren.no/en/researchers/notification-insurance-and-reporting-obligations",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Fossils and protected areas",
+          "text": "Collecting fossils is allowed only outside protected areas and needs an application inside them. Protected-area regulations bar prospecting for minerals and stone.",
+          "source_url": "https://sysselmesteren.no/en/researchers/guidelines-for-researchers-in-svalbard",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Motor traffic",
+          "text": "Off-road motor traffic on bare, unfrozen ground is allowed only on designated routes or with a Governor permit (Svalbard Environmental Protection Act s. 80). Aircraft landings outside approved strips also need an exemption (s. 83).",
+          "source_url": "https://www.sysselmesteren.no/contentassets/45f24e88de42498387da557becffa26f/en-svalbard-environmental-protection-act.pdf",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Cultural heritage",
+          "text": "Automatically protected cultural remains and their security zones may not be disturbed (s. 42). Protected historical objects may not be exported from Svalbard without a permit (s. 46).",
+          "source_url": "https://www.sysselmesteren.no/contentassets/45f24e88de42498387da557becffa26f/en-svalbard-environmental-protection-act.pdf",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Bockfjorden",
+          "text": "Bockfjorden lies in Nordvest-Spitsbergen National Park, which specifically protects its thermal springs, carbonate deposits and volcanic remains. A 2020 amendment (s. 5b) bans travel within a mapped zone at Trollkjeldene.",
+          "source_url": "https://www.sysselmesteren.no/contentassets/f1d44bf6dfb740f6a3ac6ea37838355d/forskrift-om-endring-i-forskrift-om-storre-naturvernomrader-og-fuglereservater-pa-svalbard-viderefort-fra-1973.pdf",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Polar bear protection",
+          "text": "Anyone travelling outside settlements must carry suitable means to scare off polar bears, and the Governor recommends carrying a firearm. Renting a rifle generally needs a police lending permit.",
+          "source_url": "https://www.sysselmesteren.no/en/weapon/",
+          "source_kind": "official"
+        }
+      ]
+    },
+    {
+      "id": "no_lofoten",
+      "name": "Lofoten (anorthosite sites, Norway)",
+      "level": "permit",
+      "countries": [
+        "Norway"
+      ],
+      "bbox": [
+        12.8,
+        67.8,
+        15.0,
+        68.5
+      ],
+      "summary": "Outside protected areas, Norwegian right of access (allemannsretten) covers walking and camping but not taking stone or minerals, so sampling needs the landowner's permission. No Lofoten-specific research permit was identified.",
+      "legal_notes": [
+        {
+          "topic": "Stone and mineral sampling",
+          "text": "Under allemannsretten you must first ask the landowner before taking stone, minerals, peat, moss or lichen. Only small amounts of natural products of little or no value are exempt.",
+          "source_url": "https://www.miljodirektoratet.no/ansvarsomrader/friluftsliv/friluftsliv-og-allemannsretten/plukke-bar-sopp-og-urter/",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Right of access",
+          "text": "Allemannsretten applies in uncultivated land (utmark), not on cultivated land.",
+          "source_url": "https://www.miljodirektoratet.no/nye-temasider---ansvarsomrader/ny---allemannsretten/",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Protected areas and vehicles",
+          "text": "Whether specific anorthosite outcrops lie in a protected area (for example Lofotodden National Park), and what Norwegian motor traffic rules mean for rover tests, is not confirmed.",
+          "source_url": "https://www.miljodirektoratet.no/nye-temasider---ansvarsomrader/ny---allemannsretten/",
+          "source_kind": "official"
+        }
+      ]
+    },
+    {
+      "id": "de_nordlinger_ries",
+      "name": "Nördlinger Ries UNESCO Global Geopark (Bavaria)",
+      "level": "permit",
+      "countries": [
+        "Germany"
+      ],
+      "bbox": [
+        10.35,
+        48.75,
+        10.75,
+        49.0
+      ],
+      "summary": "A geotope listing carries no legal protection by itself. Sampling rules depend on whether a site is a natural monument or nature reserve (handled by the lower nature conservation authority) and on landowner or quarry-operator consent, and no Ries-specific sampling permit rule was confirmed.",
+      "legal_notes": [
+        {
+          "topic": "Geotope status",
+          "text": "The Bavarian Environment Agency (LfU) states that 'geotope' is not a legal protection category. Where protection is needed, sites are designated under nature conservation law or as monuments.",
+          "source_url": "https://www.lfu.bayern.de/geologie/geotope/index.htm",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Ries geotopes",
+          "text": "The LfU keeps a register of Ries geotopes, including former suevite quarries. Which specific sites are protected natural monuments, and the sampling rules for each, are not confirmed.",
+          "source_url": "https://www.lfu.bayern.de/geologie/meteorite/ries/riesgeotope/index.htm",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Geopark conduct",
+          "text": "The Geopark publishes a code of conduct for nature visitors. Its content on rock sampling was not read and is not confirmed.",
+          "source_url": "https://en.geopark-ries.de/geotope/",
+          "source_kind": "official"
+        }
+      ]
+    },
+    {
+      "id": "au_pilbara_dresser_north_pole",
+      "name": "Pilbara: Dresser Formation / North Pole area (Western Australia)",
+      "level": "restricted",
+      "countries": [
+        "Australia"
+      ],
+      "bbox": [
+        119.3,
+        -21.3,
+        119.7,
+        -20.9
+      ],
+      "summary": "Early-life sites near North Pole are in State Geoheritage Reserves that need permission to visit or sample. Harming Aboriginal sites needs ministerial consent under the Aboriginal Heritage Act 1972, native title is held over nearby Nyamal country (whether it covers the site is not confirmed), and fossil export is controlled federally.",
+      "legal_notes": [
+        {
+          "topic": "Geoheritage reserves",
+          "text": "Five Pilbara early-life sites have been declared State Geoheritage Reserves, and permission is needed to visit or sample in them. The oldest microbial structures in the historic North Pole mining area are within Buick Reserve.",
+          "source_url": "https://www.wa.gov.au/organisation/department-of-mines-petroleum-and-exploration/geological-survey-of-western-australia/microbialites-and-other-early-life",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Aboriginal heritage",
+          "text": "The amended Aboriginal Heritage Act 1972 applies again (since 15 November 2023). Landowners must not knowingly damage Aboriginal sites, and section 18 consent from the Minister, advised by the Aboriginal Cultural Heritage Committee, is needed for harmful activities.",
+          "source_url": "https://www.wa.gov.au/organisation/department-of-planning-lands-and-heritage/aboriginal-heritage-laws",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Consultation",
+          "text": "State policy expects consultation with Aboriginal people before a section 18 application. Consultation may let a proponent avoid needing consent.",
+          "source_url": "https://wa.gov.au/system/files/2024-11/consultation_policy_section_18.pdf",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Native title and land access",
+          "text": "Native title over Nyamal country in the East Pilbara is held by the Nyamal Aboriginal Corporation, and exploration there has gone ahead under heritage agreements with it. Whether the Dresser/North Pole sites fall inside a Nyamal determination is not confirmed.",
+          "source_url": "https://www.businessnews.com.au/article/Novo-heritage-signing-clears-path-to-explore-East-Pilbara",
+          "source_kind": "news"
+        },
+        {
+          "topic": "Mining Act access",
+          "text": "Prospecting or fossicking on Crown land needs a Miner's Right, which allows specimens up to 20 kg. Fossicking needs prior written consent from occupiers such as pastoralists. Overlap with specific mining tenements at North Pole is not confirmed.",
+          "source_url": "https://dmp.wa.gov.au/Prospecting-fossicking-in-WA-2474.aspx",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Export of fossils",
+          "text": "Exporting fossils may need a permit under the Protection of Movable Cultural Heritage Act 1986 after expert assessment. Standard processing takes 8 to 10 weeks.",
+          "source_url": "https://arts.gov.au/what-we-do/cultural-heritage/movable-cultural-heritage/exporting-cultural-property-australia/fossils-and-meteorites",
+          "source_kind": "official"
+        }
+      ]
+    },
+    {
+      "id": "saudi_national",
+      "name": "Saudi Arabia: national advisory and antiquities law",
+      "level": "restricted",
+      "countries": [
+        "Saudi Arabia"
+      ],
+      "bbox": null,
+      "summary": "Nationwide: the UK advises against all but essential travel, and surveying or excavating without a Heritage Commission licence is an offence.",
+      "legal_notes": [
+        {
+          "topic": "Security advisory",
+          "text": "The UK FCDO (updated 27 October 2026) advises against all travel within 10 km of the Yemen border and all but essential travel to the rest of Saudi Arabia, after Houthi missile and drone attacks, including a strike on Riyadh's King Khalid airport on 10 October 2026. News reports say the US raised Saudi Arabia to Level 3 (Reconsider Travel) on 12 October 2026.",
+          "source_url": "https://www.gov.uk/foreign-travel-advice/saudi-arabia",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Antiquities law",
+          "text": "The 2014 Law of Antiquities, Museums and Urban Heritage, overseen by the Heritage Commission since 2019, makes all antiquities state property. Surveying or excavating without a licence is punishable by jail or fines, and the Commission actively records violations, including unlicensed survey and excavation.",
+          "source_url": "https://saudigazette.com.sa/article/663306/saudi-arabia/heritage-commission-uncovers-55-violations-targeting-saudi-archaeological-sites",
+          "source_kind": "news"
+        }
+      ]
+    }
+  ],
+  "general_notes": [
+    {
+      "topic": "Not legal advice",
+      "text": "These notes summarize public sources read on 2026-11-15. Rules change and depend on the traveler's nationality and institution: check the foreign ministry of your own country, the host country's authorities and your institution's export control office.",
+      "source_url": "https://travel.state.gov/en/international-travel/travel-advisories.html",
+      "source_kind": "official"
+    },
+    {
+      "topic": "Biological samples (Nagoya Protocol)",
+      "text": "Microbial or other genetic material collected at an analog site needs prior informed consent and agreed benefit-sharing from the provider country, plus collection and export permits. Journals and funders increasingly ask for proof. Check the ABS Clearing-House.",
+      "source_url": "https://absch.cbd.int/",
+      "source_kind": "official"
+    },
+    {
+      "topic": "Rock and soil samples",
+      "text": "Purely geological samples fall outside the Nagoya Protocol, but national and protected-area rules, mineral or heritage permits and export controls can still apply.",
+      "source_url": "https://ncl.ac.uk/research/research-governance/ethics/toolkit/nagoya-protocol",
+      "source_kind": "secondary"
+    },
+    {
+      "topic": "Sanctions travel with the people",
+      "text": "US sanctions bind US persons and institutions wherever they are; EU and UK sanctions bind theirs. A team with members of several nationalities must meet every applicable regime.",
+      "source_url": "https://ofac.treasury.gov/sanctions-programs-and-country-information",
+      "source_kind": "official"
+    }
+  ]
+}

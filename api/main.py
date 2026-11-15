@@ -21,6 +21,7 @@ from api.store import Store
 from pipeline import scoring
 from pipeline.contract import Profile, Target
 from pipeline.earth import beyond_earth_keys
+from pipeline.environment import areas_for_site
 from pipeline.findings import findings_for
 
 LIMITS_STATEMENT = (
@@ -236,7 +237,24 @@ def process(
 
 @app.get("/analogs")
 def analogs(request: Request) -> list[dict]:
-    return [a.model_dump() for a in _store(request).config.analogs]
+    """The analog catalog. Each site lists the IDs of its environmental areas."""
+    config = _store(request).config
+    return [
+        {
+            **a.model_dump(),
+            "environment_areas": []
+            if config.environment is None
+            else areas_for_site(config.environment, a.id),
+        }
+        for a in config.analogs
+    ]
+
+
+@app.get("/environment")
+def environment_notes(request: Request) -> dict | None:
+    """Environmental notes per analog site and finding: protected areas, wildlife, hazards."""
+    config = _store(request).config.environment
+    return None if config is None else config.model_dump()
 
 
 @app.get("/findings")
@@ -568,7 +586,7 @@ def export(
     writer = csv.writer(out)
     writer.writerow(
         ["rank", "cell_id", "lat", "lon", "country", "terrain", "score", "confidence", "band"]
-        + ["access", "road_km", "airport_km", "restriction"]
+        + ["access", "road_km", "airport_km", "restriction", "environment_areas"]
         + [f"raw_{k}" for k in keys]
         + [f"s_{k}" for k in keys]
     )
@@ -576,7 +594,7 @@ def export(
         writer.writerow(
             [rank, c["cell_id"], c["lat"], c["lon"], c["country"], "|".join(c["terrain"])]
             + [c["score"], c["confidence"], c["band"]]
-            + [c["access"], c["road_km"], c["airport_km"], c["restriction"]]
+            + [c["access"], c["road_km"], c["airport_km"], c["restriction"], c["environment_areas"]]
             + [c["raw"][k] for k in keys]
             + [c["s"][k] for k in keys]
         )

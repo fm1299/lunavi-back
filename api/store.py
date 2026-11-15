@@ -8,7 +8,7 @@ from pathlib import Path
 import numpy as np
 
 from api.assistant import Assistant, settings_from_env
-from pipeline import scoring
+from pipeline import environment, scoring
 from pipeline.contract import Config, Profile, Target, load_config
 from pipeline.earth import Comparison, beyond_earth_keys, compare, load_earth, tag_caves
 from pipeline.geo import haversine_km
@@ -74,6 +74,15 @@ class Store:
             self.restriction = [worst_level(self.config.restrictions, z) for z in self.zones]
         else:
             self.restriction = [None] * len(self.earth.lat)
+        # Environmental areas per cell (protected areas, wildlife, hazards). Never scored.
+        self.env_areas: list[list[str]] = [[] for _ in self.earth.lat]
+        if self.config.environment is not None:
+            self.env_areas = environment.cell_areas(
+                self.config.environment,
+                self.earth.table["country"].to_numpy(),
+                self.earth.lat,
+                self.earth.lon,
+            )
         self.sites = sites or SiteBook(
             window_km=self.config.run.site_window_km, rules=self.config.rules
         )
@@ -200,6 +209,7 @@ class Store:
             "novelty": self.novelty(index),
             "new_candidate": bool(self.new_candidate[index]),
             "restriction": self.restriction[index],
+            "environment_areas": len(self.env_areas[index]),
         }
 
     def matches(
@@ -349,7 +359,14 @@ class Store:
             "test_tags": profile.test_tags,
             "eligible": bool(self.earth.eligible[index]),
             "access_restrictions": self.restrictions_at(index),
+            "environment": self.environment_at(index),
         }
+
+    def environment_at(self, index: int) -> dict | None:
+        """Environmental notes of the areas that hold one cell."""
+        if self.config.environment is None:
+            return None
+        return environment.describe(self.config.environment, self.env_areas[index])
 
     def restrictions_at(self, index: int) -> dict | None:
         """Fieldwork restrictions of one cell, with the legal notes of each zone."""
