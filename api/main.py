@@ -155,6 +155,7 @@ def meta(request: Request) -> dict:
         "site_window_km": run.site_window_km,
         "confidence_bands": run.confidence_bands,
         "beyond_earth_mode": run.beyond_earth,
+        "novelty_km": run.novelty_km,
         "limits_statement": LIMITS_STATEMENT,
         "ai": store.assistant.describe(),
     }
@@ -426,6 +427,7 @@ def summary(
     lang: str = "en",
     beyond: str | None = BEYOND_QUERY,
     avoid: str | None = AVOID_QUERY,
+    new_only: bool = False,  # only new cells: farther than novelty_km["near"] from the catalog
 ) -> dict:
     """A short answer about the best results, written from their numbers (spec FR-AI2).
 
@@ -435,7 +437,7 @@ def summary(
     store = _store(request)
     ranked = results(
         request, target, profile, weights, bbox, terrain, 5,
-        min_confidence, min_separation_km, "full", beyond, avoid,
+        min_confidence, min_separation_km, "full", beyond, avoid, new_only,
     )  # fmt: skip
     site = _target(store, target)
     features = store.config.features
@@ -457,6 +459,7 @@ def summary(
         "purpose": purpose.label,
         "region": presets.get(region or "", None),
         "terrain_filter": [t for t in (terrain or "").split(",") if t],
+        "only_new_places": new_only,
         "cells_compared": ranked["meta"]["count"],
         "emphasis": stressed,
         "beyond_earth_features": [labels[key] for key in ranked["meta"]["beyond_earth"]],
@@ -517,6 +520,7 @@ def portfolio(
     max_cells: int = Query(10, ge=1, le=50),
     beyond: str | None = BEYOND_QUERY,
     avoid: str | None = AVOID_QUERY,
+    new_only: bool = False,  # only new cells: farther than novelty_km["near"] from the catalog
 ) -> dict:
     """The fewest cells that together cover the site's conditions (spec FR-P13)."""
     store = _store(request)
@@ -525,7 +529,8 @@ def portfolio(
     requested = _weights(store, profile_config, weights)
     active_weights = _scoring_weights(store, site, requested, beyond)
     scored = store.compute(site, active_weights, profile_config)
-    keep = _keep(store, scored, bbox, terrain, min_confidence, avoid) & (scored.score > 0)
+    keep = _keep(store, scored, bbox, terrain, min_confidence, avoid, new_only=new_only)
+    keep &= scored.score > 0
     limit = store.config.run.cover_threshold if threshold is None else threshold
     flagged = beyond_earth_keys(store.config.features, site)
     result = store.portfolio(
@@ -551,11 +556,12 @@ def export(
     format: Literal["csv"] = "csv",
     beyond: str | None = BEYOND_QUERY,
     avoid: str | None = AVOID_QUERY,
+    new_only: bool = False,  # only new cells: farther than novelty_km["near"] from the catalog
 ) -> Response:
     """The shortlist as a CSV file (spec FR-A5). Takes the same filters as /results."""
     ranked = results(
         request, target, profile, weights, bbox, terrain, top_n,
-        min_confidence, min_separation_km, "full", beyond, avoid,
+        min_confidence, min_separation_km, "full", beyond, avoid, new_only,
     )  # fmt: skip
     keys = list(_store(request).config.features)
     out = io.StringIO()

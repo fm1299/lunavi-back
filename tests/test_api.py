@@ -538,3 +538,14 @@ def test_cells_carry_a_restriction_label_and_can_be_left_out(client):
     first = compact["cells"]["cell_id"][0]
     sheet = client.get(f"/cells/{first}", params={"target": "jezero"}).json()
     assert set(sheet["access_restrictions"]) == {"level", "zones", "checked"}
+
+
+def test_new_only_reaches_every_list_built_from_the_results(client):
+    params = {"target": "jezero", "new_only": True}
+    assert client.get("/meta").json()["novelty_km"]["near"] > 0
+    summary = client.get("/summary", params=params).json()
+    assert summary["facts"]["only_new_places"] is True
+    assert client.get("/portfolio", params=params).status_code == 200
+    every = client.get("/export", params={"target": "jezero", "top_n": 1000}).text.splitlines()
+    new = client.get("/export", params={**params, "top_n": 1000}).text.splitlines()
+    assert len(new) <= len(every)
