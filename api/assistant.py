@@ -19,6 +19,9 @@ from dataclasses import dataclass
 import httpx
 
 from pipeline.contract import Config
+from pipeline.gazetteer import SOURCE_PAGE, PlaceName
+
+FindPlace = Callable[[str, str | None, str | None], PlaceName | None]
 
 PROVIDERS = {
     "gemini": {
@@ -149,6 +152,11 @@ JSON fields, all required:
 - "target": a site identifier, or null to keep the current site.
 - "coordinates": {{"body": "moon" or "mars", "lat": number, "lon": number}} only when the person
   typed coordinates themselves, else null. Never work out coordinates from a place name.
+- "place": {{"name": text, "body": "moon", "mars" or null}} when the person names a feature of the
+  Moon or Mars that is not in the sites list, such as a crater, valley, mountain, plain or sea,
+  else null. Give its official IAU name in its usual Latin or English form ("Olympus Mons", not
+  "Monte Olimpo"; "Mare Tranquillitatis", not "Mar de la Tranquilidad"). Never give coordinates
+  for it: the app looks the name up in the official list of planetary names.
 - "profile": a purpose identifier only when the request itself names or clearly implies a
   purpose, else null. Do not repeat the current purpose for a new site.
 - "emphasis": the feature the person stresses, or null. A comparison such as "but colder",
@@ -165,10 +173,23 @@ search ("now only deserts", "and drier"), keep the current values for everything
 mention. When it is a new search, use null, an empty list or 0 for what it does not mention."""
 
 
-def validate_plan(raw: dict, request: str, current: dict, config: Config) -> dict:
+def _current_body(current: dict, config: Config) -> str | None:
+    target = current.get("target")
+    if target in config.targets:
+        return config.targets[target].body
+    if isinstance(target, str) and target.split("_", 1)[0] in ("moon", "mars"):
+        return target.split("_", 1)[0]
+    return None
+
+
+def validate_plan(
+    raw: dict, request: str, current: dict, config: Config, find_place: FindPlace | None = None
+) -> dict:
     """Check a model reply against the data contract. Anything unknown is dropped and reported.
 
-    Returns the plan with plain identifiers. "site" is (body, lat, lon) for typed coordinates.
+    Returns the plan with plain identifiers. "site" is (body, lat, lon) for typed coordinates or
+    for a named feature found in the official gazetteer; "place" then describes that feature.
+    "site_kept" is True when the request asked for a site that could not be used.
     """
     notes = [
         str(note)[:MAX_NOTE_CHARS]
@@ -178,10 +199,12 @@ def validate_plan(raw: dict, request: str, current: dict, config: Config) -> dic
     if raw.get("understood") is not True:
         return {"understood": False, "not_applied": notes}
 
-    target, site = current.get("target"), None
-    changed_site = False
+    target, site, place = current.get("target"), None, None
+    changed_site = site_kept = False
     wanted = raw.get("target")
     coordinates = raw.get("coordinates")
+    named = raw.get("place") if isinstance(raw.get("place"), dict) else None
+    place_name = named.get("name") if named else None
     if isinstance(wanted, str) and wanted in config.targets:
         target, changed_site = wanted, wanted != current.get("target")
     elif isinstance(coordinates, dict):
@@ -197,8 +220,33 @@ def validate_plan(raw: dict, request: str, current: dict, config: Config) -> dic
             site, changed_site = (body, round(lat, 2), round(lon, 2)), True
         else:
             notes.append("coordinates")
+            site_kept = True
+    elif isinstance(place_name, str) and place_name.strip():
+        body = named.get("body") if named.get("body") in ("moon", "mars") else None
+        found = None
+        if find_place is not None:
+            try:
+                found = find_place(place_name, body, _current_body(current, config))
+            except (OSError, RuntimeError, ValueError):
+                found = None  # the list could not be read: say so instead of guessing
+        if found is not None:
+            site, changed_site = (found.body, round(found.lat, 2), round(found.lon, 2)), True
+            place = {
+                "name": found.name,
+                "body": found.body,
+                "type": found.type,
+                "diameter_km": found.diameter_km,
+                "lat": found.lat,
+                "lon": found.lon,
+                "link": found.link,
+                "source": SOURCE_PAGE,
+            }
+        else:
+            notes.append(place_name.strip()[:MAX_NOTE_CHARS])
+            site_kept = True
     elif isinstance(wanted, str) and wanted.strip():
         notes.append(wanted[:MAX_NOTE_CHARS])
+        site_kept = True
 
     profile = raw.get("profile")
     if changed_site and profile == current.get("profile"):
@@ -237,6 +285,8 @@ def validate_plan(raw: dict, request: str, current: dict, config: Config) -> dic
         "understood": True,
         "target": target,
         "site": site,
+        "place": place,
+        "site_kept": site_kept,
         "profile": profile,
         "emphasis": emphasis,
         "region": region,
@@ -339,7 +389,14 @@ class Assistant:
             raise AssistantError("the model returned an empty reply")
         return content.strip()
 
-    def interpret(self, request: str, language: str, current: dict, config: Config) -> dict:
+    def interpret(
+        self,
+        request: str,
+        language: str,
+        current: dict,
+        config: Config,
+        find_place: FindPlace | None = None,
+    ) -> dict:
         """Turn a request into a validated plan. Raises AssistantError when the model fails."""
         message = json.dumps(
             {
@@ -350,7 +407,7 @@ class Assistant:
             ensure_ascii=False,
         )
         reply = self.chat(interpret_prompt(config), message, json_reply=True)
-        return validate_plan(parse_json_reply(reply), request, current, config)
+        return validate_plan(parse_json_reply(reply), request, current, config, find_place)
 
     def summarize(self, facts: dict, language: str) -> str | None:
         """A short answer written from the facts, or None when the model fails or adds numbers."""

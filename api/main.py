@@ -395,7 +395,9 @@ def ask(
         "min_confidence": min_confidence,
     }
     try:
-        plan = store.assistant.interpret(text, lang, current, store.config)
+        plan = store.assistant.interpret(
+            text, lang, current, store.config, find_place=store.gazetteer.find
+        )
     except AssistantError as error:
         raise HTTPException(502, str(error)) from error
     model = store.assistant.describe()["model"]
@@ -409,6 +411,9 @@ def ask(
 
     if plan["site"]:
         site = store.sites.resolve(*plan["site"])
+        if plan["place"]:
+            # A site found by its official name keeps that name, also in later reads of the site.
+            site = store.sites.name_site(site.id, plan["place"]["name"]) or site
     else:
         site = store.find_target(plan["target"]) if plan["target"] else None
     if site is None:
@@ -425,6 +430,8 @@ def ask(
             "terrain": plan["terrain"],
             "min_confidence": plan["min_confidence"],
         },
+        "place": plan["place"],
+        "site_kept": plan["site_kept"],
         "not_applied": plan["not_applied"],
         "model": model,
     }

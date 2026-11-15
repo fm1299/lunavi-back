@@ -11,6 +11,7 @@ from api.assistant import Assistant, settings_from_env
 from pipeline import environment, scoring
 from pipeline.contract import Config, Profile, Target, load_config
 from pipeline.earth import Comparison, beyond_earth_keys, compare, load_earth, tag_caves
+from pipeline.gazetteer import Gazetteer
 from pipeline.geo import haversine_km
 from pipeline.restrictions import cell_zones, describe, worst_level
 from pipeline.sites import SiteBook
@@ -53,6 +54,7 @@ class Store:
         config: Config | None = None,
         sites: SiteBook | None = None,
         assistant: Assistant | None = None,
+        gazetteer: Gazetteer | None = None,
     ):
         self.config = config or load_config()
         self.directory = directory or results_dir()
@@ -87,6 +89,7 @@ class Store:
             window_km=self.config.run.site_window_km, rules=self.config.rules
         )
         self.assistant = assistant or Assistant(settings_from_env())
+        self.gazetteer = gazetteer or Gazetteer()
         self.analog_cells = self._analog_cells()
         self.known_km, self.known_name = self._nearest_catalog()
         # One novelty rule for the list, the map and /process (spec 5.5, run.json novelty_km).

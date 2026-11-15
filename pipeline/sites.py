@@ -424,6 +424,16 @@ class SiteBook:
         except (RuntimeError, OSError, ValueError, KeyError) as error:
             return blank(f"The composition map could not be read: {str(error)[:80]}")
 
+    def name_site(self, identifier: str, name: str) -> Target | None:
+        """Give a resolved site an official name, such as one from the IAU gazetteer, for good."""
+        target = self._load(identifier)
+        if target is None:
+            return None
+        if target.name != name:
+            target.name = name
+            self._save(target)
+        return target
+
     def get(self, identifier: str) -> Target | None:
         """A known site, or read it again from its ID, for example after a restart."""
         cached = self._load(identifier)
@@ -440,6 +450,9 @@ class SiteBook:
         try:
             target.features.update(read_mars_temperature(target.lat, target.lon))
             target.climate_status = "ready"
+            latest = self._load(identifier)  # a name given during the slow query must survive it
+            if latest is not None:
+                target.name = latest.name
             self._save(target)
         except (RuntimeError, ValueError) as error:
             note = f"The Mars Climate Database could not be read: {str(error)[:80]}"

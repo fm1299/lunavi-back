@@ -197,3 +197,16 @@ def test_a_cached_site_gets_its_composition_once_the_map_can_be_read(tmp_path, m
     third = sites.SiteBook(directory=tmp_path, rules=load_config().rules)
     assert third.get(first.id).features["composition"].value == "basaltic"
     assert len(calls) == 2  # saved, so not read again
+
+
+def test_an_official_name_survives_the_slow_mars_temperature_query(book, monkeypatch):
+    site = book.resolve("mars", -14.01, -58.59)
+
+    def climate(lat, lon):
+        book.name_site(site.id, "Valles Marineris")  # named while the query runs
+        return {"mean_temperature": _measured(-60.0)}
+
+    monkeypatch.setattr(sites, "read_mars_temperature", climate)
+    finished = book.finish_climate(site.id)
+    assert finished.name == "Valles Marineris" and finished.climate_status == "ready"
+    assert book.get(site.id).name == "Valles Marineris"
