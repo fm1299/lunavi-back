@@ -90,6 +90,24 @@
         "category": {
           "title": "Category",
           "type": "string"
+        },
+        "verification_status": {
+          "anyOf": [
+            {
+              "enum": [
+                "verificado",
+                "oficial_sin_reabrir",
+                "secundario",
+                "pendiente"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Verification Status"
         }
       },
       "required": [

@@ -239,8 +239,14 @@ class AccessRestrictions(BaseModel):
     general_notes: list[LegalNote]
 
 
+VerificationStatus = Literal["verificado", "oficial_sin_reabrir", "secundario", "pendiente"]
+
+
 class EnvironmentalNote(LegalNote):
     category: str  # a key of EnvironmentalNotes.categories
+    # verificado: source opened and confirmed; oficial_sin_reabrir: official source not re-opened;
+    # secundario: context from a secondary or news source; pendiente: unconfirmed, do not act on it.
+    verification_status: VerificationStatus | None = None
 
 
 class EnvironmentalArea(BaseModel):
