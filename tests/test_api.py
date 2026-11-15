@@ -449,3 +449,24 @@ def test_validation_audits_the_findings(client):
     assert audit["findings"] == 13
     assert sum(audit["literature_results"].values()) == 13
     assert "jezero_N3300_E05300" in audit["without_sources"]  # Nain: no source was found
+
+
+def test_process_walks_through_every_step(client):
+    reply = client.get("/process", params={"target": "jezero"})
+    assert reply.status_code == 200
+    body = reply.json()
+    stages = [row["stage"] for row in body["funnel"]]
+    assert stages[:3] == ["land_cells", "after_masks", "after_gates"]
+    counts = [row["count"] for row in body["funnel"][:-1]]  # findings are reviewed by hand
+    assert counts == sorted(counts, reverse=True)  # each step keeps fewer cells
+    assert [row["key"] for row in body["features"]] == [
+        row["key"] for row in client.get("/features").json()
+    ]
+    example = body["example"]
+    if example is not None and example["weight_sum"]:
+        expected = 100 * example["weighted_sum"] / example["weight_sum"]
+        assert abs(example["score"] - expected) < 0.2
+
+
+def test_process_rejects_an_unknown_site(client):
+    assert client.get("/process", params={"target": "nowhere"}).status_code == 404

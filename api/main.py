@@ -16,6 +16,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.gzip import GZipMiddleware
 
 from api.assistant import LANGUAGES, MAX_REQUEST_CHARS, TERRAIN_CLASSES, AssistantError
+from api.process import build_process
 from api.store import Store
 from pipeline import scoring
 from pipeline.contract import Profile, Target
@@ -168,6 +169,28 @@ def sources(request: Request) -> list[dict]:
 def validation(request: Request) -> dict:
     """How documented analogs and unlikely places rank for the preset sites (spec FR-A4)."""
     return _store(request).validation()
+
+
+@app.get("/process")
+def process(
+    request: Request,
+    target: str,
+    profile: str | None = None,
+    weights: str | None = None,
+    top_share: float = Query(0.01, gt=0.0, le=1.0, description="share of top scores kept"),
+) -> dict:
+    """How LUNAVI reaches its analogs for one site, step by step, with live numbers.
+
+    Grid, Earth data, site values, common scale, similarity, score and veto, terrain, confidence,
+    novelty, candidate regions, literature-checked findings and validation, plus the funnel of
+    cells left after each step and the best cell worked out term by term.
+    """
+    store = _store(request)
+    site = _target(store, target)
+    profile_config = _profile(store, site, profile)
+    return build_process(
+        store, site, profile_config, _weights(store, profile_config, weights), top_share
+    )
 
 
 @app.get("/analogs")

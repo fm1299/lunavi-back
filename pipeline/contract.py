@@ -294,6 +294,8 @@ class RunConfig(BaseModel):
     access: AccessConfig
     cover_threshold: float  # a similarity at or above this covers a site condition (FR-P12, FR-P13)
     analog_match_km: float  # a documented analog is read from the nearest cell within this distance
+    # Novelty (spec 5.5): known closer than "known" km to a catalog site, new farther than "near".
+    novelty_km: dict[Literal["known", "near"], float] = {"known": 150.0, "near": 500.0}
     modis: ModisConfig = ModisConfig()
     validation: ValidationConfig = ValidationConfig()
 

@@ -66,12 +66,29 @@ class Store:
         self.assistant = assistant or Assistant(settings_from_env())
         self.analog_cells = self._analog_cells()
         self._validation: dict | None = None
+        self._catalog_km: np.ndarray | None = None
 
     def validation(self) -> dict:
         """The validation report for the loaded Earth table, built once (spec FR-A4)."""
         if self._validation is None:
             self._validation = build_report(self.config, self.earth, self.manifest["dummy"])
         return self._validation
+
+    @property
+    def catalog(self) -> list:
+        """The catalog of documented analogs, leaving out negative controls (spec 1.5)."""
+        return [a for a in self.config.analogs if a.role != "negative_control"]
+
+    def catalog_distance_km(self) -> np.ndarray:
+        """Distance from each Earth cell to the nearest catalog site, for novelty (spec 5.5)."""
+        if self._catalog_km is None:
+            distance = np.full(len(self.earth.lat), np.inf)
+            for site in self.catalog:
+                distance = np.minimum(
+                    distance, haversine_km(site.lat, site.lon, self.earth.lat, self.earth.lon)
+                )
+            self._catalog_km = distance
+        return self._catalog_km
 
     def _analog_cells(self) -> dict[str, int]:
         """The Earth cell that stands for each documented analog, leaving out negative controls."""
