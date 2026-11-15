@@ -1,0 +1,54 @@
+{
+  "_note": "Documented lava tubes and caves, as Earth analogs of Moon and Mars caves. Earth cells within analog_match_km of one carry the terrain tag 'cave'.",
+  "sites": [
+    {
+      "id": "la_corona",
+      "name": "La Corona lava tube, Lanzarote",
+      "lat": 29.1608,
+      "lon": -13.4387,
+      "source_ref": "https://doi.org/10.1029/2022JB024056"
+    },
+    {
+      "id": "craters_moon_caves",
+      "name": "Craters of the Moon caves, Idaho",
+      "lat": 43.4425,
+      "lon": -113.5298,
+      "source_ref": "https://doi.org/10.1016/j.pss.2012.02.002"
+    },
+    {
+      "id": "byaduk",
+      "name": "Byaduk lava caves, Victoria",
+      "lat": -37.9084,
+      "lon": 141.9745,
+      "source_ref": "https://marssociety.org.au/node/1845"
+    },
+    {
+      "id": "youyang_cave",
+      "name": "Youyang cave, Chongqing",
+      "lat": 28.8,
+      "lon": 108.8,
+      "source_ref": "https://doi.org/10.34133/2022/9875780"
+    },
+    {
+      "id": "kazumura",
+      "name": "Kazumura Cave, Hawaii",
+      "lat": 19.5189,
+      "lon": -155.0311,
+      "source_ref": "https://digitalcommons.usf.edu/kip_articles/6173"
+    },
+    {
+      "id": "lava_beds",
+      "name": "Lava Beds National Monument, California",
+      "lat": 41.7139,
+      "lon": -121.5083,
+      "source_ref": "https://doi.org/10.1029/2021JG006430"
+    },
+    {
+      "id": "undara",
+      "name": "Undara, Queensland",
+      "lat": -18.2011,
+      "lon": 144.5961,
+      "source_ref": "https://www.vulcanospeleology.org/sym14/papers/Atkinson.pdf"
+    }
+  ]
+}

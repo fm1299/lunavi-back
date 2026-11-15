@@ -1,0 +1,310 @@
+{
+  "$defs": {
+    "MarsCompositionRule": {
+      "properties": {
+        "geology_zip_url": {
+          "title": "Geology Zip Url",
+          "type": "string"
+        },
+        "geology_members": {
+          "maxItems": 2,
+          "minItems": 2,
+          "prefixItems": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "string"
+            }
+          ],
+          "title": "Geology Members",
+          "type": "array"
+        },
+        "geology_unit_field": {
+          "title": "Geology Unit Field",
+          "type": "string"
+        },
+        "geology_doi": {
+          "title": "Geology Doi",
+          "type": "string"
+        },
+        "chlorides_url": {
+          "title": "Chlorides Url",
+          "type": "string"
+        },
+        "chlorides_page": {
+          "title": "Chlorides Page",
+          "type": "string"
+        },
+        "chloride_cell_deg": {
+          "title": "Chloride Cell Deg",
+          "type": "number"
+        },
+        "chloride_min_area_fraction": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Chloride Min Area Fraction"
+        },
+        "units": {
+          "items": {
+            "$ref": "#/$defs/MarsUnit"
+          },
+          "title": "Units",
+          "type": "array"
+        }
+      },
+      "required": [
+        "geology_zip_url",
+        "geology_members",
+        "geology_unit_field",
+        "geology_doi",
+        "chlorides_url",
+        "chlorides_page",
+        "chloride_cell_deg",
+        "chloride_min_area_fraction",
+        "units"
+      ],
+      "title": "MarsCompositionRule",
+      "type": "object"
+    },
+    "MarsRules": {
+      "properties": {
+        "composition": {
+          "$ref": "#/$defs/MarsCompositionRule"
+        }
+      },
+      "required": [
+        "composition"
+      ],
+      "title": "MarsRules",
+      "type": "object"
+    },
+    "MarsUnit": {
+      "properties": {
+        "unit": {
+          "title": "Unit",
+          "type": "string"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string"
+        },
+        "class": {
+          "anyOf": [
+            {
+              "enum": [
+                "basaltic",
+                "felsic",
+                "sedimentary",
+                "evaporite"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Class"
+        },
+        "confidence": {
+          "anyOf": [
+            {
+              "enum": [
+                "high",
+                "medium",
+                "low"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Confidence"
+        }
+      },
+      "required": [
+        "unit",
+        "description",
+        "class",
+        "confidence"
+      ],
+      "title": "MarsUnit",
+      "type": "object"
+    },
+    "MoonAnnualRangeRule": {
+      "properties": {
+        "polar_lat_deg": {
+          "title": "Polar Lat Deg",
+          "type": "number"
+        },
+        "non_polar_value_k": {
+          "title": "Non Polar Value K",
+          "type": "number"
+        },
+        "non_polar_source_url": {
+          "title": "Non Polar Source Url",
+          "type": "string"
+        },
+        "polar_source_url": {
+          "title": "Polar Source Url",
+          "type": "string"
+        }
+      },
+      "required": [
+        "polar_lat_deg",
+        "non_polar_value_k",
+        "non_polar_source_url",
+        "polar_source_url"
+      ],
+      "title": "MoonAnnualRangeRule",
+      "type": "object"
+    },
+    "MoonCompositionRule": {
+      "properties": {
+        "mare_polygons_url": {
+          "title": "Mare Polygons Url",
+          "type": "string"
+        },
+        "mare_polygons_page": {
+          "title": "Mare Polygons Page",
+          "type": "string"
+        },
+        "mare_polygons_lat_range": {
+          "maxItems": 2,
+          "minItems": 2,
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "title": "Mare Polygons Lat Range",
+          "type": "array"
+        },
+        "feo_url": {
+          "title": "Feo Url",
+          "type": "string"
+        },
+        "feo_page": {
+          "title": "Feo Page",
+          "type": "string"
+        },
+        "spa_ellipse": {
+          "$ref": "#/$defs/SpaEllipse"
+        },
+        "spa_feo_min_wt_pct": {
+          "title": "Spa Feo Min Wt Pct",
+          "type": "number"
+        },
+        "fallback_mare_feo_wt_pct": {
+          "title": "Fallback Mare Feo Wt Pct",
+          "type": "number"
+        }
+      },
+      "required": [
+        "mare_polygons_url",
+        "mare_polygons_page",
+        "mare_polygons_lat_range",
+        "feo_url",
+        "feo_page",
+        "spa_ellipse",
+        "spa_feo_min_wt_pct",
+        "fallback_mare_feo_wt_pct"
+      ],
+      "title": "MoonCompositionRule",
+      "type": "object"
+    },
+    "MoonRules": {
+      "properties": {
+        "composition": {
+          "$ref": "#/$defs/MoonCompositionRule"
+        },
+        "temp_annual_range": {
+          "$ref": "#/$defs/MoonAnnualRangeRule"
+        }
+      },
+      "required": [
+        "composition",
+        "temp_annual_range"
+      ],
+      "title": "MoonRules",
+      "type": "object"
+    },
+    "SpaEllipse": {
+      "properties": {
+        "center_lat": {
+          "title": "Center Lat",
+          "type": "number"
+        },
+        "center_lon": {
+          "title": "Center Lon",
+          "type": "number"
+        },
+        "semi_major_km": {
+          "title": "Semi Major Km",
+          "type": "number"
+        },
+        "semi_minor_km": {
+          "title": "Semi Minor Km",
+          "type": "number"
+        },
+        "rotation_deg": {
+          "title": "Rotation Deg",
+          "type": "number"
+        },
+        "source": {
+          "title": "Source",
+          "type": "string"
+        },
+        "source_url": {
+          "title": "Source Url",
+          "type": "string"
+        }
+      },
+      "required": [
+        "center_lat",
+        "center_lon",
+        "semi_major_km",
+        "semi_minor_km",
+        "rotation_deg",
+        "source",
+        "source_url"
+      ],
+      "title": "SpaEllipse",
+      "type": "object"
+    }
+  },
+  "description": "How a Moon or Mars location gets values that no global map gives directly.",
+  "properties": {
+    "status": {
+      "enum": [
+        "proposed",
+        "confirmed"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "moon": {
+      "$ref": "#/$defs/MoonRules"
+    },
+    "mars": {
+      "$ref": "#/$defs/MarsRules"
+    }
+  },
+  "required": [
+    "status",
+    "moon",
+    "mars"
+  ],
+  "title": "PlanetRules",
+  "type": "object"
+}

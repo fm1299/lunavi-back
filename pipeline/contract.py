@@ -9,7 +9,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Literal
 
-from pydantic import BaseModel, model_validator
+from pydantic import BaseModel, Field, model_validator
 
 CONFIG_DIR = Path("data/config")
 SCHEMA_DIR = Path("data/schemas")
@@ -22,7 +22,7 @@ class TargetFeature(BaseModel):
     """One value for a Moon or Mars site. A null value means no data yet."""
 
     value: float | str | None
-    uncertainty: float | None = None
+    uncertainty: float | str | None = None  # a number in the value's unit, or a short text
     basis: Basis | None
     source_url: str | None
     note: str | None = None
@@ -67,6 +67,7 @@ class Feature(BaseModel):
     source_url: str | None
     license: str | None
     note: str | None = None
+    range_note: str | None = None  # where lo and hi come from
     comparable_across_bodies: bool = True  # false when each body measures it from its own zero
 
     @model_validator(mode="after")
@@ -101,6 +102,80 @@ class KnownAnalog(BaseModel):
     control_for: list[str]
     source_ref: str | None
     citation_status: CitationStatus
+
+
+class CaveSite(BaseModel):
+    """A documented lava tube or cave. Earth cells near one carry the terrain tag "cave"."""
+
+    id: str
+    name: str
+    lat: float
+    lon: float
+    source_ref: str | None
+
+
+class SpaEllipse(BaseModel):
+    center_lat: float
+    center_lon: float
+    semi_major_km: float
+    semi_minor_km: float
+    rotation_deg: float  # of the major axis, from north, positive toward east
+    source: str
+    source_url: str
+
+
+class MoonCompositionRule(BaseModel):
+    mare_polygons_url: str
+    mare_polygons_page: str
+    mare_polygons_lat_range: tuple[float, float]  # the polygons only cover this band
+    feo_url: str
+    feo_page: str
+    spa_ellipse: SpaEllipse
+    spa_feo_min_wt_pct: float
+    fallback_mare_feo_wt_pct: float
+
+
+class MoonAnnualRangeRule(BaseModel):
+    polar_lat_deg: float
+    non_polar_value_k: float
+    non_polar_source_url: str
+    polar_source_url: str
+
+
+class MarsUnit(BaseModel):
+    unit: str
+    description: str
+    class_: Literal["basaltic", "felsic", "sedimentary", "evaporite"] | None = Field(alias="class")
+    confidence: Literal["high", "medium", "low"] | None
+
+
+class MarsCompositionRule(BaseModel):
+    geology_zip_url: str
+    geology_members: tuple[str, str]  # .shp and .dbf inside the ZIP
+    geology_unit_field: str
+    geology_doi: str
+    chlorides_url: str
+    chlorides_page: str
+    chloride_cell_deg: float
+    chloride_min_area_fraction: float | None  # null: one deposit in the cell is enough
+    units: list[MarsUnit]
+
+
+class MoonRules(BaseModel):
+    composition: MoonCompositionRule
+    temp_annual_range: MoonAnnualRangeRule
+
+
+class MarsRules(BaseModel):
+    composition: MarsCompositionRule
+
+
+class PlanetRules(BaseModel):
+    """How a Moon or Mars location gets values that no global map gives directly."""
+
+    status: Literal["proposed", "confirmed"]
+    moon: MoonRules
+    mars: MarsRules
 
 
 class MaskException(BaseModel):
@@ -218,6 +293,8 @@ class Config:
     analogs: list[KnownAnalog]
     masks: Masks
     sources: list[Source]
+    caves: tuple[CaveSite, ...] = ()
+    rules: PlanetRules | None = None
 
 
 def _read(path: Path) -> dict:
@@ -233,6 +310,8 @@ def load_config(config_dir: Path = CONFIG_DIR) -> Config:
         analogs=[KnownAnalog(**s) for s in _read(config_dir / "known_analogs.json")["sites"]],
         masks=Masks(**_read(config_dir / "masks.json")),
         sources=[Source(**s) for s in _read(config_dir / "sources.json")["sources"]],
+        caves=tuple(CaveSite(**s) for s in _read(config_dir / "cave_sites.json")["sites"]),
+        rules=PlanetRules(**_read(config_dir / "planet_rules.json")),
     )
     _cross_check(config)
     return config
@@ -263,6 +342,8 @@ def export_schemas(out_dir: Path = SCHEMA_DIR) -> None:
         "profile": Profile,
         "known_analog": KnownAnalog,
         "masks": Masks,
+        "cave_site": CaveSite,
+        "planet_rules": PlanetRules,
         "run": RunConfig,
         "source": Source,
         "result_cell": ResultCell,

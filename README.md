@@ -32,6 +32,7 @@ Other commands:
 ```powershell
 uv run python -m pipeline.validate      # validation report for the real table, written to data/results/validation.json
 uv run python -m pipeline.make_dummy    # regenerate the dummy table (about 50 cells)
+uv run python -m pipeline.check_sites   # read the ten Moon and Mars test points and compare them with published values
 uv run python -m pipeline.contract      # validate config and export JSON Schemas to data/schemas
 uv run pytest                           # tests, no network needed
 uv run ruff check .                     # linter
@@ -49,6 +50,18 @@ uv run ruff check .                     # linter
 - **Ranges.** `manifest.json` (and `/meta`) carries `feature_ranges`: percentiles 1 and 99 of each numeric feature over all land cells and over the eligible cells, next to its `lo` and `hi`. When `lo` to `hi` is much wider than the data, the feature barely tells cells apart, and the range in `features.json` should be narrowed. A table built before this needs one more `uv run python -m pipeline.run` (cached, so it is quick).
 - **Sources.** `data/config/sources.json` is the team's source inventory: which source fills each feature on each body, its license, whether the organizers list it, and whether the pipeline reads it today. `GET /sources` serves it. `verified` stays `null` until a team member checks the source.
 - **MODIS sampling.** `modis` in `run.json` sets which months are read (one composite each) and the share of valid composites a cell needs to keep a value (0.2). Adding months gives a truer yearly maximum NDVI, at the cost of more downloads.
+
+## Moon and Mars composition
+
+No global map gives one of the four classes directly, so a location gets its class from proposed rules over mapped data. The rules are in `data/config/planet_rules.json`; the reasoning, citations, limits and open decisions are in `data/reference/reglas_luna_marte.json`. Every class from a rule has basis `literature`.
+
+- **Moon.** Inside a mapped mare ([LROC outlines](https://data.lroc.im-ldi.com/lroc/view_rdr/SHAPEFILE_LROC_GLOBAL_MARE), 8.7 MB) is basaltic. Otherwise, inside the South Pole-Aitken iron ellipse (Garrick-Bethell and Zuber 2009) with Lunar Prospector FeO of 8 wt% or more is basaltic, as mafic non-mare material. Anything else is felsic, the nearest class to anorthositic highlands. Never sedimentary or evaporite.
+- **Mars.** The [SIM 3292](https://doi.org/10.3133/sim3292) unit at the point, translated with the table of 44 units. Only the global layer (about 55 MB) is pulled out of the 809 MB ZIP, by HTTP range requests. A 0.5 degree cell holding a chloride deposit ([Osterloo et al. 2010](https://data.caltech.edu/records/kasms-vp209)) becomes evaporite. Polar ice units leave composition missing.
+- **Moon annual range.** Below 80 degrees of latitude it is 0 K, basis `physical`: the spin axis tilts 1.54 degrees. Poleward of 80 degrees it stays blank for map sites until the Diviner seasonal polar product is read; the Shackleton preset carries the measured value.
+
+`pipeline.check_sites` reads the ten test points in `data/reference/puntos_prueba.json` (landers and rovers) and writes `data/results/site_checks.json`. The rule reads all ten as expected; seven also match what was found on the ground. Gale (lake mudstone in an impact unit), Meridiani (sulfate evaporites in HNhu) and InSight (basalt under regolith in eHt) disagree, and stay listed instead of tuned away.
+
+**Caves.** `data/config/cave_sites.json` lists documented lava tubes. The nearest Earth cell to each, within `analog_match_km`, gets the terrain tag `cave`, so `terrain=cave` finds them. The tag does not make a masked cell eligible.
 
 ## Search in plain words (FR-AI2)
 
@@ -103,6 +116,7 @@ Composition comes from GLiM gridded to 0.5 degrees (`pipeline/adapters/glim.py`)
 | `GET /summary?target={id}&lang=` plus the `/results` filters | Facts about the five best results, and a short answer when a model is set up |
 | `GET /validation` | How the documented analogs and the negative controls rank for the preset sites |
 | `GET /sources` | The data source inventory, with license and status |
+| `GET /caves` | Documented lava tubes and caves, and whether a cell of the table holds each |
 | `GET /profiles`, `/features`, `/analogs`, `/meta`, `/health` | Config and status |
 
 ## Layout
@@ -112,6 +126,9 @@ Composition comes from GLiM gridded to 0.5 degrees (`pipeline/adapters/glim.py`)
 | `pipeline/scoring.py` | The formulas from spec section 5, as pure functions |
 | `pipeline/adapters/` | One adapter per Earth feature |
 | `pipeline/sites.py` | Reads any Moon or Mars location |
+| `pipeline/planet_rules.py` | Composition class on the Moon and Mars, and the Moon's annual range |
+| `pipeline/shapefile.py` | A small polygon shapefile reader, and reading one file out of a remote ZIP |
+| `pipeline/check_sites.py` | Compares the site reader with the team's test points |
 | `pipeline/earth.py` | Loads the Earth table and compares a site with it |
 | `pipeline/access.py` | Distance to roads and airports, and the access score per cell |
 | `pipeline/contract.py` | The data contract as Pydantic models |
@@ -120,6 +137,7 @@ Composition comes from GLiM gridded to 0.5 degrees (`pipeline/adapters/glim.py`)
 | `api/` | FastAPI app |
 | `api/assistant.py` | The language model client, its prompts and the checks on its replies |
 | `data/config/` | Preset sites, features, profiles, documented analogs, masks, sources and run settings |
+| `data/reference/` | The team's rule analysis and test points, as received (Spanish) |
 | `data/dummy/results/` | A dummy Earth table in the real format |
 | `data/results/` | The real Earth table (git-ignored) |
 
@@ -139,4 +157,6 @@ The spec describes one repository with `pipeline/`, `api/`, `web/` and `data/`. 
 | Mars terrain | [MOLA 463 m](https://planetarymaps.usgs.gov/mosaic/Mars_MGS_MOLA_DEM_mosaic_global_463m.tif) | NASA and USGS open data |
 | Mars temperature | [Mars Climate Database v6.2](https://www-mars.lmd.jussieu.fr/mcd_python/) | Cite the MCD (a model, so basis is literature) |
 | Moon terrain | [LOLA 118 m](https://planetarymaps.usgs.gov/mosaic/Lunar_LRO_LOLA_Global_LDEM_118m_Mar2014.tif) and [LOLA south polar](https://pgda.gsfc.nasa.gov/products/90) | NASA open data |
+| Moon composition | [LROC mare outlines](https://data.lroc.im-ldi.com/lroc/view_rdr/SHAPEFILE_LROC_GLOBAL_MARE) and [Lunar Prospector FeO](https://pds-geosciences.wustl.edu/missions/lunarp/reduced_special.html) | NASA open data |
+| Mars composition | [USGS SIM 3292](https://doi.org/10.3133/sim3292) and [Osterloo chlorides](https://data.caltech.edu/records/kasms-vp209) | Public domain; CC0 |
 | Moon temperature | [Diviner global table](https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp/) | NASA PDS open data |

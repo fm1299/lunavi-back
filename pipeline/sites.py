@@ -17,9 +17,10 @@ from rasterio.warp import transform as warp_transform
 from rasterio.windows import Window
 
 from pipeline import http_setup  # noqa: F401
-from pipeline.contract import Target, TargetFeature
+from pipeline.contract import PlanetRules, Target, TargetFeature
 from pipeline.grid import block_nanmean
 from pipeline.net import fetch
+from pipeline.planet_rules import moon_annual_range, read_composition
 from pipeline.terrain_metrics import terrain_metrics
 
 SITE_DIR = Path("data/derived/sites")
@@ -312,9 +313,15 @@ def _site_name(body: str, lat: float, lon: float) -> str:
 class SiteBook:
     """Sites chosen on the map, kept on disk so a location is only read once."""
 
-    def __init__(self, directory: Path = SITE_DIR, window_km: float = 28.0):
+    def __init__(
+        self,
+        directory: Path = SITE_DIR,
+        window_km: float = 28.0,
+        rules: PlanetRules | None = None,
+    ):
         self.directory = directory
         self.window_km = window_km
+        self.rules = rules  # composition and Moon annual range rules; None leaves them blank
         self._lock = threading.Lock()
 
     def _path(self, identifier: str) -> Path:
@@ -341,7 +348,7 @@ class SiteBook:
         if cached is not None:
             return cached
 
-        features = {**physical_features(body), "composition": blank("No source yet.")}
+        features = {**physical_features(body), "composition": self._composition(body, lat, lon)}
         try:
             features.update(read_terrain(body, lat, lon, self.window_km))
         except (rasterio.errors.RasterioError, OSError) as error:
@@ -358,6 +365,10 @@ class SiteBook:
                 note = f"The Diviner table could not be read: {str(error)[:80]}"
                 for key in ("mean_temperature", "temp_annual_range", "temp_diurnal_range"):
                     features[key] = blank(note)
+            if self.rules is not None:  # from the Moon's geometry, so it needs no Diviner read
+                features["temp_annual_range"] = moon_annual_range(
+                    lat, self.rules.moon.temp_annual_range
+                )
         else:
             note = "Waiting for the Mars Climate Database."
             for key in ("mean_temperature", "temp_annual_range", "temp_diurnal_range"):
@@ -379,6 +390,14 @@ class SiteBook:
         )
         self._save(target)
         return target
+
+    def _composition(self, body: str, lat: float, lon: float) -> TargetFeature:
+        if self.rules is None:
+            return blank("No source yet.")
+        try:
+            return read_composition(body, lat, lon, self.rules)
+        except (RuntimeError, OSError, ValueError, KeyError) as error:
+            return blank(f"The composition map could not be read: {str(error)[:80]}")
 
     def get(self, identifier: str) -> Target | None:
         """A known site, or read it again from its ID, for example after a restart."""

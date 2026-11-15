@@ -33,7 +33,7 @@ PROVIDERS = {
     },
     "ollama": {"base_url": "http://localhost:11434/v1", "model": "llama3.2", "key_env": None},
 }
-TERRAIN_CLASSES = ("arid", "polar", "volcanic", "other")
+TERRAIN_CLASSES = ("arid", "polar", "volcanic", "other", "cave")
 LANGUAGES = {"es": "Spanish", "en": "English"}
 MAX_REQUEST_CHARS = 400
 MAX_NOTES = 4
@@ -141,7 +141,8 @@ Features that can be given more importance (field "emphasis", at most one):
 {features}
 Earth regions (field "region"):
 {regions}
-Terrain classes (field "terrain", a list): "arid" (deserts), "polar", "volcanic", "other".
+Terrain classes (field "terrain", a list): "arid" (deserts), "polar", "volcanic", "other",
+"cave" (documented lava tubes and caves).
 
 JSON fields, all required:
 - "understood": false when the request is not about finding such places, else true.

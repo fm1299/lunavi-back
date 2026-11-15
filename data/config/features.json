@@ -6,15 +6,16 @@
       "unit": "deg",
       "type": "numeric",
       "direction": "Lower is flatter.",
-      "lo": 0,
-      "hi": 25,
+      "lo": 0.08,
+      "hi": 15.991,
       "source_quality": 0.95,
       "resolution_factor": 1.0,
       "adapter": "pipeline.adapters.terrain:slope",
       "source_name": "AWS Terrain Tiles (Terrarium, zoom 8)",
       "source_url": "https://registry.opendata.aws/terrain-tiles/",
       "license": "Open data, attribution required",
-      "note": "Regional terrain at a baseline of about 500 m, averaged over the cell. Not a landing or driving safety assessment."
+      "note": "Regional terrain at a baseline of about 500 m, averaged over the cell. Not a landing or driving safety assessment.",
+      "range_note": "Percentiles 1 to 99 of the land cells."
     },
     {
       "key": "roughness",
@@ -22,15 +23,16 @@
       "unit": "m",
       "type": "numeric",
       "direction": "Height variation in a 3 x 3 pixel window. Lower is smoother.",
-      "lo": 0,
-      "hi": 250,
+      "lo": 0.608,
+      "hi": 125.496,
       "source_quality": 0.95,
       "resolution_factor": 1.0,
       "adapter": "pipeline.adapters.terrain:roughness",
       "source_name": "AWS Terrain Tiles (Terrarium, zoom 8)",
       "source_url": "https://registry.opendata.aws/terrain-tiles/",
       "license": "Open data, attribution required",
-      "note": "Regional terrain at a baseline of about 500 m, averaged over the cell. Not a landing or driving safety assessment."
+      "note": "Regional terrain at a baseline of about 500 m, averaged over the cell. Not a landing or driving safety assessment.",
+      "range_note": "Percentiles 1 to 99 of the land cells."
     },
     {
       "key": "temp_annual_range",
@@ -38,15 +40,16 @@
       "unit": "K",
       "type": "numeric",
       "direction": "Warmest minus coldest monthly mean surface temperature.",
-      "lo": 0,
-      "hi": 60,
+      "lo": 1.213,
+      "hi": 51.25,
       "source_quality": 0.9,
       "resolution_factor": 0.9,
       "adapter": "pipeline.adapters.power:temp_annual_range",
       "source_name": "NASA POWER climatology (TS)",
       "source_url": "https://power.larc.nasa.gov/",
       "license": "NASA open data",
-      "note": "Source grid is 0.5 x 0.625 degrees, so sharp mountain relief is smoothed."
+      "note": "Source grid is 0.5 x 0.625 degrees, so sharp mountain relief is smoothed.",
+      "range_note": "Percentiles 1 to 99 of the land cells."
     },
     {
       "key": "temp_diurnal_range",
@@ -54,15 +57,16 @@
       "unit": "K",
       "type": "numeric",
       "direction": "Mean day minus night land surface temperature at the Aqua overpass.",
-      "lo": 0,
-      "hi": 40,
+      "lo": 0.0,
+      "hi": 31.916,
       "source_quality": 0.85,
       "resolution_factor": 1.0,
       "adapter": "pipeline.adapters.modis:temp_diurnal_range",
       "source_name": "MODIS MYD11A2 v061 land surface temperature",
       "source_url": "https://lpdaac.usgs.gov/products/myd11a2v061/",
       "license": "NASA open data",
-      "note": "One 8-day composite from each sampled month of the reference year, read from the Planetary Computer mirror of the NASA product."
+      "note": "One 8-day composite from each sampled month of the reference year, read from the Planetary Computer mirror of the NASA product.",
+      "range_note": "lo is the physical floor (0); hi is percentile 99 of the land cells."
     },
     {
       "key": "mean_temperature",
@@ -70,15 +74,16 @@
       "unit": "C",
       "type": "numeric",
       "direction": "Mean annual surface temperature.",
-      "lo": -55,
-      "hi": 32,
+      "lo": -56.733,
+      "hi": 29.934,
       "source_quality": 0.9,
       "resolution_factor": 0.9,
       "adapter": "pipeline.adapters.power:mean_temperature",
       "source_name": "NASA POWER climatology (TS)",
       "source_url": "https://power.larc.nasa.gov/",
       "license": "NASA open data",
-      "note": "Source grid is 0.5 x 0.625 degrees, so sharp mountain relief is smoothed."
+      "note": "Source grid is 0.5 x 0.625 degrees, so sharp mountain relief is smoothed.",
+      "range_note": "Percentiles 1 to 99 of the land cells."
     },
     {
       "key": "aridity",
@@ -86,15 +91,16 @@
       "unit": "mm/yr",
       "type": "numeric",
       "direction": "Mean annual precipitation. Lower is more arid.",
-      "lo": 0,
-      "hi": 3000,
+      "lo": 0.0,
+      "hi": 2678.744,
       "source_quality": 0.85,
       "resolution_factor": 0.9,
       "adapter": "pipeline.adapters.power:aridity",
       "source_name": "NASA POWER climatology (PRECTOTCORR)",
       "source_url": "https://power.larc.nasa.gov/",
       "license": "NASA open data",
-      "note": "Source grid is 0.5 x 0.625 degrees."
+      "note": "Source grid is 0.5 x 0.625 degrees.",
+      "range_note": "lo is the physical floor (0); hi is percentile 99 of the land cells."
     },
     {
       "key": "vegetation",
@@ -102,15 +108,16 @@
       "unit": "NDVI",
       "type": "numeric",
       "direction": "Maximum NDVI across the year. 0 means barren.",
-      "lo": 0,
-      "hi": 1,
+      "lo": 0.0,
+      "hi": 1.0,
       "source_quality": 0.95,
       "resolution_factor": 1.0,
       "adapter": "pipeline.adapters.modis:vegetation",
       "source_name": "MODIS MOD13A1 v061 NDVI",
       "source_url": "https://lpdaac.usgs.gov/products/mod13a1v061/",
       "license": "NASA open data",
-      "note": "One 16-day composite from each sampled month of the reference year, read from the Planetary Computer mirror of the NASA product. Used as a gate, never for ranking."
+      "note": "One 16-day composite from each sampled month of the reference year, read from the Planetary Computer mirror of the NASA product. Used as a gate, never for ranking.",
+      "range_note": "Physical limits 0 and 1."
     },
     {
       "key": "composition",
@@ -118,19 +125,55 @@
       "unit": "class",
       "type": "categorical",
       "direction": "Coarse lithology class.",
-      "classes": ["basaltic", "felsic", "sedimentary", "evaporite"],
+      "classes": [
+        "basaltic",
+        "felsic",
+        "sedimentary",
+        "evaporite"
+      ],
       "similarity_matrix": {
-        "basaltic": { "basaltic": 1.0, "felsic": 0.4, "sedimentary": 0.2, "evaporite": 0.1 },
-        "felsic": { "basaltic": 0.4, "felsic": 1.0, "sedimentary": 0.3, "evaporite": 0.1 },
-        "sedimentary": { "basaltic": 0.2, "felsic": 0.3, "sedimentary": 1.0, "evaporite": 0.5 },
-        "evaporite": { "basaltic": 0.1, "felsic": 0.1, "sedimentary": 0.5, "evaporite": 1.0 }
+        "basaltic": {
+          "basaltic": 1.0,
+          "felsic": 0.4,
+          "sedimentary": 0.2,
+          "evaporite": 0.1
+        },
+        "felsic": {
+          "basaltic": 0.4,
+          "felsic": 1.0,
+          "sedimentary": 0.3,
+          "evaporite": 0.1
+        },
+        "sedimentary": {
+          "basaltic": 0.2,
+          "felsic": 0.3,
+          "sedimentary": 1.0,
+          "evaporite": 0.5
+        },
+        "evaporite": {
+          "basaltic": 0.1,
+          "felsic": 0.1,
+          "sedimentary": 0.5,
+          "evaporite": 1.0
+        }
       },
       "class_map": {
-        "su": "sedimentary", "ss": "sedimentary", "sm": "sedimentary", "sc": "sedimentary",
+        "su": "sedimentary",
+        "ss": "sedimentary",
+        "sm": "sedimentary",
+        "sc": "sedimentary",
         "ev": "evaporite",
-        "vb": "basaltic", "pb": "basaltic", "vi": "basaltic",
-        "va": "felsic", "pa": "felsic", "pi": "felsic", "py": "felsic", "mt": "felsic",
-        "ig": null, "wb": null, "nd": null
+        "vb": "basaltic",
+        "pb": "basaltic",
+        "vi": "basaltic",
+        "va": "felsic",
+        "pa": "felsic",
+        "pi": "felsic",
+        "py": "felsic",
+        "mt": "felsic",
+        "ig": null,
+        "wb": null,
+        "nd": null
       },
       "source_quality": 0.6,
       "resolution_factor": 0.5,
@@ -138,7 +181,8 @@
       "source_name": "GLiM v1.0 global lithological map, 0.5 degrees",
       "source_url": "https://doi.org/10.1594/PANGAEA.788537",
       "license": "CC BY 3.0",
-      "note": "Bedrock class, not the loose surface layer. The most common class in the cell; a mixed cell lowers confidence. class_map is proposed: intermediate volcanic counts as basaltic, and intermediate plutonic, pyroclastic and metamorphic rock as felsic."
+      "note": "Bedrock class, not the loose surface layer. The most common class in the cell; a mixed cell lowers confidence. class_map is proposed: intermediate volcanic counts as basaltic, and intermediate plutonic, pyroclastic and metamorphic rock as felsic.",
+      "range_note": "Similarity matrix from spec 5.2, unchanged (B20 pending)."
     },
     {
       "key": "elevation",
@@ -146,8 +190,8 @@
       "unit": "m",
       "type": "numeric",
       "direction": "Mean height. Off by default because each body has its own datum.",
-      "lo": -430,
-      "hi": 6500,
+      "lo": -326.328,
+      "hi": 4296.845,
       "source_quality": 0.95,
       "resolution_factor": 1.0,
       "adapter": "pipeline.adapters.terrain:elevation",
@@ -155,7 +199,8 @@
       "source_url": "https://registry.opendata.aws/terrain-tiles/",
       "license": "Open data, attribution required",
       "note": "Moon and Mars heights are relative to their own datums, so this is context only.",
-      "comparable_across_bodies": false
+      "comparable_across_bodies": false,
+      "range_note": "Percentiles 1 to 99 of the land cells, leaving out 3425 cells below -430 m (sea floor)."
     }
   ]
 }

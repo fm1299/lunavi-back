@@ -1,0 +1,314 @@
+{
+  "_note": "Rules that give a Moon or Mars location its composition class and, on the Moon, its annual temperature range. Proposed on 2026-11-14 (LUNAVI analysis); the reasoning, citations, limits and checks are in data/reference/reglas_luna_marte.json. Decisions still open for the team: the class of HNt and eHt, SPA interior as basaltic or felsic, a minimum chloride area per cell, and Meridiani sulfates.",
+  "status": "proposed",
+  "moon": {
+    "composition": {
+      "mare_polygons_url": "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/EXTRAS/SHAPEFILE/LROC_GLOBAL_MARE/LROC_GLOBAL_MARE_180.ZIP",
+      "mare_polygons_page": "https://data.lroc.im-ldi.com/lroc/view_rdr/SHAPEFILE_LROC_GLOBAL_MARE",
+      "mare_polygons_lat_range": [
+        -66.5,
+        64.8
+      ],
+      "feo_url": "https://pds-geosciences.wustl.edu/missions/lunarp/reduced/ironhd.dat",
+      "feo_page": "https://pds-geosciences.wustl.edu/missions/lunarp/reduced_special.html",
+      "spa_ellipse": {
+        "center_lat": -51.4,
+        "center_lon": -171.6,
+        "semi_major_km": 1030.0,
+        "semi_minor_km": 710.0,
+        "rotation_deg": -14.1,
+        "source": "Garrick-Bethell and Zuber 2009, Icarus 204, 399-408, table 1 (iron ellipse)",
+        "source_url": "https://people.ucsc.edu/~igarrick/pubs/Garrick-Bethell_and_Zuber_2009.pdf"
+      },
+      "spa_feo_min_wt_pct": 8.0,
+      "fallback_mare_feo_wt_pct": 12.0
+    },
+    "temp_annual_range": {
+      "polar_lat_deg": 80,
+      "non_polar_value_k": 0,
+      "non_polar_source_url": "http://luna1.diviner.ucla.edu/~jpierre/diviner/level4_polar/aareadme.txt",
+      "polar_source_url": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_pcp/seasonal/"
+    }
+  },
+  "mars": {
+    "composition": {
+      "geology_zip_url": "https://pubs.usgs.gov/sim/3292/downloads/sim3292_database.zip",
+      "geology_members": [
+        "SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_Shapefiles/SIM3292_Global_Geology.shp",
+        "SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_Shapefiles/SIM3292_Global_Geology.dbf"
+      ],
+      "geology_unit_field": "Unit",
+      "geology_doi": "https://doi.org/10.3133/sim3292",
+      "chlorides_url": "https://data.caltech.edu/records/kasms-vp209/files/Leask_and_Ehlmann_2021_2010_osterloo_chl_pts_w_tanaka_2014_age.csv?download=1",
+      "chlorides_page": "https://data.caltech.edu/records/kasms-vp209",
+      "chloride_cell_deg": 0.5,
+      "chloride_min_area_fraction": null,
+      "units": [
+        {
+          "unit": "mAl",
+          "description": "Middle Amazonian lowland unit",
+          "class": "sedimentary",
+          "confidence": "medium"
+        },
+        {
+          "unit": "lHl",
+          "description": "Late Hesperian lowland unit",
+          "class": "sedimentary",
+          "confidence": "medium"
+        },
+        {
+          "unit": "AHi",
+          "description": "Amazonian and Hesperian impact unit",
+          "class": "basaltic",
+          "confidence": "low"
+        },
+        {
+          "unit": "lApc",
+          "description": "Late Amazonian polar cap unit",
+          "class": null,
+          "confidence": null
+        },
+        {
+          "unit": "lApd",
+          "description": "Late Amazonian polar dunes unit",
+          "class": "sedimentary",
+          "confidence": "medium"
+        },
+        {
+          "unit": "Apu",
+          "description": "Amazonian polar undivided unit",
+          "class": null,
+          "confidence": null
+        },
+        {
+          "unit": "Ap",
+          "description": "Amazonian polar unit",
+          "class": null,
+          "confidence": null
+        },
+        {
+          "unit": "Hp",
+          "description": "Hesperian polar unit",
+          "class": null,
+          "confidence": null
+        },
+        {
+          "unit": "Hpu",
+          "description": "Hesperian polar undivided unit",
+          "class": "sedimentary",
+          "confidence": "low"
+        },
+        {
+          "unit": "Hpe",
+          "description": "Hesperian polar edifice unit",
+          "class": null,
+          "confidence": null
+        },
+        {
+          "unit": "eAb",
+          "description": "Early Amazonian basin unit",
+          "class": "sedimentary",
+          "confidence": "medium"
+        },
+        {
+          "unit": "lHb",
+          "description": "Late Hesperian basin unit",
+          "class": "sedimentary",
+          "confidence": "low"
+        },
+        {
+          "unit": "eHb",
+          "description": "Early Hesperian basin unit",
+          "class": "sedimentary",
+          "confidence": "low"
+        },
+        {
+          "unit": "HNb",
+          "description": "Hesperian and Noachian basin unit",
+          "class": "sedimentary",
+          "confidence": "low"
+        },
+        {
+          "unit": "lAv",
+          "description": "Late Amazonian volcanic unit",
+          "class": "basaltic",
+          "confidence": "high"
+        },
+        {
+          "unit": "lAvf",
+          "description": "Late Amazonian volcanic field unit",
+          "class": "basaltic",
+          "confidence": "high"
+        },
+        {
+          "unit": "Av",
+          "description": "Amazonian volcanic unit",
+          "class": "basaltic",
+          "confidence": "medium"
+        },
+        {
+          "unit": "AHv",
+          "description": "Amazonian and Hesperian volcanic unit",
+          "class": "basaltic",
+          "confidence": "high"
+        },
+        {
+          "unit": "lHv",
+          "description": "Late Hesperian volcanic unit",
+          "class": "basaltic",
+          "confidence": "high"
+        },
+        {
+          "unit": "lHvf",
+          "description": "Late Hesperian volcanic field unit",
+          "class": "basaltic",
+          "confidence": "high"
+        },
+        {
+          "unit": "eHv",
+          "description": "Early Hesperian volcanic unit",
+          "class": "basaltic",
+          "confidence": "high"
+        },
+        {
+          "unit": "lNv",
+          "description": "Late Noachian volcanic unit",
+          "class": "basaltic",
+          "confidence": "medium"
+        },
+        {
+          "unit": "Ave",
+          "description": "Amazonian volcanic edifice",
+          "class": "basaltic",
+          "confidence": "high"
+        },
+        {
+          "unit": "Hve",
+          "description": "Hesperian volcanic edifice unit",
+          "class": "basaltic",
+          "confidence": "medium"
+        },
+        {
+          "unit": "Nve",
+          "description": "Noachian volcanic edifice unit",
+          "class": "basaltic",
+          "confidence": "medium"
+        },
+        {
+          "unit": "lAa",
+          "description": "Late Amazonian apron unit",
+          "class": "sedimentary",
+          "confidence": "medium"
+        },
+        {
+          "unit": "Aa",
+          "description": "Amazonian apron unit",
+          "class": "sedimentary",
+          "confidence": "low"
+        },
+        {
+          "unit": "ANa",
+          "description": "Amazonian and Noachian apron unit",
+          "class": "sedimentary",
+          "confidence": "low"
+        },
+        {
+          "unit": "AHtu",
+          "description": "Amazonian and Hesperian transition undivided unit",
+          "class": "sedimentary",
+          "confidence": "medium"
+        },
+        {
+          "unit": "Htu",
+          "description": "Hesperian transition undivided unit",
+          "class": "sedimentary",
+          "confidence": "medium"
+        },
+        {
+          "unit": "lHt",
+          "description": "Late Hesperian transition unit",
+          "class": "sedimentary",
+          "confidence": "medium"
+        },
+        {
+          "unit": "eHt",
+          "description": "Early Hesperian transition unit",
+          "class": "sedimentary",
+          "confidence": "low"
+        },
+        {
+          "unit": "Ht",
+          "description": "Hesperian transition unit",
+          "class": "sedimentary",
+          "confidence": "medium"
+        },
+        {
+          "unit": "Hto",
+          "description": "Hesperian transition outflow unit",
+          "class": "sedimentary",
+          "confidence": "medium"
+        },
+        {
+          "unit": "HNt",
+          "description": "Hesperian and Noachian transition unit",
+          "class": "basaltic",
+          "confidence": "low"
+        },
+        {
+          "unit": "HNhu",
+          "description": "Hesperian and Noachian highland undivided unit",
+          "class": "sedimentary",
+          "confidence": "medium"
+        },
+        {
+          "unit": "Nhu",
+          "description": "Noachian highland undivided unit",
+          "class": "sedimentary",
+          "confidence": "low"
+        },
+        {
+          "unit": "eHh",
+          "description": "Early Hesperian highland unit",
+          "class": "basaltic",
+          "confidence": "low"
+        },
+        {
+          "unit": "lNh",
+          "description": "Late Noachian highland unit",
+          "class": "basaltic",
+          "confidence": "low"
+        },
+        {
+          "unit": "mNh",
+          "description": "Middle Noachian highland unit",
+          "class": "basaltic",
+          "confidence": "low"
+        },
+        {
+          "unit": "eNh",
+          "description": "Early Noachian highland unit",
+          "class": "basaltic",
+          "confidence": "low"
+        },
+        {
+          "unit": "Nhe",
+          "description": "Noachian highland edifice unit",
+          "class": "basaltic",
+          "confidence": "medium"
+        },
+        {
+          "unit": "mNhm",
+          "description": "Middle Noachian highland massif unit",
+          "class": "basaltic",
+          "confidence": "low"
+        },
+        {
+          "unit": "eNhm",
+          "description": "Early Noachian highland massif unit",
+          "class": "basaltic",
+          "confidence": "low"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "description": "A documented lava tube or cave. Earth cells near one carry the terrain tag \"cave\".",
+  "properties": {
+    "id": {
+      "title": "Id",
+      "type": "string"
+    },
+    "name": {
+      "title": "Name",
+      "type": "string"
+    },
+    "lat": {
+      "title": "Lat",
+      "type": "number"
+    },
+    "lon": {
+      "title": "Lon",
+      "type": "number"
+    },
+    "source_ref": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Source Ref"
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "lat",
+    "lon",
+    "source_ref"
+  ],
+  "title": "CaveSite",
+  "type": "object"
+}

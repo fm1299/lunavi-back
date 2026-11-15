@@ -4,74 +4,74 @@
       "id": "shackleton_ridge",
       "name": "Shackleton Connecting Ridge",
       "body": "moon",
-      "lat": -89.45,
-      "lon": -137.31,
-      "description": "Ridge between Shackleton and de Gerlache craters at the lunar south pole. A representative site for a future Moon base, not a declared base location and not an Artemis III region. No feature here captures the low sun or permanent shadow that define the pole.",
-      "coordinate_note": "Coordinates to confirm against a published source. Diviner shows a sunlit site here (annual maximum about 248 K), which fits a ridge.",
+      "lat": -89.4398,
+      "lon": -137.17,
+      "description": "The best-lit point of the ridge that joins Shackleton and de Gerlache craters at the lunar south pole (88% mean illumination 2 m above the ground). A representative site of the polar highlands, not a declared base location.",
+      "coordinate_note": "Connecting Ridge site C1, the best-lit point of the ridge.",
       "default_profile": "habitat_thermal",
       "features": {
         "slope": {
-          "value": 13.48,
-          "uncertainty": 7.06,
-          "basis": "measured",
-          "source_url": "https://pgda.gsfc.nasa.gov/products/90",
-          "note": "LOLA LDEM_60S_240MPP averaged to 480 m. Mean over a 28 km window, which includes the Shackleton crater wall."
-        },
-        "roughness": {
-          "value": 94.8,
-          "uncertainty": 51.1,
-          "basis": "measured",
-          "source_url": "https://pgda.gsfc.nasa.gov/products/90",
-          "note": "LOLA at 480 m, 3 x 3 window, mean over 28 km."
-        },
-        "temp_annual_range": {
-          "value": 113.3,
-          "uncertainty": 29.0,
-          "basis": "measured",
-          "source_url": "https://ode.rsl.wustl.edu/moon/pagehelp/Content/Missions_Instruments/LRO/DIVINER/PRP.htm",
-          "note": "Lower bound: Diviner annual maximum minus annual mean, within 3 km. The true range is larger, and the Earth scale clamps it either way."
-        },
-        "temp_diurnal_range": {
-          "value": 137.5,
+          "value": 13.39,
           "uncertainty": null,
           "basis": "measured",
-          "source_url": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gcp",
-          "note": "Diviner global table: 13:30 minus 01:30 local time, mirroring the MODIS overpass on Earth. A 0.5 degree bin, so coarser than this ridge. The pole's local time is a weak idea of day and night, so treat this as approximate."
+          "source_url": "https://pds-geosciences.wustl.edu/missions/lro/lola.htm",
+          "note": "LOLA."
+        },
+        "roughness": {
+          "value": 94.1,
+          "uncertainty": null,
+          "basis": "measured",
+          "source_url": "https://pds-geosciences.wustl.edu/missions/lro/lola.htm",
+          "note": "LOLA."
+        },
+        "temp_annual_range": {
+          "value": 43.2,
+          "uncertainty": 3.6,
+          "basis": "measured",
+          "source_url": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_pcp/diurnal/ltim/pols/pcp_avg_tbol_pols_{sum,win}_ltim{01..96}_240.tab (192 archivos)",
+          "note": "Diviner polar cumulative product: summer minus winter bolometric temperature, from 192 local-time files (96 per season)."
+        },
+        "temp_diurnal_range": {
+          "value": 125.1,
+          "uncertainty": 16.7,
+          "basis": "measured",
+          "source_url": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_pcp/diurnal/ltim/pols/pcp_avg_tbol_pols_{sum,win}_ltim{01..96}_240.tab (192 archivos)",
+          "note": "Diviner polar cumulative product, day minus night bolometric temperature."
         },
         "mean_temperature": {
-          "value": -138.2,
-          "uncertainty": 15.4,
+          "value": -117.9,
+          "uncertainty": 4.5,
           "basis": "measured",
-          "source_url": "https://ode.rsl.wustl.edu/moon/pagehelp/Content/Missions_Instruments/LRO/DIVINER/PRP.htm",
-          "note": "Diviner annual mean of 135.0 K within 3 km, from thermal model fits to observations."
+          "source_url": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_pcp/diurnal/ltim/pols/pcp_avg_tbol_pols_{sum,win}_ltim{01..96}_240.tab (192 archivos)",
+          "note": "Diviner polar cumulative product, mean of all local times and both seasons."
         },
         "aridity": {
           "value": 0,
           "uncertainty": 0,
           "basis": "physical",
-          "source_url": null,
+          "source_url": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/moonfact.html",
           "note": "No rainfall on the Moon."
         },
         "vegetation": {
           "value": 0,
           "uncertainty": 0,
           "basis": "physical",
-          "source_url": null,
+          "source_url": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/moonfact.html",
           "note": "No vegetation on the Moon."
         },
         "composition": {
           "value": "felsic",
-          "uncertainty": null,
+          "uncertainty": "medium: the nearest class available, not an exact match",
           "basis": "literature",
-          "source_url": null,
-          "note": "Proposed handling from the spec: anorthositic highlands mapped to felsic, the nearest available class. A citation is still needed, and the site sheet must show this limit."
+          "source_url": "https://iopscience.iop.org/article/10.3847/PSJ/ac88c2",
+          "note": "Anorthositic highlands mapped to felsic, the nearest of the four classes. Anorthosite is rich in calcic plagioclase and poorer in silica than granite, so the site sheet must show this limit."
         },
         "elevation": {
-          "value": 482,
+          "value": 479,
           "uncertainty": null,
           "basis": "measured",
-          "source_url": "https://pgda.gsfc.nasa.gov/products/90",
-          "note": "Relative to the lunar reference radius. Context only."
+          "source_url": "https://pds-geosciences.wustl.edu/missions/lro/lola.htm",
+          "note": "LOLA, relative to the lunar reference radius. Context only."
         }
       }
     },
@@ -79,46 +79,46 @@
       "id": "arcadia_planitia",
       "name": "Arcadia Planitia",
       "body": "mars",
-      "lat": 45.0,
-      "lon": -165.0,
-      "description": "Northern plain with shallow water ice. NASA JPL calls it the most tempting target in the northern hemisphere. The coordinates are a representative point in the plain, not a selected landing site.",
-      "coordinate_note": "Representative point chosen for this prototype. The team should confirm it.",
+      "lat": 46.58,
+      "lon": -165.15,
+      "description": "Northern plain of Mars where SHARAD radar and terraced craters show a wide layer of excess ice a few metres or less below the surface. The representative point is the 'Badger' crater of Bramson et al. 2015 (46.58 N, 194.85 E), inside their study area of 38 to 50 N and 180 to 225 E.",
+      "coordinate_note": "Crater 'Badger', Bramson et al. 2015, converted to -180 to 180 east.",
       "default_profile": "ice_water",
       "features": {
         "slope": {
-          "value": 0.2,
-          "uncertainty": 0.15,
+          "value": 0.25,
+          "uncertainty": "p10 0.06 to p90 0.47 degrees (pixels in the window)",
           "basis": "measured",
-          "source_url": "https://planetarymaps.usgs.gov/mosaic/Mars_MGS_MOLA_DEM_mosaic_global_463m.tif",
-          "note": "MOLA at 463 m. Mean over a 28 km window."
+          "source_url": "https://pds-geosciences.wustl.edu/mgs/mgs-m-mola-5-megdr-l3-v1/mgsl_300x/meg128/megt88n180hb.img",
+          "note": "MOLA MEGDR at 128 pixels per degree."
         },
         "roughness": {
-          "value": 1.1,
-          "uncertainty": 0.8,
+          "value": 1.5,
+          "uncertainty": "p10 0.5 to p90 2.7 m (pixels in the window)",
           "basis": "measured",
-          "source_url": "https://planetarymaps.usgs.gov/mosaic/Mars_MGS_MOLA_DEM_mosaic_global_463m.tif",
-          "note": "MOLA at 463 m, 3 x 3 window, mean over 28 km."
+          "source_url": "https://pds-geosciences.wustl.edu/mgs/mgs-m-mola-5-megdr-l3-v1/mgsl_300x/meg128/megt88n180hb.img",
+          "note": "MOLA MEGDR at 128 pixels per degree."
         },
         "temp_annual_range": {
-          "value": 56.1,
+          "value": 61.2,
           "uncertainty": null,
           "basis": "literature",
           "source_url": "https://www-mars.lmd.jussieu.fr/mcd_python/",
-          "note": "Mars Climate Database v6.2 surface temperature: warmest minus coldest seasonal daily mean. A model, so basis is literature."
+          "note": "Mars Climate Database surface temperature: warmest minus coldest seasonal daily mean. A model, so basis is literature."
         },
         "temp_diurnal_range": {
-          "value": 67.5,
-          "uncertainty": 17.4,
-          "basis": "literature",
-          "source_url": "https://www-mars.lmd.jussieu.fr/mcd_python/",
-          "note": "Mars Climate Database v6.2: 13:30 minus 01:30 local time, mirroring the MODIS overpass, averaged over the year."
-        },
-        "mean_temperature": {
-          "value": -73.9,
+          "value": 69.3,
           "uncertainty": null,
           "basis": "literature",
           "source_url": "https://www-mars.lmd.jussieu.fr/mcd_python/",
-          "note": "Mars Climate Database v6.2 mean surface temperature."
+          "note": "Mars Climate Database surface temperature, day minus night. A model, so basis is literature."
+        },
+        "mean_temperature": {
+          "value": -75.8,
+          "uncertainty": null,
+          "basis": "literature",
+          "source_url": "https://www-mars.lmd.jussieu.fr/mcd_python/",
+          "note": "Mars Climate Database mean surface temperature. A model, so basis is literature."
         },
         "aridity": {
           "value": 0,
@@ -136,17 +136,17 @@
         },
         "composition": {
           "value": "basaltic",
-          "uncertainty": null,
+          "uncertainty": "medium: the area mixes volcanic units (Av, 12 of 25 points) and sedimentary ones (lHl, 6 of 25)",
           "basis": "literature",
-          "source_url": "https://en.wikipedia.org/wiki/Arcadia_Planitia",
-          "note": "Described as volcanic flows in general sources. Basaltic is inferred, not confirmed by a peer-reviewed study. Replace this source."
+          "source_url": "https://doi.org/10.3133/sim3292",
+          "note": "SIM 3292 (Tanaka et al. 2014) puts the Badger point in unit Av, lava and perhaps volcaniclastic flows, which the rule maps to basaltic. The earlier sedimentary (lHl) choice is not supported at this point."
         },
         "elevation": {
-          "value": -3953,
-          "uncertainty": null,
+          "value": -3986.0,
+          "uncertainty": "p10 -4000 to p90 -3976 m (min -4020, max -3966)",
           "basis": "measured",
-          "source_url": "https://planetarymaps.usgs.gov/mosaic/Mars_MGS_MOLA_DEM_mosaic_global_463m.tif",
-          "note": "Relative to the Mars datum. Context only."
+          "source_url": "https://pds-geosciences.wustl.edu/mgs/mgs-m-mola-5-megdr-l3-v1/mgsl_300x/meg128/megt88n180hb.img",
+          "note": "MOLA, relative to the Mars datum. Context only."
         }
       }
     },
@@ -154,74 +154,74 @@
       "id": "jezero",
       "name": "Jezero crater",
       "body": "mars",
-      "lat": 18.4447,
-      "lon": 77.4508,
-      "description": "Crater with an ancient river delta, where Perseverance landed in 2021 at Octavia E. Butler Landing. It is not a future site. It stays as a well-studied reference that anchors the demo.",
+      "lat": 18.4446,
+      "lon": 77.4509,
+      "description": "Impact crater about 45 to 49 km wide on the western edge of Isidis Planitia that held a lake and a delta about 3.5 billion years ago. Perseverance has worked there since February 2021 at Octavia E. Butler Landing. The floor is basaltic and ultramafic igneous rock, with a sedimentary delta to the west.",
       "coordinate_note": "Coordinates of Octavia E. Butler Landing.",
       "default_profile": "rover_mobility",
       "features": {
         "slope": {
-          "value": 2.85,
-          "uncertainty": 3.21,
+          "value": 2.99,
+          "uncertainty": "p10 0.4 to p90 8.03 degrees (pixels in the window)",
           "basis": "measured",
-          "source_url": "https://planetarymaps.usgs.gov/mosaic/Mars_MGS_MOLA_DEM_mosaic_global_463m.tif",
-          "note": "MOLA at 463 m. Mean over a 28 km window."
+          "source_url": "https://pds-geosciences.wustl.edu/mgs/mgs-m-mola-5-megdr-l3-v1/mgsl_300x/meg128/megt44n000hb.img",
+          "note": "MOLA MEGDR at 128 pixels per degree."
         },
         "roughness": {
-          "value": 18.4,
-          "uncertainty": 20.3,
+          "value": 19.7,
+          "uncertainty": "p10 3.0 to p90 51.3 m (pixels in the window)",
           "basis": "measured",
-          "source_url": "https://planetarymaps.usgs.gov/mosaic/Mars_MGS_MOLA_DEM_mosaic_global_463m.tif",
-          "note": "MOLA at 463 m, 3 x 3 window, mean over 28 km."
+          "source_url": "https://pds-geosciences.wustl.edu/mgs/mgs-m-mola-5-megdr-l3-v1/mgsl_300x/meg128/megt44n000hb.img",
+          "note": "MOLA MEGDR at 128 pixels per degree."
         },
         "temp_annual_range": {
           "value": 15.7,
-          "uncertainty": null,
+          "uncertainty": "about ±5 K (models differ by up to 10 K in surface temperature around Jezero, Newman et al. 2021; the seasonal range is less sensitive than absolute values)",
           "basis": "literature",
           "source_url": "https://www-mars.lmd.jussieu.fr/mcd_python/",
-          "note": "Mars Climate Database v6.2 surface temperature: warmest minus coldest seasonal daily mean. A model, so basis is literature. MEDA rover data could replace it."
+          "note": "Mars Climate Database: warmest minus coldest seasonal daily mean. A model, so basis is literature."
         },
         "temp_diurnal_range": {
-          "value": 77.9,
-          "uncertainty": 5.0,
+          "value": 84.7,
+          "uncertainty": "about ±15 K; MEDA measures smaller swings than the MCD (near Ls 65 MEDA saw about 200 K minimum and 260 K maximum, about 60 K, against about 83 K in the MCD)",
           "basis": "literature",
           "source_url": "https://www-mars.lmd.jussieu.fr/mcd_python/",
-          "note": "Mars Climate Database v6.2: 13:30 minus 01:30 local time, mirroring the MODIS overpass, averaged over the year."
+          "note": "Mars Climate Database: day minus night. A model, so basis is literature."
         },
         "mean_temperature": {
           "value": -49.4,
-          "uncertainty": null,
+          "uncertainty": "about ±5 °C (models spread up to 10 K; MEDA is warmer at night and colder by day than the MCD)",
           "basis": "literature",
           "source_url": "https://www-mars.lmd.jussieu.fr/mcd_python/",
-          "note": "Mars Climate Database v6.2 mean surface temperature."
+          "note": "Mars Climate Database mean surface temperature. A model, so basis is literature."
         },
         "aridity": {
           "value": 0,
-          "uncertainty": 0,
+          "uncertainty": "0",
           "basis": "physical",
-          "source_url": null,
+          "source_url": "https://science.nasa.gov/mars/facts/",
           "note": "No rainfall on present-day Mars."
         },
         "vegetation": {
           "value": 0,
-          "uncertainty": 0,
+          "uncertainty": "0",
           "basis": "physical",
-          "source_url": null,
+          "source_url": "https://science.nasa.gov/mars/facts/",
           "note": "No known vegetation on Mars."
         },
         "composition": {
           "value": "basaltic",
-          "uncertainty": null,
-          "basis": "literature",
-          "source_url": "https://www.usgs.gov/publications/aqueously-altered-igneous-rocks-sampled-floor-jezero-crater-mars",
-          "note": "Farley et al. 2022 describe igneous crater floor rocks: olivine-rich Seitah under Maaz, read as lava flows. Mapped to basaltic by the team; the delta is sedimentary."
+          "uncertainty": "dominant class; the western edge of the exploration area is sedimentary (delta)",
+          "basis": "measured",
+          "source_url": "https://www.science.org/doi/10.1126/science.abo2196",
+          "note": "Farley et al. 2022: igneous basaltic and ultramafic crater floor."
         },
         "elevation": {
-          "value": -2384,
-          "uncertainty": null,
+          "value": -2384.0,
+          "uncertainty": "p10 -2663 to p90 -1970 m (min -2719, max -1537)",
           "basis": "measured",
-          "source_url": "https://planetarymaps.usgs.gov/mosaic/Mars_MGS_MOLA_DEM_mosaic_global_463m.tif",
-          "note": "Relative to the Mars datum. Context only."
+          "source_url": "https://pds-geosciences.wustl.edu/mgs/mgs-m-mola-5-megdr-l3-v1/mgsl_300x/meg128/megt44n000hb.img",
+          "note": "MOLA, relative to the Mars datum. Context only."
         }
       }
     }

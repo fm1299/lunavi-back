@@ -8,16 +8,38 @@
     {
       "id": "rio_tinto",
       "name": "Rio Tinto",
-      "bbox": [-6.8, 37.5, -6.3, 37.9],
-      "reason": "Acidic, iron-rich river system documented as a Mars analog, outside the arid, polar and volcanic classes.",
-      "source_ref": null
+      "bbox": [
+        -6.75,
+        37.55,
+        -6.45,
+        37.8
+      ],
+      "reason": "Acidic sulfate and iron analog in a climate that is not arid, so it would fall outside the desert class.",
+      "source_ref": "https://astrobiology.nasa.gov/news/red-river-drills-for-mars/"
     },
     {
-      "id": "dry_valleys",
-      "name": "Antarctic Dry Valleys",
-      "bbox": [160.5, -78.0, 164.0, -76.5],
-      "reason": "Ice-free polar desert documented as a Mars analog, which the coarse glacier layer covers.",
-      "source_ref": null
+      "id": "mcmurdo_dry_valleys",
+      "name": "McMurdo Dry Valleys",
+      "bbox": [
+        160.5,
+        -78.0,
+        163.7,
+        -77.2
+      ],
+      "reason": "Ice-free valleys inside a coarse glacier polygon.",
+      "source_ref": "https://ntrs.nasa.gov/citations/20150023012"
+    },
+    {
+      "id": "pavilion_lake",
+      "name": "Pavilion Lake",
+      "bbox": [
+        -121.8,
+        50.82,
+        -121.7,
+        50.9
+      ],
+      "reason": "Microbialites in a temperate lake, used by NASA and the CSA.",
+      "source_ref": "https://astrobiology.nasa.gov/news/looking-for-life-on-mars-in-a-canadian-lake/"
     }
   ]
 }

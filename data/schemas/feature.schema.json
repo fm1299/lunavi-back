@@ -160,6 +160,18 @@
       "default": null,
       "title": "Note"
     },
+    "range_note": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Range Note"
+    },
     "comparable_across_bodies": {
       "default": true,
       "title": "Comparable Across Bodies",
