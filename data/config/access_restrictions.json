@@ -1,0 +1,469 @@
+{
+  "_note": "Places where fieldwork is unsafe, legally restricted or needs special permits, with the legal notes behind each. A cell takes every zone that holds its country (and box, when given). Reviewed on the web on 2026-11-15; source_kind says whether a note rests on an official page, a news report or a secondary source. Informational only, not legal advice.",
+  "checked": "2026-11-15",
+  "levels": {
+    "do_not_travel": "Active conflict or highest travel advisory: no fieldwork.",
+    "restricted": "Sanctions or laws that limit research, data collection or access.",
+    "permit": "Fieldwork is possible with special permits."
+  },
+  "zones": [
+    {
+      "id": "us_level4",
+      "name": "US State Department Level 4: Do Not Travel",
+      "level": "do_not_travel",
+      "countries": [
+        "Afghanistan",
+        "Belarus",
+        "Burkina Faso",
+        "Myanmar",
+        "Central African Rep.",
+        "Chad",
+        "Dem. Rep. Congo",
+        "Haiti",
+        "Iran",
+        "Iraq",
+        "Lebanon",
+        "Libya",
+        "Mali",
+        "Niger",
+        "North Korea",
+        "Russia",
+        "Somalia",
+        "S. Sudan",
+        "Sudan",
+        "Syria",
+        "Uganda",
+        "Ukraine",
+        "Yemen",
+        "Palestine"
+      ],
+      "bbox": null,
+      "summary": "Highest US travel advisory: the US government can give very little help and asks citizens not to go.",
+      "legal_notes": [
+        {
+          "topic": "Travel advisory",
+          "text": "About 22 to 23 countries and territories were at Level 4 in early November 2026. Trackers disagree on a few names (Chad, Uganda, Gaza), so check the official page for each country before planning fieldwork.",
+          "source_url": "https://travel.state.gov/en/international-travel/travel-advisories.html",
+          "source_kind": "official"
+        },
+        {
+          "topic": "List used here",
+          "text": "The country list comes from a secondary tracker, not the State Department page, and is a starting point only.",
+          "source_url": "https://www.squaremouth.com/travel-advice/travel-advisory-guide-level-4-countries-for-u-s-citizens",
+          "source_kind": "secondary"
+        }
+      ]
+    },
+    {
+      "id": "north_korea",
+      "name": "North Korea",
+      "level": "do_not_travel",
+      "countries": [
+        "North Korea"
+      ],
+      "bbox": null,
+      "summary": "A US passport is not valid for travel there, and broad UN and US sanctions apply.",
+      "legal_notes": [
+        {
+          "topic": "Passport restriction",
+          "text": "The US restriction on using a US passport to travel to, in or through North Korea was extended to 31 August 2027. Travel needs a passport with a special validation from the State Department.",
+          "source_url": "https://www.koreatimes.co.kr/foreignaffairs/northkorea/20260806/us-renews-warning-against-travel-to-n-korea-citing-serious-risk-of-arrest-detention",
+          "source_kind": "news"
+        },
+        {
+          "topic": "Sanctions",
+          "text": "North Korea is under comprehensive US sanctions (OFAC) and UN Security Council sanctions, which bar most transactions, equipment transfers and services.",
+          "source_url": "https://ofac.treasury.gov/sanctions-programs-and-country-information",
+          "source_kind": "official"
+        }
+      ]
+    },
+    {
+      "id": "iran",
+      "name": "Iran",
+      "level": "do_not_travel",
+      "countries": [
+        "Iran"
+      ],
+      "bbox": null,
+      "summary": "Level 4 with a documented risk of wrongful detention of academics, and comprehensive US sanctions.",
+      "legal_notes": [
+        {
+          "topic": "Travel advisory",
+          "text": "Level 4, updated 23 October 2026: terrorism, unrest, kidnapping, arbitrary arrest and wrongful detention, naming students, journalists and academics. Iran does not recognize dual nationality and may block departure.",
+          "source_url": "https://travel.state.gov/en/international-travel/travel-advisories/iran.html",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Sanctions",
+          "text": "Iran is under comprehensive US sanctions (Iranian Transactions and Sanctions Regulations). OFAC General License G for academic exchanges was suspended indefinitely on 24 August 2026; the wind-down ended 8 September 2026. A US person or US institution should not collaborate without legal advice and, where needed, a specific license.",
+          "source_url": "https://ofac.treasury.gov/system/files/2026-08/iran_glg.pdf",
+          "source_kind": "official"
+        }
+      ]
+    },
+    {
+      "id": "russia",
+      "name": "Russia",
+      "level": "do_not_travel",
+      "countries": [
+        "Russia"
+      ],
+      "bbox": null,
+      "summary": "Level 4, Western research cooperation largely suspended, and FSB permits for border zones.",
+      "legal_notes": [
+        {
+          "topic": "Research cooperation",
+          "text": "Most EU and NATO members suspended research projects with Russian institutions or taking place in Russia, so joint fieldwork is in practice closed to them.",
+          "source_url": "https://www.themoscowtimes.com/2026/08/06/alienated-from-west-russias-scientists-grapple-with-working-in-isolation",
+          "source_kind": "news"
+        },
+        {
+          "topic": "Sanctions",
+          "text": "US, EU and UK sanctions and export controls on Russia limit payments, equipment and data transfers; check the lists before any contract or shipment.",
+          "source_url": "https://ofac.treasury.gov/sanctions-programs-and-country-information",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Border zones",
+          "text": "Chukotka requires an FSB border-zone permit (propusk) from the FSB border unit in Anadyr, filed by the host organization; it limits route and length of stay. Other Arctic border zones have similar rules.",
+          "source_url": "https://chaogov.ru/vlast/organy-vlasti/apparat-gubernatora-i-pravitelstva/poryadok-oformleniya-razresheniya-na-vezd/pamyatka-vyezzhayushchemu_en.php",
+          "source_kind": "official"
+        }
+      ]
+    },
+    {
+      "id": "afghanistan",
+      "name": "Afghanistan",
+      "level": "do_not_travel",
+      "countries": [
+        "Afghanistan"
+      ],
+      "bbox": null,
+      "summary": "Level 4 under Taliban rule; detention may be arbitrary and the US embassy is closed.",
+      "legal_notes": [
+        {
+          "topic": "Travel advisory",
+          "text": "Level 4, issued 20 February 2026: reasons for detention may be unclear or arbitrary, and the embassy in Kabul is closed, so consular help is very limited.",
+          "source_url": "https://travel.state.gov/en/international-travel/travel-advisories/afghanistan.html",
+          "source_kind": "official"
+        }
+      ]
+    },
+    {
+      "id": "sudan",
+      "name": "Sudan",
+      "level": "do_not_travel",
+      "countries": [
+        "Sudan"
+      ],
+      "bbox": null,
+      "summary": "Civil war since April 2023; Darfur is under RSF control, with mass killings reported in 2025 and 2026.",
+      "legal_notes": [
+        {
+          "topic": "Armed conflict",
+          "text": "El Fasher has been under RSF control since October 2025; the UN Fact-Finding Mission reported a genocidal campaign there, and fighting continued in Darfur and Kordofan in November 2026. Field access is not possible.",
+          "source_url": "https://www.cfr.org/global-conflict-tracker/conflict/power-struggle-sudan",
+          "source_kind": "secondary"
+        }
+      ]
+    },
+    {
+      "id": "syria",
+      "name": "Syria",
+      "level": "do_not_travel",
+      "countries": [
+        "Syria"
+      ],
+      "bbox": null,
+      "summary": "Level 4. The comprehensive US sanctions program ended in July 2025, but targeted sanctions remain.",
+      "legal_notes": [
+        {
+          "topic": "Sanctions",
+          "text": "Executive Order 14312 ended the Syria sanctions program from 1 July 2025. Designations tied to the former Assad government and others remain under the PAARSS program, so screen every partner.",
+          "source_url": "https://www.hklaw.com/en/insights/publications/2025/07/executive-order-terminates-syria-sanctions",
+          "source_kind": "secondary"
+        }
+      ]
+    },
+    {
+      "id": "ukraine_occupied",
+      "name": "Ukraine and occupied regions",
+      "level": "do_not_travel",
+      "countries": [
+        "Ukraine"
+      ],
+      "bbox": null,
+      "summary": "Active war. Crimea, Donetsk and Luhansk are under regional US embargoes.",
+      "legal_notes": [
+        {
+          "topic": "Sanctions",
+          "text": "Crimea and the occupied Donetsk and Luhansk regions are under broad US restrictions (imports, new investment, blocking).",
+          "source_url": "https://ofac.treasury.gov/sanctions-programs-and-country-information",
+          "source_kind": "official"
+        }
+      ]
+    },
+    {
+      "id": "china",
+      "name": "China: surveying and data laws",
+      "level": "restricted",
+      "countries": [
+        "China"
+      ],
+      "bbox": null,
+      "summary": "Foreign surveying and geological data collection need state approval and a Chinese partner.",
+      "legal_notes": [
+        {
+          "topic": "Surveying and Mapping Law (2017)",
+          "text": "Foreign organizations and individuals need approval to survey or map in China and must work with Chinese departments or units; reports on the 2017 revision say collecting geological data needs a permit from the State Council and military authorities. Fines go up to 1 million yuan, with equipment and results confiscated. Elevation models, GPS tracks and rover logs can count as survey data.",
+          "source_url": "https://www.chinajusticeobserver.com/law/x/surveying-and-mapping-law-20170427",
+          "source_kind": "secondary"
+        },
+        {
+          "topic": "Counter-espionage law (2023)",
+          "text": "Since 1 July 2023 espionage covers any documents, data or materials related to national security and interests, terms the law does not define. The US counterintelligence center warns of legal risk for academics and researchers.",
+          "source_url": "https://www.loc.gov/item/global-legal-monitor/2023-09-21/china-counterespionage-law-revised/",
+          "source_kind": "official"
+        },
+        {
+          "topic": "Travel advisory",
+          "text": "The US advisory notes extra security measures in Xinjiang and Tibet and possible arbitrary detention for travelers with ethnic ties to those regions.",
+          "source_url": "https://travel.state.gov/en/international-travel/travel-advisories/china.html",
+          "source_kind": "official"
+        }
+      ]
+    },
+    {
+      "id": "china_tibet",
+      "name": "Tibet Autonomous Region",
+      "level": "permit",
+      "countries": [
+        "China"
+      ],
+      "bbox": [
+        78.4,
+        26.8,
+        99.1,
+        36.5
+      ],
+      "summary": "Foreigners need a TAR travel permit, arranged only through a licensed Chinese agency.",
+      "legal_notes": [
+        {
+          "topic": "Travel permit",
+          "text": "The State Department's 2025 report says travel to the TAR still requires TAR government permits. The box here is approximate and also takes in parts of Qinghai and Xinjiang.",
+          "source_url": "https://www.tibetanreview.net/us-report-tibet-continues-to-be-chinas-most-restricted-region-for-foreign-visitors-overseas-tibetans/",
+          "source_kind": "news"
+        }
+      ]
+    },
+    {
+      "id": "china_xinjiang_border",
+      "name": "Xinjiang border areas (Tashkurgan, Karakoram)",
+      "level": "permit",
+      "countries": [
+        "China"
+      ],
+      "bbox": [
+        73.4,
+        35.5,
+        77.0,
+        40.0
+      ],
+      "summary": "Remote border counties such as Tashkurgan need a border permit.",
+      "legal_notes": [
+        {
+          "topic": "Border permit",
+          "text": "Most of Xinjiang needs no region-wide permit, but border areas such as Tashkurgan County and parts of the Karakoram Highway do. Rules change; confirm with a licensed agency.",
+          "source_url": "https://www.chinatravelchecklists.com/xinjiang",
+          "source_kind": "secondary"
+        }
+      ]
+    },
+    {
+      "id": "tajikistan_gbao",
+      "name": "Gorno-Badakhshan (Tajik Pamir)",
+      "level": "permit",
+      "countries": [
+        "Tajikistan"
+      ],
+      "bbox": [
+        70.9,
+        36.6,
+        75.2,
+        39.6
+      ],
+      "summary": "A GBAO permit is needed for the whole Tajik Pamir and is checked along the Pamir Highway.",
+      "legal_notes": [
+        {
+          "topic": "GBAO permit",
+          "text": "Foreigners need a GBAO permit, which can be added to the Tajik e-visa or obtained at consulates or the OVIR office in Dushanbe; it may list the districts allowed.",
+          "source_url": "https://advantour.com/tajikistan/visa/gbao-permit.htm",
+          "source_kind": "secondary"
+        }
+      ]
+    },
+    {
+      "id": "india_ladakh",
+      "name": "Ladakh inner line areas",
+      "level": "permit",
+      "countries": [
+        "India",
+        "Siachen Glacier"
+      ],
+      "bbox": [
+        75.3,
+        32.3,
+        80.3,
+        36.0
+      ],
+      "summary": "Foreigners need a Protected Area Permit for inner line areas such as Nubra, Pangong and Tso Moriri.",
+      "legal_notes": [
+        {
+          "topic": "Protected Area Permit",
+          "text": "All foreign nationals need a PAP or RAP for the inner line areas of Ladakh, obtained beforehand; travelers without one are turned back at checkpoints. Whether Tso Kar is included differs between sources, and a review of the permit framework was under way in August 2026.",
+          "source_url": "https://www.outlooktraveller.com/News/ladakh-moves-to-simplify-travel-rules-for-foreign-visitors",
+          "source_kind": "news"
+        }
+      ]
+    },
+    {
+      "id": "mongolia_border",
+      "name": "Mongolia: border zones and strictly protected areas",
+      "level": "permit",
+      "countries": [
+        "Mongolia"
+      ],
+      "bbox": null,
+      "summary": "Strictly protected areas and border zones need permits; Great Gobi B is the highest protection category.",
+      "legal_notes": [
+        {
+          "topic": "Protected areas",
+          "text": "Great Gobi B, on the border with China, is a Strictly Protected Area, Mongolia's highest conservation category; access needs special permits and a local guide. No official source on a separate border-zone permit for it was found; confirm with the reserve administration.",
+          "source_url": "https://savethewildhorse.org/en/great-desert-gobi-b-biosphere/",
+          "source_kind": "secondary"
+        }
+      ]
+    },
+    {
+      "id": "antarctica",
+      "name": "Antarctica",
+      "level": "permit",
+      "countries": [
+        "Antarctica"
+      ],
+      "bbox": null,
+      "summary": "All activity needs authorization from a national Antarctic authority under the Antarctic Treaty system.",
+      "legal_notes": [
+        {
+          "topic": "Environmental Protocol",
+          "text": "Activities need prior environmental assessment and authorization by the national authority of the organizing country. Entering an Antarctic Specially Protected Area needs a special permit.",
+          "source_url": "https://antarcticanz.govt.nz/environment/protecting-special-areas",
+          "source_kind": "official"
+        },
+        {
+          "topic": "McMurdo Dry Valleys",
+          "text": "The Dry Valleys are Antarctic Specially Managed Area No. 2 (Measure 18, 2015); following its management plan is a legal obligation under US and New Zealand law, and it holds five ASPAs (123, 131, 138, 154, 172).",
+          "source_url": "https://www.era.gs/resources/asma2manual/index.shtml",
+          "source_kind": "official"
+        }
+      ]
+    },
+    {
+      "id": "canada_nunavut",
+      "name": "Nunavut (Canadian Arctic Archipelago)",
+      "level": "permit",
+      "countries": [
+        "Canada"
+      ],
+      "bbox": [
+        -120.0,
+        60.0,
+        -60.0,
+        84.0
+      ],
+      "summary": "Research needs a Nunavut Research Institute licence, plus a Parks Canada permit inside national parks.",
+      "legal_notes": [
+        {
+          "topic": "Research licence",
+          "text": "Physical and natural science research in Nunavut needs a Scientific Research Licence from the Nunavut Research Institute, with evidence of community consultation (guidelines updated May 2025).",
+          "source_url": "https://www.nri.nu.ca/research-licencing-applications",
+          "source_kind": "official"
+        },
+        {
+          "topic": "National parks",
+          "text": "Quttinirpaaq (northern Ellesmere) needs a Parks Canada Research and Collection Permit, reviewed by the joint Inuit and government park committee. Archaeological sites need a permit from the Inuit Heritage Trust. The box here is approximate.",
+          "source_url": "https://parks.canada.ca/pn-np/nu/quttinirpaaq/info/plan/implementation-2019",
+          "source_kind": "official"
+        }
+      ]
+    },
+    {
+      "id": "greenland",
+      "name": "Greenland",
+      "level": "permit",
+      "countries": [
+        "Greenland"
+      ],
+      "bbox": null,
+      "summary": "The Northeast Greenland National Park needs a government expedition permit, applied for weeks ahead.",
+      "legal_notes": [
+        {
+          "topic": "Expedition permit",
+          "text": "Access to the national park needs a Greenland Government permit (one source says 12 weeks ahead) and a firearms permit. Collecting minerals, soil or sediment and work with genetic resources need separate permits.",
+          "source_url": "https://zackenberg.dk/permits",
+          "source_kind": "official"
+        }
+      ]
+    },
+    {
+      "id": "saudi_medina",
+      "name": "Medina sacred area (Harrat Rahat)",
+      "level": "restricted",
+      "countries": [
+        "Saudi Arabia"
+      ],
+      "bbox": [
+        39.3,
+        24.2,
+        39.9,
+        24.8
+      ],
+      "summary": "Entry to Medina's sacred core is restricted for non-Muslims; part of Harrat Rahat lies next to it.",
+      "legal_notes": [
+        {
+          "topic": "Access",
+          "text": "Sources differ on how far the restriction reaches today (it was relaxed in 2021 and 2023), and no official rule was found. Coordinate fieldwork with the Saudi Geological Survey and confirm access with Saudi authorities. The box is approximate.",
+          "source_url": "https://en.wikivoyage.org/wiki/Medina",
+          "source_kind": "secondary"
+        }
+      ]
+    }
+  ],
+  "general_notes": [
+    {
+      "topic": "Not legal advice",
+      "text": "These notes summarize public sources read on 2026-11-15. Rules change and depend on the traveler's nationality and institution: check the foreign ministry of your own country, the host country's authorities and your institution's export control office.",
+      "source_url": "https://travel.state.gov/en/international-travel/travel-advisories.html",
+      "source_kind": "official"
+    },
+    {
+      "topic": "Biological samples (Nagoya Protocol)",
+      "text": "Microbial or other genetic material collected at an analog site needs prior informed consent and agreed benefit-sharing from the provider country, plus collection and export permits. Journals and funders increasingly ask for proof. Check the ABS Clearing-House.",
+      "source_url": "https://absch.cbd.int/",
+      "source_kind": "official"
+    },
+    {
+      "topic": "Rock and soil samples",
+      "text": "Purely geological samples fall outside the Nagoya Protocol, but national and protected-area rules, mineral or heritage permits and export controls can still apply.",
+      "source_url": "https://ncl.ac.uk/research/research-governance/ethics/toolkit/nagoya-protocol",
+      "source_kind": "secondary"
+    },
+    {
+      "topic": "Sanctions travel with the people",
+      "text": "US sanctions bind US persons and institutions wherever they are; EU and UK sanctions bind theirs. A team with members of several nationalities must meet every applicable regime.",
+      "source_url": "https://ofac.treasury.gov/sanctions-programs-and-country-information",
+      "source_kind": "official"
+    }
+  ]
+}

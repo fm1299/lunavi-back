@@ -15,6 +15,7 @@ CONFIG_DIR = Path("data/config")
 SCHEMA_DIR = Path("data/schemas")
 
 Basis = Literal["measured", "literature", "physical"]
+BeyondMode = Literal["exclude", "clamp"]  # how a beyond-Earth site value enters the score
 CitationStatus = Literal["verified", "to_verify"]
 
 
@@ -205,7 +206,37 @@ class Finding(BaseModel):
 class FindingSet(BaseModel):
     target_id: str
     profile: str
+    scored_with: BeyondMode = "clamp"  # the mode the team reviewed the scores in
     findings: list[Finding]
+
+
+RestrictionLevel = Literal["do_not_travel", "restricted", "permit"]  # most severe first
+
+
+class LegalNote(BaseModel):
+    topic: str
+    text: str
+    source_url: str
+    source_kind: Literal["official", "news", "secondary"]
+
+
+class RestrictionZone(BaseModel):
+    """A place where fieldwork is unsafe, legally restricted or needs special permits."""
+
+    id: str
+    name: str
+    level: RestrictionLevel
+    countries: list[str]  # country names as in the Earth table
+    bbox: tuple[float, float, float, float] | None  # west, south, east, north; null: whole country
+    summary: str
+    legal_notes: list[LegalNote]
+
+
+class AccessRestrictions(BaseModel):
+    checked: str
+    levels: dict[RestrictionLevel, str]
+    zones: list[RestrictionZone]
+    general_notes: list[LegalNote]
 
 
 class MaskException(BaseModel):
@@ -296,6 +327,8 @@ class RunConfig(BaseModel):
     analog_match_km: float  # a documented analog is read from the nearest cell within this distance
     # Novelty (spec 5.5): known closer than "known" km to a catalog site, new farther than "near".
     novelty_km: dict[Literal["known", "near"], float] = {"known": 150.0, "near": 500.0}
+    # exclude: beyond-Earth features leave the score; clamp: they count at the edge of Earth's range
+    beyond_earth: BeyondMode = "exclude"
     modis: ModisConfig = ModisConfig()
     validation: ValidationConfig = ValidationConfig()
 
@@ -328,6 +361,7 @@ class Config:
     caves: tuple[CaveSite, ...] = ()
     rules: PlanetRules | None = None
     findings: tuple[FindingSet, ...] = ()
+    restrictions: AccessRestrictions | None = None
 
 
 def _read(path: Path) -> dict:
@@ -346,6 +380,7 @@ def load_config(config_dir: Path = CONFIG_DIR) -> Config:
         caves=tuple(CaveSite(**s) for s in _read(config_dir / "cave_sites.json")["sites"]),
         rules=PlanetRules(**_read(config_dir / "planet_rules.json")),
         findings=tuple(FindingSet(**s) for s in _read(config_dir / "findings.json")["sets"]),
+        restrictions=AccessRestrictions(**_read(config_dir / "access_restrictions.json")),
     )
     _cross_check(config)
     return config
@@ -386,6 +421,7 @@ def export_schemas(out_dir: Path = SCHEMA_DIR) -> None:
         "cave_site": CaveSite,
         "planet_rules": PlanetRules,
         "finding_set": FindingSet,
+        "access_restrictions": AccessRestrictions,
         "run": RunConfig,
         "source": Source,
         "result_cell": ResultCell,

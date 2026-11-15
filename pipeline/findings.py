@@ -5,12 +5,15 @@ matches are recomputed here from the loaded Earth table, so a finding never show
 table no longer supports. The checks list what a reviewer should know before trusting one.
 """
 
+from dataclasses import dataclass
+
 import numpy as np
 
 from pipeline import scoring
-from pipeline.contract import Config, Finding, FindingSet
+from pipeline.contract import BeyondMode, Config, Finding, FindingSet
 from pipeline.earth import Comparison, Earth, beyond_earth_keys, compare
 from pipeline.geo import haversine_km
+from pipeline.restrictions import describe, zones_at
 
 
 def _nearest_analog(config: Config, lat: float, lon: float) -> tuple[str | None, float | None]:
@@ -28,17 +31,42 @@ def _inside(bbox: tuple[float, float, float, float], lat: float, lon: float) -> 
     return west <= lon <= east and south <= lat <= north
 
 
+@dataclass(frozen=True)
+class Ranked:
+    """Score and confidence of every cell for one site, in one beyond-Earth mode."""
+
+    weights: dict[str, float]
+    score: np.ndarray
+    confidence: np.ndarray
+
+
+def rank(
+    comparison: Comparison, weights: dict, gates: dict, flagged: set[str], mode: BeyondMode
+) -> Ranked:
+    if mode == "exclude":
+        weights = scoring.earth_only_weights(weights, flagged)
+    vector = comparison.weights(weights)
+    return Ranked(
+        weights=weights,
+        score=scoring.combined_score(comparison.s, vector, comparison.vetoes(gates)),
+        confidence=scoring.confidence(comparison.q, comparison.s, vector),
+    )
+
+
 def review_finding(
     config: Config,
     earth: Earth,
     finding: Finding,
     comparison: Comparison,
-    score: np.ndarray,
-    confidence: np.ndarray,
-    weights: dict[str, float],
+    current: Ranked,
+    reviewed: Ranked,
     flagged: set[str],
 ) -> dict:
-    """A finding with its live values and the checks a reviewer needs."""
+    """A finding with its live values and the checks a reviewer needs.
+
+    Live values use the app's current beyond-Earth mode. The score change is measured in the mode
+    the team reviewed in, so a change of mode is not mistaken for a change of data.
+    """
     rows = [earth.index_by_cell.get(cell) for cell in finding.cell_ids]
     main = rows[0]
     bands = config.run.confidence_bands
@@ -59,36 +87,42 @@ def review_finding(
     }
     live: dict = {"cell_id": finding.cell_ids[0], "score": None, "confidence": None, "band": None}
     if main is not None:
-        value = float(confidence[main])
+        value = float(current.confidence[main])
         similarities = {
             key: float(comparison.s[main, column])
             for column, key in enumerate(comparison.keys)
-            if weights.get(key, 0.0) > 0 and not np.isnan(comparison.s[main, column])
+            if current.weights.get(key, 0.0) > 0 and not np.isnan(comparison.s[main, column])
         }
         closest, weakest = scoring.closest_and_weakest(similarities, flagged, limit=2)
+        as_reviewed = round(float(reviewed.score[main]), 1)
         live.update(
-            score=round(float(score[main]), 1),
+            score=round(float(current.score[main]), 1),
             confidence=round(value, 3),
             band=scoring.confidence_band(value, bands["high"], bands["medium"]),
             eligible=bool(earth.eligible[main]),
             closest_matches={k: round(similarities[k], 2) for k in closest},
             weakest_matches={k: round(similarities[k], 2) for k in weakest},
+            score_as_reviewed=as_reviewed,
         )
-        checks["score_change"] = round(live["score"] - finding.score_at_review, 1)
-    return {**finding.model_dump(), "live": live, "checks": checks}
+        checks["score_change"] = round(as_reviewed - finding.score_at_review, 1)
+    restrictions = None
+    if config.restrictions is not None:
+        country = earth.table["country"].iloc[main] if main is not None else None
+        zones = zones_at(config.restrictions, country, finding.lat, finding.lon)
+        restrictions = {**describe(config.restrictions, zones), "country": country}
+    return {**finding.model_dump(), "live": live, "checks": checks, "restrictions": restrictions}
 
 
 def review_set(config: Config, earth: Earth, group: FindingSet) -> list[dict]:
     target = config.targets[group.target_id]
     profile = config.profiles[group.profile]
-    weights = dict(profile.weights)
     comparison = compare(earth, config.features, target, config.run.target_quality)
-    weight_vector = comparison.weights(weights)
-    score = scoring.combined_score(comparison.s, weight_vector, comparison.vetoes(profile.gates))
-    confidence = scoring.confidence(comparison.q, comparison.s, weight_vector)
     flagged = beyond_earth_keys(config.features, target)
+    weights = dict(profile.weights)
+    current = rank(comparison, weights, profile.gates, flagged, config.run.beyond_earth)
+    reviewed = rank(comparison, weights, profile.gates, flagged, group.scored_with)
     return [
-        review_finding(config, earth, f, comparison, score, confidence, weights, flagged)
+        review_finding(config, earth, f, comparison, current, reviewed, flagged)
         for f in group.findings
     ]
 
@@ -99,6 +133,7 @@ def findings_for(config: Config, earth: Earth, target_id: str | None = None) -> 
         {
             "target_id": group.target_id,
             "profile": group.profile,
+            "beyond_earth_mode": config.run.beyond_earth,
             "findings": review_set(config, earth, group),
         }
         for group in config.findings
@@ -128,6 +163,11 @@ def audit(sets: list[dict], medium: float) -> dict:
         "cells_missing_from_table": [
             f["id"] for f in rows if f["checks"]["cells_missing_from_table"]
         ],
+        "fieldwork_restriction": {
+            f["id"]: f["restrictions"]["level"]
+            for f in rows
+            if f.get("restrictions") and f["restrictions"]["level"]
+        },
         "score_changed": [
             f["id"] for f in rows if abs(f["checks"].get("score_change") or 0.0) >= 0.5
         ],

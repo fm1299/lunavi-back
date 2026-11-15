@@ -14,8 +14,8 @@ from pathlib import Path
 import numpy as np
 
 from pipeline import scoring
-from pipeline.contract import Config, KnownAnalog, Target, load_config
-from pipeline.earth import Comparison, Earth, compare, load_earth
+from pipeline.contract import BeyondMode, Config, KnownAnalog, Target, load_config
+from pipeline.earth import Comparison, Earth, beyond_earth_keys, compare, load_earth
 from pipeline.findings import audit, findings_for
 from pipeline.geo import haversine_km
 from pipeline.grid import cell_id
@@ -122,9 +122,13 @@ def _top_cells(score: np.ndarray, eligible: np.ndarray, count: int) -> set[int]:
     return {int(index) for index in order[:count]}
 
 
-def target_report(config: Config, earth: Earth, target: Target, method: str) -> dict:
+def target_report(
+    config: Config, earth: Earth, target: Target, method: str, beyond: BeyondMode | None = None
+) -> dict:
     profile = config.profiles[target.default_profile]
     weights = dict(profile.weights)
+    if (beyond or config.run.beyond_earth) == "exclude":
+        weights = scoring.earth_only_weights(weights, beyond_earth_keys(config.features, target))
     comparison = compare(earth, config.features, target, config.run.target_quality)
     score = _score(comparison, weights, profile.gates, method)
     positives = _positive_rows(config, earth, target, score)
@@ -256,6 +260,11 @@ def build_report(config: Config, earth: Earth, dummy: bool) -> dict:
         for method in METHODS
     }
     targets = by_method["arithmetic"]
+    # The two ways a beyond-Earth value can enter the score, so the team can keep the better one.
+    by_mode = {
+        mode: [target_report(config, earth, t, "arithmetic", mode) for t in config.targets.values()]
+        for mode in ("exclude", "clamp")
+    }
     return {
         "generated_at": datetime.now(UTC).isoformat(timespec="seconds"),
         "dummy": dummy,
@@ -265,6 +274,8 @@ def build_report(config: Config, earth: Earth, dummy: bool) -> dict:
         },
         # Spec 5.3: try both ways of combining and keep the one that ranks the controls better.
         "methods": {method: _method_summary(reports) for method, reports in by_method.items()},
+        "beyond_earth_mode": config.run.beyond_earth,
+        "beyond_earth_modes": {mode: _method_summary(r) for mode, r in by_mode.items()},
         "targets": targets,
         "honest_gaps": honest_gaps(targets),
         # Test 7: the literature review of the findings (FR-P16), with live values.

@@ -229,6 +229,15 @@
       "title": "Novelty Km",
       "type": "object"
     },
+    "beyond_earth": {
+      "default": "exclude",
+      "enum": [
+        "exclude",
+        "clamp"
+      ],
+      "title": "Beyond Earth",
+      "type": "string"
+    },
     "modis": {
       "$ref": "#/$defs/ModisConfig",
       "default": {
