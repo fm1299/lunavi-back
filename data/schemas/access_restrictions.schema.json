@@ -1,0 +1,157 @@
+{
+  "$defs": {
+    "LegalNote": {
+      "properties": {
+        "topic": {
+          "title": "Topic",
+          "type": "string"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        },
+        "source_url": {
+          "title": "Source Url",
+          "type": "string"
+        },
+        "source_kind": {
+          "enum": [
+            "official",
+            "news",
+            "secondary"
+          ],
+          "title": "Source Kind",
+          "type": "string"
+        }
+      },
+      "required": [
+        "topic",
+        "text",
+        "source_url",
+        "source_kind"
+      ],
+      "title": "LegalNote",
+      "type": "object"
+    },
+    "RestrictionZone": {
+      "description": "A place where fieldwork is unsafe, legally restricted or needs special permits.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "level": {
+          "enum": [
+            "do_not_travel",
+            "restricted",
+            "permit"
+          ],
+          "title": "Level",
+          "type": "string"
+        },
+        "countries": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Countries",
+          "type": "array"
+        },
+        "bbox": {
+          "anyOf": [
+            {
+              "maxItems": 4,
+              "minItems": 4,
+              "prefixItems": [
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "number"
+                },
+                {
+                  "type": "number"
+                }
+              ],
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Bbox"
+        },
+        "summary": {
+          "title": "Summary",
+          "type": "string"
+        },
+        "legal_notes": {
+          "items": {
+            "$ref": "#/$defs/LegalNote"
+          },
+          "title": "Legal Notes",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "level",
+        "countries",
+        "bbox",
+        "summary",
+        "legal_notes"
+      ],
+      "title": "RestrictionZone",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "checked": {
+      "title": "Checked",
+      "type": "string"
+    },
+    "levels": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "propertyNames": {
+        "enum": [
+          "do_not_travel",
+          "restricted",
+          "permit"
+        ]
+      },
+      "title": "Levels",
+      "type": "object"
+    },
+    "zones": {
+      "items": {
+        "$ref": "#/$defs/RestrictionZone"
+      },
+      "title": "Zones",
+      "type": "array"
+    },
+    "general_notes": {
+      "items": {
+        "$ref": "#/$defs/LegalNote"
+      },
+      "title": "General Notes",
+      "type": "array"
+    }
+  },
+  "required": [
+    "checked",
+    "levels",
+    "zones",
+    "general_notes"
+  ],
+  "title": "AccessRestrictions",
+  "type": "object"
+}

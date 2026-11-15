@@ -249,3 +249,16 @@ def test_feature_ranges_report_percentiles_next_to_lo_and_hi():
     assert ranges["slope"]["land_p99"] > ranges["slope"]["eligible_p99"]
     assert ranges["slope"]["hi"] == config.features["slope"].hi
     assert "composition" not in ranges
+
+
+def test_restriction_zones_follow_country_and_box():
+    from pipeline.restrictions import worst_level, zones_at
+
+    restrictions = load_config(Path("data/config")).restrictions
+    assert zones_at(restrictions, "Iran", 32.5, 57.5)[:1] == ["us_level4"]
+    assert worst_level(restrictions, zones_at(restrictions, "Iran", 32.5, 57.5)) == "do_not_travel"
+    # The Tibet box only applies inside it: Xinjiang's Turpan is restricted, not a Tibet permit.
+    turpan = zones_at(restrictions, "China", 43.0, 87.5)
+    assert turpan == ["china"]
+    assert "china_tibet" in zones_at(restrictions, "China", 29.6, 91.1)
+    assert zones_at(restrictions, "Chile", -24.0, -69.0) == []

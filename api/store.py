@@ -12,6 +12,7 @@ from pipeline import scoring
 from pipeline.contract import Config, Profile, Target, load_config
 from pipeline.earth import Comparison, beyond_earth_keys, compare, load_earth, tag_caves
 from pipeline.geo import haversine_km
+from pipeline.restrictions import cell_zones, describe, worst_level
 from pipeline.sites import SiteBook
 from pipeline.validate import build_report
 
@@ -60,6 +61,19 @@ class Store:
         self.cave_cells = tag_caves(
             self.earth, list(self.config.caves), self.config.run.analog_match_km
         )
+        # Fieldwork restrictions per cell: zone IDs and the most severe level. Never scored.
+        self.zones: list[list[str]] = []
+        self.restriction: list[str | None] = []
+        if self.config.restrictions is not None:
+            self.zones = cell_zones(
+                self.config.restrictions,
+                self.earth.table["country"].to_numpy(),
+                self.earth.lat,
+                self.earth.lon,
+            )
+            self.restriction = [worst_level(self.config.restrictions, z) for z in self.zones]
+        else:
+            self.restriction = [None] * len(self.earth.lat)
         self.sites = sites or SiteBook(
             window_km=self.config.run.site_window_km, rules=self.config.rules
         )
@@ -160,6 +174,7 @@ class Store:
             "confidence": round(float(scored.confidence[index]), 3),
             "band": self.band(float(scored.confidence[index])),
             **{k: _clean(v) for k, v in self.earth.access.iloc[index].items()},
+            "restriction": self.restriction[index],
         }
 
     def matches(
@@ -294,4 +309,11 @@ class Store:
             "missing_features": [r["key"] for r in breakdown if r["weight"] > 0 and r["s"] is None],
             "test_tags": profile.test_tags,
             "eligible": bool(self.earth.eligible[index]),
+            "access_restrictions": self.restrictions_at(index),
         }
+
+    def restrictions_at(self, index: int) -> dict | None:
+        """Fieldwork restrictions of one cell, with the legal notes of each zone."""
+        if self.config.restrictions is None:
+            return None
+        return describe(self.config.restrictions, self.zones[index])

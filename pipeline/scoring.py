@@ -133,6 +133,17 @@ def closest_and_weakest(
     return closest, weakest
 
 
+def earth_only_weights(weights: dict[str, float], flagged: set[str]) -> dict[str, float]:
+    """Weights with every beyond-Earth feature set to 0 (mode "exclude").
+
+    A site value outside the Earth range is clamped to the edge, so the most extreme Earth cells
+    all reach the same similarity and the feature stops telling places apart while it still
+    carries weight. Leaving it out of the score keeps the ranking on what Earth can imitate; the
+    feature is still shown, flagged, as a condition no Earth site reaches.
+    """
+    return {key: (0.0 if key in flagged else value) for key, value in weights.items()}
+
+
 def weight_share(weights: dict[str, float], flagged: set[str]) -> float:
     """The share of the active weight that rests on flagged features."""
     total = sum(w for w in weights.values() if w > 0)

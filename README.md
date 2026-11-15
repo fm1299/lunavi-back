@@ -65,6 +65,14 @@ No global map gives one of the four classes directly, so a location gets its cla
 
 **Caves.** `data/config/cave_sites.json` lists documented lava tubes. The nearest Earth cell to each, within `analog_match_km`, gets the terrain tag `cave`, so `terrain=cave` finds them. The tag does not make a masked cell eligible.
 
+## Values beyond Earth's range
+
+A Moon or Mars value outside the Earth range (a day-night swing of 125 K, a mean of -118 °C) used to be clamped to the edge, so the most extreme Earth cells all matched it equally and the feature stopped telling places apart while still carrying weight. By default (`beyond_earth: "exclude"` in `run.json`) such a feature now leaves the score: it weighs 0, does not lower confidence, and is listed in `/results` as `excluded_beyond_earth`, as a condition to test in a chamber rather than in the field. `beyond=clamp` on any scoring endpoint brings back the old behavior. On the real table the positive controls that pass go from 3 of 9 (clamp) to 5 of 9 (exclude), with every negative control still in the lower half; `validation.json` reports both modes under `beyond_earth_modes`. Arcadia is the exception: its ice-and-water purpose rests on temperatures that are all beyond Earth, so it ranks only on composition and aridity and Haughton drops.
+
+## Fieldwork restrictions
+
+`data/config/access_restrictions.json` lists places where fieldwork is unsafe or limited, each with a level (`do_not_travel`, `restricted`, `permit`), the countries (and box) it covers, and legal notes with their source and the kind of source (official, news, secondary). It was reviewed on the web on 2026-11-15 and is informational only, not legal advice. Every cell, sheet and finding carries its level; `avoid=do_not_travel,restricted` on `/results`, `/summary`, `/export` and `/portfolio` leaves those places out. The label never changes a score. `GET /restrictions` serves the zones and the general notes (samples, Nagoya Protocol, sanctions by nationality).
+
 ## Findings (FR-P16)
 
 `data/config/findings.json` holds the team's findings for the preset sites: new regions from the top 1% of cells, grouped and checked in the literature (13 regions on 2026-11-15, after 2 rounds and 21 regions reviewed). Each one keeps its cells, box, what to test first, the sources read, the searches run with their result, and an honest limit. The originals, in Spanish, are in `data/reference/findings.propuesto.json`.
@@ -125,6 +133,7 @@ Composition comes from GLiM gridded to 0.5 degrees (`pipeline/adapters/glim.py`)
 | `GET /validation` | How the documented analogs and the negative controls rank for the preset sites |
 | `GET /sources` | The data source inventory, with license and status |
 | `GET /findings?target=` | The team's findings with live score, confidence and checks |
+| `GET /restrictions` | Fieldwork restriction zones with their legal notes |
 | `GET /caves` | Documented lava tubes and caves, and whether a cell of the table holds each |
 | `GET /profiles`, `/features`, `/analogs`, `/meta`, `/health` | Config and status |
 
@@ -137,6 +146,7 @@ Composition comes from GLiM gridded to 0.5 degrees (`pipeline/adapters/glim.py`)
 | `pipeline/sites.py` | Reads any Moon or Mars location |
 | `pipeline/planet_rules.py` | Composition class on the Moon and Mars, and the Moon's annual range |
 | `pipeline/shapefile.py` | A small polygon shapefile reader, and reading one file out of a remote ZIP |
+| `pipeline/restrictions.py` | Which restriction zones hold each cell |
 | `pipeline/findings.py` | Recomputes and audits the findings |
 | `pipeline/check_sites.py` | Compares the site reader with the team's test points |
 | `pipeline/earth.py` | Loads the Earth table and compares a site with it |

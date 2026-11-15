@@ -144,6 +144,15 @@
       "title": "Profile",
       "type": "string"
     },
+    "scored_with": {
+      "default": "clamp",
+      "enum": [
+        "exclude",
+        "clamp"
+      ],
+      "title": "Scored With",
+      "type": "string"
+    },
     "findings": {
       "items": {
         "$ref": "#/$defs/Finding"

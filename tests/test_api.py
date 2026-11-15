@@ -144,7 +144,10 @@ def test_cell_sheet_has_the_site_sheet_fields(client):
     sheet = client.get(f"/cells/{first}", params=params).json()
     assert sheet["cell_id"] == first
     assert sheet["test_tags"]
-    assert sheet["beyond_earth_weight_share"] > 0
+    # By default beyond-Earth features leave the score, so none of the weight rests on them.
+    assert sheet["beyond_earth_weight_share"] == 0
+    clamped = client.get(f"/cells/{first}", params={**params, "beyond": "clamp"}).json()
+    assert clamped["beyond_earth_weight_share"] > 0
     keys = {row["key"]: row for row in sheet["breakdown"]}
     assert keys["mean_temperature"]["beyond_earth"] is True
     assert not set(sheet["closest_matches"]) & {k for k, r in keys.items() if r["beyond_earth"]}
@@ -470,3 +473,42 @@ def test_process_walks_through_every_step(client):
 
 def test_process_rejects_an_unknown_site(client):
     assert client.get("/process", params={"target": "nowhere"}).status_code == 404
+
+
+def test_beyond_earth_features_leave_the_score_by_default(client):
+    meta = client.get("/results", params={"target": "jezero"}).json()["meta"]
+    assert meta["beyond_earth_mode"] == "exclude"
+    assert meta["excluded_beyond_earth"] == ["temp_diurnal_range"]
+    assert meta["weights"]["temp_diurnal_range"] == 0
+    clamp = client.get("/results", params={"target": "jezero", "beyond": "clamp"}).json()["meta"]
+    assert clamp["excluded_beyond_earth"] == [] and clamp["weights"]["temp_diurnal_range"] > 0
+    bad = client.get("/results", params={"target": "jezero", "beyond": "maybe"})
+    assert bad.status_code == 422
+
+
+def test_validation_compares_both_beyond_earth_modes(client):
+    report = client.get("/validation").json()
+    assert report["beyond_earth_mode"] == "exclude"
+    assert set(report["beyond_earth_modes"]) == {"exclude", "clamp"}
+
+
+def test_restrictions_list_zones_with_legal_notes(client):
+    body = client.get("/restrictions").json()
+    zones = {z["id"]: z for z in body["zones"]}
+    assert zones["iran"]["level"] == "do_not_travel"
+    assert zones["china"]["level"] == "restricted"
+    assert all(n["source_url"].startswith("http") for z in zones.values() for n in z["legal_notes"])
+    assert body["general_notes"]
+
+
+def test_cells_carry_a_restriction_label_and_can_be_left_out(client):
+    full = client.get("/results", params={"target": "jezero", "top_n": 5, "detail": "full"}).json()
+    assert all("restriction" in cell for cell in full["cells"])
+    compact = client.get("/results", params={"target": "jezero"}).json()
+    assert len(compact["cells"]["restriction"]) == len(compact["cells"]["cell_id"])
+    avoid = client.get("/results", params={"target": "jezero", "avoid": "do_not_travel"})
+    assert avoid.status_code == 200
+    assert client.get("/results", params={"target": "jezero", "avoid": "war"}).status_code == 422
+    first = compact["cells"]["cell_id"][0]
+    sheet = client.get(f"/cells/{first}", params={"target": "jezero"}).json()
+    assert set(sheet["access_restrictions"]) == {"level", "zones", "checked"}

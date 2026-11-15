@@ -212,6 +212,32 @@
       "title": "Analog Match Km",
       "type": "number"
     },
+    "novelty_km": {
+      "additionalProperties": {
+        "type": "number"
+      },
+      "default": {
+        "known": 150.0,
+        "near": 500.0
+      },
+      "propertyNames": {
+        "enum": [
+          "known",
+          "near"
+        ]
+      },
+      "title": "Novelty Km",
+      "type": "object"
+    },
+    "beyond_earth": {
+      "default": "exclude",
+      "enum": [
+        "exclude",
+        "clamp"
+      ],
+      "title": "Beyond Earth",
+      "type": "string"
+    },
     "modis": {
       "$ref": "#/$defs/ModisConfig",
       "default": {
