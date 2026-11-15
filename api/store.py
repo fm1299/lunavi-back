@@ -10,7 +10,7 @@ import numpy as np
 from api.assistant import Assistant, settings_from_env
 from pipeline import scoring
 from pipeline.contract import Config, Profile, Target, load_config
-from pipeline.earth import Comparison, beyond_earth_keys, compare, load_earth
+from pipeline.earth import Comparison, beyond_earth_keys, compare, load_earth, tag_caves
 from pipeline.geo import haversine_km
 from pipeline.sites import SiteBook
 from pipeline.validate import build_report
@@ -57,7 +57,12 @@ class Store:
         self.directory = directory or results_dir()
         self.manifest = json.loads((self.directory / "manifest.json").read_text(encoding="utf-8"))
         self.earth = load_earth(self.directory / "earth.parquet")
-        self.sites = sites or SiteBook(window_km=self.config.run.site_window_km)
+        self.cave_cells = tag_caves(
+            self.earth, list(self.config.caves), self.config.run.analog_match_km
+        )
+        self.sites = sites or SiteBook(
+            window_km=self.config.run.site_window_km, rules=self.config.rules
+        )
         self.assistant = assistant or Assistant(settings_from_env())
         self.analog_cells = self._analog_cells()
         self._validation: dict | None = None

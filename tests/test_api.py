@@ -41,6 +41,13 @@ def client(tmp_path_factory):
         )
         patch.setattr(
             sites,
+            "read_composition",
+            lambda body, lat, lon, rules: TargetFeature(
+                value="basaltic", basis="literature", source_url="https://example.org"
+            ),
+        )
+        patch.setattr(
+            sites,
             "read_mars_temperature",
             lambda lat, lon: {
                 "mean_temperature": TargetFeature(
@@ -158,7 +165,11 @@ def test_a_location_on_the_moon_can_be_chosen_and_compared(client):
     assert results["meta"]["count"] == 50
     first = results["cells"]["cell_id"][0]
     sheet = client.get(f"/cells/{first}", params={"target": site["id"]}).json()
-    assert "temp_annual_range" in sheet["missing_features"]
+    assert "temp_annual_range" not in sheet["missing_features"]
+    # Away from the poles the Moon's annual range comes from its 1.54 degree tilt: 0 K, physical.
+    assert site["features"]["temp_annual_range"]["value"] == 0
+    assert site["features"]["temp_annual_range"]["basis"] == "physical"
+    assert site["features"]["composition"]["value"] == "basaltic"
 
 
 def test_a_mars_location_gets_its_temperature_in_a_second_step(client):
@@ -193,7 +204,14 @@ def test_unknown_site_climate_returns_404(client):
 def test_analogs_list_known_sites(client):
     analogs = {a["id"]: a for a in client.get("/analogs").json()}
     assert analogs["amazon_central"]["role"] == "negative_control"
-    assert analogs["pampas_la_joya"]["role"] == "positive_control"
+    assert analogs["salar_uyuni"]["role"] == "positive_control"
+    assert analogs["pampas_la_joya"]["role"] == "catalog_only"
+
+
+def test_caves_say_whether_a_cell_holds_them(client):
+    caves = {c["id"]: c for c in client.get("/caves").json()}
+    assert "kazumura" in caves
+    assert caves["kazumura"]["in_table"] is False  # the dummy cells sit around the Atacama
 
 
 def test_responses_are_compressed_when_large(client):
@@ -251,7 +269,10 @@ def test_portfolio_cells_cover_the_conditions_together(client):
     one = client.get("/portfolio", params={"target": "jezero", "max_cells": 1}).json()
     assert len(one["cells"]) == 1
     none = client.get("/portfolio", params={"target": "jezero", "threshold": 1.0}).json()
-    assert {key for cell in none["cells"] for key in cell["covers"]} <= {"composition"}
+    # Only an exact class match, or a value clamped at the edge of the Earth range, reaches 1.0.
+    targets = {t["id"]: t for t in client.get("/targets").json()}
+    beyond = set(targets["jezero"]["beyond_earth"])
+    assert {key for cell in none["cells"] for key in cell["covers"]} <= {"composition"} | beyond
 
 
 def test_sources_list_what_fills_each_feature(client):
@@ -270,8 +291,8 @@ def test_validation_ranks_the_controls_of_each_preset(client):
     assert set(report["methods"]) == {"arithmetic", "geometric"}
     jezero = next(t for t in report["targets"] if t["target"] == "jezero")
     controls = {row["id"]: row for row in jezero["positive_controls"]}
-    # The dummy cells sit around the Atacama; Death Valley is far outside them.
-    assert controls["atacama"]["comparable"] and 0.0 <= controls["atacama"]["top_share"] <= 1.0
+    # The dummy cells sit around the Atacama, so every Jezero control is too far to compare.
+    assert set(controls) == {"salar_uyuni", "death_valley", "haughton", "dry_valleys"}
     assert controls["death_valley"]["comparable"] is False
     assert {"kind": "not_comparable", "target": "jezero", "id": "death_valley"} in report[
         "honest_gaps"

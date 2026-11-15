@@ -1,0 +1,741 @@
+{
+  "_status": "propuesto 2026-11-14 (análisis LUNAVI); decisiones pendientes de Fernanda marcadas en cada sección",
+  "moon": {
+    "composition": {
+      "fuente": {
+        "principal": {
+          "titulo": "Global Mapping of Lunar Mare Boundaries (65N and 65S), LROC_GLOBAL_MARE_180 (Nelson et al. 2014, LPSC 45, 2861)",
+          "url": "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/EXTRAS/SHAPEFILE/LROC_GLOBAL_MARE/LROC_GLOBAL_MARE_180.ZIP",
+          "pagina_producto": "https://data.lroc.im-ldi.com/lroc/view_rdr/SHAPEFILE_LROC_GLOBAL_MARE",
+          "tipo": "poligonos vectoriales de mares lunares (PDS, LRO LROC RDR)",
+          "formato": "ESRI Shapefile (SHP/SHX/DBF/PRJ) en ZIP; campos MARE_NAME, PERIMTR_KM, AREA_KM; IAU Moon 2000 geografico, longitud -180 a 180",
+          "resolucion": "digitalizado a escala 1:200 000 y 1:500 000 sobre mosaico WAC de 100 m/pixel; 644 registros; cobertura real comprobada de 66.5 S a 64.8 N",
+          "tamano": "8 750 199 bytes (8.7 MB) el ZIP; SHP descomprimido 7.3 MB"
+        },
+        "secundaria": {
+          "titulo": "Lunar Prospector GRS, Iron half degree (FeO % en peso), Lawrence et al. 2002, JGR Planets",
+          "url": "https://pds-geosciences.wustl.edu/missions/lunarp/reduced/ironhd.dat",
+          "url_ascii": "https://pds-geosciences.wustl.edu/missions/lunarp/reduced/ironhd.txt",
+          "pagina_producto": "https://pds-geosciences.wustl.edu/missions/lunarp/reduced_special.html",
+          "tipo": "mapa global de abundancia de FeO medido por espectrometro de rayos gamma (PDS Geosciences Node)",
+          "formato": "binario 720 x 360 enteros de 2 bytes big endian (IEEE MSB), valor = FeO x 10, fila 0 = latitud -90 a -89.5, columna 0 = longitud -180 (orden comprobado contra el ASCII); o ASCII de 5 columnas (lat min, lat max, lon min, lon max, FeO)",
+          "resolucion": "rejilla de 0.5 grados (igual que la tabla de la Tierra), pero la huella real del instrumento es de unos 45 km y el mapa esta suavizado: los bordes mar/tierras altas quedan mezclados",
+          "tamano": "binario 518 400 bytes (0.5 MB); ASCII 14 256 401 bytes (14 MB)"
+        },
+        "alternativas_revisadas": [
+          {
+            "titulo": "Unified Geologic Map of the Moon, 1:5M, 2020 (Fortezzo, Spudis y Harrel)",
+            "url": "https://asc-astropedia.s3.us-west-2.amazonaws.com/Moon/Geology/Unified_Geologic_Map_of_the_Moon_GIS_v2.zip",
+            "tipo": "mapa geologico global por unidades",
+            "formato": "paquete GIS ESRI en ZIP (no se abrio; la pagina de USGS respondio 403 y no se pudo confirmar el nombre del campo de unidades)",
+            "resolucion": "escala 1:5 000 000, global",
+            "tamano": "224 413 040 bytes (224 MB)",
+            "por_que_no_es_principal": "pesa 26 veces mas que el shapefile de mares y no se pudo verificar que campo y codigos de unidad usar; sirve como respaldo para latitudes mayores a 66 grados, donde LROC no cubre (alli no hay mares relevantes)."
+          },
+          {
+            "titulo": "Moon Clementine UVVIS FeO Color Binned 1km (USGS Astrogeology)",
+            "url": "https://astrogeology.usgs.gov/search/map/Moon_Clementine_UVVIS_FeO_Color_Binned_1km",
+            "tipo": "mapa de FeO a 1 km por espectroscopia",
+            "formato": "no verificado (pagina devolvio 403)",
+            "resolucion": "1 km/pixel segun el titulo",
+            "tamano": "no verificado",
+            "por_que_no_es_principal": "no se pudo verificar URL de archivo ni tamano; ademas Antonenko 2000 advierte errores grandes de FeO con pendiente y angulo de fase altos, que crecen con la latitud."
+          }
+        ]
+      },
+      "regla": {
+        "texto": "Para un punto (lat, lon) de la Luna: (1) si cae dentro de un poligono de LROC_GLOBAL_MARE, la clase es basaltic (mar). (2) Si no, y cae dentro de la elipse de hierro de la cuenca South Pole-Aitken (Garrick-Bethell y Zuber 2009, tabla 1: centro 51.4 S, 188.4 E, semieje mayor 1030 km, semieje menor 710 km, inclinacion -14.1 grados) y el FeO de Lunar Prospector es mayor o igual a 8.0 % en peso, la clase es basaltic con marca 'SPA interior, material mafico no mare (intermedio)'. (3) En cualquier otro caso la clase es felsic (tierras altas anortositicas), con el limite de la SPEC. Regla de respaldo si no se usa el shapefile: FeO de Lunar Prospector mayor o igual a 12 % en peso = basaltic; si no, se aplica el paso 2 y luego el 3. Nunca se asigna sedimentary ni evaporite en la Luna (base physical: sin agua liquida ni atmosfera que formen sedimentos o evaporitas).",
+        "umbrales": {
+          "mare_poligono": "dentro del poligono LROC = basaltic (base measured)",
+          "spa_feo_min_pct_peso": 8.0,
+          "spa_feo_justificacion": "Garrick-Bethell y Zuber 2009 trazaron la elipse de hierro siguiendo el contorno de 7.5 a 8.0 % de hierro de Lunar Prospector, que segun ellos separa la parte interior y exterior del SPA Terrane de Jolliff et al. 2000. Jolliff 2000 (resumido por PSRD): SPA interior FeO medio 10.1 %, SPA exterior 5.7 %.",
+          "respaldo_feo_mare_pct_peso": 12.0,
+          "respaldo_justificacion": "Antonenko 2000 (LPSC XXXI, 2016): las muestras de mar tienen en general FeO > 16 % y las de tierras altas < 6 % (Heiken et al. 1991, Lunar Sourcebook); con datos de FeO de Clementine eligio 12 % como limite inferior conservador porque parches de mar en Schickard bajan hasta 12 %.",
+          "referencias_tierras_altas": "Jolliff 2000: FHT anortositico FeO medio 4.2 %, FHT exterior 5.5 %."
+        },
+        "citas": [
+          {
+            "ref": "Nelson et al. 2014, Mapping lunar maria extents and lobate scarps using LROC image products, LPSC 45, 2861",
+            "url": "https://data.lroc.im-ldi.com/lroc/view_rdr/SHAPEFILE_LROC_GLOBAL_MARE"
+          },
+          {
+            "ref": "Lawrence et al. 2002, Iron abundances on the lunar surface as measured by the Lunar Prospector gamma-ray and neutron spectrometers, JGR Planets",
+            "url": "https://pds-geosciences.wustl.edu/missions/lunarp/reduced_special.html"
+          },
+          {
+            "ref": "Garrick-Bethell y Zuber 2009, Elliptical structure of the lunar South Pole-Aitken basin, Icarus 204, 399-408, doi 10.1016/j.icarus.2009.05.032 (tabla 1 y seccion de hierro)",
+            "url": "https://people.ucsc.edu/~igarrick/pubs/Garrick-Bethell_and_Zuber_2009.pdf"
+          },
+          {
+            "ref": "Jolliff et al. 2000, Major lunar crustal terranes, JGR 105(E2), 4197-4216, doi 10.1029/1999JE001103; valores FeO por terreno tomados del resumen PSRD (Taylor 2000)",
+            "url": "http://www.psrd.hawaii.edu/Aug00/newMoon.html"
+          },
+          {
+            "ref": "Antonenko 2000, Analysis of Clementine FeO maps for the identification of cryptomare deposits, LPSC XXXI, abstract 2016 (cita a Heiken et al. 1991, Lunar Sourcebook)",
+            "url": "https://www.lpi.usra.edu/meetings/lpsc2000/pdf/2016.pdf"
+          }
+        ],
+        "base": "literature (clase asignada por literatura a partir de datos medidos); paso 1 apoyado en mapeo medido",
+        "estado": "propuesto"
+      },
+      "limites": [
+        "La anortosita no es felsica en sentido estricto (es rica en plagioclasa calcica y pobre en silice comparada con un granito); felsic es la clase mas cercana de las cuatro, como dice la SPEC. Mostrarlo en la ficha.",
+        "El material interior de SPA es mafico no mare (norita, mezcla de corteza inferior y fundido de impacto segun Jolliff 2000 y Garrick-Bethell y Zuber 2009); asignarlo a basaltic es una aproximacion. Alternativa que Fernanda debe decidir: dejarlo como felsic con marca, o como basaltic con marca (propuesta).",
+        "Lunar Prospector a 0.5 grados esta suavizado (huella ~45 km): sitios de borde como Apollo 15 (11.4 %), Apollo 17 (10.8 %) y Apollo 16 (7.8 %) quedan con valores mezclados. Por eso la regla usa primero los poligonos de mares y el FeO solo para SPA y como respaldo.",
+        "Con solo FeO >= 12 % (respaldo), Apollo 15 y Apollo 17 saldrian felsic aunque aterrizaron en mar: el respaldo falla en bordes. Se reporta, no se ajusta el umbral.",
+        "El shapefile LROC cubre de 66.5 S a 64.8 N; fuera de eso la regla cae al paso 2 o 3 (no hay mares extensos alli). Los criptomares (mares cubiertos por eyecta) no estan en los poligonos y saldran felsic.",
+        "El umbral de 8 % solo se aplica dentro de la elipse de SPA; fuera de ella, valores de 8 a 12 % suelen ser mezcla de bordes de mar o FHT exterior y se tratan como felsic.",
+        "Cuatro clases son una simplificacion fuerte; la variable tiene peso bajo en la SPEC (5.2)."
+      ],
+      "puntos_validacion": [
+        {
+          "nombre": "Apollo 11",
+          "lat": 0.674,
+          "lon": 23.473,
+          "clase_esperada": "basaltic",
+          "por_que": "Mare Tranquillitatis, basaltos de mar",
+          "feo_lp_pct": 14.1,
+          "dentro_poligono_mare": true,
+          "dentro_elipse_spa": false,
+          "clase_regla": "basaltic",
+          "coincide": true,
+          "fuente_coordenadas": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_sites.html"
+        },
+        {
+          "nombre": "Apollo 15",
+          "lat": 26.132,
+          "lon": 3.634,
+          "clase_esperada": "basaltic",
+          "por_que": "Hadley Rille, Palus Putredinis (mar) al pie de los Apeninos",
+          "feo_lp_pct": 11.4,
+          "dentro_poligono_mare": true,
+          "dentro_elipse_spa": false,
+          "clase_regla": "basaltic",
+          "coincide": true,
+          "nota": "con el respaldo solo FeO >= 12 % saldria felsic",
+          "fuente_coordenadas": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_sites.html"
+        },
+        {
+          "nombre": "Apollo 16",
+          "lat": -8.973,
+          "lon": 15.5,
+          "clase_esperada": "felsic",
+          "por_que": "tierras altas de Descartes, rocas anortositicas",
+          "feo_lp_pct": 7.8,
+          "dentro_poligono_mare": false,
+          "dentro_elipse_spa": false,
+          "clase_regla": "felsic",
+          "coincide": true,
+          "fuente_coordenadas": "https://nssdc.gsfc.nasa.gov/planetary/lunar/lunar_sites.html"
+        },
+        {
+          "nombre": "Shackleton (polo sur)",
+          "lat": -89.9,
+          "lon": 0.0,
+          "clase_esperada": "felsic",
+          "por_que": "SPEC: tierras altas anortositicas del polo sur = felsic (literature)",
+          "feo_lp_pct": 6.4,
+          "dentro_poligono_mare": false,
+          "dentro_elipse_spa": false,
+          "clase_regla": "felsic",
+          "coincide": true,
+          "nota": "se muestreo la fila de 90 a 89.5 S de Lunar Prospector; coordenada exacta del crater por verificar en el Gazetteer de nomenclatura planetaria"
+        },
+        {
+          "nombre": "Centro de la elipse de hierro de SPA",
+          "lat": -51.4,
+          "lon": 188.4,
+          "clase_esperada": "basaltic (intermedio, mafico no mare)",
+          "por_que": "SPA interior, FeO medio 10.1 % segun Jolliff 2000",
+          "feo_lp_pct": 9.1,
+          "dentro_poligono_mare": false,
+          "dentro_elipse_spa": true,
+          "clase_regla": "basaltic con marca SPA intermedio",
+          "coincide": true,
+          "fuente": "https://people.ucsc.edu/~igarrick/pubs/Garrick-Bethell_and_Zuber_2009.pdf"
+        },
+        {
+          "nombre": "Chang'e 4, crater Von Karman (SPA)",
+          "lat": -45.457,
+          "lon": 177.588,
+          "clase_esperada": "basaltic",
+          "por_que": "piso de Von Karman relleno de mar dentro de SPA",
+          "feo_lp_pct": 10.9,
+          "dentro_poligono_mare": true,
+          "dentro_elipse_spa": true,
+          "clase_regla": "basaltic",
+          "coincide": true,
+          "nota": "coordenadas de la literatura de Chang'e 4, fuente no verificada en esta tarea"
+        },
+        {
+          "nombre": "Control extra: Luna 20 (tierras altas de Apollonius)",
+          "lat": 3.787,
+          "lon": 56.624,
+          "clase_esperada": "felsic",
+          "feo_lp_pct": 9.8,
+          "dentro_poligono_mare": false,
+          "dentro_elipse_spa": false,
+          "clase_regla": "felsic",
+          "coincide": true,
+          "nota": "coordenadas no verificadas en esta tarea"
+        }
+      ]
+    },
+    "temp_annual_range": {
+      "fuente": {
+        "polar": {
+          "titulo": "Diviner seasonal polar temperature maps, summer y winter average (Williams et al. 2019, Seasonal Polar Temperatures on the Moon, JGR Planets 124, 2505-2521, doi 10.1029/2019JE006028)",
+          "url": "http://luna1.diviner.ucla.edu/~jpierre/diviner/level4_polar/additional_maps/",
+          "archivos": [
+            "http://luna1.diviner.ucla.edu/~jpierre/diviner/level4_polar/additional_maps/polar_south_80_summer_avg-float.tif",
+            "http://luna1.diviner.ucla.edu/~jpierre/diviner/level4_polar/additional_maps/polar_south_80_winter_avg-float.tif",
+            "http://luna1.diviner.ucla.edu/~jpierre/diviner/level4_polar/additional_maps/polar_north_80_summer_avg-float.tif",
+            "http://luna1.diviner.ucla.edu/~jpierre/diviner/level4_polar/additional_maps/polar_north_80_winter_avg-float.tif"
+          ],
+          "archivo_pds": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_pcp/seasonal/",
+          "tipo": "temperatura bolometrica medida por LRO Diviner (Polar Cumulative Products), promedio por estacion",
+          "formato": "GeoTIFF flotante en proyeccion polar estereografica (tambien .grd de GMT, ASCII disperso y PNG)",
+          "resolucion": "240 m/pixel, solo latitudes mayores a 80 grados (norte y sur); datos de julio 2009 a febrero 2019",
+          "tamano": "25 686 193 bytes (25.7 MB) por archivo; se necesitan 2 por polo"
+        },
+        "no_polar": {
+          "titulo": "No existe producto global de Diviner con estacionalidad fuera de los polos que se haya encontrado; se usa regla fisica",
+          "url": "https://www.diviner.ucla.edu/single-post/2020/07/20/new-diviner-seasonal-polar-data-products",
+          "tipo": "regla fisica con constantes citadas",
+          "formato": "no aplica",
+          "resolucion": "no aplica",
+          "tamano": "no aplica",
+          "nota": "El producto global de Williams et al. 2017 (Icarus 283, 300-325) y el Global Cumulative Product de Diviner estan binados por hora local, no por estacion, segun la ayuda de PDS ODE (https://ode.rsl.wustl.edu/moon/pagehelp/Content/Missions_Instruments/LRO/DIVINER/GCP.htm). No se encontro magnitud medida de la variacion estacional a latitudes bajas."
+        }
+      },
+      "regla": {
+        "texto": "Si |lat| >= 80 grados: temp_annual_range = temperatura promedio de verano menos temperatura promedio de invierno en ese punto, leidas de los mapas polares de Diviner (Williams et al. 2019); las estaciones se definen por la latitud subsolar al norte o al sur del ecuador, asi que es medio ano contra medio ano, no mes contra mes. Si |lat| < 80 grados: temp_annual_range = 0 K nominal, porque la latitud subsolar solo cambia 1.54 grados en el ano lunar de 346 dias (Williams 2019); se documenta una cota fisica superior: la distancia Tierra Sol varia con excentricidad 0.0167, lo que cambia la irradiancia en un factor (1.0167/0.9833)^2 = 1.069 (6.9 %), y como la temperatura de equilibrio radiativo va con la raiz cuarta de la irradiancia, la temperatura cambia como maximo 1.7 % del valor local. Esa cota es un calculo propio con constantes citadas, no una medicion.",
+        "umbrales": {
+          "latitud_corte_grados": 80,
+          "latitud_corte_justificacion": "cobertura del producto polar de Williams 2019 (poleward of 80 degrees)",
+          "valor_no_polar_K": 0,
+          "cota_superior_no_polar": "1.7 % de la temperatura media local (calculo fisico propio, no medido)",
+          "oblicuidad_grados": 1.54,
+          "excentricidad_orbita_terrestre": 0.0167
+        },
+        "citas": [
+          {
+            "ref": "Williams et al. 2019, Seasonal Polar Temperatures on the Moon, JGR Planets 124, 2505-2521 (readme del producto: estaciones por la inclinacion de 1.54 grados entre el eje de giro y la ecliptica)",
+            "url": "http://luna1.diviner.ucla.edu/~jpierre/diviner/level4_polar/aareadme.txt"
+          },
+          {
+            "ref": "Diviner UCLA, New Diviner seasonal polar data products (2020)",
+            "url": "https://www.diviner.ucla.edu/single-post/2020/07/20/new-diviner-seasonal-polar-data-products"
+          },
+          {
+            "ref": "NASA NSSDCA Earth Fact Sheet, excentricidad orbital 0.0167",
+            "url": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html"
+          },
+          {
+            "ref": "Zhang y Zheng 2024, The surface temperatures of flat areas on the Moon, AIP Advances 14, 055315 (modelo, no Diviner): la variacion de la irradiancia en la superficie lunar por la distancia Tierra Sol supera 100 W/m2",
+            "url": "https://pubs.aip.org/aip/adv/article/14/5/055315/3292452/The-surface-temperatures-of-flat-areas-on-the-Moon"
+          }
+        ],
+        "estado": "propuesto"
+      },
+      "base_sugerida": {
+        "latitud_mayor_o_igual_80": "measured",
+        "latitud_menor_80": "physical",
+        "argumento": "En los polos hay un mapa medido por Diviner con promedios de verano e invierno, asi que el valor es medido. Fuera de los polos no hay medicion estacional publicada que se haya encontrado; el valor sale de la geometria del cuerpo (oblicuidad de 1.54 grados) y de la orbita (excentricidad 0.0167), como el ejemplo de la SPEC de 'sin lluvia en la Luna'. En la practica la decision casi no cambia el puntaje: un valor de 0 a pocos K cae en el extremo mas bajo de cualquier rango de normalizacion terrestre, donde los climas mas estables de la Tierra ya tienen varios K de rango anual."
+      },
+      "limites": [
+        "Shackleton y otros sitios polares: el mapa de diferencia de temperatura maxima verano menos invierno (polar_south_80_sw_max_diff.png, revisado visualmente) llega a unos 200 K en bordes y paredes que miran al polo, incluido el borde de Shackleton, y suele quedar por debajo de unos 30 K en terreno plano cerca de 80 S. Eso es la temperatura maxima, no la media; el valor de la variable debe salir de los mapas de promedio.",
+        "Las estaciones de Williams 2019 son medios anos (latitud subsolar positiva o negativa), no el mes mas calido menos el mas frio que usa la Tierra; la variable no es identica entre los dos cuerpos.",
+        "Entre 66 y 80 grados de latitud el efecto de la oblicuidad crece y la regla de 0 K subestima; no se encontro producto medido para esa franja.",
+        "La cota de 1.7 % supone equilibrio radiativo; el regolito nocturno no responde igual, asi que es una cota aproximada."
+      ],
+      "puntos_validacion": [
+        {
+          "nombre": "Apollo 11",
+          "lat": 0.674,
+          "lon": 23.473,
+          "valor_esperado_K": 0,
+          "base": "physical",
+          "nota": "cota superior 1.7 % de la temperatura media local"
+        },
+        {
+          "nombre": "Apollo 16",
+          "lat": -8.973,
+          "lon": 15.5,
+          "valor_esperado_K": 0,
+          "base": "physical"
+        },
+        {
+          "nombre": "Shackleton (borde, polo sur)",
+          "lat": -89.9,
+          "lon": 0.0,
+          "valor_esperado_K": null,
+          "base": "measured",
+          "pendiente": "leer polar_south_80_summer_avg-float.tif menos polar_south_80_winter_avg-float.tif en el punto (2 archivos de 25.7 MB, no descargados). Esperado: positivo y grande comparado con latitudes bajas, segun el mapa de diferencia de maximos."
+        },
+        {
+          "nombre": "Terreno plano cerca de 80 S",
+          "lat": -80.5,
+          "lon": 0.0,
+          "valor_esperado_K": null,
+          "base": "measured",
+          "pendiente": "mismo calculo; sirve para comprobar la continuidad con la regla de 0 K en el corte de 80 grados"
+        }
+      ]
+    }
+  },
+  "mars": {
+    "composition": {
+      "fuente": {
+        "principal": {
+          "cita": "Tanaka, K.L., Skinner, J.A., Jr., Dohm, J.M., Irwin, R.P., III, Kolb, E.J., Fortezzo, C.M., Platz, T., Michael, G.G., y Hare, T.M., 2014, Geologic map of Mars: U.S. Geological Survey Scientific Investigations Map 3292, escala 1:20.000.000, folleto 43 p.",
+          "doi": "https://doi.org/10.3133/sim3292",
+          "pagina": "https://pubs.usgs.gov/sim/3292/",
+          "descarga_gis": "https://pubs.usgs.gov/sim/3292/downloads/sim3292_database.zip",
+          "tamano_zip_bytes": 808910442,
+          "tamano_nota": "El zip completo pesa unos 809 MB porque incluye geodatabase, mapas base TIFF y mapas a 1:1.000.000. Lo que hace falta es solo la capa de polígonos SIM3292_Global_Geology dentro de SIM3292_MarsGlobalGeologicGIS_20M/SIM3292_Shapefiles/ (.shp de 63,8 MB sin comprimir, 54,5 MB comprimido; .dbf de 156 KB). Se verificó listando el zip por HTTP Range sin descargarlo entero.",
+          "formato": "ESRI shapefile (polígonos) y ESRI File Geodatabase. Los shapefiles están en grados decimales, longitud -180 a 180 este, GCS_Mars_2000_Sphere (radio 3.396.190 m). La geodatabase está en proyección Robinson.",
+          "capa": "SIM3292_Global_Geology (1311 polígonos, 44 unidades)",
+          "campo_unidad": "Unit (texto de 8 caracteres, p. ej. 'lHl'). Otros campos: UnitDesc (nombre de la unidad), SphArea_km (área en km2), OBJECTID.",
+          "descripcion_de_unidades": "La interpretación de cada unidad está en la Description of Map Units del mapa: https://pubs.usgs.gov/sim/3292/pdf/sim3292_dmu_with_locality_images.pdf (0,8 MB). Folleto: https://pubs.usgs.gov/sim/3292/pdf/sim3292_pamphlet.pdf. README: https://pubs.usgs.gov/sim/3292/downloads/sim3292_readme.txt",
+          "consulta_por_punto_sin_descarga": "Servicio ArcGIS de NASA Mars Trek con la misma capa: https://trek.nasa.gov/mars/trekarcgis/rest/services/SIM3292_Global_Geology/MapServer/identify?geometry=LON,LAT&geometryType=esriGeometryPoint&tolerance=0&mapExtent=-180,-90,180,90&imageDisplay=36000,18000,96&layers=all&returnGeometry=false&f=json . Devuelve el campo Unit. Se usó para las comprobaciones de este paquete. Para la app se recomienda el shapefile local (sin dependencia de red).",
+          "resolucion": "Escala 1:20.000.000; afloramiento mínimo 40 km x 100 km; vértices cada 5 km (folleto, sección Drafting). Una celda de 0,5 grados (unos 30 km) puede caer en un límite entre unidades: usar la unidad del centro de la celda o la de mayor área dentro de la celda.",
+          "limitacion_clave": "Es un mapa de unidades geológicas por edad y ambiente, no un mapa de minerales. La clase que sale de la regla es una inferencia, no una medición. Cráteres de menos de unos 100 km quedan dentro de la unidad que los rodea (p. ej. Jezero cae en HNt), y los cráteres grandes se mapean como unidad de impacto AHi (p. ej. Gale)."
+        },
+        "alternativas": [
+          {
+            "nombre": "Mapas de minerales de TES (Bandfield 2002)",
+            "cita": "Bandfield, J.L., 2002, Global mineral distributions on Mars, JGR Planets 107(E6), doi 10.1029/2001JE001510",
+            "url": "http://tes.mars.asu.edu/products/",
+            "descarga_ejemplo": "http://tes.asu.edu/mineral_map/TES_mineral_maps_1_ppd.ascii.gz (unos 2,5 MB); también 2 y 4 píxeles por grado en ASCII, ENVI e ISIS; GeoTIFF por componente a 4 ppd (p. ej. http://tes.asu.edu/mineral_map/quartz_4_ppd_mola.tif)",
+            "contenido": "13 componentes en fracción: cuarzo, feldespato K, plagioclasa, anfíbol, piroxeno bajo y alto en Ca, olivino, hematita, sulfatos, carbonatos, filosilicatos y vidrio rico en Si, polvo, error RMS.",
+            "uso_sugerido": "Respaldo para separar basáltico de alterado y para marcar sulfatos o hematita (Meridiani). No hay polvo en todas partes: donde el polvo domina (Tharsis, Arabia) la señal mineral no es confiable.",
+            "nota_superficie_tipo": "Superficie Tipo 1 (basáltica) y Tipo 2 vienen de Bandfield et al. 2000, Science 287:1626, doi 10.1126/science.287.5458.1626, que interpretó Tipo 2 como andesita. Wyatt y McSween 2002, Nature 417:263, doi 10.1038/417263a, lo reinterpretan como basalto alterado. Por esa ambigüedad NO se propone traducir Tipo 2 a felsic. No se encontró una URL de descarga de los mapas de tipo de superficie como capa; queda pendiente."
+          },
+          {
+            "nombre": "Mapas globales de minerales anhidros de OMEGA",
+            "cita": "Ody, A., et al., 2012, Global maps of anhydrous minerals at the surface of Mars from OMEGA/MEx, JGR Planets, doi 10.1029/2012JE004117",
+            "url": "https://doi.org/10.1029/2012JE004117",
+            "uso_sugerido": "Piroxeno y olivino como respaldo de la clase basáltica. URL de descarga de los mapas no verificada en esta tarea (pendiente)."
+          }
+        ]
+      },
+      "regla": {
+        "paso_1": "Para el punto o el centro de la celda de Marte, leer el campo Unit de SIM3292_Global_Geology (punto en polígono).",
+        "paso_2": "Traducir Unit a clase con la tabla traduccion_unidades.",
+        "paso_3": "Si el punto cae dentro de una celda con depósito de cloruros (ver evaporitas), cambiar a evaporite.",
+        "paso_4": "Si la clase es null (hielo polar o unidad ambigua), composition queda como faltante; la app debe tratarla como variable ausente, no como cero.",
+        "felsic": "Ninguna unidad del mapa global se traduce a felsic. Las rocas félsicas en Marte son detecciones locales (Wray et al. 2013, Nature Geoscience, doi 10.1038/ngeo1994; Sautter et al. 2015, Nature Geoscience, doi 10.1038/ngeo2474) que no se resuelven a esta escala. Solo se asignaría felsic con una excepción puntual citada.",
+        "base_de_basaltico_para_tierras_altas": "La corteza de Marte es de composición basáltica en promedio según GRS y TES (McSween, Taylor y Wyatt 2009, Science 324:736, doi 10.1126/science.1165871; Bandfield et al. 2000). Por eso las unidades de tierras altas con mezcla de brechas de impacto, volcánicas y sedimentos sin diferenciar se proponen como basaltic, con confianza baja.",
+        "estado": "propuesto"
+      },
+      "traduccion_unidades": [
+        {
+          "unidad": "mAl",
+          "grupo": "tierras bajas",
+          "descripcion": "Middle Amazonian lowland unit",
+          "clase": "sedimentary",
+          "confianza": "media",
+          "justificacion": "DMU: loess rico en hielo ('Ice-rich loess'), modificado por periglaciación."
+        },
+        {
+          "unidad": "lHl",
+          "grupo": "tierras bajas",
+          "descripcion": "Late Hesperian lowland unit",
+          "clase": "sedimentary",
+          "confianza": "media",
+          "justificacion": "DMU: sedimentos fluviales, lacustres o marinos y coluviales, probablemente intercalados con lava y rocas volcanoclásticas."
+        },
+        {
+          "unidad": "AHi",
+          "grupo": "impacto",
+          "descripcion": "Amazonian and Hesperian impact unit",
+          "clase": "basaltic",
+          "confianza": "baja",
+          "justificacion": "DMU: rocas del blanco levantadas, eyectadas y brechadas, con relleno fluvio-lacustre y eólico común en el interior. Se asume blanco de corteza basáltica (McSween et al. 2009). Ojo: el piso de Gale está en AHi y Curiosity encontró lutitas lacustres; ver comprobaciones."
+        },
+        {
+          "unidad": "lApc",
+          "grupo": "polar",
+          "descripcion": "Late Amazonian polar cap unit",
+          "clase": null,
+          "confianza": null,
+          "justificacion": "DMU: hielo residual de H2O (norte) y CO2 (sur). Ninguna de las 4 clases aplica."
+        },
+        {
+          "unidad": "lApd",
+          "grupo": "polar",
+          "descripcion": "Late Amazonian polar dunes unit",
+          "clase": "sedimentary",
+          "confianza": "media",
+          "justificacion": "DMU: arena eólica en dunas; incluye detecciones de sulfatos y yeso. Candidata a evaporite solo con excepción puntual (Olympia Undae)."
+        },
+        {
+          "unidad": "Apu",
+          "grupo": "polar",
+          "descripcion": "Amazonian polar undivided unit",
+          "clase": null,
+          "confianza": null,
+          "justificacion": "DMU: hielo de agua con poco polvo. Ninguna de las 4 clases aplica."
+        },
+        {
+          "unidad": "Ap",
+          "grupo": "polar",
+          "descripcion": "Amazonian polar unit",
+          "clase": null,
+          "confianza": null,
+          "justificacion": "DMU: dominantemente hielo de agua y pocos finos líticos."
+        },
+        {
+          "unidad": "Hp",
+          "grupo": "polar",
+          "descripcion": "Hesperian polar unit",
+          "clase": null,
+          "confianza": null,
+          "justificacion": "DMU: capas de hielo de agua según constante dieléctrica."
+        },
+        {
+          "unidad": "Hpu",
+          "grupo": "polar",
+          "descripcion": "Hesperian polar undivided unit",
+          "clase": "sedimentary",
+          "confianza": "baja",
+          "justificacion": "DMU: proporciones parecidas de hielo y finos líticos, quizá por inundaciones o actividad eólica."
+        },
+        {
+          "unidad": "Hpe",
+          "grupo": "polar",
+          "descripcion": "Hesperian polar edifice unit",
+          "clase": null,
+          "confianza": null,
+          "justificacion": "DMU: construcciones criovolcánicas, sedimentarias o volcánicas ígneas ricas en hielo. Origen ambiguo."
+        },
+        {
+          "unidad": "eAb",
+          "grupo": "cuenca",
+          "descripcion": "Early Amazonian basin unit",
+          "clase": "sedimentary",
+          "confianza": "media",
+          "justificacion": "DMU: depósitos lacustres o de inundación laminar."
+        },
+        {
+          "unidad": "lHb",
+          "grupo": "cuenca",
+          "descripcion": "Late Hesperian basin unit",
+          "clase": "sedimentary",
+          "confianza": "baja",
+          "justificacion": "DMU: depósitos eólicos, lacustres o de caída volcánica ricos en hielo."
+        },
+        {
+          "unidad": "eHb",
+          "grupo": "cuenca",
+          "descripcion": "Early Hesperian basin unit",
+          "clase": "sedimentary",
+          "confianza": "baja",
+          "justificacion": "DMU: relleno de cuenca eólico, lacustre o volcánico."
+        },
+        {
+          "unidad": "HNb",
+          "grupo": "cuenca",
+          "descripcion": "Hesperian and Noachian basin unit",
+          "clase": "sedimentary",
+          "confianza": "baja",
+          "justificacion": "DMU: relleno de cuenca eólico, lacustre o volcánico (Argyre y oeste de Hellas)."
+        },
+        {
+          "unidad": "lAv",
+          "grupo": "volcánica",
+          "descripcion": "Late Amazonian volcanic unit",
+          "clase": "basaltic",
+          "confianza": "alta",
+          "justificacion": "DMU, encabezado del grupo: la mayoría de las ocurrencias son probablemente basálticas por sus propiedades reológicas. Lavas de inundación poco modificadas."
+        },
+        {
+          "unidad": "lAvf",
+          "grupo": "volcánica",
+          "descripcion": "Late Amazonian volcanic field unit",
+          "clase": "basaltic",
+          "confianza": "alta",
+          "justificacion": "DMU: flujos de lava y bocas poco modificados; encabezado del grupo volcánico."
+        },
+        {
+          "unidad": "Av",
+          "grupo": "volcánica",
+          "descripcion": "Amazonian volcanic unit",
+          "clase": "basaltic",
+          "confianza": "media",
+          "justificacion": "DMU: lava y quizá flujos volcanoclásticos de Elysium Mons y de una fuente desconocida al noroeste de Olympus Mons. Cubre el este de Utopia y el norte de Amazonis; también gran parte de Arcadia (ver comprobaciones)."
+        },
+        {
+          "unidad": "AHv",
+          "grupo": "volcánica",
+          "descripcion": "Amazonian and Hesperian volcanic unit",
+          "clase": "basaltic",
+          "confianza": "alta",
+          "justificacion": "DMU: lavas de inundación y grandes flujos que forman el abultamiento de Tharsis y Elysium."
+        },
+        {
+          "unidad": "lHv",
+          "grupo": "volcánica",
+          "descripcion": "Late Hesperian volcanic unit",
+          "clase": "basaltic",
+          "confianza": "alta",
+          "justificacion": "DMU: lavas de inundación y grandes flujos de fisuras y bocas."
+        },
+        {
+          "unidad": "lHvf",
+          "grupo": "volcánica",
+          "descripcion": "Late Hesperian volcanic field unit",
+          "clase": "basaltic",
+          "confianza": "alta",
+          "justificacion": "DMU: volcanes y flujos de lava."
+        },
+        {
+          "unidad": "eHv",
+          "grupo": "volcánica",
+          "descripcion": "Early Hesperian volcanic unit",
+          "clase": "basaltic",
+          "confianza": "alta",
+          "justificacion": "DMU: lavas de inundación; incluye el cráter Gusev (Spirit midió basaltos allí)."
+        },
+        {
+          "unidad": "lNv",
+          "grupo": "volcánica",
+          "descripcion": "Late Noachian volcanic unit",
+          "clase": "basaltic",
+          "confianza": "media",
+          "justificacion": "DMU: lava degradada y flujos volcanoclásticos. En el archivo DMU la etiqueta aparece como 'INv' por error de extracción; en el shapefile es lNv."
+        },
+        {
+          "unidad": "Ave",
+          "grupo": "volcánica",
+          "descripcion": "Amazonian volcanic edifice",
+          "clase": "basaltic",
+          "confianza": "alta",
+          "justificacion": "DMU: edificios volcánicos de flujos de lava (Olympus, Alba, Ascraeus, Pavonis, Arsia)."
+        },
+        {
+          "unidad": "Hve",
+          "grupo": "volcánica",
+          "descripcion": "Hesperian volcanic edifice unit",
+          "clase": "basaltic",
+          "confianza": "media",
+          "justificacion": "DMU: edificios de lava con depósitos piroclásticos y volcanoclásticos."
+        },
+        {
+          "unidad": "Nve",
+          "grupo": "volcánica",
+          "descripcion": "Noachian volcanic edifice unit",
+          "clase": "basaltic",
+          "confianza": "media",
+          "justificacion": "DMU: edificios de lava, piroclastos y volcanoclastos de escudos degradados."
+        },
+        {
+          "unidad": "lAa",
+          "grupo": "delantal",
+          "descripcion": "Late Amazonian apron unit",
+          "clase": "sedimentary",
+          "confianza": "media",
+          "justificacion": "DMU: morrenas dejadas por glaciares de base fría (clástico)."
+        },
+        {
+          "unidad": "Aa",
+          "grupo": "delantal",
+          "descripcion": "Amazonian apron unit",
+          "clase": "sedimentary",
+          "confianza": "baja",
+          "justificacion": "DMU: depósitos de deslizamiento y expansión gravitacional desde Olympus Mons y paredes de Valles Marineris (clástico de roca volcánica)."
+        },
+        {
+          "unidad": "ANa",
+          "grupo": "delantal",
+          "descripcion": "Amazonian and Noachian apron unit",
+          "clase": "sedimentary",
+          "confianza": "baja",
+          "justificacion": "DMU: materiales amazónicos ricos en hielo de caída aérea y remoción en masa, sobre relictos noáquicos."
+        },
+        {
+          "unidad": "AHtu",
+          "grupo": "transición",
+          "descripcion": "Amazonian and Hesperian transition undivided unit",
+          "clase": "sedimentary",
+          "confianza": "media",
+          "justificacion": "DMU: sedimentos eólicos finos y o depósitos piroclásticos de caída; yardangs (Medusae Fossae)."
+        },
+        {
+          "unidad": "Htu",
+          "grupo": "transición",
+          "descripcion": "Hesperian transition undivided unit",
+          "clase": "sedimentary",
+          "confianza": "media",
+          "justificacion": "DMU: sedimentos eólicos finos o piroclásticos, alterados por meteorización ácida; incluye firmas de sulfatos hidratados (Valles Marineris). Candidata a evaporite con mapa de sulfatos."
+        },
+        {
+          "unidad": "lHt",
+          "grupo": "transición",
+          "descripcion": "Late Hesperian transition unit",
+          "clase": "sedimentary",
+          "confianza": "media",
+          "justificacion": "DMU: materiales de remoción en masa, fluvio-lacustres y otros sedimentarios, y rocas volcánicas en lugares."
+        },
+        {
+          "unidad": "eHt",
+          "grupo": "transición",
+          "descripcion": "Early Hesperian transition unit",
+          "clase": "sedimentary",
+          "confianza": "baja",
+          "justificacion": "DMU: remoción en masa, fluvio-lacustre y otros sedimentarios, y posiblemente volcánicas. Ojo: InSight está en eHt y encontró regolito sobre basaltos (Golombek et al. 2020); ver comprobaciones."
+        },
+        {
+          "unidad": "Ht",
+          "grupo": "transición",
+          "descripcion": "Hesperian transition unit",
+          "clase": "sedimentary",
+          "confianza": "media",
+          "justificacion": "DMU: mezcla de sedimentos y bloques de materiales colapsados (terrenos caóticos)."
+        },
+        {
+          "unidad": "Hto",
+          "grupo": "transición",
+          "descripcion": "Hesperian transition outflow unit",
+          "clase": "sedimentary",
+          "confianza": "media",
+          "justificacion": "DMU: depósitos fluviales y de flujo de detritos de canales de desagüe (Chryse; sitio de Mars Pathfinder)."
+        },
+        {
+          "unidad": "HNt",
+          "grupo": "transición",
+          "descripcion": "Hesperian and Noachian transition unit",
+          "clase": "basaltic",
+          "confianza": "baja",
+          "justificacion": "DMU: brechas de impacto, sedimentos y depósitos volcánicos noáquicos (colinas y mesetas de material de tierras altas) con delantales de remoción en masa hespéricos. Se aplica el mismo criterio que a las tierras altas noáquicas. Es la unidad más ambigua: la alternativa razonable es sedimentary. Jezero cae en HNt; la propuesta no se eligió para que Jezero salga bien, y se pide decisión explícita."
+        },
+        {
+          "unidad": "HNhu",
+          "grupo": "tierras altas",
+          "descripcion": "Hesperian and Noachian highland undivided unit",
+          "clase": "sedimentary",
+          "confianza": "media",
+          "justificacion": "DMU: rocas friables, probablemente de grano fino, sedimentarias, volcánicas e impacto, alteradas; incluye firmas de sulfatos hidratados (Meridiani Planum). Candidata a evaporite en Meridiani con mapa de sulfatos o hematita."
+        },
+        {
+          "unidad": "Nhu",
+          "grupo": "tierras altas",
+          "descripcion": "Noachian highland undivided unit",
+          "clase": "sedimentary",
+          "confianza": "baja",
+          "justificacion": "DMU: materiales friables sedimentarios, de impacto y volcánicos sin diferenciar (paredes de Valles Marineris). El DMU nombra primero lo sedimentario; alternativa: basaltic."
+        },
+        {
+          "unidad": "eHh",
+          "grupo": "tierras altas",
+          "descripcion": "Early Hesperian highland unit",
+          "clase": "basaltic",
+          "confianza": "baja",
+          "justificacion": "DMU: materiales de impacto, volcánicos, eólicos y fluvio-lacustres sin diferenciar; mesetas alrededor de Tharsis. Corteza basáltica en promedio (McSween et al. 2009)."
+        },
+        {
+          "unidad": "lNh",
+          "grupo": "tierras altas",
+          "descripcion": "Late Noachian highland unit",
+          "clase": "basaltic",
+          "confianza": "baja",
+          "justificacion": "DMU: material de impacto, volcánico, fluvial y de cuenca sin diferenciar. Corteza basáltica en promedio (McSween et al. 2009; Bandfield et al. 2000)."
+        },
+        {
+          "unidad": "mNh",
+          "grupo": "tierras altas",
+          "descripcion": "Middle Noachian highland unit",
+          "clase": "basaltic",
+          "confianza": "baja",
+          "justificacion": "DMU: materiales de impacto, volcánicos, fluviales y de cuenca, moderada a fuertemente degradados. Misma base que lNh. Aquí cae la mayoría de los cloruros de Osterloo (ver evaporitas)."
+        },
+        {
+          "unidad": "eNh",
+          "grupo": "tierras altas",
+          "descripcion": "Early Noachian highland unit",
+          "clase": "basaltic",
+          "confianza": "baja",
+          "justificacion": "DMU: materiales de impacto, volcánicos, fluviales y de cuenca, muy degradados. Misma base que lNh."
+        },
+        {
+          "unidad": "Nhe",
+          "grupo": "tierras altas",
+          "descripcion": "Noachian highland edifice unit",
+          "clase": "basaltic",
+          "confianza": "media",
+          "justificacion": "DMU: principalmente materiales volcánicos degradados sin diferenciar."
+        },
+        {
+          "unidad": "mNhm",
+          "grupo": "tierras altas",
+          "descripcion": "Middle Noachian highland massif unit",
+          "clase": "basaltic",
+          "confianza": "baja",
+          "justificacion": "DMU: rocas corticales antiguas levantadas por impactos de cuenca (bordes de Argyre e Isidis)."
+        },
+        {
+          "unidad": "eNhm",
+          "grupo": "tierras altas",
+          "descripcion": "Early Noachian highland massif unit",
+          "clase": "basaltic",
+          "confianza": "baja",
+          "justificacion": "DMU: rocas corticales primitivas levantadas por el impacto de Hellas."
+        }
+      ],
+      "traduccion_resumen": {
+        "fuente_descripciones": "Tanaka et al. 2014, SIM 3292, Description of Map Units (columna INTERPRETATION y encabezados de grupo): https://pubs.usgs.gov/sim/3292/pdf/sim3292_dmu_with_locality_images.pdf",
+        "unidades_en_shapefile": 44,
+        "basaltic": "lAv, lAvf, Av, AHv, lHv, lHvf, eHv, lNv, Ave, Hve, Nve, AHi, HNt, eHh, lNh, mNh, eNh, Nhe, mNhm, eNhm",
+        "sedimentary": "mAl, lHl, lApd, Hpu, eAb, lHb, eHb, HNb, lAa, Aa, ANa, AHtu, Htu, lHt, eHt, Ht, Hto, HNhu, Nhu",
+        "evaporite": "ninguna unidad completa; solo por superposición de mapa de cloruros o sulfatos",
+        "felsic": "ninguna unidad",
+        "null": "lApc, Apu, Ap, Hp, Hpe (hielo polar o unidad ambigua)"
+      },
+      "evaporitas": {
+        "cloruros": {
+          "fuente_primaria": "Osterloo, M.M., Anderson, F.S., Hamilton, V.E., y Hynek, B.M., 2010, Geologic context of proposed chloride-bearing materials on Mars, JGR Planets 115, E10012, doi 10.1029/2010JE003613 (y Osterloo et al. 2008, Science 319:1651, doi 10.1126/science.1150690)",
+          "datos_descargables": "Leask, E.K., y Ehlmann, B.L., 2021, CaltechDATA, doi 10.22002/D1.2176, licencia CC0: https://data.caltech.edu/records/kasms-vp209 . Archivo Leask_and_Ehlmann_2021_2010_osterloo_chl_pts_w_tanaka_2014_age.csv (54,5 KB).",
+          "contenido_verificado": "642 depósitos con columnas Lat2, Lon2 (longitud 0 a 360 este), Area_m2 y la unidad de SIM 3292 donde cae cada uno (Unit). Latitud -56,0 a 22,9. Área total unos 14.182 km2; mediana 6,8 km2 por depósito; máximo 1.219 km2. Unidades: mNh 394, lNh 122, eNh 105, lNv 9, eHv 7, otras 5.",
+          "regla_propuesta": "Convertir Lon2 a -180/180. Si la celda de 0,5 grados contiene al menos un depósito, composition = evaporite. Con esa regla quedan 498 celdas de 0,5 grados marcadas.",
+          "advertencia": "La regla sobrestima: una celda de 0,5 grados en el ecuador mide unos 870 km2 y un depósito típico unos 7 km2 (menos del 1 % de la celda). Alternativa: exigir una fracción mínima de área de depósito por celda; no hay fuente para fijar ese umbral, así que queda null y lo decide Fernanda.",
+          "umbral_fraccion_area": null
+        },
+        "sulfatos_meridiani": {
+          "situacion": "No se encontró un mapa global de sulfatos listo como polígonos. Opportunity confirmó roca sedimentaria rica en sulfatos de origen evaporítico en Meridiani (Squyres et al. 2004, Science 306:1709, doi 10.1126/science.1104559).",
+          "opcion_a": "Usar los componentes Sulfates y Hematite del mapa TES de Bandfield 2002 (http://tes.mars.asu.edu/products/, 1 a 4 ppd) con un umbral de abundancia. Umbral sin fuente todavía: null.",
+          "opcion_b": "Tratar la unidad HNhu en Meridiani como evaporite mediante un polígono de excepción. Los límites del polígono deben salir de un mapa publicado; no se inventan aquí.",
+          "unidades_con_sulfatos_segun_DMU": "HNhu (Meridiani), Htu (Valles Marineris), lApd (yeso en dunas polares)",
+          "umbral_sulfatos": null,
+          "estado": "pendiente"
+        }
+      },
+      "comprobacion_objetivos": {
+        "metodo": "Consulta punto en polígono al servicio de Mars Trek que publica SIM3292_Global_Geology (URL en fuente.principal.consulta_por_punto_sin_descarga), 2026-11-14. Control de que el servicio y las coordenadas se leen bien: Mars Pathfinder (19.2608 N, -33.2528) devuelve Hto y Spirit devuelve eHv, igual que lo que dice el DMU; InSight devuelve eHt, igual que Golombek et al. 2020.",
+        "arcadia_planitia": {
+          "punto": {
+            "lat": 46.58,
+            "lon": -165.15
+          },
+          "decision_equipo": "sedimentary (unidad lHl)",
+          "unidad_sim3292_en_el_punto": "Av (Amazonian volcanic unit)",
+          "clase_por_regla": "basaltic",
+          "coincide": false,
+          "muestreo_zona_bramson_38_50N_180_225E": "Rejilla de 5 latitudes (38, 41, 44, 47, 50 N) por 6 longitudes (180 a 225 E cada 9 grados); 25 puntos válidos: Av 12, lHl 6, AHv 4, lAv 1, HNt 1, lNh 1. En 180 E el servicio no respondió y se repitió en 179,99 E: 38 N lAv, 44 N lHl (en el límite con mAl), 50 N Av. lHl aparece sobre todo cerca de 216 E y en 50 N.",
+          "explicacion": "La decisión del equipo de que Arcadia está en lHl no se sostiene en el punto Badger del mapa SIM 3292: allí la unidad es Av, que el DMU interpreta como lava y quizá flujos volcanoclásticos. No se cambia la regla para forzar el resultado. Opciones para Fernanda: (1) aceptar basaltic para Arcadia según el mapa; (2) mantener sedimentary con otra fuente que justifique un manto sedimentario rico en hielo sobre las lavas (hay que citarla; no está en este paquete); (3) mover el punto representativo a una zona lHl dentro del área de hielo. En targets.json actual figura sedimentary con source_url de SIM 3292, lo cual queda inconsistente."
+        },
+        "jezero": {
+          "punto": {
+            "lat": 18.4446,
+            "lon": 77.4509
+          },
+          "decision_equipo": "basaltic (piso ígneo, Farley et al. 2022, Science, doi 10.1126/science.abo2196)",
+          "unidad_sim3292_en_el_punto": "HNt (Hesperian and Noachian transition unit); el centro del cráter (18.38 N, 77.58 E) también da HNt",
+          "clase_por_regla": "basaltic (con la propuesta de HNt = basaltic)",
+          "coincide": true,
+          "explicacion": "Coincide solo porque HNt se propone como basaltic, y HNt es ambigua (el DMU la describe como brechas, sedimentos y volcánicas). Si Fernanda decide HNt = sedimentary, Jezero saldría sedimentary por la regla. El cráter (unos 45 a 49 km) es menor que la resolución del mapa, así que el mapa no ve su piso. Para el objetivo vale el valor medido de targets.json, no la regla."
+        }
+      }
+    }
+  }
+}

@@ -11,7 +11,8 @@ import numpy as np
 import pandas as pd
 
 from pipeline import scoring
-from pipeline.contract import Basis, Feature, Target
+from pipeline.contract import Basis, CaveSite, Feature, Target
+from pipeline.geo import haversine_km
 
 ACCESS_COLUMNS = ["access", "road_km", "airport_km"]
 
@@ -60,6 +61,26 @@ def load_earth(path: Path) -> Earth:
         access=table.reindex(columns=ACCESS_COLUMNS).astype(np.float64),
         index_by_cell={cell: index for index, cell in enumerate(cell_ids)},
     )
+
+
+def tag_caves(earth: Earth, caves: list[CaveSite], max_km: float) -> list[str]:
+    """Add the terrain tag "cave" to the nearest cell of each documented cave within max_km.
+
+    The tag only helps to filter. It does not make a masked cell eligible. Returns the IDs of the
+    caves that found a cell.
+    """
+    tagged = []
+    for cave in caves:
+        if len(earth.lat) == 0:
+            break
+        distances = haversine_km(cave.lat, cave.lon, earth.lat, earth.lon)
+        nearest = int(distances.argmin())
+        if distances[nearest] > max_km:
+            continue
+        if "cave" not in earth.terrain[nearest]:
+            earth.terrain[nearest].append("cave")
+        tagged.append(cave.id)
+    return tagged
 
 
 def _feature_similarity(feature: Feature, target_value, raw: np.ndarray) -> np.ndarray:

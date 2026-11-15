@@ -1,31 +1,510 @@
 {
   "_note": "Coordinates are approximate. citation_status to_verify means the entry came from the spec's starter list and still needs a citation. Only verified entries count toward min_catalog_size. control_for is proposed; the industrial engineer owns it.",
   "sites": [
-    { "id": "atacama", "name": "Atacama Desert (Yungay)", "lat": -24.1, "lon": -70.0, "type": "desert", "role": "positive_control", "control_for": ["jezero"], "source_ref": "Named in the official challenge text", "citation_status": "verified" },
-    { "id": "haughton", "name": "Haughton crater, Devon Island", "lat": 75.38, "lon": -89.68, "type": "polar", "role": "positive_control", "control_for": ["arcadia_planitia"], "source_ref": "Named in the official challenge text", "citation_status": "verified" },
-    { "id": "death_valley", "name": "Death Valley", "lat": 36.25, "lon": -116.85, "type": "desert", "role": "positive_control", "control_for": ["jezero"], "source_ref": "Named in the official challenge text", "citation_status": "verified" },
-    { "id": "pampas_la_joya", "name": "Pampas de La Joya", "lat": -16.7, "lon": -72.0, "type": "desert", "role": "positive_control", "control_for": ["jezero"], "source_ref": "Multidisciplinary approach of the hyperarid desert of Pampas de La Joya in southern Peru as a new Mars-like soil analog, Geochimica et Cosmochimica Acta, 2011", "citation_status": "verified" },
-    { "id": "mauna_kea", "name": "Mauna Kea", "lat": 19.82, "lon": -155.47, "type": "volcanic", "role": "positive_control", "control_for": ["shackleton_ridge"], "source_ref": null, "citation_status": "to_verify" },
-    { "id": "askja", "name": "Askja, Iceland", "lat": 65.05, "lon": -16.75, "type": "volcanic", "role": "positive_control", "control_for": ["shackleton_ridge"], "source_ref": null, "citation_status": "to_verify" },
-    { "id": "dry_valleys", "name": "Antarctic Dry Valleys", "lat": -77.5, "lon": 162.0, "type": "polar", "role": "positive_control", "control_for": ["arcadia_planitia"], "source_ref": null, "citation_status": "to_verify" },
-    { "id": "rio_tinto", "name": "Rio Tinto", "lat": 37.72, "lon": -6.56, "type": "other", "role": "positive_control", "control_for": ["jezero"], "source_ref": null, "citation_status": "to_verify" },
-    { "id": "salar_uyuni", "name": "Salar de Uyuni", "lat": -20.2, "lon": -67.6, "type": "desert", "role": "positive_control", "control_for": ["jezero"], "source_ref": null, "citation_status": "to_verify" },
-
-    { "id": "amazon_madre_de_dios", "name": "Amazon, Madre de Dios (Peru)", "lat": -12.6, "lon": -69.5, "type": "other", "role": "negative_control", "control_for": ["shackleton_ridge", "arcadia_planitia", "jezero"], "source_ref": "Negative control chosen in the spec", "citation_status": "verified" },
-    { "id": "amazon_central", "name": "Central Amazon (Brazil)", "lat": -3.1, "lon": -60.0, "type": "other", "role": "negative_control", "control_for": ["shackleton_ridge", "arcadia_planitia", "jezero"], "source_ref": "Negative control chosen in the spec", "citation_status": "verified" },
-    { "id": "congo_basin", "name": "Congo basin", "lat": -0.5, "lon": 20.0, "type": "other", "role": "negative_control", "control_for": ["shackleton_ridge", "arcadia_planitia", "jezero"], "source_ref": "Negative control chosen in the spec", "citation_status": "verified" },
-    { "id": "farmland_iowa", "name": "Intensive farmland (Iowa)", "lat": 42.0, "lon": -93.5, "type": "other", "role": "negative_control", "control_for": ["shackleton_ridge", "arcadia_planitia", "jezero"], "source_ref": "Negative control chosen in the spec", "citation_status": "verified" },
-
-    { "id": "mdrs", "name": "Mars Desert Research Station", "lat": 38.41, "lon": -110.79, "type": "desert", "role": "catalog_only", "control_for": [], "source_ref": null, "citation_status": "to_verify" },
-    { "id": "mojave", "name": "Mojave Desert", "lat": 35.0, "lon": -116.0, "type": "desert", "role": "catalog_only", "control_for": [], "source_ref": null, "citation_status": "to_verify" },
-    { "id": "svalbard", "name": "Svalbard", "lat": 79.4, "lon": 13.3, "type": "polar", "role": "catalog_only", "control_for": [], "source_ref": null, "citation_status": "to_verify" },
-    { "id": "dhofar", "name": "Dhofar, Oman", "lat": 18.8, "lon": 55.9, "type": "desert", "role": "catalog_only", "control_for": [], "source_ref": null, "citation_status": "to_verify" },
-    { "id": "negev", "name": "Negev Desert", "lat": 30.6, "lon": 34.8, "type": "desert", "role": "catalog_only", "control_for": [], "source_ref": null, "citation_status": "to_verify" },
-    { "id": "qaidam", "name": "Qaidam Basin", "lat": 37.0, "lon": 94.0, "type": "desert", "role": "catalog_only", "control_for": [], "source_ref": null, "citation_status": "to_verify" },
-    { "id": "ladakh", "name": "Ladakh", "lat": 33.3, "lon": 78.0, "type": "desert", "role": "catalog_only", "control_for": [], "source_ref": null, "citation_status": "to_verify" },
-    { "id": "pilbara", "name": "Pilbara", "lat": -21.2, "lon": 119.4, "type": "desert", "role": "catalog_only", "control_for": [], "source_ref": null, "citation_status": "to_verify" },
-    { "id": "lanzarote", "name": "Lanzarote", "lat": 29.0, "lon": -13.6, "type": "volcanic", "role": "catalog_only", "control_for": [], "source_ref": null, "citation_status": "to_verify" },
-    { "id": "meteor_crater", "name": "Meteor Crater", "lat": 35.03, "lon": -111.02, "type": "other", "role": "catalog_only", "control_for": [], "source_ref": null, "citation_status": "to_verify" },
-    { "id": "mistastin", "name": "Mistastin crater", "lat": 55.88, "lon": -63.31, "type": "other", "role": "catalog_only", "control_for": [], "source_ref": null, "citation_status": "to_verify" }
+    {
+      "id": "atacama",
+      "name": "Atacama Desert (Yungay)",
+      "lat": -24.0825,
+      "lon": -69.9852,
+      "type": "desert",
+      "role": "catalog_only",
+      "control_for": [],
+      "source_ref": "https://frontiersin.org/articles/10.3389/fspas.2021.810426/full",
+      "citation_status": "verified"
+    },
+    {
+      "id": "atacama_maria_elena_sur",
+      "name": "Atacama Desert (María Elena Sur)",
+      "lat": -22.2608,
+      "lon": -69.7247,
+      "type": "desert",
+      "role": "catalog_only",
+      "control_for": [],
+      "source_ref": "https://frontiersin.org/articles/10.3389/fspas.2021.810426/full",
+      "citation_status": "verified"
+    },
+    {
+      "id": "salar_grande",
+      "name": "Salar Grande",
+      "lat": -20.8833,
+      "lon": -70.0333,
+      "type": "desert",
+      "role": "catalog_only",
+      "control_for": [],
+      "source_ref": "https://frontiersin.org/articles/10.3389/fspas.2021.810426/full",
+      "citation_status": "verified"
+    },
+    {
+      "id": "licancabur_high_lakes",
+      "name": "Licancabur and the high lakes",
+      "lat": -22.8353,
+      "lon": -67.8853,
+      "type": "volcanic",
+      "role": "catalog_only",
+      "control_for": [],
+      "source_ref": "https://astrobiology.nasa.gov/news/2008-high-lakes-project-from-early-mars-to-todays-earth/",
+      "citation_status": "verified"
+    },
+    {
+      "id": "salar_pajonales",
+      "name": "Salar de Pajonales",
+      "lat": -25.1444,
+      "lon": -68.82,
+      "type": "desert",
+      "role": "catalog_only",
+      "control_for": [],
+      "source_ref": "https://doi.org/10.3389/fspas.2021.797591",
+      "citation_status": "verified"
+    },
+    {
+      "id": "puna_laguna_negra",
+      "name": "Argentine Puna (Laguna Negra)",
+      "lat": -27.6469,
+      "lon": -68.5453,
+      "type": "desert",
+      "role": "catalog_only",
+      "control_for": [],
+      "source_ref": "https://www.europlanet.org/europlanet-2024-ri/ta1-pfa/ta1-facility-6-argentinian-andes/",
+      "citation_status": "to_verify"
+    },
+    {
+      "id": "pampas_la_joya",
+      "name": "Pampas de La Joya, Arequipa",
+      "lat": -16.6948,
+      "lon": -72.008,
+      "type": "desert",
+      "role": "catalog_only",
+      "control_for": [],
+      "source_ref": "https://doi.org/10.1016/j.gca.2011.01.017",
+      "citation_status": "verified"
+    },
+    {
+      "id": "salar_uyuni",
+      "name": "Salar de Uyuni",
+      "lat": -20.1338,
+      "lon": -67.4891,
+      "type": "desert",
+      "role": "positive_control",
+      "control_for": [
+        "jezero"
+      ],
+      "source_ref": "https://doi.org/10.3390/rs11182104",
+      "citation_status": "verified"
+    },
+    {
+      "id": "death_valley",
+      "name": "Death Valley (Badwater, Ubehebe)",
+      "lat": 36.2503,
+      "lon": -116.8258,
+      "type": "desert",
+      "role": "positive_control",
+      "control_for": [
+        "jezero"
+      ],
+      "source_ref": "https://home.nps.gov/deva/nasa.htm",
+      "citation_status": "verified"
+    },
+    {
+      "id": "haughton",
+      "name": "Haughton crater, Devon Island",
+      "lat": 75.3667,
+      "lon": -89.6667,
+      "type": "polar",
+      "role": "positive_control",
+      "control_for": [
+        "arcadia_planitia",
+        "jezero",
+        "shackleton_ridge"
+      ],
+      "source_ref": "https://oro.open.ac.uk/7959",
+      "citation_status": "verified"
+    },
+    {
+      "id": "mauna_kea",
+      "name": "Mauna Kea",
+      "lat": 19.7609,
+      "lon": -155.4707,
+      "type": "volcanic",
+      "role": "positive_control",
+      "control_for": [
+        "shackleton_ridge"
+      ],
+      "source_ref": "https://ntrs.nasa.gov/citations/20110008363",
+      "citation_status": "verified"
+    },
+    {
+      "id": "askja",
+      "name": "Askja, Iceland",
+      "lat": 65.033,
+      "lon": -16.783,
+      "type": "volcanic",
+      "role": "positive_control",
+      "control_for": [
+        "arcadia_planitia"
+      ],
+      "source_ref": "https://ntrs.nasa.gov/citations/20240009232",
+      "citation_status": "verified"
+    },
+    {
+      "id": "dry_valleys",
+      "name": "McMurdo Dry Valleys",
+      "lat": -77.5,
+      "lon": 162.0,
+      "type": "polar",
+      "role": "positive_control",
+      "control_for": [
+        "arcadia_planitia",
+        "jezero",
+        "shackleton_ridge"
+      ],
+      "source_ref": "https://doi.org/10.1016/j.icarus.2007.06.018",
+      "citation_status": "verified"
+    },
+    {
+      "id": "rio_tinto",
+      "name": "Rio Tinto",
+      "lat": 37.7257,
+      "lon": -6.5551,
+      "type": "other",
+      "role": "catalog_only",
+      "control_for": [],
+      "source_ref": "https://digital.csic.es/handle/10261/13305",
+      "citation_status": "verified"
+    },
+    {
+      "id": "sf_volcanic_field",
+      "name": "San Francisco Volcanic Field and Cinder Lake",
+      "lat": 35.3197,
+      "lon": -111.5171,
+      "type": "volcanic",
+      "role": "catalog_only",
+      "control_for": [],
+      "source_ref": "https://www.usgs.gov/centers/astrogeology-science-center/news/artemis-iii-mission-tests-san-francisco-volcanic-field",
+      "citation_status": "verified"
+    },
+    {
+      "id": "meteor_crater",
+      "name": "Meteor Crater",
+      "lat": 35.0281,
+      "lon": -111.0233,
+      "type": "other",
+      "role": "catalog_only",
+      "control_for": [],
+      "source_ref": "https://doi.org/10.3389/fspas.2023.1186173",
+      "citation_status": "verified"
+    },
+    {
+      "id": "mdrs",
+      "name": "Mars Desert Research Station",
+      "lat": 38.4065,
+      "lon": -110.7919,
+      "type": "desert",
+      "role": "catalog_only",
+      "control_for": [],
+      "source_ref": "https://www.cambridge.org/core/journals/international-journal-of-astrobiology/article/field-astrobiology-research-in-moonmars-analogue-environments-instruments-and-methods/89160676373253E16D32C1412C128794",
+      "citation_status": "verified"
+    },
+    {
+      "id": "craters_of_the_moon",
+      "name": "Craters of the Moon",
+      "lat": 43.4617,
+      "lon": -113.5627,
+      "type": "volcanic",
+      "role": "catalog_only",
+      "control_for": [],
+      "source_ref": "https://doi.org/10.1089/ast.2018.1847",
+      "citation_status": "verified"
+    },
+    {
+      "id": "mistastin",
+      "name": "Mistastin (Kamestastin)",
+      "lat": 55.883,
+      "lon": -63.3,
+      "type": "other",
+      "role": "catalog_only",
+      "control_for": [],
+      "source_ref": "https://doi.org/10.3389/fspas.2023.1186173",
+      "citation_status": "verified"
+    },
+    {
+      "id": "sudbury",
+      "name": "Sudbury",
+      "lat": 46.6,
+      "lon": -81.183,
+      "type": "other",
+      "role": "catalog_only",
+      "control_for": [],
+      "source_ref": "https://doi.org/10.3389/fspas.2023.1186173",
+      "citation_status": "verified"
+    },
+    {
+      "id": "cuatro_cienegas",
+      "name": "Cuatro Ciénegas",
+      "lat": 26.9861,
+      "lon": -102.0664,
+      "type": "desert",
+      "role": "catalog_only",
+      "control_for": [],
+      "source_ref": "https://astrobiology.nasa.gov/nai/annual-reports/2012/asu/stoichiometry-of-life-task-2b-field-studies-cuatro-cienegas/index.html",
+      "citation_status": "verified"
+    },
+    {
+      "id": "el_pinacate",
+      "name": "El Pinacate",
+      "lat": 31.77,
+      "lon": -113.49,
+      "type": "volcanic",
+      "role": "catalog_only",
+      "control_for": [],
+      "source_ref": "https://ntrs.nasa.gov/citations/20190026783",
+      "citation_status": "verified"
+    },
+    {
+      "id": "tabernas",
+      "name": "Tabernas Desert",
+      "lat": 37.0,
+      "lon": -2.45,
+      "type": "desert",
+      "role": "catalog_only",
+      "control_for": [],
+      "source_ref": "https://www.esa.int/Newsroom/Press_Releases/Call_for_interest_Mars_rover_field_trials_in_Spain",
+      "citation_status": "verified"
+    },
+    {
+      "id": "bardenas_reales",
+      "name": "Bardenas Reales",
+      "lat": 42.0681,
+      "lon": -1.5028,
+      "type": "desert",
+      "role": "catalog_only",
+      "control_for": [],
+      "source_ref": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11437203",
+      "citation_status": "verified"
+    },
+    {
+      "id": "teide",
+      "name": "Teide, Tenerife",
+      "lat": 28.263,
+      "lon": -16.616,
+      "type": "volcanic",
+      "role": "catalog_only",
+      "control_for": [],
+      "source_ref": "https://doi.org/10.3989/egeol.41927.354",
+      "citation_status": "verified"
+    },
+    {
+      "id": "lanzarote",
+      "name": "Lanzarote, La Corona lava tube",
+      "lat": 29.1611,
+      "lon": -13.4389,
+      "type": "cave",
+      "role": "catalog_only",
+      "control_for": [],
+      "source_ref": "https://doi.org/10.1029/2022JB024056",
+      "citation_status": "verified"
+    },
+    {
+      "id": "nordlinger_ries",
+      "name": "Nördlinger Ries",
+      "lat": 48.883,
+      "lon": 10.567,
+      "type": "other",
+      "role": "catalog_only",
+      "control_for": [],
+      "source_ref": "https://doi.org/10.3389/fspas.2023.1186173",
+      "citation_status": "verified"
+    },
+    {
+      "id": "lofoten",
+      "name": "Lofoten (anorthosite)",
+      "lat": 68.067,
+      "lon": 13.299,
+      "type": "other",
+      "role": "catalog_only",
+      "control_for": [],
+      "source_ref": "https://www.esa.int/ESA_Multimedia/Images/2023/07/The_Moon_in_a_fjord",
+      "citation_status": "verified"
+    },
+    {
+      "id": "erfoud",
+      "name": "Erfoud and Rissani (Tafilalt)",
+      "lat": 31.436,
+      "lon": -4.233,
+      "type": "desert",
+      "role": "catalog_only",
+      "control_for": [],
+      "source_ref": "https://exploration.esa.int/web/mars/-/50537-mars2013-mars-analog-field-simulation",
+      "citation_status": "verified"
+    },
+    {
+      "id": "dallol",
+      "name": "Dallol, Danakil",
+      "lat": 14.2384,
+      "lon": 40.2983,
+      "type": "volcanic",
+      "role": "catalog_only",
+      "control_for": [],
+      "source_ref": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6459281",
+      "citation_status": "verified"
+    },
+    {
+      "id": "makgadikgadi",
+      "name": "Makgadikgadi Pans",
+      "lat": -20.8,
+      "lon": 25.5,
+      "type": "desert",
+      "role": "catalog_only",
+      "control_for": [],
+      "source_ref": "https://doi.org/10.3389/fspas.2023.1108386",
+      "citation_status": "verified"
+    },
+    {
+      "id": "namib_gobabeb",
+      "name": "Namib Desert (Gobabeb)",
+      "lat": -23.55,
+      "lon": 15.033,
+      "type": "desert",
+      "role": "catalog_only",
+      "control_for": [],
+      "source_ref": "https://doi.org/10.3389/fmicb.2017.02083",
+      "citation_status": "verified"
+    },
+    {
+      "id": "ladakh",
+      "name": "Ladakh (Leh and Tso Kar)",
+      "lat": 33.3,
+      "lon": 78.0,
+      "type": "desert",
+      "role": "catalog_only",
+      "control_for": [],
+      "source_ref": "https://doi.org/10.1017/S1473550419000119",
+      "citation_status": "verified"
+    },
+    {
+      "id": "lonar",
+      "name": "Lonar crater",
+      "lat": 19.975,
+      "lon": 76.5075,
+      "type": "other",
+      "role": "catalog_only",
+      "control_for": [],
+      "source_ref": "https://www.usgs.gov/publications/hydrothermal-alteration-lonar-lake-impact-structure-india-implications-impact",
+      "citation_status": "verified"
+    },
+    {
+      "id": "negev",
+      "name": "Makhtesh Ramon, Negev (D-MARS)",
+      "lat": 30.5786,
+      "lon": 34.8178,
+      "type": "desert",
+      "role": "catalog_only",
+      "control_for": [],
+      "source_ref": "https://austria-in-space.at/en/news/2021/amadee20-mars-simulation_en.php",
+      "citation_status": "to_verify"
+    },
+    {
+      "id": "armash",
+      "name": "Armash, Armenia (AMADEE-24)",
+      "lat": 39.7667,
+      "lon": 44.8083,
+      "type": "volcanic",
+      "role": "catalog_only",
+      "control_for": [],
+      "source_ref": "https://oewf.org/en/2024/02/mars-analog-mission-in-armenia-is-go/",
+      "citation_status": "to_verify"
+    },
+    {
+      "id": "pilbara",
+      "name": "Pilbara (Dresser Formation)",
+      "lat": -21.1518,
+      "lon": 119.4373,
+      "type": "desert",
+      "role": "catalog_only",
+      "control_for": [],
+      "source_ref": "https://www.jpl.nasa.gov/news/mars-scientists-investigate-ancient-life-in-australia/",
+      "citation_status": "verified"
+    },
+    {
+      "id": "svalbard",
+      "name": "Svalbard (Bockfjord)",
+      "lat": 79.4317,
+      "lon": 13.305,
+      "type": "polar",
+      "role": "catalog_only",
+      "control_for": [],
+      "source_ref": "https://doi.org/10.1111/j.1945-5100.2007.tb00590.x",
+      "citation_status": "verified"
+    },
+    {
+      "id": "kangerlussuaq",
+      "name": "Kangerlussuaq, Greenland",
+      "lat": 67.0086,
+      "lon": -50.6892,
+      "type": "polar",
+      "role": "catalog_only",
+      "control_for": [],
+      "source_ref": "https://meetingorganizer.copernicus.org/EPSC2024/EPSC2024-1039.html",
+      "citation_status": "to_verify"
+    },
+    {
+      "id": "amazon_central",
+      "name": "Central Amazon (negative control)",
+      "lat": -3.1,
+      "lon": -60.0,
+      "type": "other",
+      "role": "negative_control",
+      "control_for": [
+        "shackleton_ridge",
+        "arcadia_planitia",
+        "jezero"
+      ],
+      "source_ref": "https://doi.org/10.5194/acp-15-10723-2015",
+      "citation_status": "verified"
+    },
+    {
+      "id": "congo_basin",
+      "name": "Congo Basin (negative control)",
+      "lat": -0.5,
+      "lon": 20.0,
+      "type": "other",
+      "role": "negative_control",
+      "control_for": [
+        "shackleton_ridge",
+        "arcadia_planitia",
+        "jezero"
+      ],
+      "source_ref": "https://worldheritageoutlook.iucn.org/node/1012",
+      "citation_status": "to_verify"
+    },
+    {
+      "id": "farmland_iowa",
+      "name": "Iowa Corn Belt (negative control, intensive farming)",
+      "lat": 42.0,
+      "lon": -93.5,
+      "type": "other",
+      "role": "negative_control",
+      "control_for": [
+        "shackleton_ridge",
+        "arcadia_planitia",
+        "jezero"
+      ],
+      "source_ref": "https://nass.usda.gov/Statistics_by_State/Iowa/Publications/County_Estimates/2023/IA-CtyEst-Corn-02-23.pdf",
+      "citation_status": "verified"
+    },
+    {
+      "id": "amazon_madre_de_dios",
+      "name": "Southern Amazon, Tambopata, Madre de Dios (negative control)",
+      "lat": -12.6,
+      "lon": -69.5,
+      "type": "other",
+      "role": "negative_control",
+      "control_for": [
+        "shackleton_ridge",
+        "arcadia_planitia",
+        "jezero"
+      ],
+      "source_ref": "https://www.keybiodiversityareas.org/site/factsheet/14690",
+      "citation_status": "to_verify"
+    }
   ]
 }

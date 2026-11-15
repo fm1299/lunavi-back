@@ -174,6 +174,16 @@ def analogs(request: Request) -> list[dict]:
     return [a.model_dump() for a in _store(request).config.analogs]
 
 
+@app.get("/caves")
+def caves(request: Request) -> list[dict]:
+    """Documented lava tubes and caves. in_table is false when no Earth cell lies near one."""
+    store = _store(request)
+    return [
+        {**cave.model_dump(), "in_table": cave.id in store.cave_cells}
+        for cave in store.config.caves
+    ]
+
+
 @app.get("/results")
 def results(
     request: Request,
