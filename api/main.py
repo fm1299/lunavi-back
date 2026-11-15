@@ -80,11 +80,18 @@ def _weights(store: Store, profile: Profile, raw: str | None) -> dict[str, float
 
 
 def _keep(
-    store: Store, scored, bbox: str | None, terrain: str | None, min_confidence: float
+    store: Store,
+    scored,
+    bbox: str | None,
+    terrain: str | None,
+    min_confidence: float,
+    new_only: bool = False,
 ) -> np.ndarray:
-    """Eligible cells that pass the area, terrain and confidence filters."""
+    """Eligible cells that pass the area, terrain, confidence and new-candidate filters."""
     earth = store.earth
     keep = earth.eligible & (scored.confidence >= min_confidence)
+    if new_only:
+        keep &= store.new_candidate
     if bbox:
         try:
             west, south, east, north = (float(v) for v in bbox.split(","))
@@ -196,6 +203,7 @@ def results(
     min_confidence: float = Query(0.0, ge=0.0, le=1.0),
     min_separation_km: float = Query(0.0, ge=0.0, description="spacing between top_n cells"),
     detail: Literal["compact", "full"] = "compact",
+    new_only: bool = False,  # only cells far from every documented analog (run.json novelty_km)
 ) -> dict:
     store = _store(request)
     site = _target(store, target)
@@ -204,7 +212,7 @@ def results(
     scored = store.compute(site, active_weights, profile_config)
     earth = store.earth
 
-    indices = np.flatnonzero(_keep(store, scored, bbox, terrain, min_confidence))
+    indices = np.flatnonzero(_keep(store, scored, bbox, terrain, min_confidence, new_only))
     indices = indices[np.argsort(-scored.score[indices], kind="stable")]
     count = int(indices.size)
     if top_n is not None:
@@ -226,6 +234,7 @@ def results(
         "beyond_earth": sorted(flagged),
         "beyond_earth_weight_share": round(scoring.weight_share(active_weights, flagged), 3),
         "dummy": store.manifest["dummy"],
+        "novelty_km": store.config.run.novelty_km,
     }
     if detail == "full":
         cells = [
@@ -249,6 +258,7 @@ def results(
                 None if np.isnan(v) else round(float(v), 2)
                 for v in earth.access["access"].to_numpy()[indices]
             ],
+            "new_candidate": store.new_candidate[indices].tolist(),
         },
     }
 
@@ -428,7 +438,10 @@ def portfolio(
     scored = store.compute(site, active_weights, profile_config)
     keep = _keep(store, scored, bbox, terrain, min_confidence) & (scored.score > 0)
     limit = store.config.run.cover_threshold if threshold is None else threshold
-    result = store.portfolio(scored, active_weights, np.flatnonzero(keep), limit, max_cells)
+    flagged = beyond_earth_keys(store.config.features, site)
+    result = store.portfolio(
+        scored, active_weights, np.flatnonzero(keep), limit, max_cells, flagged
+    )
     return {"target": site.id, "profile": profile_config.id, "threshold": limit, **result}
 
 

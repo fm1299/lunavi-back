@@ -269,10 +269,35 @@ def test_portfolio_cells_cover_the_conditions_together(client):
     one = client.get("/portfolio", params={"target": "jezero", "max_cells": 1}).json()
     assert len(one["cells"]) == 1
     none = client.get("/portfolio", params={"target": "jezero", "threshold": 1.0}).json()
-    # Only an exact class match, or a value clamped at the edge of the Earth range, reaches 1.0.
+    # Only an exact class match reaches 1.0 among the conditions Earth can cover.
+    assert {key for cell in none["cells"] for key in cell["covers"]} <= {"composition"}
+
+
+def test_conditions_beyond_earth_are_never_covered(client):
     targets = {t["id"]: t for t in client.get("/targets").json()}
-    beyond = set(targets["jezero"]["beyond_earth"])
-    assert {key for cell in none["cells"] for key in cell["covers"]} <= {"composition"} | beyond
+    beyond = set(targets["shackleton_ridge"]["beyond_earth"])
+    assert beyond  # the Moon's temperatures lie outside the Earth range
+    body = client.get("/portfolio", params={"target": "shackleton_ridge"}).json()
+    assert set(body["beyond_earth"]) == beyond & set(body["beyond_earth"])
+    assert not beyond & set(body["conditions"])
+    assert not beyond & {key for cell in body["cells"] for key in cell["covers"]}
+    gaps = client.get("/gaps", params={"target": "shackleton_ridge"}).json()
+    for row in gaps["conditions"]:
+        if row["beyond_earth"] and row["best_analog"] is not None:
+            assert row["covered"] is False and row["covered_by"] == []
+
+
+def test_new_candidates_are_far_from_every_documented_analog(client):
+    full = client.get("/results", params={"target": "jezero", "detail": "full", "top_n": 50}).json()
+    limit = full["meta"]["novelty_km"]
+    for cell in full["cells"]:
+        assert cell["new_candidate"] == (cell["nearest_known"]["km"] > limit)
+    only = client.get(
+        "/results", params={"target": "jezero", "detail": "full", "new_only": True}
+    ).json()
+    assert all(cell["new_candidate"] for cell in only["cells"])
+    compact = client.get("/results", params={"target": "jezero"}).json()
+    assert len(compact["cells"]["new_candidate"]) == len(compact["cells"]["cell_id"])
 
 
 def test_sources_list_what_fills_each_feature(client):

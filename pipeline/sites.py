@@ -331,7 +331,32 @@ class SiteBook:
         path = self._path(identifier)
         if not path.exists():
             return None
-        return Target.model_validate_json(path.read_text(encoding="utf-8"))
+        return self._fill_rules(Target.model_validate_json(path.read_text(encoding="utf-8")))
+
+    def _fill_rules(self, target: Target) -> Target:
+        """Fill rule-based values that a cached site lacks, then save it if any changed.
+
+        Sites cached before the rules existed, or whose map read failed once, would otherwise keep
+        a blank composition for good.
+        """
+        if self.rules is None:
+            return target
+        changed = False
+        composition = target.features.get("composition")
+        if composition is None or composition.value is None:
+            filled = self._composition(target.body, target.lat, target.lon)
+            if filled.value is not None:
+                target.features["composition"] = filled
+                changed = True
+        annual = target.features.get("temp_annual_range")
+        if target.body == "moon" and (annual is None or annual.value is None):
+            filled = moon_annual_range(target.lat, self.rules.moon.temp_annual_range)
+            if filled.value is not None:
+                target.features["temp_annual_range"] = filled
+                changed = True
+        if changed:
+            self._save(target)
+        return target
 
     def _save(self, target: Target) -> None:
         self.directory.mkdir(parents=True, exist_ok=True)

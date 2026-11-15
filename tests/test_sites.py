@@ -172,3 +172,28 @@ def test_terrain_near_a_pole_with_no_map_is_blank():
 def test_physical_values_follow_from_the_body():
     assert sites.physical_features("moon")["aridity"].value == 0
     assert sites.physical_features("mars")["vegetation"].basis == "physical"
+
+
+def test_a_cached_site_gets_its_composition_once_the_map_can_be_read(tmp_path, monkeypatch):
+    from pipeline.contract import load_config
+
+    monkeypatch.setattr(sites, "read_terrain", lambda *args: dict(TERRAIN))
+    calls = []
+
+    def composition(body, lat, lon, rules):
+        calls.append(body)
+        if len(calls) == 1:
+            raise OSError("map server down")
+        return TargetFeature(value="basaltic", basis="literature", source_url="https://example.org")
+
+    monkeypatch.setattr(sites, "read_composition", composition)
+    book = sites.SiteBook(directory=tmp_path, rules=load_config().rules)
+    first = book.resolve("mars", 18.44, 77.45)
+    assert first.features["composition"].value is None  # the failed read is cached as blank
+
+    again = sites.SiteBook(directory=tmp_path, rules=load_config().rules)
+    assert again.get(first.id).features["composition"].value == "basaltic"
+    assert len(calls) == 2
+    third = sites.SiteBook(directory=tmp_path, rules=load_config().rules)
+    assert third.get(first.id).features["composition"].value == "basaltic"
+    assert len(calls) == 2  # saved, so not read again

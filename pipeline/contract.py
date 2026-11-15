@@ -264,6 +264,8 @@ class RunConfig(BaseModel):
     access: AccessConfig
     cover_threshold: float  # a similarity at or above this covers a site condition (FR-P12, FR-P13)
     analog_match_km: float  # a documented analog is read from the nearest cell within this distance
+    # A cell farther than this from every documented analog and cave is a new candidate analog.
+    novelty_km: float = 300.0
     modis: ModisConfig = ModisConfig()
     validation: ValidationConfig = ValidationConfig()
 

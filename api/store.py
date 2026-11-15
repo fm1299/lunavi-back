@@ -65,7 +65,29 @@ class Store:
         )
         self.assistant = assistant or Assistant(settings_from_env())
         self.analog_cells = self._analog_cells()
+        self.known_km, self.known_name = self._nearest_known()
+        self.new_candidate = self.known_km > self.config.run.novelty_km
         self._validation: dict | None = None
+
+    def _nearest_known(self) -> tuple[np.ndarray, list[str | None]]:
+        """For every cell, the distance in km to the nearest documented analog or cave, and its name
+
+        Negative controls do not count: they are documented as unlike the Moon and Mars.
+        """
+        places = [
+            (site.lat, site.lon, site.name)
+            for site in self.config.analogs
+            if site.role != "negative_control"
+        ] + [(cave.lat, cave.lon, cave.name) for cave in self.config.caves]
+        count = len(self.earth.lat)
+        if not places or count == 0:
+            return np.full(count, np.inf), [None] * count
+        distances = np.stack(
+            [haversine_km(lat, lon, self.earth.lat, self.earth.lon) for lat, lon, _ in places]
+        )
+        nearest = distances.argmin(axis=0)
+        names = [places[i][2] for i in nearest]
+        return distances[nearest, np.arange(count)], names
 
     def validation(self) -> dict:
         """The validation report for the loaded Earth table, built once (spec FR-A4)."""
@@ -143,6 +165,13 @@ class Store:
             "confidence": round(float(scored.confidence[index]), 3),
             "band": self.band(float(scored.confidence[index])),
             **{k: _clean(v) for k, v in self.earth.access.iloc[index].items()},
+            "nearest_known": {
+                "name": self.known_name[index],
+                "km": None
+                if np.isinf(self.known_km[index])
+                else round(float(self.known_km[index])),
+            },
+            "new_candidate": bool(self.new_candidate[index]),
         }
 
     def matches(
@@ -164,6 +193,7 @@ class Store:
         rows = []
         for column, key in enumerate(scored.comparison.keys):
             entry = target.features.get(key)
+            beyond = key in flagged
             similar = {
                 analog: scored.comparison.s[index, column]
                 for analog, index in self.analog_cells.items()
@@ -175,12 +205,18 @@ class Store:
                     "key": key,
                     "label": self.config.features[key].label,
                     "target_value": entry.value if entry else None,
-                    "beyond_earth": key in flagged,
+                    "beyond_earth": beyond,
                     # None means it cannot be judged: no site value, no Earth source, or no analog.
-                    "covered": bool(similar[best] >= threshold) if best else None,
+                    # A value beyond Earth's range is never covered: the clamped similarity only
+                    # says which place comes closest. best_analog still names that place.
+                    "covered": (False if beyond else bool(similar[best] >= threshold))
+                    if best
+                    else None,
                     "best_analog": names[best] if best else None,
                     "best_s": _clean(similar[best]) if best else None,
-                    "covered_by": [names[a] for a, s in similar.items() if s >= threshold],
+                    "covered_by": []
+                    if beyond
+                    else [names[a] for a, s in similar.items() if s >= threshold],
                 }
             )
         return rows
@@ -192,14 +228,20 @@ class Store:
         candidates: np.ndarray,
         threshold: float,
         max_cells: int,
+        flagged: set[str] | frozenset[str] = frozenset(),
     ) -> dict:
-        """The fewest cells that together cover the site's weighted conditions (spec FR-P13)."""
+        """The fewest cells that together cover the site's weighted conditions (spec FR-P13).
+
+        Conditions beyond Earth's range (flagged) are left out and listed apart: no Earth cell can
+        cover them, even though the clamped similarity of the most extreme cells reaches 1.
+        """
         keys = scored.comparison.keys
-        columns = [
+        weighted = [
             i
             for i, key in enumerate(keys)
             if weights.get(key, 0.0) > 0 and not np.isnan(scored.comparison.s[:, i]).all()
         ]
+        columns = [i for i in weighted if keys[i] not in flagged]
         covers = np.nan_to_num(scored.comparison.s[np.ix_(candidates, columns)]) >= threshold
         picks = scoring.greedy_cover(covers, scored.score[candidates], max_cells)
         cells = [
@@ -214,6 +256,7 @@ class Store:
             "cells": cells,
             "conditions": [keys[c] for c in columns],
             "uncovered": [keys[c] for c in columns if keys[c] not in covered],
+            "beyond_earth": [keys[i] for i in weighted if keys[i] in flagged],
         }
 
     def cell_sheet(

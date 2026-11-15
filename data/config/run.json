@@ -25,6 +25,7 @@
   "access": { "road_far_km": 100.0, "airport_far_km": 500.0 },
   "cover_threshold": 0.8,
   "analog_match_km": 50.0,
+  "novelty_km": 300.0,
   "modis": { "months": [1, 3, 5, 7, 9, 11], "min_valid_share": 0.2 },
   "validation": { "accept_top_share": 0.2, "stretch_top_share": 0.1, "weight_change": 0.2, "top_cells": 50 }
 }

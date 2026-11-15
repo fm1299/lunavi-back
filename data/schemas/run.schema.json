@@ -212,6 +212,11 @@
       "title": "Analog Match Km",
       "type": "number"
     },
+    "novelty_km": {
+      "default": 300.0,
+      "title": "Novelty Km",
+      "type": "number"
+    },
     "modis": {
       "$ref": "#/$defs/ModisConfig",
       "default": {
